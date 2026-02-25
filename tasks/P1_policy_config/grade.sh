@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+# Seed-aware grader for P1: Policy-Driven Config Change
+# Reads expected values from expected.json instead of hardcoded assertions.
+#
+# Args: $1=WORKSPACE $2=REPORTS $3=SUBMISSION $4=TASK_DIR [$5=EXPECTED_JSON]
 set -euo pipefail
 WORKSPACE="$1"
 REPORTS="$2"
 SUBMISSION="$3"
 TASK_DIR="$4"
+EXPECTED="${5:-$REPORTS/expected.json}"
 
 mkdir -p "$REPORTS"
 
@@ -20,79 +25,134 @@ check() {
 CONFIG="$WORKSPACE/output/config.json"
 check "test -f '$CONFIG'" "missing_config_json"
 
-if [ -f "$CONFIG" ]; then
-  # Exactly 8 keys, no extras
-  check "python3 -c \"
+if [ -f "$CONFIG" ] && [ -f "$EXPECTED" ]; then
+
+# Exactly the required keys, no extras
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-allowed = {'max_connections','timeout_sec','ssl_enabled','log_level','retry_count','cors_origins','rate_limit_rpm','auth_method'}
-assert set(cfg.keys()) == allowed, f'Wrong keys: {set(cfg.keys())} (expected {allowed})'
+expected = json.load(open('$EXPECTED'))
+required = set(expected['required_keys'])
+assert set(cfg.keys()) == required, f'Wrong keys: {set(cfg.keys())} (expected {required})'
 print('KEYS_OK')
 \"" "wrong_keys"
 
-  # Rule 1: max_connections
-  check "python3 -c \"
+# Validate every rule from expected.json policy_rules
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert isinstance(cfg['max_connections'], int) and 100 <= cfg['max_connections'] <= 500, f'max_connections={cfg[\"max_connections\"]}'
-print('RULE1_OK')
-\"" "rule1_max_connections"
+expected = json.load(open('$EXPECTED'))
+rules = expected['policy_rules']
+for key, spec in rules.items():
+    val = cfg.get(key)
+    t = spec['type']
+    if t == 'int_range':
+        assert isinstance(val, int) and spec['min'] <= val <= spec['max'], \
+            f'{key}={val} not in [{spec[\"min\"]}, {spec[\"max\"]}]'
+    elif t == 'exact_int':
+        assert val == spec['value'], f'{key}={val} must be exactly {spec[\"value\"]}'
+    elif t == 'exact_bool':
+        assert val is spec['value'], f'{key}={val} must be exactly {spec[\"value\"]}'
+    elif t == 'enum':
+        assert val in spec['allowed'], f'{key}={val!r} not in allowed {spec[\"allowed\"]}'
+    elif t == 'exact_list':
+        assert val == spec['value'], f'{key}={val} must be exactly {spec[\"value\"]}'
+    elif t == 'exact_string':
+        assert val == spec['value'], f'{key}={val!r} must be exactly {spec[\"value\"]!r}'
+print('ALL_RULES_OK')
+\"" "policy_rules_fail"
 
-  # Rule 2: timeout_sec
-  check "python3 -c \"
+# Individual rule checks (mirrors policy_rules but one check per rule for granular feedback)
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert cfg['timeout_sec'] == 30, f'timeout_sec={cfg[\"timeout_sec\"]}'
-print('RULE2_OK')
-\"" "rule2_timeout_sec"
+expected = json.load(open('$EXPECTED'))
+spec = expected['policy_rules']['max_connections']
+v = cfg['max_connections']
+assert isinstance(v, int) and spec['min'] <= v <= spec['max'], f'max_connections={v}'
+print('RULE_MAX_CONNECTIONS_OK')
+\"" "rule_max_connections"
 
-  # Rule 3: ssl_enabled
-  check "python3 -c \"
+check "python3 -c \"
+import json
+cfg = json.load(open('$CONFIG'))
+expected = json.load(open('$EXPECTED'))
+assert cfg['timeout_sec'] == expected['policy_rules']['timeout_sec']['value'], \
+    f'timeout_sec={cfg[\"timeout_sec\"]}'
+print('RULE_TIMEOUT_OK')
+\"" "rule_timeout_sec"
+
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
 assert cfg['ssl_enabled'] is True, f'ssl_enabled={cfg[\"ssl_enabled\"]}'
-print('RULE3_OK')
-\"" "rule3_ssl_enabled"
+print('RULE_SSL_OK')
+\"" "rule_ssl_enabled"
 
-  # Rule 4: log_level
-  check "python3 -c \"
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert cfg['log_level'] in ('warn', 'error'), f'log_level={cfg[\"log_level\"]}'
-print('RULE4_OK')
-\"" "rule4_log_level"
+expected = json.load(open('$EXPECTED'))
+allowed = expected['policy_rules']['log_level']['allowed']
+assert cfg['log_level'] in allowed, f'log_level={cfg[\"log_level\"]!r} not in {allowed}'
+print('RULE_LOG_LEVEL_OK')
+\"" "rule_log_level"
 
-  # Rule 5: retry_count
-  check "python3 -c \"
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert cfg['retry_count'] == 3, f'retry_count={cfg[\"retry_count\"]}'
-print('RULE5_OK')
-\"" "rule5_retry_count"
+expected = json.load(open('$EXPECTED'))
+assert cfg['retry_count'] == expected['policy_rules']['retry_count']['value'], \
+    f'retry_count={cfg[\"retry_count\"]}'
+print('RULE_RETRY_OK')
+\"" "rule_retry_count"
 
-  # Rule 6: cors_origins
-  check "python3 -c \"
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert cfg['cors_origins'] == [], f'cors_origins={cfg[\"cors_origins\"]}'
-print('RULE6_OK')
-\"" "rule6_cors_origins"
+expected = json.load(open('$EXPECTED'))
+assert cfg['cors_origins'] == expected['policy_rules']['cors_origins']['value'], \
+    f'cors_origins={cfg[\"cors_origins\"]}'
+print('RULE_CORS_OK')
+\"" "rule_cors_origins"
 
-  # Rule 7: rate_limit_rpm
-  check "python3 -c \"
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert isinstance(cfg['rate_limit_rpm'], int) and 60 <= cfg['rate_limit_rpm'] <= 120, f'rate_limit_rpm={cfg[\"rate_limit_rpm\"]}'
-print('RULE7_OK')
-\"" "rule7_rate_limit_rpm"
+expected = json.load(open('$EXPECTED'))
+spec = expected['policy_rules']['rate_limit_rpm']
+v = cfg['rate_limit_rpm']
+assert isinstance(v, int) and spec['min'] <= v <= spec['max'], f'rate_limit_rpm={v}'
+print('RULE_RATE_LIMIT_OK')
+\"" "rule_rate_limit_rpm"
 
-  # Rule 8: auth_method
-  check "python3 -c \"
+check "python3 -c \"
 import json
 cfg = json.load(open('$CONFIG'))
-assert cfg['auth_method'] == 'jwt', f'auth_method={cfg[\"auth_method\"]}'
-print('RULE8_OK')
-\"" "rule8_auth_method"
+expected = json.load(open('$EXPECTED'))
+allowed = expected['policy_rules']['auth_method']['allowed']
+assert cfg['auth_method'] in allowed, f'auth_method={cfg[\"auth_method\"]!r} not in {allowed}'
+print('RULE_AUTH_OK')
+\"" "rule_auth_method"
+
+check "python3 -c \"
+import json
+cfg = json.load(open('$CONFIG'))
+expected = json.load(open('$EXPECTED'))
+assert cfg['session_timeout_min'] == expected['policy_rules']['session_timeout_min']['value'], \
+    f'session_timeout_min={cfg[\"session_timeout_min\"]}'
+print('RULE_SESSION_TIMEOUT_OK')
+\"" "rule_session_timeout_min"
+
+check "python3 -c \"
+import json
+cfg = json.load(open('$CONFIG'))
+expected = json.load(open('$EXPECTED'))
+assert cfg['min_password_length'] == expected['policy_rules']['min_password_length']['value'], \
+    f'min_password_length={cfg[\"min_password_length\"]}'
+print('RULE_PASSWORD_LENGTH_OK')
+\"" "rule_min_password_length"
+
 fi
 
 # Attestation

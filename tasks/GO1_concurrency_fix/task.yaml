@@ -8,4 +8,4 @@ languages: [go]
 tags: [concurrency, goroutine, race-condition, deadlock, go]
 workspace_file_count: 4
 lines_changed_expected: 40
-parameterized: false
+parameterized: true

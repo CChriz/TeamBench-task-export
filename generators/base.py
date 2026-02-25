@@ -93,7 +93,7 @@ class TaskGenerator(ABC):
 
         # Write corpus files
         if generated.corpus_files:
-            c_dir = corpus_dir or os.path.join(task_dir, "corpus") if task_dir else ""
+            c_dir = corpus_dir if corpus_dir else (os.path.join(task_dir, "corpus") if task_dir else "")
             if c_dir:
                 os.makedirs(c_dir, exist_ok=True)
                 for rel_path, content in generated.corpus_files.items():

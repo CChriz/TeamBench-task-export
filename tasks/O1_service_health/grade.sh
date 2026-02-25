@@ -17,6 +17,17 @@ check() {
   fi
 }
 
+# Load seed-specific expected values from expected.json (written by generator)
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ ! -f "$EXPECTED_JSON" ]; then
+  EXPECTED_JSON="$TASK_DIR/expected.json"
+fi
+
+# Extract fields from expected.json (defaults match original fixed task)
+PORT=$(python3 -c "import json; e=json.load(open('$EXPECTED_JSON')); print(e.get('port',8080))" 2>/dev/null || echo "8080")
+HEALTH_PATH=$(python3 -c "import json; e=json.load(open('$EXPECTED_JSON')); print(e.get('health_endpoint','/health'))" 2>/dev/null || echo "/health")
+EXPECTED_BODY=$(python3 -c "import json; e=json.load(open('$EXPECTED_JSON')); print(e.get('expected_health_body','{\"status\":\"ok\"}'))" 2>/dev/null || echo '{"status":"ok"}')
+
 # Export REPORTS_DIR so run_service.sh writes logs to the right place
 export REPORTS_DIR="$REPORTS"
 
@@ -36,7 +47,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# Poll /health up to 5 seconds
+# Poll health endpoint up to 5 seconds
 OK=false
 BODY=""
 for i in $(seq 1 25); do
@@ -44,13 +55,13 @@ for i in $(seq 1 25); do
   BODY="$(python3 -c "
 import urllib.request, sys
 try:
-    with urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=0.3) as r:
+    with urllib.request.urlopen('http://127.0.0.1:${PORT}${HEALTH_PATH}', timeout=0.3) as r:
         sys.stdout.write(r.read().decode('utf-8'))
 except Exception:
     pass
 " 2>/dev/null)"
   set -e
-  if [ "$BODY" = '{"status":"ok"}' ]; then
+  if [ "$BODY" = "$EXPECTED_BODY" ]; then
     OK=true
     break
   fi

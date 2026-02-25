@@ -19,6 +19,30 @@ check() {
 
 cd "$WORKSPACE"
 
+# ---------------------------------------------------------------------------
+# Seed-aware: read expected.json if present (generated tasks)
+# ---------------------------------------------------------------------------
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ ! -f "$EXPECTED_JSON" ]; then
+  EXPECTED_JSON="$(dirname "$0")/expected.json"
+fi
+
+# Determine resource name and port from expected.json or defaults
+RESOURCE="tasks"
+PORT="3000"
+if [ -f "$EXPECTED_JSON" ]; then
+  RESOURCE=$(python3 -c "
+import json
+d = json.load(open('$EXPECTED_JSON'))
+print(d.get('resource', 'tasks'))
+" 2>/dev/null || echo "tasks")
+  PORT=$(python3 -c "
+import json
+d = json.load(open('$EXPECTED_JSON'))
+print(d.get('port', 3000))
+" 2>/dev/null || echo "3000")
+fi
+
 # ── 1. package.json pins express >= 5 ─────────────────────────────────────────
 check "node -e \"
 const pkg = require('./package.json');
@@ -63,7 +87,7 @@ check "
     sleep 0.3
     if node -e \"
       const http = require('http');
-      http.get('http://localhost:3000/tasks', (r) => {
+      http.get('http://localhost:${PORT}/${RESOURCE}', (r) => {
         process.exit(r.statusCode === 200 ? 0 : 1);
       }).on('error', () => process.exit(1));
     \" 2>/dev/null; then

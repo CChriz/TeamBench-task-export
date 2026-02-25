@@ -1,103 +1,36 @@
 # JS1 — API Migration (Planner Specification)
 
-> **Planner eyes only.** This document contains the full list of breaking changes that must be communicated to the executor. The executor only has access to `brief.md` and the workspace files.
-
----
-
 ## Overview
 
-The workspace contains an Express v4 application that uses four patterns that were **removed or renamed in Express v5**. The planner must identify all four issues and clearly communicate them to the executor, who will make the code changes.
+The workspace contains an Express v4 application that must be migrated to Express v5. Express v5 introduced several breaking changes that make the current code incompatible. The planner must identify all affected patterns and communicate the necessary changes to the executor.
 
 ---
 
 ## Breaking Changes That Must Be Fixed
 
-### 1. `req.param()` removed
+### 1. Removed convenience method for accessing request parameters
 
-Express v4 provided the convenience method `req.param(name)` which looked up a value in `req.params`, `req.body`, and `req.query` in order. Express v5 removed this method entirely.
+Express v4 provided a single method that searched `params`, `body`, and `query` in order. This method was removed in Express v5. Code that relies on it must be rewritten to access the appropriate specific source directly, based on where the value actually comes from in each route.
 
-**v4 (broken in v5):**
-```js
-const id = req.param('id');
-```
+### 2. Changed signature for JSON responses with status codes
 
-**v5 fix — use the specific source:**
-```js
-const id = req.params.id;   // for route parameters
-// or req.query.id           // for query-string parameters
-// or req.body.id            // for body parameters
-```
+Express v4 accepted a status code as a second argument to the JSON response method. Express v5 removed this overload. Status codes must now be set through the chained status method before the JSON method is called.
 
-In `server.js` the call appears in route handlers that have `:id` in their path, so `req.params.id` is the correct replacement.
+### 3. Removed legacy alias for the DELETE route registration method
 
----
+Express v4 provided a compatibility alias for registering DELETE routes because `delete` was a reserved word in older JavaScript environments. Express v5 removed this alias. Only the standard method name is valid.
 
-### 2. `res.json()` second-argument status removed
+### 4. Removed inline regex constraint syntax in route paths
 
-Express v4 accepted an optional second argument to `res.json()` as the HTTP status code:
+Express v4 allowed inline regular expression constraints to be appended to route parameter names within the path string. Express v5 no longer supports this syntax. Route paths must use plain parameter names; any type or format validation must be performed inside the handler.
 
-```js
-res.json(data, 200);   // v4 — second arg is status
-```
+### 5. Error handler must explicitly set HTTP status
 
-Express v5 removed this overload. The status must be set via `res.status()` chained before `.json()`:
+Express v5 requires error-handling middleware to explicitly set the response status code. Handlers that rely on an implicit default status must be updated to call the status method before sending a response.
 
-```js
-res.status(200).json(data);   // v5
-```
+### 6. Package version must target Express v5
 
-Search `server.js` for any call matching `res.json(` with two arguments and rewrite them.
-
----
-
-### 3. `app.del()` renamed to `app.delete()`
-
-Express v4 provided `app.del()` as an alias for `app.delete()` because `delete` is a reserved word in older JavaScript environments. Express v5 dropped the alias; only `app.delete()` is valid.
-
-**v4 (broken in v5):**
-```js
-app.del('/tasks/:id', handler);
-```
-
-**v5 fix:**
-```js
-app.delete('/tasks/:id', handler);
-```
-
----
-
-### 4. Regex route parameter syntax changed
-
-Express v4 allowed inline regex constraints in route paths:
-
-```js
-app.get('/user/:id(\\d+)', handler);   // v4
-```
-
-Express v5 no longer supports the inline `(regex)` syntax after a parameter name. Use a plain parameter and validate manually, or use the new named-parameter syntax with `{name}`. The simplest migration is to drop the constraint:
-
-```js
-app.get('/user/:id', handler);   // v5 — validate inside handler if needed
-```
-
----
-
-### 5. Error handler must set status explicitly
-
-Express v4 allowed error handlers to omit `res.status()` and the framework might fall back to a default. Express v5 requires the error handler to set the status code explicitly before sending. The signature itself (`(err, req, res, next)`) is unchanged, but the handler body must call `res.status(n)`.
-
-**Fix pattern:**
-```js
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ error: err.message });
-});
-```
-
----
-
-### 6. `package.json` dependency must be updated
-
-The current `package.json` pins `"express": "^4.18.2"`. Change it to `"express": "^5.0.0"` so that `npm install` (or equivalent) fetches Express v5.
+The `package.json` dependency pin must be updated to install Express v5 rather than v4.
 
 ---
 
@@ -105,9 +38,9 @@ The current `package.json` pins `"express": "^4.18.2"`. Change it to `"express":
 
 | File | What needs to change |
 |---|---|
-| `package.json` | `express` version `^4.18.2` → `^5.0.0` |
-| `server.js` | Fix all five patterns above |
-| `test/api.test.js` | **Do not modify** — tests are written against observable HTTP behaviour and pass with both v4-correct and v5-correct code |
+| `package.json` | Express version pin must target v5 |
+| `server.js` | All five code patterns above must be fixed |
+| `test/api.test.js` | **Do not modify** — tests are written against observable HTTP behaviour and pass once the server behaves correctly |
 
 ---
 
@@ -127,14 +60,9 @@ All five tests must exit the suite with code `0`.
 
 ---
 
-## Communication Checklist for Planner → Executor
+## Deliverables
 
-When writing instructions to the executor, cover:
-
-- [ ] Which npm version of express to pin in `package.json`
-- [ ] Replace every `req.param('id')` with `req.params.id`
-- [ ] Rewrite every `res.json(data, status)` to `res.status(status).json(data)`
-- [ ] Rename `app.del(` to `app.delete(`
-- [ ] Remove inline regex from route path `/user/:id(\\d+)` → `/user/:id`
-- [ ] Ensure error handler calls `res.status(...)` before `.json(...)`
-- [ ] Create `attestation.json` with `{"verdict": "pass"}` once all tests pass
+- `package.json` updated with Express v5 version pin
+- `server.js` with all breaking-change patterns corrected
+- All 5 tests pass with exit code `0`
+- `attestation.json` created with `{"verdict": "pass"}` once all tests pass

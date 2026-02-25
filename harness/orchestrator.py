@@ -20,8 +20,8 @@ from harness.agent_interface import (
     make_executor_config,
     make_verifier_config,
 )
+from harness.agent_interface import ToolCallAdapter
 from harness.agent_loop import AgentLoop, AgentTurn
-from harness.gemini_adapter import GeminiAdapter
 
 
 @dataclass
@@ -80,7 +80,7 @@ class TaskOrchestrator:
         self,
         task_dir: str,
         run_dir: str,
-        adapter: GeminiAdapter,
+        adapter: ToolCallAdapter,
         max_turns_per_phase: int = 20,
         max_remediation_loops: int = 2,
     ):

@@ -8,4 +8,4 @@ languages: [python, sql]
 tags: [sql, database, query-repair, sqlite]
 workspace_file_count: 3
 lines_changed_expected: 35
-parameterized: false
+parameterized: true

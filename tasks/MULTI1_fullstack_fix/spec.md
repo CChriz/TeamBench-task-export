@@ -26,49 +26,39 @@ The backend uses an in-memory SQLite database (created fresh on app startup). Th
 
 ### Backend Bugs — `app.py`
 
-**Bug 1: POST /api/notes reads wrong request attribute**
-- Location: `POST /api/notes` route handler
-- Symptom: `request.args` is used instead of `request.json`
-- Effect: The `title` and `content` fields from the JSON body are always `None`; every note is created with null title/content
-- Fix: Replace `request.args.get(...)` with `request.json.get(...)`
+**Bug 1: Note creation endpoint does not read the request body**
+- **Symptom**: Every note is created with null title and content, regardless of what the client sends
+- **Expected behavior**: The POST endpoint must parse the JSON request body and use the `title` and `content` values from it
+- **Constraint**: Flask provides two separate ways to access request data — URL query parameters and the parsed JSON body. The endpoint is currently using the wrong one.
 
-**Bug 2: GET /api/notes returns notes in wrong order**
-- Location: `GET /api/notes` route handler
-- Symptom: SQL query orders by `id ASC` (ascending), so oldest notes appear first
-- Effect: Notes are returned oldest-first instead of newest-first
-- Fix: Change `ORDER BY id` to `ORDER BY id DESC` in the SELECT query
+**Bug 2: Notes are returned in the wrong order**
+- **Symptom**: The GET /api/notes endpoint returns notes oldest-first
+- **Expected behavior**: Notes must be returned newest-first so that the most recently created note appears at the top of the list
 
-**Bug 3: DELETE /api/notes/<id> uses wrong variable name in SQL binding**
-- Location: `DELETE /api/notes/<id>` route handler
-- Symptom: SQL parameter tuple uses `note_id` but the route variable is `id` (i.e., `(note_id,)` instead of `(id,)`)
-- Effect: `NameError: name 'note_id' is not defined` at runtime; delete always fails
-- Fix: Change `(note_id,)` to `(id,)` in the SQL execute call
+**Bug 3: Delete endpoint fails at runtime**
+- **Symptom**: Any attempt to delete a note causes a server-side error; the delete operation never succeeds
+- **Expected behavior**: The DELETE endpoint must correctly identify the note to delete using the ID from the route and remove it from the database
 
 ---
 
 ### Frontend Bugs — `static/app.js`
 
-**Bug 4: POST fetch sends wrong Content-Type header**
-- Location: `addNote()` function, `fetch` call headers
-- Symptom: `'Content-Type': 'text/plain'` is set instead of `'application/json'`
-- Effect: Flask's `request.json` returns `None` even after Bug 1 is fixed, because Flask only parses JSON when Content-Type is `application/json`
-- Fix: Change `'text/plain'` to `'application/json'`
+**Bug 4: Note creation requests are rejected by the backend**
+- **Symptom**: Even after the backend bug is fixed, note creation still fails because Flask does not parse the request body
+- **Expected behavior**: The fetch request that creates a note must declare the correct MIME type so that Flask recognizes and parses the JSON body
+- **Constraint**: Flask's JSON body parsing is only activated when the request declares `application/json` as its Content-Type
 
-**Bug 5: Delete button handler references undefined variable**
-- Location: `deleteNote()` function or the delete button's event handler
-- Symptom: Template literal uses `${note.id}` but the parameter variable is named `noteId`
-- Effect: `undefined` is interpolated into the URL — DELETE request goes to `/api/notes/undefined`
-- Fix: Change `${note.id}` to `${noteId}` in the fetch URL
+**Bug 5: Delete requests are sent to the wrong URL**
+- **Symptom**: Clicking delete sends a request to `/api/notes/undefined` instead of the correct note URL
+- **Expected behavior**: The delete fetch request URL must include the actual numeric ID of the note being deleted
 
 ---
 
 ### Deploy Script Bug — `deploy.sh`
 
-**Bug 6: FLASK_APP points to wrong file**
-- Location: `deploy.sh`, line setting `FLASK_APP`
-- Symptom: `export FLASK_APP=application.py` — but the actual app file is `app.py`
-- Effect: `flask run` fails with "Could not import 'application'"
-- Fix: Change `application.py` to `app.py`
+**Bug 6: Deploy script references the wrong application file**
+- **Symptom**: Running the deploy script causes Flask to fail on startup because it cannot find the application module
+- **Expected behavior**: The `FLASK_APP` environment variable in `deploy.sh` must point to the actual application file
 
 ---
 
@@ -94,8 +84,8 @@ All 6 tests pass:
 2. `test_get_notes` — GET returns a JSON list
 3. `test_notes_sorted` — newest note appears first
 4. `test_delete_note` — DELETE removes a note (200 response)
-5. `test_deploy_script_env` — deploy.sh contains `FLASK_APP=app.py`
-6. `test_frontend_content_type` — app.js contains `application/json`
+5. `test_deploy_script_env` — deploy.sh contains correct `FLASK_APP` value
+6. `test_frontend_content_type` — app.js declares `application/json`
 
 ---
 

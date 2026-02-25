@@ -6,6 +6,8 @@ Runs one role (planner/executor/verifier) in a turn-based loop:
 2. Call LLM with tools
 3. Execute tool calls and feed results back
 4. Stop when agent signals completion
+
+Provider-agnostic: depends only on ToolCallAdapter and AdapterResponse.
 """
 from __future__ import annotations
 
@@ -14,10 +16,14 @@ import os
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 
-from google.genai import types
-
-from harness.agent_interface import RoleConfig, Tool, ToolResult
-from harness.gemini_adapter import GeminiAdapter, tools_to_gemini_declarations
+from harness.agent_interface import (
+    AdapterResponse,
+    RoleConfig,
+    Tool,
+    ToolCallAdapter,
+    ToolResult,
+    tools_to_standard_declarations,
+)
 
 
 STDOUT_LIMIT = 4000
@@ -87,7 +93,7 @@ class AgentLoop:
     def __init__(
         self,
         role_config: RoleConfig,
-        adapter: GeminiAdapter,
+        adapter: ToolCallAdapter,
         messages_dir: str,
         log_dir: str | None = None,
         max_turns: int = 30,
@@ -101,11 +107,11 @@ class AgentLoop:
 
     def run(self, initial_prompt: str) -> list[AgentTurn]:
         """Execute the agent loop. Returns list of turns."""
-        gemini_tools = tools_to_gemini_declarations(self.config.tools)
+        std_tools = tools_to_standard_declarations(self.config.tools)
 
-        # Build initial contents
-        contents: list[types.Content] = [
-            types.Content(role="user", parts=[types.Part.from_text(text=initial_prompt)]),
+        # Conversation history as plain dicts
+        messages: list[dict] = [
+            {"role": "user", "content": initial_prompt},
         ]
 
         turns: list[AgentTurn] = []
@@ -123,70 +129,59 @@ class AgentLoop:
                 msg_text = "\n".join(
                     f"[Message from {m['role']}]: {m['content']}" for m in new_msgs
                 )
-                contents.append(types.Content(
-                    role="user",
-                    parts=[types.Part.from_text(text=f"New messages received:\n{msg_text}")],
-                ))
+                messages.append({
+                    "role": "user",
+                    "content": f"New messages received:\n{msg_text}",
+                })
 
-            # Call LLM
-            response = self.adapter.generate_with_tools(
-                contents=contents,
-                system_instruction=self.config.system_prompt,
-                tools=gemini_tools,
+            # Call LLM via provider-agnostic interface
+            response: AdapterResponse = self.adapter.generate_with_tools(
+                messages=messages,
+                system_prompt=self.config.system_prompt,
+                tools=std_tools,
             )
 
-            # Process response parts
-            has_function_call = False
-            function_response_parts = []
+            # Record assistant text
+            if response.text:
+                turn.text = response.text
+                if "DONE" in response.text or "TASK_COMPLETE" in response.text:
+                    turn.done = True
 
-            for candidate in response.candidates or []:
-                if not candidate.content or not candidate.content.parts:
-                    continue
-                for part in candidate.content.parts:
-                    # Text part
-                    if part.text:
-                        turn.text += part.text
-                        # Check for done signal
-                        if "DONE" in part.text or "TASK_COMPLETE" in part.text:
-                            turn.done = True
+            # Append assistant message to history
+            messages.append({"role": "assistant", "content": response.text or ""})
 
-                    # Function call part
-                    if part.function_call:
-                        has_function_call = True
-                        fc = part.function_call
-                        tool_name = fc.name
-                        tool_args = dict(fc.args) if fc.args else {}
+            # Process tool calls
+            tool_result_parts: list[dict] = []
+            for tc in response.tool_calls:
+                tool_name = tc.get("name", "")
+                tool_args = tc.get("args", {})
 
-                        turn.tool_calls.append({"name": tool_name, "args": tool_args})
+                turn.tool_calls.append({"name": tool_name, "args": tool_args})
 
-                        # Execute the tool
-                        result = _execute_tool(tool_name, tool_args, self.config.tools)
-                        result_dict = {
-                            "stdout": _truncate(result.stdout, STDOUT_LIMIT),
-                            "stderr": _truncate(result.stderr, STDERR_LIMIT),
-                            "exit_code": result.exit_code,
-                        }
-                        turn.tool_results.append(result_dict)
+                # Execute the tool
+                result = _execute_tool(tool_name, tool_args, self.config.tools)
+                result_dict = {
+                    "stdout": _truncate(result.stdout, STDOUT_LIMIT),
+                    "stderr": _truncate(result.stderr, STDERR_LIMIT),
+                    "exit_code": result.exit_code,
+                }
+                turn.tool_results.append(result_dict)
 
-                        # Build function response
-                        function_response_parts.append(
-                            types.Part.from_function_response(
-                                name=tool_name,
-                                response={
-                                    "stdout": result_dict["stdout"],
-                                    "stderr": result_dict["stderr"],
-                                    "exit_code": result.exit_code,
-                                },
-                            )
-                        )
+                tool_result_parts.append({
+                    "tool_name": tool_name,
+                    "result": result_dict,
+                })
 
-            # Append model response to contents
-            if response.candidates and response.candidates[0].content:
-                contents.append(response.candidates[0].content)
-
-            # If there were function calls, send results back
-            if function_response_parts:
-                contents.append(types.Content(role="user", parts=function_response_parts))
+            # Feed tool results back as a user message
+            if tool_result_parts:
+                result_text = "\n\n".join(
+                    f"Tool '{p['tool_name']}' result:\n"
+                    f"stdout: {p['result']['stdout']}\n"
+                    f"stderr: {p['result']['stderr']}\n"
+                    f"exit_code: {p['result']['exit_code']}"
+                    for p in tool_result_parts
+                )
+                messages.append({"role": "user", "content": result_text})
 
             # Log turn
             _log_turn(self.log_dir, self.config.role, turn)

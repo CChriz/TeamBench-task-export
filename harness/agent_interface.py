@@ -1,14 +1,15 @@
 """
 TeamBench Agent Driver Interface.
 
-Any LLM (OpenAI, Gemini, Claude, OSS) can be plugged in by implementing ModelAdapter.
+Any LLM (OpenAI, Gemini, Claude, OSS) can be plugged in by implementing ModelAdapter
+or ToolCallAdapter.
 RoleAgent wraps a ModelAdapter with role-specific constraints and tool access.
 
 This is the standard contract for running automated evaluations.
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 import json
 import os
@@ -30,6 +31,94 @@ class ModelAdapter(ABC):
             Assistant response text.
         """
         raise NotImplementedError
+
+
+@dataclass
+class AdapterResponse:
+    """Standardized response from any model adapter."""
+    text: str = ""
+    tool_calls: list[dict] = field(default_factory=list)  # [{"name": "...", "args": {...}}]
+    done: bool = False  # True if model signaled completion
+
+
+class ToolCallAdapter(ABC):
+    """Interface for LLM backends that support tool calling."""
+
+    @abstractmethod
+    def generate_with_tools(
+        self,
+        messages: list[dict],  # {"role": "user"|"assistant"|"tool", "content": ...}
+        system_prompt: str,
+        tools: list[dict],  # Tool declarations in standard format
+    ) -> AdapterResponse:
+        """Generate a response, potentially with tool calls."""
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_usage(self) -> dict:
+        """Return token usage stats."""
+        raise NotImplementedError
+
+
+def tools_to_standard_declarations(tools: "list[Tool]") -> list[dict]:
+    """Convert Tool objects to a model-agnostic tool declaration format.
+
+    Produces JSON-Schema-style dicts that each adapter converts to its
+    provider-specific format (Gemini FunctionDeclaration, OpenAI functions, etc.).
+    """
+    schema_map = {
+        "run": {
+            "name": "run",
+            "description": "Execute a shell command in the workspace. Returns stdout, stderr, and exit code.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "cmd": {"type": "string", "description": "Shell command to execute"},
+                },
+                "required": ["cmd"],
+            },
+        },
+        "read": {
+            "name": "read",
+            "description": "Read the contents of a file. Path must be within allowed directories.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "Path to the file to read"},
+                },
+                "required": ["path"],
+            },
+        },
+        "write": {
+            "name": "write",
+            "description": "Write content to a file. Path must be within allowed directories.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "Path to the file to write"},
+                    "content": {"type": "string", "description": "Content to write to the file"},
+                },
+                "required": ["path", "content"],
+            },
+        },
+        "send_message": {
+            "name": "send_message",
+            "description": "Send a message to another agent role (planner, executor, or verifier).",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "to": {"type": "string", "description": "Target role: planner, executor, or verifier"},
+                    "content": {"type": "string", "description": "Message content"},
+                },
+                "required": ["to", "content"],
+            },
+        },
+    }
+    result = []
+    for tool in tools:
+        if tool.name in schema_map:
+            result.append(schema_map[tool.name])
+    return result
 
 
 @dataclass

@@ -8,4 +8,4 @@ languages: [python]
 tags: [api, hidden-requirements, testing]
 workspace_file_count: 3
 lines_changed_expected: 50
-parameterized: false
+parameterized: true

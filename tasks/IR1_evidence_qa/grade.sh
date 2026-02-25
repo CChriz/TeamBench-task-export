@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+# Seed-aware grader for IR1: Offline Browse — Evidence-Required QA
+# Reads expected values from expected.json instead of hardcoded assertions.
+#
+# Args: $1=WORKSPACE $2=REPORTS $3=SUBMISSION $4=TASK_DIR [$5=EXPECTED_JSON]
 set -euo pipefail
 WORKSPACE="$1"
 REPORTS="$2"
 SUBMISSION="$3"
 TASK_DIR="$4"
+EXPECTED="${5:-$REPORTS/expected.json}"
 
 mkdir -p "$REPORTS"
 
@@ -20,19 +25,23 @@ check() {
 ANS_PATH="$WORKSPACE/answer.json"
 check "test -f '$ANS_PATH'" "missing_answer_json"
 
-if [ -f "$ANS_PATH" ]; then
+if [ -f "$ANS_PATH" ] && [ -f "$EXPECTED" ]; then
+
+# Answer must contain the correct budget value (from expected.json)
 check "python3 -c \"
 import json, os, sys
 
 ans = json.load(open('$ANS_PATH'))
+expected = json.load(open('$EXPECTED'))
 answer = ans.get('answer', '')
 
-# Answer must contain \\\$4.2M
-assert '\\\$4.2M' in answer or '4.2M' in answer or '4,200,000' in answer or '4200000' in answer, \
-    f'Wrong answer: {answer}'
+variants = expected.get('primary_answer_variants', [expected.get('primary_answer', '')])
+matched = any(v in answer for v in variants if v)
+assert matched, f'Wrong answer: {answer!r}. Expected one of: {variants}'
 print('ANSWER_OK')
 \"" "wrong_answer"
 
+# Exactly 2 evidence items
 check "python3 -c \"
 import json
 ans = json.load(open('$ANS_PATH'))
@@ -41,6 +50,7 @@ assert isinstance(evidence, list) and len(evidence) == 2, f'Need 2 evidence item
 print('EVIDENCE_COUNT_OK')
 \"" "wrong_evidence_count"
 
+# Evidence from 2 different docs
 check "python3 -c \"
 import json
 ans = json.load(open('$ANS_PATH'))
@@ -48,21 +58,28 @@ evidence = ans.get('evidence', [])
 docs = []
 for ev in evidence:
     doc = ev['doc']
-    assert isinstance(doc, str) and doc.endswith('.txt')
+    assert isinstance(doc, str) and doc.endswith('.txt'), f'Invalid doc: {doc}'
     docs.append(doc)
 assert docs[0] != docs[1], f'Evidence must be from 2 different docs: {docs}'
 print('EVIDENCE_DOCS_OK')
 \"" "evidence_not_from_different_docs"
 
+# Evidence content must mention the target project and be budget-related
 check "python3 -c \"
 import json, os
 
 ans = json.load(open('$ANS_PATH'))
+expected = json.load(open('$EXPECTED'))
 evidence = ans.get('evidence', [])
 corpus_dir = '$WORKSPACE/corpus'
+target = expected.get('target_project', '').lower()
+final_budget = expected.get('final_budget', '')
+# Extract numeric part (e.g. '8.8' from '\$8.8M')
+import re
+budget_num = re.sub(r'[^\d.]', '', final_budget)
+
 for ev in evidence:
     doc = ev['doc']
-    # Normalize: strip leading corpus/ if agent included it
     if doc.startswith('corpus/'):
         doc = doc[len('corpus/'):]
     start, end = ev['lines']
@@ -72,11 +89,12 @@ for ev in evidence:
         lines = f.read().splitlines()
     assert end <= len(lines), f'Line {end} exceeds {doc} length {len(lines)}'
     blob = ' '.join(lines[start-1:end]).lower()
-    assert 'titan' in blob, f'Evidence from {doc} does not mention Titan'
-    has_budget_info = any(t in blob for t in ['4.2', 'budget', 'approved', 'allocated'])
+    assert target in blob, f'Evidence from {doc} does not mention target project ({target})'
+    has_budget_info = any(t in blob for t in [budget_num, 'budget', 'approved', 'allocated', 'revised'])
     assert has_budget_info, f'Evidence from {doc} not budget-related'
 print('EVIDENCE_CONTENT_OK')
 \"" "invalid_evidence_content"
+
 fi
 
 # Attestation

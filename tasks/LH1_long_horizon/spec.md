@@ -8,10 +8,12 @@ and must be retried/recovered.
 
 1. Run `python workflow.py` which executes steps 1-15 sequentially.
 2. The workflow reads `pipeline_config.json` for step definitions.
-3. **Step 5** will fail on first attempt (transient error, creates `step5_fail` marker).
-   - Fix: delete the marker file `intermediates/step5_fail` and re-run step 5.
-4. **Step 11** will fail on first attempt (transient error, creates `step11_fail` marker).
-   - Fix: delete the marker file `intermediates/step11_fail`, regenerate from step 10 output, and re-run step 11.
+3. **Step 5** will fail on first attempt due to a transient error condition.
+   - The error condition is indicated by a marker file written to the `intermediates/` directory.
+   - Recovery requires clearing the error condition and re-running the step.
+4. **Step 11** will fail on first attempt due to a transient error condition.
+   - The error condition is indicated by a marker file written to the `intermediates/` directory.
+   - Recovery requires clearing the error condition, ensuring the step's input is valid (derived from the previous step's output), and re-running the step.
 5. Final output: `output/final_result.json` must contain:
    - `{"steps_completed": 15, "recovered_failures": 2, "checksum": "<sha256>"}`
 6. The `checksum` is SHA-256 of concatenated step outputs.

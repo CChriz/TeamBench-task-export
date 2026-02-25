@@ -3,8 +3,14 @@ TeamBench agent driver — run a multi-agent evaluation on a single task.
 
 Usage:
     python -m harness.run_agent --task S1_hidden_spec --model gemini-2.5-flash
-    python -m harness.run_agent --task S1_hidden_spec --model gemini-2.5-pro --max-turns 25
+    python -m harness.run_agent --task S1_hidden_spec --model gpt-4o --max-turns 25
+    python -m harness.run_agent --task S1_hidden_spec --model claude-3-5-sonnet-20241022
     python -m harness.run_agent --task all    # Run all tasks sequentially
+
+Model prefixes determine the adapter:
+    gemini-*  -> GeminiAdapter   (GEMINI_API_KEY)
+    gpt-*, o* -> OpenAIAdapter   (OPENAI_API_KEY)
+    claude-*  -> AnthropicAdapter (ANTHROPIC_API_KEY)
 """
 from __future__ import annotations
 
@@ -16,45 +22,24 @@ import time
 from pathlib import Path
 
 from harness.run_all import setup_run, grade_run, discover_tasks
-from harness.gemini_adapter import GeminiAdapter
+from harness.adapters import create_adapter
+from harness.agent_interface import ToolCallAdapter
 from harness.orchestrator import TaskOrchestrator
-
-
-def load_api_key() -> str:
-    """Load Gemini API key from environment or .env file."""
-    key = os.environ.get("GEMINI_API_KEY", "")
-    if key:
-        return key
-
-    # Try loading from common .env locations
-    for env_path in [
-        os.path.expanduser("~/CoDaS_v4/.env"),
-        os.path.join(os.getcwd(), ".env"),
-    ]:
-        if os.path.isfile(env_path):
-            with open(env_path, "r") as f:
-                for line in f:
-                    line = line.strip()
-                    if line.startswith("GEMINI_API_KEY="):
-                        return line.split("=", 1)[1].strip().strip('"').strip("'")
-
-    print("ERROR: GEMINI_API_KEY not found.")
-    print("Set it via environment variable or in .env file.")
-    sys.exit(1)
 
 
 def run_single_task(
     task_name: str,
     tasks_dir: str,
     runs_dir: str,
-    adapter: GeminiAdapter,
+    adapter: ToolCallAdapter,
     max_turns: int,
     max_remediation: int,
 ) -> dict:
     """Run agent evaluation on a single task. Returns result dict."""
+    model_name = getattr(adapter, "model", "unknown")
     print(f"\n{'='*60}")
     print(f"  TASK: {task_name}")
-    print(f"  MODEL: {adapter.model}")
+    print(f"  MODEL: {model_name}")
     print(f"{'='*60}")
 
     start_time = time.time()
@@ -84,7 +69,7 @@ def run_single_task(
     meta = {
         "task_id": task_name,
         "run_id": run_id,
-        "model": adapter.model,
+        "model": model_name,
         "agent_verdict": orch_result.verdict,
         "grader_verdict": "pass" if score.get("pass") else "fail",
         "total_turns": orch_result.total_turns,
@@ -116,7 +101,10 @@ def run_single_task(
 def main() -> None:
     ap = argparse.ArgumentParser(description="TeamBench agent driver")
     ap.add_argument("--task", required=True, help="Task name (e.g., S1_hidden_spec) or 'all'")
-    ap.add_argument("--model", default="gemini-2.5-flash", help="Gemini model name")
+    ap.add_argument(
+        "--model", default="gemini-2.5-flash",
+        help="Model name. Prefix determines provider: gemini-*, gpt-*, claude-*",
+    )
     ap.add_argument("--tasks-dir", default="tasks", help="Tasks directory")
     ap.add_argument("--runs-dir", default="shared/runs", help="Runs output directory")
     ap.add_argument("--max-turns", type=int, default=20, help="Max turns per phase")
@@ -127,13 +115,12 @@ def main() -> None:
     tasks_dir = os.path.abspath(args.tasks_dir)
     runs_dir = os.path.abspath(args.runs_dir)
 
-    # Load API key and create adapter
-    api_key = load_api_key()
-    adapter = GeminiAdapter(
-        api_key=api_key,
-        model=args.model,
-        temperature=args.temperature,
-    )
+    # Create provider-appropriate adapter from model name
+    try:
+        adapter = create_adapter(model=args.model, temperature=args.temperature)
+    except ValueError as exc:
+        print(f"ERROR: {exc}")
+        sys.exit(1)
 
     # Determine tasks to run
     if args.task.lower() == "all":

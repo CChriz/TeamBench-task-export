@@ -8,4 +8,4 @@ languages: [python, javascript, html, bash]
 tags: [fullstack, flask, frontend-backend, multi-language, cross-layer]
 workspace_file_count: 6
 lines_changed_expected: 35
-parameterized: false
+parameterized: true

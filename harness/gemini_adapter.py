@@ -2,6 +2,7 @@
 Gemini adapter for TeamBench agent driver.
 
 Uses the google-genai SDK (GA package) with manual function calling.
+Implements ToolCallAdapter so agent_loop.py has zero provider-specific code.
 """
 from __future__ import annotations
 
@@ -12,68 +13,40 @@ from typing import Any, Optional
 from google import genai
 from google.genai import types
 
-from harness.agent_interface import ModelAdapter, Tool
+from harness.agent_interface import AdapterResponse, ModelAdapter, ToolCallAdapter
 
 
-def tools_to_gemini_declarations(tools: list[Tool]) -> list[types.Tool]:
-    """Convert TeamBench Tool objects to Gemini FunctionDeclaration schemas."""
+def _standard_to_gemini_declarations(tools: list[dict]) -> list[types.Tool]:
+    """Convert standard tool declarations (dicts) to Gemini FunctionDeclaration objects."""
     declarations = []
-    for tool in tools:
-        if tool.name == "run":
-            declarations.append(types.FunctionDeclaration(
-                name="run",
-                description="Execute a shell command in the workspace. Returns stdout, stderr, and exit code.",
-                parameters=types.Schema(
-                    type="OBJECT",
-                    properties={
-                        "cmd": types.Schema(type="STRING", description="Shell command to execute"),
-                    },
-                    required=["cmd"],
-                ),
-            ))
-        elif tool.name == "read":
-            declarations.append(types.FunctionDeclaration(
-                name="read",
-                description="Read the contents of a file. Path must be within allowed directories.",
-                parameters=types.Schema(
-                    type="OBJECT",
-                    properties={
-                        "path": types.Schema(type="STRING", description="Path to the file to read"),
-                    },
-                    required=["path"],
-                ),
-            ))
-        elif tool.name == "write":
-            declarations.append(types.FunctionDeclaration(
-                name="write",
-                description="Write content to a file. Path must be within allowed directories.",
-                parameters=types.Schema(
-                    type="OBJECT",
-                    properties={
-                        "path": types.Schema(type="STRING", description="Path to the file to write"),
-                        "content": types.Schema(type="STRING", description="Content to write to the file"),
-                    },
-                    required=["path", "content"],
-                ),
-            ))
-        elif tool.name == "send_message":
-            declarations.append(types.FunctionDeclaration(
-                name="send_message",
-                description="Send a message to another agent role (planner, executor, or verifier).",
-                parameters=types.Schema(
-                    type="OBJECT",
-                    properties={
-                        "to": types.Schema(type="STRING", description="Target role: planner, executor, or verifier"),
-                        "content": types.Schema(type="STRING", description="Message content"),
-                    },
-                    required=["to", "content"],
-                ),
-            ))
+    for t in tools:
+        params = t.get("parameters", {})
+        props = params.get("properties", {})
+        required = params.get("required", [])
+
+        gemini_props = {
+            k: types.Schema(type=v.get("type", "STRING").upper(), description=v.get("description", ""))
+            for k, v in props.items()
+        }
+
+        declarations.append(types.FunctionDeclaration(
+            name=t["name"],
+            description=t.get("description", ""),
+            parameters=types.Schema(
+                type="OBJECT",
+                properties=gemini_props,
+                required=required,
+            ),
+        ))
     return [types.Tool(function_declarations=declarations)]
 
 
-class GeminiAdapter(ModelAdapter):
-    """Gemini model adapter with tool calling support."""
+class GeminiAdapter(ModelAdapter, ToolCallAdapter):
+    """Gemini model adapter with tool calling support.
+
+    Implements both ModelAdapter (simple text generation) and
+    ToolCallAdapter (standard tool-calling interface used by AgentLoop).
+    """
 
     def __init__(
         self,
@@ -92,6 +65,10 @@ class GeminiAdapter(ModelAdapter):
         if not key:
             raise ValueError("GEMINI_API_KEY not set. Provide api_key or set the environment variable.")
         self.client = genai.Client(api_key=key)
+
+    # ------------------------------------------------------------------
+    # ModelAdapter (simple text generation)
+    # ------------------------------------------------------------------
 
     def generate(self, messages: list[dict], **kwargs) -> str:
         """Simple text generation (ModelAdapter contract)."""
@@ -112,20 +89,89 @@ class GeminiAdapter(ModelAdapter):
         self._track_usage(response)
         return response.text or ""
 
+    # ------------------------------------------------------------------
+    # ToolCallAdapter (provider-agnostic tool-calling interface)
+    # ------------------------------------------------------------------
+
     def generate_with_tools(
         self,
-        contents: list[types.Content],
-        system_instruction: str | None = None,
-        tools: list[types.Tool] | None = None,
-    ) -> types.GenerateContentResponse:
-        """Generate with function calling support. Returns raw response for tool processing."""
-        response = self._call_with_retry(
+        messages: list[dict],
+        system_prompt: str,
+        tools: list[dict],
+    ) -> AdapterResponse:
+        """Convert standard messages/tools to Gemini format, call API, return AdapterResponse."""
+        gemini_tools = _standard_to_gemini_declarations(tools) if tools else None
+        contents = self._messages_to_gemini(messages)
+
+        raw = self._call_with_retry(
             contents=contents,
-            system_instruction=system_instruction,
-            tools=tools,
+            system_instruction=system_prompt or None,
+            tools=gemini_tools,
         )
-        self._track_usage(response)
-        return response
+        self._track_usage(raw)
+        return self._parse_response(raw)
+
+    def get_usage(self) -> dict:
+        """Return cumulative token usage."""
+        return {
+            "input_tokens": self._total_input_tokens,
+            "output_tokens": self._total_output_tokens,
+            "total_tokens": self._total_input_tokens + self._total_output_tokens,
+            "model": self.model,
+        }
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _messages_to_gemini(self, messages: list[dict]) -> list[types.Content]:
+        """Convert standard message dicts to Gemini Content objects.
+
+        Roles: "user" -> "user", "assistant" -> "model", "tool" -> "user" (function response).
+        """
+        contents: list[types.Content] = []
+        for msg in messages:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+
+            if role == "user":
+                contents.append(types.Content(
+                    role="user",
+                    parts=[types.Part.from_text(text=content)],
+                ))
+            elif role == "assistant":
+                contents.append(types.Content(
+                    role="model",
+                    parts=[types.Part.from_text(text=content)],
+                ))
+            elif role == "tool":
+                # Tool result injected as user turn text (already formatted by agent_loop)
+                contents.append(types.Content(
+                    role="user",
+                    parts=[types.Part.from_text(text=content)],
+                ))
+        return contents
+
+    def _parse_response(self, response: types.GenerateContentResponse) -> AdapterResponse:
+        """Parse a Gemini response into an AdapterResponse."""
+        text = ""
+        tool_calls: list[dict] = []
+
+        for candidate in response.candidates or []:
+            if not candidate.content or not candidate.content.parts:
+                continue
+            for part in candidate.content.parts:
+                if part.text:
+                    text += part.text
+                if part.function_call:
+                    fc = part.function_call
+                    tool_calls.append({
+                        "name": fc.name,
+                        "args": dict(fc.args) if fc.args else {},
+                    })
+
+        done = "DONE" in text or "TASK_COMPLETE" in text
+        return AdapterResponse(text=text, tool_calls=tool_calls, done=done)
 
     def _call_with_retry(
         self,
@@ -167,11 +213,17 @@ class GeminiAdapter(ModelAdapter):
             self._total_input_tokens += getattr(meta, "prompt_token_count", 0) or 0
             self._total_output_tokens += getattr(meta, "candidates_token_count", 0) or 0
 
-    def get_usage(self) -> dict:
-        """Return cumulative token usage."""
-        return {
-            "input_tokens": self._total_input_tokens,
-            "output_tokens": self._total_output_tokens,
-            "total_tokens": self._total_input_tokens + self._total_output_tokens,
-            "model": self.model,
-        }
+
+# ---------------------------------------------------------------------------
+# Legacy helper kept for any external code that imported it directly
+# ---------------------------------------------------------------------------
+
+def tools_to_gemini_declarations(tools: list) -> list[types.Tool]:
+    """Backward-compat shim: convert Tool objects to Gemini declarations.
+
+    Prefer tools_to_standard_declarations() + GeminiAdapter.generate_with_tools()
+    for new code.
+    """
+    from harness.agent_interface import tools_to_standard_declarations
+    std = tools_to_standard_declarations(tools)
+    return _standard_to_gemini_declarations(std)

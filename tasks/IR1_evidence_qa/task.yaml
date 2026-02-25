@@ -8,4 +8,4 @@ languages: [python]
 tags: [information-retrieval, qa, evidence-grounding]
 workspace_file_count: 2
 lines_changed_expected: 15
-parameterized: false
+parameterized: true

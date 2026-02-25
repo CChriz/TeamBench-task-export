@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
+# Seed-aware grader for D2: Data Quality + Spec Compliance
+# Reads expected values from expected.json instead of hardcoded assertions.
+#
+# Args: $1=WORKSPACE $2=REPORTS $3=SUBMISSION $4=TASK_DIR [$5=EXPECTED_JSON]
 set -euo pipefail
 WORKSPACE="$1"
 REPORTS="$2"
 SUBMISSION="$3"
 TASK_DIR="$4"
+EXPECTED="${5:-$REPORTS/expected.json}"
 
 mkdir -p "$REPORTS"
 
@@ -25,23 +30,28 @@ check "python3 clean.py" "clean_crash"
 RESULT="data/output/clean.csv"
 check "test -f '$RESULT'" "missing_output"
 
-if [ -f "$RESULT" ]; then
+if [ -f "$RESULT" ] && [ -f "$EXPECTED" ]; then
+
+# Check columns match expected
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
 with open('$RESULT', 'r', encoding='utf-8') as f:
     reader = csv.DictReader(f)
     rows = list(reader)
     fieldnames = reader.fieldnames
-assert fieldnames == ['id', 'name', 'score', 'department'], f'Wrong columns: {fieldnames}'
+assert list(fieldnames) == expected['columns'], f'Wrong columns: {list(fieldnames)} (expected {expected[\"columns\"]})'
 print('COLUMNS_OK')
 \"" "wrong_columns"
 
-# Expected: 6 rows after dedup+drop
+# Check row count (from expected.json)
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
-assert len(rows) == 6, f'Expected 6 rows after dedup+drop, got {len(rows)}'
+assert len(rows) == expected['row_count'], f'Expected {expected[\"row_count\"]} rows after dedup+drop, got {len(rows)}'
+print('ROW_COUNT_OK')
 \"" "wrong_row_count"
 
 # No duplicates by id
@@ -51,68 +61,96 @@ with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
 ids = [r['id'] for r in rows]
 assert len(set(ids)) == len(ids), f'Duplicate ids in output: {ids}'
+print('NO_DUPLICATES_OK')
 \"" "duplicate_ids"
 
-# Range check: no score outside 0-100
+# Range check: no score outside 0-100, out-of-range ids must be absent
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
+score_col = expected['score_col']
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
+ids_present = {r['id'] for r in rows}
+for oor_id in expected['out_of_range_ids']:
+    assert oor_id not in ids_present, f'Out-of-range id={oor_id} should be dropped'
 for r in rows:
-    if r['score'] != 'MISSING':
-        s = int(r['score'])
+    s_str = r[score_col]
+    if s_str not in ('MISSING', '', 'N/A'):
+        s = int(s_str)
         assert 0 <= s <= 100, f'Score out of range for id={r[\"id\"]}: {s}'
-ids = [r['id'] for r in rows]
-assert '5' not in ids, 'id=5 (score=105) should be dropped'
-assert '8' not in ids, 'id=8 (score=-5) should be dropped'
+print('RANGE_CHECK_OK')
 \"" "range_check_fail"
 
-# Missing values replaced with MISSING
+# Missing values replaced with MISSING (not empty or N/A)
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
+score_col = expected['score_col']
+dept_col = expected['dept_col']
+fill = expected['correct_fill']
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
 for r in rows:
-    for col in ['name', 'score', 'department']:
-        assert r[col] not in ('', 'N/A'), f'Unreplaced missing value in id={r[\"id\"]}, col={col}: \"{r[col]}\"'
+    for col in ['name', score_col, dept_col]:
+        assert r.get(col) not in ('', 'N/A'), f'Unreplaced missing value in id={r[\"id\"]}, col={col}: \"{r.get(col)}\"'
+print('MISSING_VALUES_OK')
 \"" "missing_values_not_replaced"
 
 # Dedup: higher score kept
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
+score_col = expected['score_col']
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
-id_score = {r['id']: r['score'] for r in rows}
-assert id_score.get('1') == '90', f'id=1 should keep score=90, got {id_score.get(\"1\")}'
-assert id_score.get('2') == '92', f'id=2 should keep score=92, got {id_score.get(\"2\")}'
+id_score = {r['id']: r[score_col] for r in rows}
+for did, winner_score in expected['dup_winner_scores'].items():
+    got = id_score.get(did)
+    assert got == winner_score, f'id={did} should keep score={winner_score}, got {got}'
+print('DEDUP_HIGHER_SCORE_OK')
 \"" "dedup_higher_score_fail"
 
 # Sort: score desc, then name asc
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
+score_col = expected['score_col']
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
-scores = []
+sort_keys = []
 for r in rows:
-    s = -1 if r['score'] == 'MISSING' else int(r['score'])
-    scores.append((-s, r['name']))
-assert scores == sorted(scores), f'Not sorted correctly (score desc, name asc)'
+    s_str = r[score_col]
+    s = -1 if s_str in ('MISSING', '') else int(s_str)
+    sort_keys.append((-s, r['name']))
+assert sort_keys == sorted(sort_keys), f'Not sorted correctly (score desc, name asc)'
+print('SORT_ORDER_OK')
 \"" "sort_order_wrong"
 
-# Department correction: MISSING + score < 50 -> review_needed
+# Department correction: MISSING dept + score < 50 -> review_needed
 check "python3 -c \"
-import csv
+import csv, json
+expected = json.load(open('$EXPECTED'))
+score_col = expected['score_col']
+dept_col = expected['dept_col']
+review_id = expected.get('review_needed_id')
 with open('$RESULT') as f:
     rows = list(csv.DictReader(f))
+dept_map = {r['id']: r[dept_col] for r in rows}
+score_map = {r['id']: r[score_col] for r in rows}
+if review_id:
+    assert dept_map.get(review_id) == 'review_needed', \
+        f'id={review_id}: expected review_needed, got {dept_map.get(review_id)}'
+# Also check no row has MISSING dept with score < 50
 for r in rows:
-    if r['score'] != 'MISSING':
-        s = int(r['score'])
-        if s < 50 and r['department'] in ('MISSING', ''):
+    s_str = r[score_col]
+    if s_str not in ('MISSING', ''):
+        s = int(s_str)
+        if s < 50 and r[dept_col] in ('MISSING', ''):
             assert False, f'id={r[\"id\"]}: department should be review_needed for low score'
-# id=6 Frank has score=45, dept was MISSING -> should be review_needed
-dept_map = {r['id']: r['department'] for r in rows}
-assert dept_map.get('6') == 'review_needed', f'id=6: expected review_needed, got {dept_map.get(\"6\")}'
+print('DEPT_CORRECTION_OK')
 \"" "department_correction_fail"
+
 fi
 
 # Attestation

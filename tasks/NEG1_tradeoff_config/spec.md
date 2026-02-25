@@ -7,24 +7,24 @@ Configure and fix the HTTP service so it simultaneously satisfies performance, s
 
 ### Performance
 - p95 latency must be < 100ms per request
-- Current: ~250ms due to slow synchronous validator (200ms per validation)
-- **Hint**: The current validator is unnecessarily slow. A regex-based approach can achieve the same validation in < 5ms.
+- The current implementation is significantly slower than this threshold due to the input validation step
+- **Constraint**: Validation must not be disabled — the solution must make validation fast enough to meet the latency target, not skip it
 
 ### Security
-- All inputs must be validated (cannot disable validation)
-- TLS must be enabled (currently disabled)
-- No plaintext credentials in config
-- Session tokens must be generated securely
+- All inputs must be validated before processing (validation cannot be disabled or bypassed)
+- TLS must be enabled for all connections
+- No plaintext credentials may appear in config files or source code
+- Session tokens must be generated using a cryptographically secure method
 
 ### Reliability
-- Circuit breaker must be implemented on external service calls
-- Retry with exponential backoff (base 100ms, max 3 retries)
-- Circuit breaker opens after 3 consecutive failures, closes after 10s
+- External service calls must be wrapped with a circuit breaker
+- Failed requests must be retried with exponential backoff: base delay of 100ms, maximum of 3 retry attempts
+- The circuit breaker must open after 3 consecutive failures and remain open for 10 seconds before attempting recovery
 
 ## Common Traps
-- Disabling validation → passes perf but fails security
-- Enabling everything naively → passes security but fails perf
-- Only implementing circuit breaker → passes reliability but not perf/security
+- Disabling validation satisfies the performance requirement but violates security
+- Enabling all features without optimizing validation satisfies security but fails the performance benchmark
+- Implementing only the circuit breaker satisfies reliability but leaves performance and security unaddressed
 
 ## Deliverables
 - Fixed service code meeting all 3 constraint categories

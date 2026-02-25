@@ -3,60 +3,54 @@
 ## Goal
 Write comprehensive tests for the calculator engine that catch bugs through mutation testing.
 
-## Calculator Specification — 15 Behaviors
+## Calculator Specification — 20 Behaviors
 
 ### Basic Arithmetic
-1. `calc.add(a, b)` returns `a + b`
-2. `calc.subtract(a, b)` returns `a - b`
-3. `calc.multiply(a, b)` returns `a * b`
-4. `calc.divide(a, b)` returns `a / b`
+1. `calc.add(a, b)` returns the sum of `a` and `b`
+2. `calc.subtract(a, b)` returns the difference `a` minus `b`
+3. `calc.multiply(a, b)` returns the product of `a` and `b`
+4. `calc.divide(a, b)` returns the quotient `a` divided by `b`
 
 ### Error Handling
-5. `calc.divide(a, 0)` raises `CalculatorError("division_by_zero")`
-6. Numbers > 2^53 raise `CalculatorError("overflow")`
-7. `calc.sqrt(-1)` raises `CalculatorError("domain_error")`
+5. Dividing by zero raises `CalculatorError` with code `"division_by_zero"`
+6. Numbers exceeding 2^53 raise `CalculatorError` with code `"overflow"`
+7. Taking the square root of a negative number raises `CalculatorError` with code `"domain_error"`
 
 ### Chained Operations
-8. `calc.chain(5).add(3).multiply(2).result()` returns `16.0`
-   - Chain starts with initial value, applies operations sequentially
+8. The calculator supports method chaining starting from an initial value; each chained operation applies to the running result; calling `.result()` returns the final value
 
 ### Memory
-9. `calc.memory_store(42)` stores value; `calc.memory_recall()` returns `42.0`
-10. `calc.memory_clear()` clears memory; subsequent `memory_recall()` returns `0.0`
+9. A value stored with `memory_store` is returned by a subsequent `memory_recall`
+10. After `memory_clear`, `memory_recall` returns `0.0`
 
 ### Precision
-11. Results are rounded to 6 decimal places
-    - `calc.divide(1, 3)` returns `0.333333` (not `0.3333333...`)
+11. All results are rounded to exactly 6 decimal places (e.g., one-third is `0.333333`, not a longer repeating decimal)
 
 ### Percentage
-12. `calc.percent(200, 15)` returns `30.0` (15% of 200)
+12. `calc.percent(value, pct)` returns the given percentage of the value
 
 ### Expression Parsing
-13. `calc.evaluate("2 + 3 * 4")` returns `14.0` (follows order of operations)
-    - Supports: +, -, *, /, parentheses
-    - `calc.evaluate("(2 + 3) * 4")` returns `20.0`
+13. `calc.evaluate(expr)` parses and evaluates arithmetic expressions following standard operator precedence (multiplication and division before addition and subtraction)
+14. Parentheses in expressions override default precedence
 
 ### History
-14. `calc.history()` returns list of last 10 operations as strings
-    - Format: `"add(1, 2) = 3.0"`
-    - Only keeps last 10
+15. `calc.history()` returns a list of the last 10 operations as strings in the format `"op(a, b) = result"`; operations beyond 10 cause the oldest to be dropped
 
 ### Undo
-15. After `calc.add(1, 2)` then `calc.undo()`, the last operation is reversed
-    - History entry is also removed
+16. After an operation, calling `calc.undo()` reverses that operation and removes its entry from history
 
 ### Batch Mode
-16. `calc.batch([("add", 1, 2), ("multiply", 3, 4)])` returns `[3.0, 12.0]`
+17. `calc.batch(ops)` accepts a list of `(operation, arg1, arg2)` tuples and returns a list of results in the same order
 
 ### Reset
-17. `calc.reset()` clears history, memory, and chain state
+18. `calc.reset()` clears history, memory, and any chain state
 
 ### Type Coercion
-18. String numeric inputs auto-convert: `calc.add("5", "3")` returns `8.0`
-19. Non-numeric strings raise `CalculatorError("invalid_input")`
+19. Numeric string inputs (e.g., `"5"`) are automatically converted to numbers
+20. Non-numeric string inputs raise `CalculatorError` with code `"invalid_input"`
 
 ### Thread Safety
-20. Concurrent operations from 10 threads must not corrupt state
+21. Concurrent operations from multiple threads must not corrupt calculator state or raise exceptions
 
 ## Test Cases Table
 

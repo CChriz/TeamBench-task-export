@@ -11,6 +11,30 @@ CHECKS=0; PASSED=0; FAILURES=""
 
 cd "$WORKSPACE"
 
+# ---------------------------------------------------------------------------
+# Seed-aware: read expected.json if present (generated tasks)
+# ---------------------------------------------------------------------------
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ ! -f "$EXPECTED_JSON" ]; then
+  EXPECTED_JSON="$(dirname "$0")/expected.json"
+fi
+
+# Determine expected run output and Result type name from expected.json or defaults
+EXPECTED_RUN_MSG="All 10 jobs completed"
+RESULT_TYPE="Result"
+if [ -f "$EXPECTED_JSON" ]; then
+  EXPECTED_RUN_MSG=$(python3 -c "
+import json
+d = json.load(open('$EXPECTED_JSON'))
+print(d.get('print_msg', 'All 10 jobs completed'))
+" 2>/dev/null || echo "All 10 jobs completed")
+  RESULT_TYPE=$(python3 -c "
+import json
+d = json.load(open('$EXPECTED_JSON'))
+print(d.get('Result', 'Result'))
+" 2>/dev/null || echo "Result")
+fi
+
 # Check 1: go build compiles cleanly
 CHECKS=$((CHECKS + 1))
 if go build ./... > /tmp/go_build_out 2>&1; then
@@ -38,7 +62,7 @@ fi
 # Check 4: go run completes within 10s and prints expected output
 CHECKS=$((CHECKS + 1))
 RUN_OUT=$(timeout 10s go run . 2>&1 || true)
-if echo "$RUN_OUT" | grep -q "All 10 jobs completed"; then
+if echo "$RUN_OUT" | grep -qF "$EXPECTED_RUN_MSG"; then
   PASSED=$((PASSED + 1))
 else
   FAILURES="${FAILURES:+${FAILURES},}run_output_wrong"
@@ -54,8 +78,8 @@ fi
 
 # Check 5b: results channel is buffered (capacity argument present after the type)
 CHECKS=$((CHECKS + 1))
-# Match make(chan Result, <anything>) but not make(chan Result) with no second arg
-if grep -E 'make\(chan Result,' main.go | grep -qvE 'make\(chan Result\)'; then
+# Match make(chan <ResultType>, <anything>) but not make(chan <ResultType>) with no second arg
+if grep -E "make\\(chan ${RESULT_TYPE}," main.go | grep -qvE "make\\(chan ${RESULT_TYPE}\\)"; then
   PASSED=$((PASSED + 1))
 else
   FAILURES="${FAILURES:+${FAILURES},}results_channel_unbuffered"

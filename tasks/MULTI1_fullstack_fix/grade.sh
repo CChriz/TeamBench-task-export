@@ -20,47 +20,79 @@ check() {
 cd "$WORKSPACE"
 
 # ---------------------------------------------------------------------------
+# Seed-aware: read expected.json if present (generated tasks)
+# ---------------------------------------------------------------------------
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ ! -f "$EXPECTED_JSON" ]; then
+  # Fallback: look next to grade.sh (static task)
+  EXPECTED_JSON="$(dirname "$0")/expected.json"
+fi
+
+# Extract values from expected.json, fall back to defaults matching original task
+ENTITY_NAME="notes"
+SINGULAR="note"
+WRONG_APP="application.py"
+WRONG_CT="text/plain"
+if [ -f "$EXPECTED_JSON" ]; then
+  ENTITY_NAME=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('entity_name','notes'))" 2>/dev/null || echo "notes")
+  SINGULAR=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('singular','note'))" 2>/dev/null || echo "note")
+  WRONG_APP=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('wrong_app_name','application.py'))" 2>/dev/null || echo "application.py")
+  WRONG_CT=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('wrong_content_type','text/plain'))" 2>/dev/null || echo "text/plain")
+fi
+
+# Discover test class name from test_app.py (seed-aware)
+TEST_CLASS=$(python3 -c "
+import ast, sys
+try:
+    tree = ast.parse(open('test_app.py').read())
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ClassDef) and 'TestCase' in node.name:
+            print(node.name)
+            sys.exit(0)
+except Exception:
+    pass
+print('NoteAppTestCase')
+" 2>/dev/null || echo "NoteAppTestCase")
+
+# ---------------------------------------------------------------------------
 # Check 1: app.py imports without error
 # ---------------------------------------------------------------------------
 check "python3 -c 'from app import app'" "import_error"
 
 # ---------------------------------------------------------------------------
-# Check 2: test_create_note passes
+# Check 2: create test passes (test_create_<singular>)
 # ---------------------------------------------------------------------------
-check "python3 -m pytest test_app.py::NoteAppTestCase::test_create_note -x -q 2>/dev/null || \
-       python3 -m unittest test_app.NoteAppTestCase.test_create_note 2>/dev/null" \
-      "test_create_note_fail"
+check "python3 -m unittest test_app.${TEST_CLASS}.test_create_${SINGULAR} 2>/dev/null" \
+      "test_create_fail"
 
 # ---------------------------------------------------------------------------
-# Check 3: test_get_notes passes
+# Check 3: get test passes (test_get_<entity>)
 # ---------------------------------------------------------------------------
-check "python3 -m pytest test_app.py::NoteAppTestCase::test_get_notes -x -q 2>/dev/null || \
-       python3 -m unittest test_app.NoteAppTestCase.test_get_notes 2>/dev/null" \
-      "test_get_notes_fail"
+check "python3 -m unittest test_app.${TEST_CLASS}.test_get_${ENTITY_NAME} 2>/dev/null" \
+      "test_get_fail"
 
 # ---------------------------------------------------------------------------
-# Check 4: test_notes_sorted passes (newest-first ordering)
+# Check 4: sorted test passes (test_<entity>_sorted)
 # ---------------------------------------------------------------------------
-check "python3 -m pytest test_app.py::NoteAppTestCase::test_notes_sorted -x -q 2>/dev/null || \
-       python3 -m unittest test_app.NoteAppTestCase.test_notes_sorted 2>/dev/null" \
-      "test_notes_sorted_fail"
+check "python3 -m unittest test_app.${TEST_CLASS}.test_${ENTITY_NAME}_sorted 2>/dev/null" \
+      "test_sorted_fail"
 
 # ---------------------------------------------------------------------------
-# Check 5: test_delete_note passes
+# Check 5: delete test passes (test_delete_<singular>)
 # ---------------------------------------------------------------------------
-check "python3 -m pytest test_app.py::NoteAppTestCase::test_delete_note -x -q 2>/dev/null || \
-       python3 -m unittest test_app.NoteAppTestCase.test_delete_note 2>/dev/null" \
-      "test_delete_note_fail"
+check "python3 -m unittest test_app.${TEST_CLASS}.test_delete_${SINGULAR} 2>/dev/null" \
+      "test_delete_fail"
 
 # ---------------------------------------------------------------------------
-# Check 6: deploy.sh contains FLASK_APP=app.py
+# Check 6: deploy.sh contains FLASK_APP=app.py (not the wrong app name)
 # ---------------------------------------------------------------------------
 check "grep -q 'FLASK_APP=app\.py' deploy.sh" "deploy_flask_app_wrong"
 
 # ---------------------------------------------------------------------------
-# Check 7: static/app.js contains application/json (Content-Type fix)
+# Check 7: static/app.js contains application/json and NOT the wrong Content-Type
 # ---------------------------------------------------------------------------
-check "grep -q 'application/json' static/app.js" "frontend_content_type_wrong"
+check "grep -q 'application/json' static/app.js && ! grep -q '${WRONG_CT}' static/app.js" \
+      "frontend_content_type_wrong"
 
 # ---------------------------------------------------------------------------
 # Check 8: attestation.json verdict=pass
