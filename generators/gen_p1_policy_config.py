@@ -225,7 +225,14 @@ Any extra keys constitute a policy violation.
             "config.json": json.dumps(violated_config, indent=2) + "\n",
         }
 
-        spec_md = self._generate_spec(correct_cors, rule_count=10, cors_origins=correct_cors)
+        spec_md = self._generate_spec(
+            cors_origins=correct_cors,
+            rule_count=10,
+            correct_timeout=correct_timeout,
+            correct_retry=correct_retry,
+            correct_min_pw=correct_min_pw,
+            correct_auth=correct_auth,
+        )
         brief_md = self._generate_brief()
 
         return GeneratedTask(
@@ -238,14 +245,20 @@ Any extra keys constitute a policy violation.
             corpus_files=corpus_files,
         )
 
-    def _generate_spec(self, correct_cors: list, rule_count: int = 10,
-                       cors_origins: list | None = None) -> str:
-        cors_str = json.dumps(cors_origins or correct_cors)
+    def _generate_spec(self, cors_origins: list, rule_count: int = 10,
+                       correct_timeout: int = 30, correct_retry: int = 3,
+                       correct_min_pw: int = 12, correct_auth: str = "jwt") -> str:
+        cors_str = json.dumps(cors_origins)
         return f"""# P1: Policy-Driven Config Change
 
 ## Goal
 Generate a configuration file (`output/config.json`) that complies with ALL {rule_count} rules
 defined in the policy document.
+
+## Context
+This deployment uses {correct_auth} authentication with a {correct_timeout}s timeout policy,
+{correct_retry} retries, and a minimum password length of {correct_min_pw} characters.
+The CORS origins are restricted to: {cors_str}.
 
 ## Hard Requirements
 
@@ -256,7 +269,6 @@ defined in the policy document.
    (exact values, permitted ranges, or allowed enumerations as appropriate).
 5. The initial `config.json` template in the workspace has intentional policy violations
    that must be identified and corrected.
-6. Allowed CORS origins for this deployment: {cors_str}
 
 ## Policy Source
 

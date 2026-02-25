@@ -8,4 +8,4 @@ languages: [python]
 tags: [dependency-resolution, packaging, version-conflict]
 workspace_file_count: 8
 lines_changed_expected: 30
-parameterized: false
+parameterized: true

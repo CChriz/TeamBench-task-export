@@ -8,4 +8,4 @@ languages: [python]
 tags: [incident-response, root-cause-analysis, debugging]
 workspace_file_count: 3
 lines_changed_expected: 35
-parameterized: false
+parameterized: true

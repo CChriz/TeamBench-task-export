@@ -8,4 +8,4 @@ languages: [python]
 tags: [conflict-resolution, requirements, prioritization]
 workspace_file_count: 2
 lines_changed_expected: 25
-parameterized: false
+parameterized: true

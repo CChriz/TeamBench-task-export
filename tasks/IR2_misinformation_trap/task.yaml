@@ -8,4 +8,4 @@ languages: [python]
 tags: [misinformation-detection, adversarial, fact-checking]
 workspace_file_count: 2
 lines_changed_expected: 15
-parameterized: false
+parameterized: true

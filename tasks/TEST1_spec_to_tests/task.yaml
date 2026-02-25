@@ -8,4 +8,4 @@ languages: [python]
 tags: [test-generation, specification, tdd]
 workspace_file_count: 3
 lines_changed_expected: 40
-parameterized: false
+parameterized: true

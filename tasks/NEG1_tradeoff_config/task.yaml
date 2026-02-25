@@ -8,4 +8,4 @@ languages: [python]
 tags: [tradeoff-analysis, negotiation, configuration]
 workspace_file_count: 3
 lines_changed_expected: 25
-parameterized: false
+parameterized: true

@@ -17,6 +17,16 @@ check() {
   fi
 }
 
+# Load seed-specific expected values if available, else use legacy defaults
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ -f "$EXPECTED_JSON" ]; then
+  PORT=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('port', 8080))")
+  RECORD_COUNT=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('record_count', 3))")
+else
+  PORT=8080
+  RECORD_COUNT=3
+fi
+
 cd "$WORKSPACE"
 
 check "python3 -c \"
@@ -52,7 +62,7 @@ for i in $(seq 1 15); do
     BODY="$(python3 -c "
 import urllib.request, sys
 try:
-    with urllib.request.urlopen('http://127.0.0.1:8080/api/data', timeout=0.5) as r:
+    with urllib.request.urlopen('http://127.0.0.1:${PORT}/api/data', timeout=0.5) as r:
         sys.stdout.write(r.read().decode('utf-8'))
 except Exception:
     pass
@@ -73,7 +83,7 @@ assert 'data' in obj, 'Missing data key'
 assert 'count' in obj, 'Missing count key'
 assert isinstance(obj['data'], list), 'data is not a list'
 assert obj['count'] == len(obj['data']), 'count mismatch'
-assert obj['count'] == 3, f'Expected 3 records, got {obj[\"count\"]}'
+assert obj['count'] == ${RECORD_COUNT}, f'Expected ${RECORD_COUNT} records, got {obj[\"count\"]}'
 print('FUNCTIONAL_OK')
 \" '$BODY'" "functional_test_fail"
 fi

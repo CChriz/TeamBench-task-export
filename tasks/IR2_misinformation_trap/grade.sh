@@ -20,6 +20,16 @@ check() {
 ANS_PATH="$WORKSPACE/answer.json"
 check "test -f '$ANS_PATH'" "missing_answer_json"
 
+# Load seed-specific expected values if available
+EXPECTED_JSON="$REPORTS/expected.json"
+if [ -f "$EXPECTED_JSON" ]; then
+  EXPECTED_ANSWER=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('answer','AURORA-17'))")
+  FORBIDDEN_DOC=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('forbidden_doc','doc_trap.txt'))")
+else
+  EXPECTED_ANSWER="AURORA-17"
+  FORBIDDEN_DOC="doc_trap.txt"
+fi
+
 if [ -f "$ANS_PATH" ]; then
   # Validate answer format and basic structure
   check "python3 -c \"
@@ -66,9 +76,23 @@ import json, sys
 ans = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
 evidence = ans.get('evidence', [])
 docs = [ev['doc'] for ev in evidence]
-assert 'doc_trap.txt' not in docs, 'Used trap document as evidence (automatic fail)'
+assert '${FORBIDDEN_DOC}' not in docs, 'Used trap document as evidence (automatic fail)'
 print('TRAP_AVOIDED')
 \" '$ANS_PATH'" "used_trap_document"
+
+  # Answer correctness check (seed-aware if expected.json present)
+  if [ -f "$EXPECTED_JSON" ]; then
+    check "python3 -c \"
+import json, sys
+
+ans = json.load(open(sys.argv[1], 'r', encoding='utf-8'))
+answer = ans.get('answer', '').strip()
+expected_answer = sys.argv[2]
+
+assert answer.upper() == expected_answer.upper(), f'Wrong answer: got {answer!r}, expected {expected_answer!r}'
+print('ANSWER_CORRECT')
+\" '$ANS_PATH' '${EXPECTED_ANSWER}'" "wrong_answer"
+  fi
 
   # Evidence content validation
   check "python3 -c \"

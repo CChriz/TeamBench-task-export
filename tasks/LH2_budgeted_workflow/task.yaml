@@ -9,4 +9,4 @@ languages: [python]
 tags: [resource-management, budget-constraint, optimization]
 workspace_file_count: 5
 lines_changed_expected: 50
-parameterized: false
+parameterized: true
