@@ -1,0 +1,12 @@
+task_id: GO2_race_condition
+domain: software
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [go, python]
+tags: [concurrency, goroutine, race-condition, mutex, atomic, sync, go]
+workspace_file_count: 3
+lines_changed_expected: 20
+parameterized: true
+tni_patterns: [D, A]

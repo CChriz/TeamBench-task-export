@@ -208,29 +208,33 @@ assert d3.get('source') == 'db', f'Expected source=db after POST invalidation, g
 print('POST_INVALIDATES_CACHE_OK')
 \"" "post_does_not_invalidate_cache"
 
-# ── CHECK 10: PUT to cacheable resource invalidates its cache ──────────────
+# ── CHECK 10: PUT to res_a invalidates cache if res_a is cacheable ─────────
+# The stub always provides PUT /$RES_A/{id}. If res_a is the uncacheable
+# resource, there is no cache to invalidate — the check passes trivially.
 check "$PYTHON -c \"
-import sys, json
+import sys, json, os
 sys.path.insert(0, '$WORKSPACE')
 from app import app
 client = app.test_client()
 
-res = '$CACHEABLE_FIRST'
-# Prime cache
-client.get(f'/{res}')
-r2 = client.get(f'/{res}')
-d2 = json.loads(r2.data)
-assert d2.get('source') == 'cache', f'Cache not primed for PUT test on /{res}'
-
-# PUT to update item 1
-rput = client.put(f'/{res}/1', data=json.dumps({'value': 777}), content_type='application/json')
-assert rput.status_code == 200, f'PUT /{res}/1 returned {rput.status_code}'
-
-# Next GET must hit DB
-r3 = client.get(f'/{res}')
-d3 = json.loads(r3.data)
-assert d3.get('source') == 'db', f'Expected source=db after PUT invalidation, got {d3.get(\\\"source\\\")!r}'
-print('PUT_INVALIDATES_CACHE_OK')
+res_a = '$RES_A'
+uncacheable = '$UNCACHEABLE'
+if res_a == uncacheable:
+    print('PUT_INVALIDATES_CACHE_OK (res_a is uncacheable, skip)')
+else:
+    # Prime cache
+    client.get(f'/{res_a}')
+    r2 = client.get(f'/{res_a}')
+    d2 = json.loads(r2.data)
+    assert d2.get('source') == 'cache', f'Cache not primed for PUT test on /{res_a}'
+    # PUT to update item 1
+    rput = client.put(f'/{res_a}/1', data=json.dumps({'value': 777}), content_type='application/json')
+    assert rput.status_code == 200, f'PUT /{res_a}/1 returned {rput.status_code}'
+    # Next GET must hit DB
+    r3 = client.get(f'/{res_a}')
+    d3 = json.loads(r3.data)
+    assert d3.get('source') == 'db', f'Expected source=db after PUT invalidation, got {d3.get(\\\"source\\\")!r}'
+    print('PUT_INVALIDATES_CACHE_OK')
 \"" "put_does_not_invalidate_cache"
 
 # ── CHECK 11: After POST, fresh data is returned (no stale cache) ──────────

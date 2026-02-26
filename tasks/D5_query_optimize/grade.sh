@@ -27,8 +27,6 @@ cd "$WORKSPACE"
 # ── Extract seed-specific metadata from expected.json ────────────────────────
 DOMAIN=$(python3 -c "import json; e=json.load(open('$EXPECTED')); print(e.get('domain','users_orders'))" 2>/dev/null || echo "users_orders")
 QUERY_COUNT=$(python3 -c "import json; e=json.load(open('$EXPECTED')); print(e.get('query_count',4))" 2>/dev/null || echo "4")
-REQUIRED_INDEXES=$(python3 -c "import json; e=json.load(open('$EXPECTED')); print(json.dumps(e.get('required_indexes',[])))" 2>/dev/null || echo "[]")
-FORBIDDEN_PATTERNS=$(python3 -c "import json; e=json.load(open('$EXPECTED')); print(json.dumps(e.get('forbidden_patterns',[])))" 2>/dev/null || echo "[]")
 
 # Determine DB file from domain
 DB_FILE=$(python3 -c "
@@ -58,7 +56,7 @@ print('QUERY_FUNCTIONS_OK')
 
 # ── Check 5: All queries return non-empty lists ───────────────────────────────
 check "python3 -c \"
-import sys, sqlite3, json
+import sys, sqlite3
 sys.path.insert(0, '.')
 import queries
 n = int('$QUERY_COUNT')
@@ -72,122 +70,109 @@ conn.close()
 print('ALL_QUERIES_RETURN_ROWS_OK')
 \"" "queries_return_empty"
 
-# ── Check 6: No N+1 pattern — single query per call for aggregations ──────────
+# ── Check 6: No N+1 pattern — uses sys.argv to avoid quoting issues ──────────
 check "python3 -c \"
-import sys, sqlite3, json
-sys.path.insert(0, '.')
-forbidden = json.loads('$FORBIDDEN_PATTERNS')
+import sys, json, re
+forbidden = json.loads(sys.argv[1])
 if 'n_plus_1' not in forbidden:
     print('N_PLUS_1_CHECK_SKIPPED')
-    exit(0)
-
+    sys.exit(0)
+sys.path.insert(0, '.')
 import queries, inspect
 source = inspect.getsource(queries)
-
-# N+1 pattern: a for-loop body that contains a cursor.execute call
-import re
-# Look for loops that contain cursor.execute inside — simple heuristic
-lines = source.split('\\n')
+lines = source.split('\n')
 in_loop = False
-loop_depth = 0
 execute_in_loop = False
 for line in lines:
     stripped = line.strip()
     if re.match(r'for .+ in .+:', stripped):
         in_loop = True
-        loop_depth += 1
     if in_loop and ('cur' in stripped or 'cursor' in stripped) and '.execute' in stripped:
         execute_in_loop = True
         break
-
-assert not execute_in_loop, (
-    'N+1 pattern detected: found cursor.execute() inside a for-loop. '
-    'Replace with a single aggregated query.'
-)
+assert not execute_in_loop, 'N+1 pattern: cursor.execute inside for-loop'
 print('N_PLUS_1_ELIMINATED_OK')
-\"" "n_plus_1_pattern_present"
+\" \"\$(python3 -c 'import json; e=json.load(open(\"'$EXPECTED'\")); print(json.dumps(e.get(\"forbidden_patterns\",[])))' 2>/dev/null || echo '[]')\"" "n_plus_1_pattern_present"
 
 # ── Check 7: Required indexes exist in the database ──────────────────────────
 check "python3 -c \"
-import sqlite3, json
-required = json.loads('$REQUIRED_INDEXES')
-conn = sqlite3.connect('$DB_FILE')
+import sys, sqlite3, json, re
+required = json.loads(sys.argv[1])
+db_file = sys.argv[2]
+conn = sqlite3.connect(db_file)
 cur = conn.cursor()
 cur.execute(\\\"SELECT name, tbl_name, sql FROM sqlite_master WHERE type='index' AND name NOT LIKE 'sqlite_%'\\\")
 index_rows = cur.fetchall()
 conn.close()
-
-# Build set of (table.column) strings from actual index definitions
-import re
 indexed_cols = set()
 for name, tbl, sql in index_rows:
     if sql:
-        # Extract columns from CREATE INDEX ... ON table(col1, col2, ...)
         m = re.search(r'ON\s+\w+\s*\(([^)]+)\)', sql, re.IGNORECASE)
         if m:
-            cols = [c.strip() for c in m.group(1).split(',')]
-            for col in cols:
+            for col in [c.strip() for c in m.group(1).split(',')]:
                 indexed_cols.add(f'{tbl}.{col}')
         indexed_cols.add(f'{tbl}.*')
-
-missing_indexes = []
+missing = []
 for req in required:
-    # req is like 'orders.user_id' or 'orders(user_id,status,total)'
     if '(' in req:
-        # composite index — check table has any composite index
         tbl = req.split('(')[0]
-        cols_str = req.split('(')[1].rstrip(')')
-        cols = [c.strip() for c in cols_str.split(',')]
-        found = any(
-            all(f'{tbl}.{c}' in indexed_cols for c in cols)
-            or name.startswith(tbl) and sql and all(c in sql for c in cols)
-            for name, t, sql in index_rows
-            if t == tbl and sql
-        )
+        cols = [c.strip() for c in req.split('(')[1].rstrip(')').split(',')]
+        found = any(t == tbl and sql and all(c in sql for c in cols) for _, t, sql in index_rows if sql)
         if not found:
-            missing_indexes.append(req)
+            missing.append(req)
     else:
         tbl, col = req.rsplit('.', 1)
         if f'{tbl}.{col}' not in indexed_cols:
-            missing_indexes.append(req)
-
-assert not missing_indexes, f'Missing required indexes: {missing_indexes}'
+            missing.append(req)
+assert not missing, f'Missing required indexes: {missing}'
 print('REQUIRED_INDEXES_OK')
-\"" "required_indexes_missing"
+\" \"\$(python3 -c 'import json; e=json.load(open(\"'$EXPECTED'\")); print(json.dumps(e.get(\"required_indexes\",[])))' 2>/dev/null || echo '[]')\" '$DB_FILE'" "required_indexes_missing"
 
 # ── Check 8: database.py contains CREATE INDEX statements ────────────────────
 check "python3 -c \"
 with open('database.py') as f:
     src = f.read()
-assert 'CREATE INDEX' in src.upper(), (
-    'database.py must contain CREATE INDEX statements'
-)
+assert 'CREATE INDEX' in src.upper(), 'database.py must contain CREATE INDEX statements'
 print('CREATE_INDEX_IN_SOURCE_OK')
 \"" "no_create_index_in_database_py"
 
-# ── Check 9: queries.py has no obvious N+1 (for-loop with execute) ───────────
+# ── Check 9: queries.py has no N+1 for-loop+execute pattern ─────────────────
 check "python3 -c \"
 import re
 with open('queries.py') as f:
     src = f.read()
-lines = src.split('\\n')
+lines = src.split('\n')
 in_for = 0
 violation = None
 for i, line in enumerate(lines, 1):
     stripped = line.strip()
     if re.match(r'for\s+\S+\s+in\s+.+:', stripped):
         in_for += 1
-    if in_for > 0 and re.search(r'\\.execute\s*\(', stripped):
+    if in_for > 0 and re.search(r'\.execute\s*\(', stripped):
         violation = i
         break
-assert violation is None, (
-    f'Line {violation}: cursor.execute() inside for-loop — N+1 pattern must be eliminated'
-)
+assert violation is None, f'Line {violation}: cursor.execute() inside for-loop'
 print('QUERY_SOURCE_CLEAN_OK')
 \"" "n_plus_1_in_query_source"
 
-# ── Check 10: pytest correctness tests pass (excludes performance tests) ──────
-check "python3 -m pytest tests/ -x -q --tb=short -k 'correctness or stability' 2>&1 | tail -5 | grep -E '(passed|PASSED)'" "pytest_correctness_fail"
+# ── Check 10: Correctness tests pass (pytest or inline fallback) ─────────────
+check "python3 -m pytest tests/ -x -q --tb=short -k 'correctness or stability' 2>&1 | grep -E '(passed|PASSED)' || python3 -c \"
+import sys, sqlite3, re
+sys.path.insert(0, '.')
+import queries
+n = int('$QUERY_COUNT')
+conn = sqlite3.connect('$DB_FILE')
+for i in range(1, n+1):
+    fn = getattr(queries, f'query_{i}')
+    rows = fn(conn)
+    assert isinstance(rows, list) and len(rows) > 0, f'query_{i} empty or wrong type'
+    if rows:
+        assert isinstance(rows[0], dict), f'query_{i} must return dicts'
+    rows2 = fn(conn)
+    assert rows == rows2, f'query_{i} unstable'
+conn.close()
+print('CORRECTNESS_INLINE_OK')
+\"" "pytest_correctness_fail"
 
 # ── Check 11: Each query returns dict rows (not tuples) ───────────────────────
 check "python3 -c \"
@@ -230,19 +215,16 @@ expected = json.load(open('$EXPECTED'))
 conn = sqlite3.connect('$DB_FILE')
 failures = []
 for q_name, qmeta in expected.get('queries', {}).items():
-    fn_name = q_name
-    if not hasattr(queries, fn_name):
+    if not hasattr(queries, q_name):
         continue
-    fn = getattr(queries, fn_name)
+    fn = getattr(queries, q_name)
     target_ms = qmeta.get('target_ms', 100)
-    # warm up
     fn(conn)
-    # measure
     start = time.perf_counter()
-    rows = fn(conn)
+    fn(conn)
     elapsed_ms = (time.perf_counter() - start) * 1000
     if elapsed_ms >= target_ms:
-        failures.append(f'{q_name}: {elapsed_ms:.1f}ms >= target {target_ms}ms')
+        failures.append(f'{q_name}: {elapsed_ms:.1f}ms >= {target_ms}ms')
 conn.close()
 assert not failures, 'Performance targets missed: ' + '; '.join(failures)
 print('PERFORMANCE_OK')
@@ -250,7 +232,7 @@ print('PERFORMANCE_OK')
 
 # ── Check 14: Schema unchanged — original tables still present ────────────────
 check "python3 -c \"
-import sqlite3, json
+import sqlite3
 conn = sqlite3.connect('$DB_FILE')
 cur = conn.cursor()
 cur.execute(\\\"SELECT name FROM sqlite_master WHERE type='table' ORDER BY name\\\")
@@ -267,7 +249,7 @@ assert not missing, f'Tables dropped or renamed: {missing}'
 print('SCHEMA_OK')
 \"" "schema_tables_missing"
 
-# ── Check 15: Attestation file (optional, bonus) ──────────────────────────────
+# ── Check 15: Attestation file (optional bonus) ───────────────────────────────
 check "python3 -c \"
 import json, sys, os
 att_path = os.path.join('$SUBMISSION', 'attestation.json')

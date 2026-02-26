@@ -1,0 +1,12 @@
+task_id: JS2_xss_sanitize
+domain: javascript
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [javascript, python]
+tags: [security, xss, sanitization, csp, express, nodejs]
+workspace_file_count: 6
+lines_changed_expected: 60
+parameterized: true
+tni_patterns: [B, E]

@@ -84,8 +84,8 @@ class Generator(TaskGenerator):
         domain_key = rng.choice(list(DOMAINS.keys()))
         domain = DOMAINS[domain_key]
 
-        # ── Pick query count (4-6) ─────────────────────────────────────────
-        query_count = rng.randint(4, 6)
+        # ── Pick query count (4 to min(6, num opt types)) ─────────────────
+        query_count = rng.randint(4, min(6, len(OPT_TYPES)))
 
         # ── Pick optimization types (no duplicates, order matters) ─────────
         opt_pool = list(OPT_TYPES)
