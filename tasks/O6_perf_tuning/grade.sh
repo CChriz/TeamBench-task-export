@@ -36,7 +36,7 @@ with open('config.json') as f:
 required = ['thread_pool_size', 'connection_pool_size', 'cache_size_mb',
             'batch_size', 'timeout_ms', 'gc_interval_sec']
 missing = [k for k in required if k not in cfg]
-assert not missing, f'Missing knobs: {missing}'
+assert not missing, 'Missing knobs: ' + str(missing)
 print('CONFIG_KEYS_OK')
 \"" "missing_config_knobs"
 
@@ -44,12 +44,12 @@ print('CONFIG_KEYS_OK')
 check "python3 -c \"
 import json, sys
 sys.path.insert(0, '.')
-from simulator import validate_config, KNOB_RANGES
+from simulator import validate_config
 with open('config.json') as f:
     cfg = json.load(f)
 errors = validate_config(cfg)
-range_errors = [e for e in errors if 'out of range' in e or 'Missing' in e or 'numeric' in e]
-assert not range_errors, f'Range violations: {range_errors}'
+range_errors = [e for e in errors if 'Contradictory' not in e]
+assert not range_errors, 'Range violations: ' + str(range_errors)
 print('KNOB_RANGES_OK')
 \"" "config_values_invalid"
 
@@ -61,8 +61,8 @@ with open('config.json') as f:
 threads = cfg.get('thread_pool_size', 1)
 batch   = cfg.get('batch_size', 1)
 product = threads * batch
-assert product <= 10000, f'Contradictory: thread_pool_size({threads}) * batch_size({batch}) = {product} > 10000'
-print(f'NO_CONTRADICTION_OK: {threads}x{batch}={product}')
+assert product <= 10000, 'Contradictory: thread_pool_size(' + str(threads) + ') * batch_size(' + str(batch) + ') = ' + str(product) + ' > 10000'
+print('NO_CONTRADICTION_OK: ' + str(threads) + 'x' + str(batch) + '=' + str(product))
 \"" "contradictory_settings"
 
 # 5. CPU utilisation within target
@@ -73,9 +73,9 @@ from simulator import compute_metrics, CPU_TARGET_PCT
 with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
-assert m['cpu_pct'] < CPU_TARGET_PCT, \
-    f'CPU={m[\"cpu_pct\"]}% exceeds target {CPU_TARGET_PCT}%'
-print(f'CPU_OK: {m[\"cpu_pct\"]}%')
+cpu = m['cpu_pct']
+assert cpu < CPU_TARGET_PCT, 'CPU=' + str(cpu) + '% exceeds target ' + str(CPU_TARGET_PCT) + '%'
+print('CPU_OK: ' + str(cpu) + '%')
 \"" "cpu_target_missed"
 
 # 6. Memory utilisation within target
@@ -86,9 +86,9 @@ from simulator import compute_metrics, MEMORY_TARGET_PCT
 with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
-assert m['memory_pct'] < MEMORY_TARGET_PCT, \
-    f'Memory={m[\"memory_pct\"]}% exceeds target {MEMORY_TARGET_PCT}%'
-print(f'MEMORY_OK: {m[\"memory_pct\"]}%')
+mem = m['memory_pct']
+assert mem < MEMORY_TARGET_PCT, 'Memory=' + str(mem) + '% exceeds target ' + str(MEMORY_TARGET_PCT) + '%'
+print('MEMORY_OK: ' + str(mem) + '%')
 \"" "memory_target_missed"
 
 # 7. p99 latency within target
@@ -99,9 +99,9 @@ from simulator import compute_metrics, P99_TARGET_MS
 with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
-assert m['p99_ms'] < P99_TARGET_MS, \
-    f'p99={m[\"p99_ms\"]}ms exceeds target {P99_TARGET_MS}ms'
-print(f'P99_OK: {m[\"p99_ms\"]}ms')
+p99 = m['p99_ms']
+assert p99 < P99_TARGET_MS, 'p99=' + str(p99) + 'ms exceeds target ' + str(P99_TARGET_MS) + 'ms'
+print('P99_OK: ' + str(p99) + 'ms')
 \"" "p99_target_missed"
 
 # 8. Throughput meets target
@@ -112,9 +112,9 @@ from simulator import compute_metrics, THROUGHPUT_TARGET
 with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
-assert m['throughput_rps'] > THROUGHPUT_TARGET, \
-    f'Throughput={m[\"throughput_rps\"]}rps below target {THROUGHPUT_TARGET}rps'
-print(f'THROUGHPUT_OK: {m[\"throughput_rps\"]}rps')
+tput = m['throughput_rps']
+assert tput > THROUGHPUT_TARGET, 'Throughput=' + str(tput) + 'rps below target ' + str(THROUGHPUT_TARGET) + 'rps'
+print('THROUGHPUT_OK: ' + str(tput) + 'rps')
 \"" "throughput_target_missed"
 
 # 9. Error rate within target
@@ -125,9 +125,9 @@ from simulator import compute_metrics, ERROR_RATE_TARGET
 with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
-assert m['error_rate_pct'] < ERROR_RATE_TARGET, \
-    f'Error rate={m[\"error_rate_pct\"]}% exceeds target {ERROR_RATE_TARGET}%'
-print(f'ERROR_RATE_OK: {m[\"error_rate_pct\"]}%')
+err = m['error_rate_pct']
+assert err < ERROR_RATE_TARGET, 'Error rate=' + str(err) + '% exceeds target ' + str(ERROR_RATE_TARGET) + '%'
+print('ERROR_RATE_OK: ' + str(err) + '%')
 \"" "error_rate_target_missed"
 
 # 10. Weighted score above baseline (0.35)
@@ -139,11 +139,11 @@ with open('config.json') as f:
     cfg = json.load(f)
 m = compute_metrics(cfg)
 score = _weighted_score(m)
-assert score > BASELINE_SCORE, f'Score {score:.4f} not above baseline {BASELINE_SCORE}'
-print(f'SCORE_OK: {score:.4f}')
+assert score > BASELINE_SCORE, 'Score ' + str(score) + ' not above baseline ' + str(BASELINE_SCORE)
+print('SCORE_OK: ' + str(score))
 \"" "score_below_baseline"
 
-# 11. Simulator confirms improvement over baseline (all 5 metrics better than bad config)
+# 11. Simulator confirms improvement over baseline in at least one metric
 check "python3 -c \"
 import json, sys
 sys.path.insert(0, '.')
@@ -163,7 +163,7 @@ assert improved, 'No metric improved over the bad baseline config'
 print('IMPROVEMENT_CONFIRMED')
 \"" "no_improvement_over_baseline"
 
-# 12. target.json is present and readable (workspace integrity check)
+# 12. target.json is present and readable
 check "python3 -c \"
 import json
 with open('target.json') as f:

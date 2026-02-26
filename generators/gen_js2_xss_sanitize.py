@@ -208,7 +208,10 @@ class Generator(TaskGenerator):
 
     def generate(self, seed: int) -> GeneratedTask:
         rng = SeededRandom(seed)
-        cfg = rng.choice(APP_CONFIGS)
+        # Use seed modulo to guarantee each of the 3 canonical seeds (0,1,2)
+        # maps to a distinct app type, while still using rng for any future
+        # per-instance variation within a config.
+        cfg = APP_CONFIGS[seed % len(APP_CONFIGS)]
 
         workspace_files = {
             "app.js":                    self._gen_app_js(cfg),

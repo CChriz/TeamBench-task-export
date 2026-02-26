@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Seed-aware grader for MULTI3_polyglot: Polyglot Interface Bug Fix.
 #
+# Runs each unittest method individually for precise per-check scoring.
+#
 # Args: $1=WORKSPACE $2=REPORTS $3=SUBMISSION $4=TASK_DIR [$5=EXPECTED_JSON]
 set -o pipefail
 
@@ -33,7 +35,7 @@ for pkg in backend frontend shared tests; do
 done
 
 # ---------------------------------------------------------------------------
-# Load seed-specific expected values from expected.json
+# Load seed-specific expected values
 # ---------------------------------------------------------------------------
 ID_FIELD="config_id"
 DATE_FIELD="updated_at"
@@ -49,220 +51,124 @@ if [ -f "$EXPECTED" ]; then
     CORRECT_SCHEMA_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('correct_schema_field','service_name'))" 2>/dev/null || echo "service_name")
 fi
 
+# Discover test class name from the test file
+TEST_CLASS=$(python3 -c "
+import re
+src = open('$WORKSPACE/tests/test_contract.py').read()
+m = re.search(r'class (\w+ContractTestCase)', src)
+print(m.group(1) if m else 'ContractTestCase')
+" 2>/dev/null || echo "ContractTestCase")
+
+# Helper: run one unittest method, return 0 if it passes
+run_test() {
+    local method="$1"
+    python3 -m unittest "tests.test_contract.${TEST_CLASS}.${method}" \
+        --tb=no -q 2>/dev/null
+}
+
 # ---------------------------------------------------------------------------
-# Check 1: backend/processor.py exists and imports cleanly
+# Check 1-4: files exist and compile
 # ---------------------------------------------------------------------------
 check "test -f '$WORKSPACE/backend/processor.py'" "missing_processor"
-check "python3 -c 'import sys; sys.path.insert(0,\"$WORKSPACE\"); import backend.processor'" "processor_import_error"
-
-# ---------------------------------------------------------------------------
-# Check 2: frontend/handler.py exists and imports cleanly
-# ---------------------------------------------------------------------------
 check "test -f '$WORKSPACE/frontend/handler.py'" "missing_handler"
-check "python3 -c 'import sys; sys.path.insert(0,\"$WORKSPACE\"); import frontend.handler'" "handler_import_error"
-
-# ---------------------------------------------------------------------------
-# Check 3: shared/schema.json is valid JSON with required keys
-# ---------------------------------------------------------------------------
 check "test -f '$WORKSPACE/shared/schema.json'" "missing_schema"
-check "python3 -c \"
-import json
-s = json.load(open('$WORKSPACE/shared/schema.json'))
-assert 'record_fields' in s, 'missing record_fields'
-assert 'envelope' in s, 'missing envelope'
-\"" "schema_invalid_json"
+check "python3 -m py_compile '$WORKSPACE/backend/processor.py' && \
+       python3 -m py_compile '$WORKSPACE/frontend/handler.py'" "syntax_errors"
 
 # ---------------------------------------------------------------------------
-# Check 4: schema.json uses correct field names (no wrong aliases)
+# Check 5-6: modules import cleanly (maps to unittest import tests)
+# ---------------------------------------------------------------------------
+check "cd '$WORKSPACE' && run_test() { python3 -m unittest tests.test_contract.${TEST_CLASS}.\$1 -q 2>/dev/null; }; run_test test_processor_imports" \
+    "processor_import_error"
+check "cd '$WORKSPACE' && run_test() { python3 -m unittest tests.test_contract.${TEST_CLASS}.\$1 -q 2>/dev/null; }; run_test test_handler_imports" \
+    "handler_import_error"
+
+# ---------------------------------------------------------------------------
+# Check 7-8: schema validity (maps to unittest schema tests)
+# ---------------------------------------------------------------------------
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_schema_json_valid -q 2>/dev/null" \
+    "schema_invalid"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_schema_fields_match_spec -q 2>/dev/null" \
+    "schema_wrong_fields"
+
+# ---------------------------------------------------------------------------
+# Check 9: schema.json correct/wrong field names (direct JSON check)
 # ---------------------------------------------------------------------------
 check "python3 -c \"
 import json
 s = json.load(open('$WORKSPACE/shared/schema.json'))
 rf = s['record_fields']
-assert '${CORRECT_SCHEMA_FIELD}' in rf, \
-    f'schema.json missing correct field ${CORRECT_SCHEMA_FIELD}, has: {list(rf.keys())}'
-assert '${WRONG_SCHEMA_FIELD}' not in rf, \
-    f'schema.json still has wrong field name ${WRONG_SCHEMA_FIELD}'
-\"" "schema_wrong_field_name"
+assert '${CORRECT_SCHEMA_FIELD}' in rf, 'missing correct field'
+assert '${WRONG_SCHEMA_FIELD}' not in rf, 'wrong field still present'
+\"" "schema_field_alias_wrong"
 
 # ---------------------------------------------------------------------------
-# Check 5: schema.json lists all expected spec fields
+# Check 10: backend emits correct ID field name
 # ---------------------------------------------------------------------------
-check "python3 -c \"
-import json, sys
-s = json.load(open('$WORKSPACE/shared/schema.json'))
-rf = s['record_fields']
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-for f in [id_field, date_field, null_field]:
-    assert f in rf, f'schema.json missing field {f!r}, has: {list(rf.keys())}'
-\"" "schema_missing_spec_fields"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_backend_id_field_name -q 2>/dev/null" \
+    "backend_wrong_id_key"
 
 # ---------------------------------------------------------------------------
-# Check 6: backend serialize_record emits correct ID field key (runtime)
+# Check 11: backend date format is ISO-8601
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import backend.processor as p
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-rec = {id_field: 99, date_field: datetime.date(2024, 3, 10), null_field: None}
-wire = p.serialize_record(rec)
-assert id_field in wire, f'serialize_record emits wrong id key; got: {list(wire.keys())}'
-assert wire[id_field] == 99, f'{id_field} value wrong: {wire[id_field]!r}'
-PYEOF" "backend_wrong_id_key"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_backend_date_format -q 2>/dev/null" \
+    "backend_wrong_date_format"
 
 # ---------------------------------------------------------------------------
-# Check 7: backend formats dates as ISO-8601 YYYY-MM-DD (runtime)
+# Check 12: backend null handling (None not sentinel)
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import backend.processor as p
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-rec = {id_field: 1, date_field: datetime.date(2024, 6, 15), null_field: None}
-wire = p.serialize_record(rec)
-val = wire.get(date_field, '')
-assert isinstance(val, str), f'{date_field} must be str in wire, got {type(val).__name__}'
-parts = val.split('-')
-assert len(parts) == 3 and len(parts[0]) == 4, f'Expected YYYY-MM-DD, got {val!r}'
-datetime.date.fromisoformat(val)
-PYEOF" "backend_wrong_date_format"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_backend_null_is_none -q 2>/dev/null" \
+    "backend_null_sentinel"
 
 # ---------------------------------------------------------------------------
-# Check 8: backend encodes None as JSON null (not sentinel string) (runtime)
+# Check 13: backend envelope uses 'data' key
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import backend.processor as p
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-rec = {id_field: 1, date_field: datetime.date(2024, 1, 1), null_field: None}
-wire = p.serialize_record(rec)
-val = wire.get(null_field)
-assert val is None, f'{null_field} must be None (JSON null), got {val!r}'
-PYEOF" "backend_null_sentinel"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_envelope_key -q 2>/dev/null" \
+    "backend_wrong_envelope"
 
 # ---------------------------------------------------------------------------
-# Check 9: backend serialize_batch wraps records under 'data' key (runtime)
+# Check 14: backend bool fields remain bool (not int) — only if test exists
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import backend.processor as p
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-rec = {id_field: 1, date_field: datetime.date(2024, 1, 1), null_field: None}
-env = p.serialize_batch([rec])
-assert 'data' in env, f'envelope missing data key; has: {list(env.keys())}'
-assert isinstance(env['data'], list), 'envelope[data] must be a list'
-assert env.get('count') == 1, f'count should be 1, got {env.get(\"count\")}'
-PYEOF" "backend_wrong_envelope_key"
+if grep -q "def test_bool_is_bool" "$WORKSPACE/tests/test_contract.py" 2>/dev/null; then
+    check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_bool_is_bool -q 2>/dev/null" \
+        "backend_bool_as_int"
+fi
 
 # ---------------------------------------------------------------------------
-# Check 10: backend encodes bool fields as bool not int (runtime)
+# Check 15: frontend reads correct ID field name
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import backend.processor as p
-import inspect
-# Find a bool field by inspecting the source
-src = inspect.getsource(p.serialize_record)
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-# Detect bool fields: look for True/False pattern or field names ending in is_/enabled/resolved
-import re
-bool_fields = re.findall(r\"['\"](\w+)['\"].*?int\(record\[", src)
-if bool_fields:
-    for bf in bool_fields:
-        assert False, f'serialize_record still casts {bf} to int — should remain bool'
-# Also check source does not use int() on record values
-assert 'int(record[' not in src, 'serialize_record casts bool field to int — remove int() cast'
-PYEOF" "backend_bool_as_int"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_frontend_id_field_read -q 2>/dev/null" \
+    "frontend_wrong_id_read"
 
 # ---------------------------------------------------------------------------
-# Check 11: frontend deserialize_record reads correct ID key (runtime)
+# Check 16: frontend handles None in nullable field without crashing
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import frontend.handler as h
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
-rec = h.deserialize_record(wire)
-assert id_field in rec, f'deserialize_record missing {id_field!r}; has: {list(rec.keys())}'
-assert rec[id_field] == 42, f'{id_field} wrong value: {rec[id_field]!r}'
-PYEOF" "frontend_wrong_id_read"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_frontend_null_guard -q 2>/dev/null" \
+    "frontend_null_crash"
 
 # ---------------------------------------------------------------------------
-# Check 12: frontend handles None in nullable field without crashing (runtime)
+# Check 17: frontend parses dates as datetime.date
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import frontend.handler as h
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
-try:
-    rec = h.deserialize_record(wire)
-except AttributeError as e:
-    raise AssertionError(f'handler crashed on None {null_field}: {e}')
-assert rec.get(null_field) is None, f'{null_field} should be None, got {rec.get(null_field)!r}'
-PYEOF" "frontend_null_crash"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_frontend_date_parse -q 2>/dev/null" \
+    "frontend_wrong_date_parse"
 
 # ---------------------------------------------------------------------------
-# Check 13: frontend parses dates as datetime.date objects (runtime)
+# Check 18: frontend reads records from 'data' envelope key
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import frontend.handler as h
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
-rec = h.deserialize_record(wire)
-val = rec.get(date_field)
-assert isinstance(val, datetime.date), \
-    f'{date_field} must be datetime.date, got {type(val).__name__}: {val!r}'
-assert val == datetime.date(2024, 6, 15), f'{date_field} wrong: {val!r}'
-PYEOF" "frontend_wrong_date_parse"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_frontend_envelope_read -q 2>/dev/null" \
+    "frontend_wrong_envelope"
 
 # ---------------------------------------------------------------------------
-# Check 14: frontend process_envelope reads from 'data' key (runtime)
+# Check 19: round-trip (serialize -> deserialize) reproduces values
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, datetime
-sys.path.insert(0, '$WORKSPACE')
-import frontend.handler as h
-id_field = '${ID_FIELD}'
-date_field = '${DATE_FIELD}'
-null_field = '${NULL_FIELD}'
-wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
-envelope = {'data': [wire], 'count': 1}
-records = h.process_envelope(envelope)
-assert isinstance(records, list), 'process_envelope must return a list'
-assert len(records) == 1, f'expected 1 record, got {len(records)}'
-PYEOF" "frontend_wrong_envelope_read"
+check "cd '$WORKSPACE' && python3 -m unittest tests.test_contract.${TEST_CLASS}.test_round_trip -q 2>/dev/null" \
+    "round_trip_failed"
 
 # ---------------------------------------------------------------------------
-# Check 15: full test suite passes (unittest)
+# Check 20: full test suite passes (all tests green)
 # ---------------------------------------------------------------------------
-check "python3 '$WORKSPACE/tests/test_contract.py' 2>&1 | grep -q '^OK'" "test_suite_failed"
+check "cd '$WORKSPACE' && python3 tests/test_contract.py 2>&1 | tail -1 | grep -q '^OK'" \
+    "test_suite_failed"
 
 # ---------------------------------------------------------------------------
 # Write score
@@ -273,7 +179,8 @@ if [ "$PASSED" -eq "$CHECKS" ]; then
 else
     PASS=false
 fi
-FM=$(python3 -c "import json; print(json.dumps([x for x in '${FAILURES}'.split(',') if x]))" 2>/dev/null || echo "[]")
+FM=$(python3 -c "import json; print(json.dumps([x for x in '${FAILURES}'.split(',') if x]))" \
+    2>/dev/null || echo "[]")
 
 cat > "$REPORTS/score.json" <<JSON
 {

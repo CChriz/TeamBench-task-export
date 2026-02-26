@@ -666,17 +666,18 @@ def verify_log(entries: list[dict]) -> list[int]:
         # Build a minimal valid payload for the first event (exclude universal fields)
         universal = {"event_type", "log_id", "signature", "prev_hash", "checksum"}
         first_ev_payload_fields = [
-            f for f in first_ev_fields if f not in universal
+            fld for fld in first_ev_fields if fld not in universal
         ]
-        payload_dict = {f: f"test_{f}_value" for f in first_ev_payload_fields}
+        payload_dict = {fld: f"test_{fld}_value" for fld in first_ev_payload_fields}
         payload_repr = repr(payload_dict)
 
         tamper_field = tamper["required_field"]
+        tamper_field_r = repr(tamper_field)
         tamper_method = tamper["method_id"]
 
         # Collect all event ids and their required fields for parametrized checks
         ev_check_lines = []
-        for ev_id, ev_label, _, _ in selected_events:
+        for ev_id, _ev_label, _, _ in selected_events:
             required = event_schemas[ev_id]
             required_repr = repr(required)
             ev_check_lines.append(
@@ -684,12 +685,24 @@ def verify_log(entries: list[dict]) -> list[int]:
             )
         ev_checks_block = "\n".join(ev_check_lines)
 
-        return f'''"""
+        # Pre-build the two multi-event test data literals so we don't need
+        # complex expressions inside the template string.
+        two_events = selected_events[:2]
+        two_events_list_r = repr([(e[0], e[1], e[2], e[3]) for e in two_events])
+        event_schemas_r = repr(event_schemas)
+
+        first_ev_id_r = repr(first_ev_id)
+        first_ev_pf_r = repr(first_ev_payload_fields)
+
+        # Use a plain (non-f) triple-quoted string with .format() to avoid
+        # any ambiguity between f-string braces and set/dict literals.
+        template = '''\
+"""
 Test suite for P5: Audit Logging Compliance
 
 Tests verify that audit.py correctly implements:
   1. Required fields per event type
-  2. Tamper-detection field presence ({tamper_field!r})
+  2. Tamper-detection field presence ({tamper_field_r})
   3. verify_log() detects tampered entries
   4. log_event() returns entries and populates get_log()
   5. Universal fields (event_type, log_id) on all entries
@@ -720,29 +733,29 @@ def reset_audit_log():
 # ── 1. log_event() returns a dict ─────────────────────────────────────────────
 
 def test_log_event_returns_dict():
-    payload = {f: "v" for f in {first_ev_payload_fields}}
-    result = audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    payload = {payload_repr}
+    result = audit.log_event({first_ev_id_r}, **payload)
     assert isinstance(result, dict), "log_event() must return a dict"
 
 
 # ── 2. Universal fields present ───────────────────────────────────────────────
 
 def test_universal_fields_event_type():
-    result = audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    assert "event_type" in result, "entry must contain 'event_type'"
-    assert result["event_type"] == {repr(first_ev_id)}
+    result = audit.log_event({first_ev_id_r}, **{payload_repr})
+    assert "event_type" in result, "entry must contain \'event_type\'"
+    assert result["event_type"] == {first_ev_id_r}
 
 
 def test_universal_fields_log_id():
-    result = audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    assert "log_id" in result, "entry must contain 'log_id'"
-    assert isinstance(result["log_id"], str), "'log_id' must be a string"
-    assert len(result["log_id"]) > 0, "'log_id' must not be empty"
+    result = audit.log_event({first_ev_id_r}, **{payload_repr})
+    assert "log_id" in result, "entry must contain \'log_id\'"
+    assert isinstance(result["log_id"], str), "\'log_id\' must be a string"
+    assert len(result["log_id"]) > 0, "\'log_id\' must not be empty"
 
 
 def test_log_ids_unique():
-    r1 = audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    r2 = audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    r1 = audit.log_event({first_ev_id_r}, **{payload_repr})
+    r2 = audit.log_event({first_ev_id_r}, **{payload_repr})
     assert r1["log_id"] != r2["log_id"], "Each entry must have a unique log_id"
 
 
@@ -753,28 +766,28 @@ def test_log_ids_unique():
 ])
 def test_required_fields_present(event_type, required_fields):
     # Build a minimal payload with dummy values for non-universal fields
-    universal = {{"event_type", "log_id", "signature", "prev_hash", "checksum"}}
-    payload = {{f: f"test_{{f}}" for f in required_fields if f not in universal}}
+    _universal = {{"event_type", "log_id", "signature", "prev_hash", "checksum"}}
+    payload = {{f: "test_" + f for f in required_fields if f not in _universal}}
     entry = audit.log_event(event_type, **payload)
     for field in required_fields:
         assert field in entry, (
-            f"Event type '{{event_type}}' entry missing required field '{{field}}'"
+            "Event type \'" + event_type + "\' entry missing required field \'" + field + "\'"
         )
 
 
 # ── 4. Tamper-detection field present ────────────────────────────────────────
 
 def test_tamper_field_present():
-    result = audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    assert {repr(tamper_field)} in result, (
-        f"Entry must contain tamper-detection field {repr(tamper_field)!r}"
+    result = audit.log_event({first_ev_id_r}, **{payload_repr})
+    assert {tamper_field_r} in result, (
+        "Entry must contain tamper-detection field " + repr({tamper_field_r})
     )
 
 
 def test_tamper_field_non_empty():
-    result = audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    assert result.get({repr(tamper_field)}), (
-        f"Tamper-detection field {repr(tamper_field)!r} must not be empty"
+    result = audit.log_event({first_ev_id_r}, **{payload_repr})
+    assert result.get({tamper_field_r}), (
+        "Tamper-detection field " + repr({tamper_field_r}) + " must not be empty"
     )
 
 
@@ -785,10 +798,10 @@ def test_get_log_empty_initially():
 
 
 def test_get_log_contains_logged_entries():
-    audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    audit.log_event({first_ev_id_r}, **{payload_repr})
+    audit.log_event({first_ev_id_r}, **{payload_repr})
     log = audit.get_log()
-    assert len(log) == 2, f"Expected 2 entries in log, got {{len(log)}}"
+    assert len(log) == 2, "Expected 2 entries in log, got " + str(len(log))
 
 
 def test_get_log_returns_list():
@@ -804,25 +817,25 @@ def test_verify_log_empty():
 
 
 def test_verify_log_valid_entries_no_tamper():
-    audit.log_event({repr(first_ev_id)}, **{payload_repr})
-    audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    audit.log_event({first_ev_id_r}, **{payload_repr})
+    audit.log_event({first_ev_id_r}, **{payload_repr})
     entries = audit.get_log()
     tampered = audit.verify_log(entries)
     assert tampered == [], (
-        f"verify_log() must return [] for untampered entries, got {{tampered}}"
+        "verify_log() must return [] for untampered entries, got " + str(tampered)
     )
 
 
 # ── 7. verify_log() detects tampered entry ───────────────────────────────────
 
 def test_verify_log_detects_tampering():
-    audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    audit.log_event({first_ev_id_r}, **{payload_repr})
     entries = audit.get_log()
-    # Tamper with the entry
+    # Tamper with the entry by mutating a copy
     tampered_entries = [dict(e) for e in entries]
     tampered_entries[0]["event_type"] = "tampered_event"
     # Remove tamper-detection field to simulate manual edit
-    tampered_entries[0].pop({repr(tamper_field)}, None)
+    tampered_entries[0].pop({tamper_field_r}, None)
     result = audit.verify_log(tampered_entries)
     assert 0 in result, (
         "verify_log() must detect the tampered entry at index 0"
@@ -832,45 +845,50 @@ def test_verify_log_detects_tampering():
 # ── 8. Multiple event types produce correct field sets ───────────────────────
 
 def test_multiple_event_types_logged():
+    _two_events = {two_events_list_r}
+    _schemas = {event_schemas_r}
+    _universal = {{"event_type", "log_id", "signature", "prev_hash", "checksum"}}
     results = []
-    for ev_id, _, _, _ in {repr([(e[0], e[1], e[2], e[3]) for e in selected_events[:2]])}:
-        universal = {{"event_type", "log_id", "signature", "prev_hash", "checksum"}}
-        fields = {repr(event_schemas)}[ev_id]
-        payload = {{f: f"val_{{f}}" for f in fields if f not in universal}}
+    for ev_id, _label, _desc, _fields in _two_events:
+        fields = _schemas[ev_id]
+        payload = {{f: "val_" + f for f in fields if f not in _universal}}
         entry = audit.log_event(ev_id, **payload)
         results.append(entry)
-    assert len(results) == 2
-    assert results[0]["event_type"] != results[1]["event_type"] or True  # just ensure no crash
+    assert len(results) == 2, "Expected 2 logged entries"
+    # Just ensure no crash and event_type is set correctly
+    for i, (ev_id, _, _, _) in enumerate(_two_events):
+        assert results[i]["event_type"] == ev_id
 
 
 # ── 9. Retention metadata (structural check) ─────────────────────────────────
 
 def test_retention_days_constant_exists():
-    """audit.py should define or be configurable with the retention period."""
-    # The module should either expose RETENTION_DAYS or the policy document
-    # should be used to configure it. We just verify log_event works correctly.
-    entry = audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    """audit.py should work correctly (retention config is in the policy doc)."""
+    entry = audit.log_event({first_ev_id_r}, **{payload_repr})
     assert entry is not None
 
 
 # ── 10. log_event stores entry in get_log ────────────────────────────────────
 
 def test_log_event_persists_to_store():
-    entry = audit.log_event({repr(first_ev_id)}, **{payload_repr})
+    entry = audit.log_event({first_ev_id_r}, **{payload_repr})
     stored = audit.get_log()
     assert len(stored) == 1
     assert stored[0]["log_id"] == entry["log_id"], (
         "Stored entry must match the returned entry"
     )
-'''.format(
-            first_ev_payload_fields=repr(first_ev_payload_fields),
-            first_ev_id=first_ev_id,
+'''
+        return template.format(
+            tamper_field_r=tamper_field_r,
+            domain_id=domain_id,
+            tamper_method=tamper_method,
             payload_repr=payload_repr,
+            first_ev_id_r=first_ev_id_r,
+            first_ev_pf_r=first_ev_pf_r,
             ev_checks_block=ev_checks_block,
             tamper_field=tamper_field,
-            tamper_method=tamper_method,
-            selected_events=selected_events,
-            event_schemas=event_schemas,
+            two_events_list_r=two_events_list_r,
+            event_schemas_r=event_schemas_r,
         )
 
     def _generate_spec(

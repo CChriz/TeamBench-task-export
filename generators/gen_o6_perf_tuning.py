@@ -18,32 +18,31 @@ All five metrics are computed as:
     metric = baseline_value * product_of_factors(knobs)
 
 where each factor is a ratio derived from (current_knob / baseline_knob) so
-that when knobs equal the bad config the output equals the documented baseline.
-This keeps all values bounded and analytically predictable.
+that when knobs equal the bad config the output exactly equals the documented
+baseline. This keeps all values bounded and analytically predictable.
 
 CPU model:
-    cpu = base_cpu * (T/T0)^alpha_t * (C/C0)^alpha_c / (log2(M+1)/log2(M0+1))^alpha_m
-    Increasing threads/conns raises CPU; increasing cache lowers it.
+    cpu = base_cpu * (T/T0)^cpu_et * (C/C0)^cpu_ec / (log2(M+1)/log2(M0+1))^cpu_em
 
 Memory model:
-    mem = base_mem * (T/T0)^beta_t * (M/M0)^beta_m / (log2(G+1)/log2(G0+1))^beta_g
-    Increasing threads/cache raises memory; longer GC interval lowers it.
+    mem = base_mem * (T/T0)^mem_et * (log2(M+1)/log2(M0+1))^mem_em
+                  / (log2(G+1)/log2(G0+1))^mem_eg
 
 p99 latency model:
-    p99 = base_p99 * (T0/T)^gamma_t * (M0/M)^gamma_m * (C0/C)^gamma_c
-    More threads/cache/conns lower latency.
+    p99 = base_p99 / (T/T0)^p99_et / (log2(M+1)/log2(M0+1))^p99_em / (C/C0)^p99_ec
 
 Throughput model:
-    tput = base_tput * (T/T0)^delta_t * (C/C0)^delta_c * (B/B0)^delta_b
-    More threads/conns/batch raise throughput.
+    tput = base_tput * (T/T0)^tput_et * (C/C0)^tput_ec * (B/B0)^tput_eb
 
 Error rate model:
-    err = base_err * (T0/T)^eps_t * (M0/M)^eps_m * (B0/B)^eps_b
-    More threads/cache/batch reduce errors.
+    err = base_err / (T/T0)^err_et / (log2(M+1)/log2(M0+1))^err_em / (B/B0)^err_eb
 
 All exponents are < 1 (diminishing returns). Agents must find knob values that
 simultaneously satisfy all five targets — the interaction effects (threads raise
 CPU and memory while lowering latency and raising throughput) create the tension.
+
+All profiles are analytically verified: bad config fails >= 3 checks,
+good config passes all 8 checks.
 """
 from __future__ import annotations
 
@@ -54,31 +53,22 @@ from generators.primitives import SeededRandom
 
 
 # ── Service profiles ──────────────────────────────────────────────────────────
-# Each profile defines:
-#   targets:       5 performance budgets
-#   bad_config:    suboptimal defaults shipped in workspace (produces baseline values)
-#   good_config:   one valid optimal config (analytically verified to pass all checks)
-#   base_*:        metric values produced by bad_config (verified by formula below)
-#   exponents:     per-knob, per-metric exponents for the multiplicative model
-#   weights:       per-metric scoring weights (must sum to 1.0)
-#   knob_ranges:   valid [min, max] per knob
+# Analytically verified (see module docstring for model).
+# bad_config produces baseline metric values (all failing >= 3 targets).
+# good_config passes all 5 targets simultaneously.
 
 SERVICE_PROFILES = [
     # ── Seed 0 mod 4: API Gateway ─────────────────────────────────────────────
-    # bad_config:  T=4,  C=10,  M=64,   B=1,   tmo=5000, G=30
-    # good_config: T=12, C=40,  M=1024, B=20,  tmo=3000, G=60
-    # Verified: CPU 85*(12/4)^0.30*(40/10)^0.10/(log2(1025)/log2(65))^0.50
-    #         = 85 * 1.369 * 1.149 / 1.588 = ~84.5 -> ~67% < 70% ✓
+    # bad:  cpu=75%(>70), p99=450ms(>200), tput=150(>500 fail), err=1.5%(>0.1)  -> 4 fails
+    # good: cpu=69%, mem=66.5%, p99=197.5ms, tput=668.5, err=0.036%  -> all pass
     {
         "service_type": "api_gateway",
         "description": "HTTP API gateway routing requests to backend microservices",
-        # Performance budget
         "cpu_target_pct":     70.0,
         "memory_target_pct":  80.0,
         "p99_target_ms":     200.0,
         "throughput_target": 500.0,
         "error_rate_target":   0.1,
-        # Bad config (baseline)
         "bad_config": {
             "thread_pool_size":     4,
             "connection_pool_size": 10,
@@ -87,42 +77,36 @@ SERVICE_PROFILES = [
             "timeout_ms":         5000,
             "gc_interval_sec":      30,
         },
-        # Good config (one valid solution)
         "good_config": {
-            "thread_pool_size":    12,
-            "connection_pool_size": 40,
-            "cache_size_mb":      1024,
+            "thread_pool_size":     8,
+            "connection_pool_size": 30,
+            "cache_size_mb":      4096,
             "batch_size":           20,
             "timeout_ms":         3000,
-            "gc_interval_sec":      60,
+            "gc_interval_sec":      90,
         },
-        # Baseline metric values (what bad_config produces)
-        "base_cpu_pct":     85.0,
-        "base_mem_pct":     55.0,
-        "base_p99_ms":     420.0,
-        "base_throughput": 180.0,
-        "base_error_rate":   2.5,
-        # CPU exponents: cpu = base * (T/T0)^a_t * (C/C0)^a_c / (log2(M+1)/log2(M0+1))^a_m
-        "cpu_exp_t":  0.30,   # threads raise CPU (diminishing returns)
-        "cpu_exp_c":  0.10,   # connections raise CPU (minor)
-        "cpu_exp_m":  0.50,   # cache relieves CPU
-        # Memory exponents: mem = base * (T/T0)^b_t * (M/100/M0*100)^b_m / (log2(G+1)/log2(G0+1))^b_g
-        "mem_exp_t":  0.40,   # threads raise memory
-        "mem_exp_m":  0.20,   # cache raises memory
-        "mem_exp_g":  0.25,   # longer gc lowers memory
-        # p99 exponents: p99 = base / (T/T0)^g_t / (log2(M+1)/log2(M0+1))^g_m / (C/C0)^g_c
-        "p99_exp_t":  0.55,
-        "p99_exp_m":  0.40,
-        "p99_exp_c":  0.15,
-        # Throughput exponents: tput = base * (T/T0)^d_t * (C/C0)^d_c * (B/B0)^d_b
-        "tput_exp_t": 0.60,
-        "tput_exp_c": 0.30,
-        "tput_exp_b": 0.25,
-        # Error rate exponents: err = base / (T/T0)^e_t / (log2(M+1)/log2(M0+1))^e_m / (B/B0)^e_b
-        "err_exp_t":  0.50,
-        "err_exp_m":  0.80,
-        "err_exp_b":  0.35,
-        # Scoring weights
+        # Baseline metric values (what bad_config produces — by construction)
+        "base_cpu_pct":     75.0,
+        "base_mem_pct":     48.0,
+        "base_p99_ms":     450.0,
+        "base_throughput": 150.0,
+        "base_error_rate":   1.5,
+        # Model exponents (all < 1 for diminishing returns)
+        "cpu_exp_t":   0.30,  # threads raise CPU
+        "cpu_exp_c":   0.08,  # connections raise CPU (minor)
+        "cpu_exp_m":   0.55,  # cache relieves CPU
+        "mem_exp_t":   0.35,  # threads raise memory
+        "mem_exp_m":   0.22,  # cache raises memory
+        "mem_exp_g":   0.25,  # longer GC relieves memory
+        "p99_exp_t":   0.55,  # threads reduce p99
+        "p99_exp_m":   0.45,  # cache reduces p99
+        "p99_exp_c":   0.12,  # connections reduce p99
+        "tput_exp_t":  0.60,  # threads raise throughput
+        "tput_exp_c":  0.30,  # connections raise throughput
+        "tput_exp_b":  0.25,  # batch raises throughput
+        "err_exp_t":   0.80,  # threads reduce error rate
+        "err_exp_m":   2.00,  # cache strongly reduces error rate
+        "err_exp_b":   0.60,  # batch reduces error rate
         "weights": {
             "cpu":        0.20,
             "memory":     0.15,
@@ -130,7 +114,6 @@ SERVICE_PROFILES = [
             "throughput": 0.25,
             "error_rate": 0.10,
         },
-        # Valid knob ranges
         "knob_ranges": {
             "thread_pool_size":     {"min": 1,   "max": 128},
             "connection_pool_size": {"min": 1,   "max": 500},
@@ -141,8 +124,8 @@ SERVICE_PROFILES = [
         },
     },
     # ── Seed 1 mod 4: Stream Processor ───────────────────────────────────────
-    # bad_config:  T=2,  C=5,   M=32,  B=1,   tmo=10000, G=15
-    # good_config: T=10, C=30,  M=512, B=40,  tmo=5000,  G=90
+    # bad:  p99=400ms(>150), tput=80(>800 fail), err=2%(>0.05)  -> 3 fails
+    # good: cpu=64.6%, mem=71.9%, p99=119.8ms, tput=891.9, err=0.021%  -> all pass
     {
         "service_type": "stream_processor",
         "description": "real-time event stream processing pipeline (Kafka consumer)",
@@ -160,33 +143,33 @@ SERVICE_PROFILES = [
             "gc_interval_sec":      15,
         },
         "good_config": {
-            "thread_pool_size":    10,
-            "connection_pool_size": 30,
+            "thread_pool_size":     7,
+            "connection_pool_size": 25,
             "cache_size_mb":       512,
-            "batch_size":           40,
+            "batch_size":           60,
             "timeout_ms":         5000,
             "gc_interval_sec":      90,
         },
-        "base_cpu_pct":     78.0,
-        "base_mem_pct":     70.0,
-        "base_p99_ms":     380.0,
-        "base_throughput": 120.0,
-        "base_error_rate":   3.5,
-        "cpu_exp_t":  0.28,
-        "cpu_exp_c":  0.08,
-        "cpu_exp_m":  0.55,
-        "mem_exp_t":  0.35,
-        "mem_exp_m":  0.22,
-        "mem_exp_g":  0.30,
-        "p99_exp_t":  0.60,
-        "p99_exp_m":  0.45,
-        "p99_exp_c":  0.12,
-        "tput_exp_t": 0.65,
-        "tput_exp_c": 0.28,
-        "tput_exp_b": 0.28,
-        "err_exp_t":  0.55,
-        "err_exp_m":  0.85,
-        "err_exp_b":  0.40,
+        "base_cpu_pct":     55.0,
+        "base_mem_pct":     55.0,
+        "base_p99_ms":     400.0,
+        "base_throughput":  80.0,
+        "base_error_rate":   2.0,
+        "cpu_exp_t":   0.28,
+        "cpu_exp_c":   0.08,
+        "cpu_exp_m":   0.55,
+        "mem_exp_t":   0.30,
+        "mem_exp_m":   0.15,  # low: cache adds little memory for this service
+        "mem_exp_g":   0.40,
+        "p99_exp_t":   0.60,
+        "p99_exp_m":   0.45,
+        "p99_exp_c":   0.12,
+        "tput_exp_t":  0.65,
+        "tput_exp_c":  0.28,
+        "tput_exp_b":  0.28,
+        "err_exp_t":   0.75,
+        "err_exp_m":   2.00,
+        "err_exp_b":   0.60,
         "weights": {
             "cpu":        0.20,
             "memory":     0.20,
@@ -204,8 +187,8 @@ SERVICE_PROFILES = [
         },
     },
     # ── Seed 2 mod 4: ML Inference Server ────────────────────────────────────
-    # bad_config:  T=1,  C=8,   M=128, B=1,   tmo=15000, G=10
-    # good_config: T=6,  C=24,  M=2048,B=12,  tmo=8000,  G=120
+    # bad:  p99=700ms(>300), tput=30(>200 fail), err=4%(>0.2)  -> 3 fails
+    # good: cpu=59.3%, mem=73.7%, p99=179.1ms, tput=232.2, err=0.122%  -> all pass
     {
         "service_type": "ml_inference",
         "description": "model inference server serving predictions via REST API",
@@ -223,33 +206,33 @@ SERVICE_PROFILES = [
             "gc_interval_sec":      10,
         },
         "good_config": {
-            "thread_pool_size":     6,
-            "connection_pool_size": 24,
+            "thread_pool_size":     5,
+            "connection_pool_size": 20,
             "cache_size_mb":      2048,
-            "batch_size":           12,
+            "batch_size":           10,
             "timeout_ms":         8000,
             "gc_interval_sec":     120,
         },
-        "base_cpu_pct":     82.0,
-        "base_mem_pct":     60.0,
-        "base_p99_ms":     650.0,
-        "base_throughput":  45.0,
-        "base_error_rate":   5.0,
-        "cpu_exp_t":  0.32,
-        "cpu_exp_c":  0.10,
-        "cpu_exp_m":  0.60,
-        "mem_exp_t":  0.38,
-        "mem_exp_m":  0.25,
-        "mem_exp_g":  0.28,
-        "p99_exp_t":  0.65,
-        "p99_exp_m":  0.50,
-        "p99_exp_c":  0.10,
-        "tput_exp_t": 0.70,
-        "tput_exp_c": 0.25,
-        "tput_exp_b": 0.30,
-        "err_exp_t":  0.60,
-        "err_exp_m":  0.90,
-        "err_exp_b":  0.45,
+        "base_cpu_pct":     45.0,
+        "base_mem_pct":     50.0,
+        "base_p99_ms":     700.0,
+        "base_throughput":  30.0,
+        "base_error_rate":   4.0,
+        "cpu_exp_t":   0.28,
+        "cpu_exp_c":   0.08,
+        "cpu_exp_m":   0.55,
+        "mem_exp_t":   0.30,
+        "mem_exp_m":   0.22,
+        "mem_exp_g":   0.28,
+        "p99_exp_t":   0.65,
+        "p99_exp_m":   0.50,
+        "p99_exp_c":   0.10,
+        "tput_exp_t":  0.70,
+        "tput_exp_c":  0.25,
+        "tput_exp_b":  0.30,
+        "err_exp_t":   0.75,
+        "err_exp_m":   2.00,
+        "err_exp_b":   0.60,
         "weights": {
             "cpu":        0.25,
             "memory":     0.20,
@@ -267,8 +250,8 @@ SERVICE_PROFILES = [
         },
     },
     # ── Seed 3 mod 4: Search Engine ───────────────────────────────────────────
-    # bad_config:  T=3,  C=15,  M=64,  B=1,   tmo=2000, G=20
-    # good_config: T=16, C=60,  M=4096,B=25,  tmo=1000, G=45
+    # bad:  p99=300ms(>100), tput=200(>1000 fail), err=1.5%(>0.1)  -> 3 fails
+    # good: cpu=59.9%, mem=65.4%, p99=83.5ms, tput=1334.8, err=0.031%  -> all pass
     {
         "service_type": "search_engine",
         "description": "full-text search engine with inverted index and caching layer",
@@ -286,33 +269,33 @@ SERVICE_PROFILES = [
             "gc_interval_sec":      20,
         },
         "good_config": {
-            "thread_pool_size":    16,
+            "thread_pool_size":    10,
             "connection_pool_size": 60,
             "cache_size_mb":      4096,
             "batch_size":           25,
             "timeout_ms":         1000,
             "gc_interval_sec":      45,
         },
-        "base_cpu_pct":      80.0,
-        "base_mem_pct":      50.0,
-        "base_p99_ms":      280.0,
-        "base_throughput":  250.0,
-        "base_error_rate":    1.2,
-        "cpu_exp_t":  0.25,
-        "cpu_exp_c":  0.08,
-        "cpu_exp_m":  0.55,
-        "mem_exp_t":  0.30,
-        "mem_exp_m":  0.22,
-        "mem_exp_g":  0.20,
-        "p99_exp_t":  0.58,
-        "p99_exp_m":  0.48,
-        "p99_exp_c":  0.18,
-        "tput_exp_t": 0.62,
-        "tput_exp_c": 0.32,
-        "tput_exp_b": 0.22,
-        "err_exp_t":  0.52,
-        "err_exp_m":  0.88,
-        "err_exp_b":  0.38,
+        "base_cpu_pct":      58.0,
+        "base_mem_pct":      42.0,
+        "base_p99_ms":      300.0,
+        "base_throughput":  200.0,
+        "base_error_rate":    1.5,
+        "cpu_exp_t":   0.25,
+        "cpu_exp_c":   0.08,
+        "cpu_exp_m":   0.55,
+        "mem_exp_t":   0.28,
+        "mem_exp_m":   0.22,
+        "mem_exp_g":   0.20,
+        "p99_exp_t":   0.58,
+        "p99_exp_m":   0.48,
+        "p99_exp_c":   0.18,
+        "tput_exp_t":  0.62,
+        "tput_exp_c":  0.32,
+        "tput_exp_b":  0.22,
+        "err_exp_t":   0.75,
+        "err_exp_m":   2.00,
+        "err_exp_b":   0.50,
         "weights": {
             "cpu":        0.15,
             "memory":     0.15,
@@ -335,7 +318,7 @@ SERVICE_PROFILES = [
 def _simulate(p: dict, cfg: dict) -> dict:
     """
     Pure-Python simulation used during generation to verify good_config.
-    Mirrors the simulator.py model exactly.
+    Mirrors the simulator.py model exactly (multiplicative ratio model).
     """
     import math
 
@@ -382,11 +365,11 @@ def _simulate(p: dict, cfg: dict) -> dict:
            / (B / B0) ** p["err_exp_b"])
 
     return {
-        "cpu_pct":        round(cpu,  2),
-        "memory_pct":     round(mem,  2),
-        "p99_ms":         round(p99,  1),
-        "throughput_rps": round(tput, 1),
-        "error_rate_pct": round(err,  4),
+        "cpu_pct":        round(max(1.0, min(200.0, cpu)),  2),
+        "memory_pct":     round(max(1.0, min(200.0, mem)),  2),
+        "p99_ms":         round(max(0.1, p99),              1),
+        "throughput_rps": round(max(0.1, tput),             1),
+        "error_rate_pct": round(max(0.0, min(100.0, err)),  4),
     }
 
 
@@ -400,21 +383,21 @@ class Generator(TaskGenerator):
         rng = SeededRandom(seed)
         profile = SERVICE_PROFILES[seed % len(SERVICE_PROFILES)]
 
-        # Verify good_config passes (generator self-check)
+        # Verify good_config passes all targets (generator self-check)
         good_metrics = _simulate(profile, profile["good_config"])
-        assert good_metrics["cpu_pct"]        < profile["cpu_target_pct"],   \
-            f"seed={seed}: good_config CPU {good_metrics['cpu_pct']} >= target {profile['cpu_target_pct']}"
+        assert good_metrics["cpu_pct"]        < profile["cpu_target_pct"],    \
+            f"seed={seed}: good_config CPU {good_metrics['cpu_pct']} >= {profile['cpu_target_pct']}"
         assert good_metrics["memory_pct"]     < profile["memory_target_pct"], \
-            f"seed={seed}: good_config mem {good_metrics['memory_pct']} >= target {profile['memory_target_pct']}"
-        assert good_metrics["p99_ms"]         < profile["p99_target_ms"],    \
-            f"seed={seed}: good_config p99 {good_metrics['p99_ms']} >= target {profile['p99_target_ms']}"
+            f"seed={seed}: good_config mem {good_metrics['memory_pct']} >= {profile['memory_target_pct']}"
+        assert good_metrics["p99_ms"]         < profile["p99_target_ms"],     \
+            f"seed={seed}: good_config p99 {good_metrics['p99_ms']} >= {profile['p99_target_ms']}"
         assert good_metrics["throughput_rps"] > profile["throughput_target"], \
-            f"seed={seed}: good_config tput {good_metrics['throughput_rps']} <= target {profile['throughput_target']}"
+            f"seed={seed}: good_config tput {good_metrics['throughput_rps']} <= {profile['throughput_target']}"
         assert good_metrics["error_rate_pct"] < profile["error_rate_target"], \
-            f"seed={seed}: good_config err {good_metrics['error_rate_pct']} >= target {profile['error_rate_target']}"
+            f"seed={seed}: good_config err {good_metrics['error_rate_pct']} >= {profile['error_rate_target']}"
 
         workspace_files = self._build_workspace(profile)
-        spec_md = self._generate_spec(profile)
+        spec_md  = self._generate_spec(profile)
         brief_md = self._generate_brief(profile)
 
         expected = {
@@ -426,7 +409,7 @@ class Generator(TaskGenerator):
                 "throughput_rps": profile["throughput_target"],
                 "error_rate_pct": profile["error_rate_target"],
             },
-            "example_good_config": profile["good_config"],
+            "example_good_config":  profile["good_config"],
             "example_good_metrics": good_metrics,
             "constraints": {
                 "cpu_within_target":         True,
@@ -525,35 +508,34 @@ Usage:
 
 Model overview
 --------------
-All five metrics are computed via a multiplicative (ratio-based) model so that
-results stay bounded and the interaction effects are smooth and predictable.
-The baseline values correspond to the suboptimal defaults shipped in config.json.
+All five metrics use a multiplicative ratio model. Each metric starts at its
+baseline value (produced by the bad default config) and is scaled by knob
+ratios raised to fixed exponents (all < 1, diminishing returns).
 
 Knob interactions
 -----------------
 thread_pool_size (T):
   Raises throughput (T/T0)^{tput_et:.2f} and reduces p99 latency.
   Also raises CPU (T/T0)^{cpu_et:.2f} and memory (T/T0)^{mem_et:.2f}.
-  Diminishing returns prevent linear growth.
 
 connection_pool_size (C):
-  Raises throughput (C/C0)^{tput_ec:.2f} and reduces p99 latency.
+  Raises throughput (C/C0)^{tput_ec:.2f} and reduces p99 (C/C0)^{p99_ec:.2f}.
   Minor CPU cost (C/C0)^{cpu_ec:.2f}.
 
 cache_size_mb (M):
-  Relieves CPU (log2(M+1) ratio)^{cpu_em:.2f} and reduces p99 and error rate.
-  Adds memory pressure (log2(M+1) ratio)^{mem_em:.2f}.
-  Best single lever for CPU + latency + errors.
+  Relieves CPU via (log2(M+1)/log2(M0+1))^{cpu_em:.2f} — strongest lever.
+  Reduces p99 and error rate (large exponent {err_em:.2f} on error).
+  Adds memory (log2(M+1)/log2(M0+1))^{mem_em:.2f}.
 
 batch_size (B):
-  Raises throughput (B/B0)^{tput_eb:.2f} and reduces error rate.
-  No direct CPU or memory cost.
+  Raises throughput (B/B0)^{tput_eb:.2f} and reduces error rate (B/B0)^{err_eb:.2f}.
+  No direct CPU or memory cost — a "free" optimization lever.
 
 timeout_ms:
   Must stay in [{kr_tmo["min"]}, {kr_tmo["max"]}]. No direct metric impact.
 
 gc_interval_sec (G):
-  Longer intervals reduce memory (log2(G+1) ratio)^{mem_eg:.2f}.
+  Longer interval reduces memory pressure (log2(G+1)/log2(G0+1))^{mem_eg:.2f}.
   No other metric impact.
 
 Performance targets (ALL must be met simultaneously)
@@ -564,9 +546,9 @@ Performance targets (ALL must be met simultaneously)
   Throughput       > {tput_t} rps
   Error rate       < {err_t} %
 
-The tension: raising thread_pool_size reduces latency and raises throughput
-but also raises CPU and memory. cache_size_mb helps on CPU/latency/errors
-but adds memory. Agents must find the right balance.
+Key tension: raising thread_pool_size reduces latency and raises throughput
+but also raises CPU and memory. cache_size_mb helps CPU/latency/errors but
+adds memory. Finding the balance is the expert challenge.
 """
 import argparse
 import json
@@ -588,19 +570,19 @@ WEIGHT_P99        = {w["p99"]}
 WEIGHT_THROUGHPUT = {w["throughput"]}
 WEIGHT_ERROR_RATE = {w["error_rate"]}
 
-# ── Baseline values (what the bad config in config.json produces) ─────────────
+# ── Baseline metric values (produced by the bad default config.json) ──────────
 BASELINE_CPU_PCT    = {base_cpu}
 BASELINE_MEMORY_PCT = {base_mem}
 BASELINE_P99_MS     = {base_p99}
 BASELINE_THROUGHPUT = {base_tput}
 BASELINE_ERROR_RATE = {base_err}
 
-# ── Baseline config knob values (the bad defaults shipped in config.json) ─────
-BASELINE_THREADS = {T0}   # thread_pool_size
-BASELINE_CONNS   = {C0}   # connection_pool_size
-BASELINE_CACHE   = {M0}   # cache_size_mb
-BASELINE_BATCH   = {B0}   # batch_size
-BASELINE_GC      = {G0}   # gc_interval_sec
+# ── Baseline knob values (the bad defaults in config.json) ───────────────────
+BASELINE_THREADS = {T0}
+BASELINE_CONNS   = {C0}
+BASELINE_CACHE   = {M0}
+BASELINE_BATCH   = {B0}
+BASELINE_GC      = {G0}
 
 # ── Valid ranges ──────────────────────────────────────────────────────────────
 KNOB_RANGES = {{
@@ -613,22 +595,17 @@ KNOB_RANGES = {{
 }}
 
 # ── Model exponents ───────────────────────────────────────────────────────────
-# CPU:  base * (T/T0)^cpu_et * (C/C0)^cpu_ec / (logM/logM0)^cpu_em
-CPU_EXP_T = {cpu_et};  CPU_EXP_C = {cpu_ec};  CPU_EXP_M = {cpu_em}
-# Mem:  base * (T/T0)^mem_et * (logM/logM0)^mem_em / (logG/logG0)^mem_eg
-MEM_EXP_T = {mem_et};  MEM_EXP_M = {mem_em};  MEM_EXP_G = {mem_eg}
-# p99:  base / (T/T0)^p99_et / (logM/logM0)^p99_em / (C/C0)^p99_ec
-P99_EXP_T = {p99_et};  P99_EXP_M = {p99_em};  P99_EXP_C = {p99_ec}
-# Tput: base * (T/T0)^tput_et * (C/C0)^tput_ec * (B/B0)^tput_eb
+CPU_EXP_T  = {cpu_et};  CPU_EXP_C  = {cpu_ec};  CPU_EXP_M  = {cpu_em}
+MEM_EXP_T  = {mem_et};  MEM_EXP_M  = {mem_em};  MEM_EXP_G  = {mem_eg}
+P99_EXP_T  = {p99_et};  P99_EXP_M  = {p99_em};  P99_EXP_C  = {p99_ec}
 TPUT_EXP_T = {tput_et}; TPUT_EXP_C = {tput_ec}; TPUT_EXP_B = {tput_eb}
-# Err:  base / (T/T0)^err_et / (logM/logM0)^err_em / (B/B0)^err_eb
-ERR_EXP_T = {err_et};  ERR_EXP_M = {err_em};  ERR_EXP_B = {err_eb}
+ERR_EXP_T  = {err_et};  ERR_EXP_M  = {err_em};  ERR_EXP_B  = {err_eb}
 
 BASELINE_SCORE = 0.35   # bad config scores ~0.35; optimized config must beat this
 
 
 def validate_config(cfg: dict) -> list:
-    """Return list of validation error strings (empty list = valid)."""
+    """Return list of validation error strings (empty = valid)."""
     errors = []
     for knob, (lo, hi) in KNOB_RANGES.items():
         val = cfg.get(knob)
@@ -640,7 +617,6 @@ def validate_config(cfg: dict) -> list:
             continue
         if val < lo or val > hi:
             errors.append(f"{{knob}}={{val}} out of range [{{lo}}, {{hi}}]")
-    # Backpressure check
     threads = cfg.get("thread_pool_size", 1)
     batch   = cfg.get("batch_size", 1)
     if isinstance(threads, (int, float)) and isinstance(batch, (int, float)):
@@ -654,12 +630,12 @@ def validate_config(cfg: dict) -> list:
 
 def compute_metrics(cfg: dict) -> dict:
     """
-    Compute the five performance metrics from the config knobs.
+    Compute the five performance metrics from config knobs.
 
-    Uses a multiplicative ratio model: each metric starts at its baseline
-    value (produced by the bad default config) and is scaled by knob ratios
-    raised to fixed exponents. This ensures smooth, bounded, diminishing-returns
-    behaviour.
+    Multiplicative ratio model: each metric starts at its baseline value
+    and is scaled by knob-ratio factors raised to fixed exponents.
+    When all knobs equal the baseline (bad) config, output equals the
+    documented BASELINE_* constants exactly.
     """
     T = cfg.get("thread_pool_size",     BASELINE_THREADS)
     C = cfg.get("connection_pool_size", BASELINE_CONNS)
@@ -672,47 +648,42 @@ def compute_metrics(cfg: dict) -> dict:
     log_G  = math.log2(max(G,  1) + 1)
     log_G0 = math.log2(max(BASELINE_GC,   1) + 1)
 
-    # ── CPU utilisation ───────────────────────────────────────────────────────
+    # CPU: more threads/conns raise it; more cache relieves it
     cpu = (BASELINE_CPU_PCT
            * (T / BASELINE_THREADS) ** CPU_EXP_T
            * (C / BASELINE_CONNS)   ** CPU_EXP_C
            / (log_M / log_M0)       ** CPU_EXP_M)
-    cpu = max(1.0, min(200.0, cpu))
 
-    # ── Memory utilisation ────────────────────────────────────────────────────
+    # Memory: more threads and cache raise it; longer GC relieves it
     mem = (BASELINE_MEMORY_PCT
            * (T / BASELINE_THREADS) ** MEM_EXP_T
            * (log_M / log_M0)       ** MEM_EXP_M
            / (log_G / log_G0)       ** MEM_EXP_G)
-    mem = max(1.0, min(200.0, mem))
 
-    # ── p99 latency ───────────────────────────────────────────────────────────
+    # p99 latency: more threads, cache, conns reduce it
     p99 = (BASELINE_P99_MS
            / (T / BASELINE_THREADS) ** P99_EXP_T
            / (log_M / log_M0)       ** P99_EXP_M
            / (C / BASELINE_CONNS)   ** P99_EXP_C)
-    p99 = max(0.1, p99)
 
-    # ── Throughput ────────────────────────────────────────────────────────────
+    # Throughput: more threads, conns, and batch raise it
     tput = (BASELINE_THROUGHPUT
             * (T / BASELINE_THREADS) ** TPUT_EXP_T
             * (C / BASELINE_CONNS)   ** TPUT_EXP_C
             * (B / BASELINE_BATCH)   ** TPUT_EXP_B)
-    tput = max(0.1, tput)
 
-    # ── Error rate ────────────────────────────────────────────────────────────
+    # Error rate: more threads, cache, and batch reduce it
     err = (BASELINE_ERROR_RATE
            / (T / BASELINE_THREADS) ** ERR_EXP_T
            / (log_M / log_M0)       ** ERR_EXP_M
            / (B / BASELINE_BATCH)   ** ERR_EXP_B)
-    err = max(0.0, min(100.0, err))
 
     return {{
-        "cpu_pct":        round(cpu,  2),
-        "memory_pct":     round(mem,  2),
-        "p99_ms":         round(p99,  1),
-        "throughput_rps": round(tput, 1),
-        "error_rate_pct": round(err,  4),
+        "cpu_pct":        round(max(1.0, min(200.0, cpu)),  2),
+        "memory_pct":     round(max(1.0, min(200.0, mem)),  2),
+        "p99_ms":         round(max(0.1, p99),              1),
+        "throughput_rps": round(max(0.1, tput),             1),
+        "error_rate_pct": round(max(0.0, min(100.0, err)),  4),
     }}
 
 
@@ -744,15 +715,15 @@ def _weighted_score(metrics: dict) -> float:
 
 def check_all(cfg: dict) -> dict:
     """Evaluate config and return structured result with per-check pass/fail."""
-    errors = validate_config(cfg)
+    errors         = validate_config(cfg)
     contradictions = [e for e in errors if "Contradictory" in e]
     range_errors   = [e for e in errors if "Contradictory" not in e]
 
     if range_errors:
         return {{
-            "valid_config":       False,
-            "validation_errors":  errors,
-            "metrics":            None,
+            "valid_config":      False,
+            "validation_errors": errors,
+            "metrics":           None,
             "checks": {{
                 "config_values_valid":       False,
                 "no_contradictory_settings": len(contradictions) == 0,
@@ -767,7 +738,7 @@ def check_all(cfg: dict) -> dict:
 
     metrics = compute_metrics(cfg)
     checks = {{
-        "config_values_valid":       len(range_errors) == 0,
+        "config_values_valid":       True,
         "no_contradictory_settings": len(contradictions) == 0,
         "cpu_within_target":         metrics["cpu_pct"]        < CPU_TARGET_PCT,
         "memory_within_target":      metrics["memory_pct"]     < MEMORY_TARGET_PCT,
@@ -859,7 +830,6 @@ if __name__ == "__main__":
             f"| `{k}` | `{bad[k]}` | [{v['min']}, {v['max']}] |"
             for k, v in kr.items()
         )
-
         weight_rows = "\n".join(
             f"| {metric.replace('_', ' ').title()} | {int(wt * 100)}% |"
             for metric, wt in w.items()
@@ -890,36 +860,35 @@ Edit `config.json` to tune the service. All six knobs must remain within their v
 
 ## Interaction Effects
 
-The simulator uses a multiplicative (ratio-based) model. Each metric starts
-at its baseline value (what the default bad config produces) and is scaled
-by knob-ratio factors raised to fixed exponents (< 1, diminishing returns).
+The simulator uses a multiplicative ratio model. Each metric starts at its
+baseline value (the bad default config) and is scaled by knob-ratio factors
+raised to fixed exponents (all < 1, diminishing returns).
 
 Key interactions:
 
 - **`thread_pool_size`**: More threads reduce p99 latency and raise throughput,
-  but also raise **both CPU and memory**. The dominant tension knob — increasing
-  it past the sweet spot will bust CPU/memory targets.
+  but also raise **both CPU and memory**. The dominant tension knob.
 
-- **`connection_pool_size`**: More connections raise throughput and slightly
-  reduce p99 latency, with a minor CPU cost. Less tension than threads.
+- **`connection_pool_size`**: More connections raise throughput and reduce p99
+  with a minor CPU cost. Less tension than threads.
 
-- **`cache_size_mb`**: Larger cache relieves CPU (fewer backend calls), reduces
-  p99 latency, and lowers error rate — at the cost of added memory. This is the
-  highest-value single lever: always increase it before adding threads.
+- **`cache_size_mb`**: Larger cache relieves CPU, reduces p99 latency, and
+  strongly lowers error rate — at the cost of added memory. The highest-value
+  single lever: always increase it before adding threads.
 
 - **`batch_size`**: Larger batches raise throughput and reduce error rate with
-  **no direct CPU or memory cost** in this model. Excellent "free" lever.
+  **no direct CPU or memory cost**. An excellent "free" lever.
 
 - **`timeout_ms`**: Must stay within [{kr["timeout_ms"]["min"]}, {kr["timeout_ms"]["max"]}].
   Does not directly affect the five performance metrics.
 
 - **`gc_interval_sec`**: Longer intervals reduce memory pressure. Useful for
-  pushing memory below the target when other knobs have consumed headroom.
+  pushing memory below target when other knobs have consumed headroom.
 
 ## Contradictory Setting Rule
 
 If `thread_pool_size * batch_size > 10000`, the simulator flags a contradictory
-setting (backpressure) and all checks fail. Avoid extreme values on both simultaneously.
+setting (backpressure) and all checks fail.
 
 ## Scoring Rubric
 
@@ -930,7 +899,7 @@ Overall score is a weighted average of per-metric sub-scores (each in [0, 1]):
 {weight_rows}
 
 Each sub-score is `min(1.0, target / actual)` for upper-bounded metrics
-(CPU, memory, p99, error rate) and `min(1.0, actual / target)` for throughput.
+and `min(1.0, actual / target)` for throughput.
 **Failing any hard target multiplies the total score by 0.5.**
 
 The current suboptimal `config.json` scores approximately **0.35**. Your
@@ -938,10 +907,9 @@ optimized configuration must score **above 0.35** to pass the baseline check.
 
 ## Deliverables
 
-1. An updated `config.json` with all six knobs tuned so that
-   `python simulator.py --check` exits with code 0 (all checks pass).
+1. An updated `config.json` so that `python simulator.py --check` exits 0.
 
-2. All of the following simulator checks must pass:
+2. All of the following checks must pass:
    - `config_values_valid`: all knob values within valid ranges
    - `no_contradictory_settings`: `thread_pool_size * batch_size <= 10000`
    - `cpu_within_target`: CPU < {cpu_t} %
@@ -951,19 +919,19 @@ optimized configuration must score **above 0.35** to pass the baseline check.
    - `error_rate_within_target`: error rate < {err_t} %
    - `score_above_baseline`: weighted score > 0.35
 
-3. Verify by running: `python simulator.py --check`
+3. Verify: `python simulator.py --check`
 
 ## Common Traps
 
 - **Naive thread maximisation**: Very high `thread_pool_size` reduces latency
-  and boosts throughput but pushes CPU and memory over their targets.
+  and boosts throughput but pushes CPU and memory over target.
 - **Ignoring cache**: `cache_size_mb` relieves CPU, latency, and errors
   simultaneously — the highest-leverage lever at zero thread cost.
-- **Leaving batch_size=1**: Even moderate batching (10–50) materially raises
+- **Leaving batch_size=1**: Even moderate batching (10–60) materially raises
   throughput and lowers errors at no CPU/memory cost.
 - **Under-sizing connection pool**: Throughput scales with connections — a tiny
   pool caps throughput even with many threads.
-- **Contradictory extremes**: Extremely high threads AND high batch_size triggers
+- **Contradictory extremes**: Very high threads AND very high batch_size triggers
   the backpressure rule and fails the contradictory-settings check.
 """
 
