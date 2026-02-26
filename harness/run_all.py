@@ -89,17 +89,19 @@ def grade_run(task_name: str, task_dir: str, run_dir: str) -> dict:
     """Grade a completed run. Returns score dict."""
     import subprocess
 
-    workspace = os.path.join(run_dir, "workspace")
-    reports = os.path.join(run_dir, "reports")
-    submission = os.path.join(run_dir, "submission")
+    workspace = os.path.abspath(os.path.join(run_dir, "workspace"))
+    reports = os.path.abspath(os.path.join(run_dir, "reports"))
+    submission = os.path.abspath(os.path.join(run_dir, "submission"))
     score_path = os.path.join(reports, "score.json")
 
     # Run grader — pass expected.json as $5 if it exists (seed-aware grading)
     # Note: attestation check is handled within each grader (not pre-filtered here)
     # so we always get partial credit and full diagnostics even when attestation is missing.
-    grade_script = os.path.join(task_dir, "grade.sh")
+    # All paths must be absolute because graders use `cd "$WORKSPACE"`.
+    grade_script = os.path.abspath(os.path.join(task_dir, "grade.sh"))
+    task_dir_abs = os.path.abspath(task_dir)
     expected_path = os.path.join(reports, "expected.json")
-    grade_args = ["bash", grade_script, workspace, reports, submission, task_dir]
+    grade_args = ["bash", grade_script, workspace, reports, submission, task_dir_abs]
     if os.path.isfile(expected_path):
         grade_args.append(expected_path)
 

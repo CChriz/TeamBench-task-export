@@ -1,0 +1,11 @@
+task_id: CR1_review_respond
+domain: code_review
+difficulty: medium
+languages: [python]
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 3
+lines_changed_expected: 25
+tags: [code-review, refactoring, security, performance]
