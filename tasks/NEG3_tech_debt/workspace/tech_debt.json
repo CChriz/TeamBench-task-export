@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "TD007",
+      "category": "outdated_deps",
+      "title": "Outdated dependency with known API deprecation",
+      "impact": "high",
+      "effort": "low",
+      "fix_hours": 2,
+      "value_score": 90
+    },
+    {
+      "id": "TD010",
+      "category": "dead_code",
+      "title": "Dead code: commented-out debug block",
+      "impact": "low",
+      "effort": "low",
+      "fix_hours": 1,
+      "value_score": 50
+    },
+    {
+      "id": "TD001",
+      "category": "dead_code",
+      "title": "Dead code: unused legacy processor",
+      "impact": "low",
+      "effort": "low",
+      "fix_hours": 1,
+      "value_score": 50
+    },
+    {
+      "id": "TD003",
+      "category": "duplicated_logic",
+      "title": "Duplicated validation logic",
+      "impact": "high",
+      "effort": "medium",
+      "fix_hours": 3,
+      "value_score": 60
+    },
+    {
+      "id": "TD005",
+      "category": "poor_error_handling",
+      "title": "Bare except clauses swallow errors",
+      "impact": "high",
+      "effort": "medium",
+      "fix_hours": 3,
+      "value_score": 60
+    },
+    {
+      "id": "TD004",
+      "category": "hardcoded_values",
+      "title": "Hardcoded configuration values",
+      "impact": "medium",
+      "effort": "low",
+      "fix_hours": 2,
+      "value_score": 70
+    }
+  ],
+  "time_budget_hours": 6,
+  "max_items_to_fix": 3,
+  "dependency": {
+    "blocker": "TD007",
+    "dependent": "TD003"
+  }
+}

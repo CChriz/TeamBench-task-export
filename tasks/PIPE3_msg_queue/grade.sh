@@ -38,6 +38,80 @@ check() {
 
 cd "$WORKSPACE"
 
+# ── Write helper Python scripts to temp files (avoids bash quoting issues) ────
+
+cat > /tmp/_pipe3_check6.py << 'PYEOF'
+import json, sys
+expected = json.load(open(sys.argv[1]))
+wrong_map = expected['wrong_field_map']
+consumer_src = open('consumer.py').read()
+
+errors = []
+for correct, wrong in wrong_map.items():
+    dq = '.get("' + wrong + '")'
+    sq = ".get('" + wrong + "')"
+    dq2 = '["' + wrong + '"]'
+    sq2 = "['" + wrong + "']"
+    if dq in consumer_src or sq in consumer_src or dq2 in consumer_src or sq2 in consumer_src:
+        errors.append('still uses wrong field ' + repr(wrong) + ' instead of ' + repr(correct))
+
+if errors:
+    print('FAIL: ' + '; '.join(errors), file=sys.stderr)
+    sys.exit(1)
+print('CORRECT_FIELD_NAMES_OK')
+PYEOF
+
+cat > /tmp/_pipe3_check7.py << 'PYEOF'
+import json, sys
+expected = json.load(open(sys.argv[1]))
+correct_fields = list(expected['correct_field_map'].keys())
+consumer_src = open('consumer.py').read()
+present = [f for f in correct_fields if f in consumer_src]
+ratio = len(present) / max(1, len(correct_fields))
+if ratio < 0.5:
+    missing = [f for f in correct_fields if f not in consumer_src]
+    print('FAIL: only ' + str(len(present)) + '/' + str(len(correct_fields)) + ' correct field names found; missing: ' + str(missing), file=sys.stderr)
+    sys.exit(1)
+print('CORRECT_FIELDS_PRESENT_OK')
+PYEOF
+
+cat > /tmp/_pipe3_check10.py << 'PYEOF'
+import json, re, sys
+expected = json.load(open(sys.argv[1]))
+id_field = expected['envelope']['id_field']
+consumer_src = open('consumer.py').read()
+has_id_field = id_field in consumer_src
+has_dedup_structure = bool(re.search(r'(set\(\)|seen|processed|dedup|_ids)', consumer_src))
+if not (has_id_field or has_dedup_structure):
+    print('FAIL: consumer.py must implement deduplication using ' + repr(id_field) + ' or a seen-IDs set', file=sys.stderr)
+    sys.exit(1)
+print('DEDUP_LOGIC_OK')
+PYEOF
+
+cat > /tmp/_pipe3_check11.py << 'PYEOF'
+import json, sys
+expected = json.load(open(sys.argv[1]))
+wrapper_key = expected['envelope']['wrapper_key']
+payload_fields = expected['payload_fields']
+producer_src = open('producer.py').read()
+if wrapper_key not in producer_src:
+    print('FAIL: producer.py must use envelope wrapper_key=' + repr(wrapper_key), file=sys.stderr)
+    sys.exit(1)
+present = [f for f in payload_fields if f in producer_src]
+if len(present) < 1:
+    print('FAIL: producer.py must reference at least one payload field; found none of ' + str(payload_fields), file=sys.stderr)
+    sys.exit(1)
+print('PRODUCER_FORMAT_OK')
+PYEOF
+
+cat > /tmp/_pipe3_attestation.py << 'PYEOF'
+import json, sys
+att_path = sys.argv[1] + '/attestation.json'
+att = json.load(open(att_path))
+assert att.get('verdict') == 'pass', 'attestation verdict is not pass'
+print('ATTESTATION_OK')
+PYEOF
+
 # ── Check 1: No syntax errors in queue.py ─────────────────────────────────────
 check "$PYTHON -m py_compile queue.py && echo QUEUE_SYNTAX_OK" "queue_syntax_error"
 
@@ -49,7 +123,7 @@ check "$PYTHON -m py_compile consumer.py && echo CONSUMER_SYNTAX_OK" "consumer_s
 
 # ── Check 4: consumer.py imports cleanly ──────────────────────────────────────
 check "$PYTHON -c \"
-import sys, os
+import sys
 sys.path.insert(0, '.')
 import consumer
 print('CONSUMER_IMPORTS_OK')
@@ -69,45 +143,11 @@ assert body == {'msg': 'hello'}, 'get() must return message body'
 print('QUEUE_ENQUEUE_DEQUEUE_OK')
 \"" "queue_enqueue_dequeue_broken"
 
-# ── Check 6: Correct field names used in consumer.py (wrong_field_map values absent) ──
-$PYTHON > /tmp/_pipe3_check6.py << 'PYEOF'
-import json, sys
-expected = json.load(open(sys.argv[1]))
-wrong_map = expected['wrong_field_map']
-consumer_src = open('consumer.py').read()
-
-errors = []
-for correct, wrong in wrong_map.items():
-    # Check .get("wrong") or ["wrong"] patterns via simple substring search
-    if ('.get("' + wrong + '")') in consumer_src or \
-       ('.get(\'' + wrong + '\')') in consumer_src or \
-       ('["' + wrong + '"]') in consumer_src or \
-       ('[\'+ wrong + '\']') in consumer_src:
-        errors.append('consumer.py still uses wrong field ' + repr(wrong) + ' instead of ' + repr(correct))
-
-if errors:
-    print('FAIL: ' + '; '.join(errors), file=sys.stderr)
-    sys.exit(1)
-print('CORRECT_FIELD_NAMES_OK')
-PYEOF
+# ── Check 6: Wrong field names are NOT used in consumer.py ────────────────────
 check "$PYTHON /tmp/_pipe3_check6.py $EXPECTED" "wrong_field_names_not_fixed"
 
-# ── Check 7: Correct field names from correct_field_map are present in consumer.py ──
-check "$PYTHON -c \"
-import json
-expected = json.load(open('$EXPECTED'))
-correct_fields = list(expected['correct_field_map'].keys())
-consumer_src = open('consumer.py').read()
-
-# At least half of the correct field names must appear in consumer.py
-present = [f for f in correct_fields if f in consumer_src]
-ratio = len(present) / max(1, len(correct_fields))
-assert ratio >= 0.5, (
-    f'Only {len(present)}/{len(correct_fields)} correct field names found in consumer.py: '
-    f'missing {[f for f in correct_fields if f not in consumer_src]}'
-)
-print('CORRECT_FIELDS_PRESENT_OK')
-\"" "correct_fields_missing_from_consumer"
+# ── Check 7: Correct field names are present in consumer.py ───────────────────
+check "$PYTHON /tmp/_pipe3_check7.py $EXPECTED" "correct_fields_missing_from_consumer"
 
 # ── Check 8: Envelope unwrapping correct (wrapper_key used) ───────────────────
 check "$PYTHON -c \"
@@ -115,75 +155,29 @@ import json
 expected = json.load(open('$EXPECTED'))
 wrapper_key = expected['envelope']['wrapper_key']
 consumer_src = open('consumer.py').read()
-
-assert wrapper_key in consumer_src, (
-    f'consumer.py must unwrap envelope using wrapper_key={wrapper_key!r}'
-)
+assert wrapper_key in consumer_src, 'consumer.py must unwrap envelope using wrapper_key=' + repr(wrapper_key)
 print('ENVELOPE_UNWRAP_OK')
 \"" "envelope_unwrapping_wrong"
 
 # ── Check 9: Ack mechanism present in consumer.py ─────────────────────────────
 check "$PYTHON -c \"
-consumer_src = open('consumer.py').read()
-# Consumer must call ack() — look for queue.ack or q.ack or self.queue.ack
 import re
-ack_pattern = r'\.ack\s*\('
-assert re.search(ack_pattern, consumer_src), (
-    'consumer.py must call queue.ack(delivery_tag) to acknowledge messages'
-)
+consumer_src = open('consumer.py').read()
+assert re.search(r'\.ack\s*\(', consumer_src), 'consumer.py must call queue.ack(delivery_tag)'
 print('ACK_MECHANISM_OK')
 \"" "ack_mechanism_missing"
 
-# ── Check 10: Deduplication logic present (message_id / id_field check) ───────
-check "$PYTHON -c \"
-import json
-expected = json.load(open('$EXPECTED'))
-id_field = expected['envelope']['id_field']
-consumer_src = open('consumer.py').read()
-
-# Dedup requires tracking seen message IDs
-has_id_field = id_field in consumer_src
-# Also accept generic patterns: set(), seen, processed_ids, dedup
-import re
-has_dedup_structure = bool(re.search(r'(set\(\)|seen|processed|dedup|_ids)', consumer_src))
-
-assert has_id_field or has_dedup_structure, (
-    f'consumer.py must implement deduplication using {id_field!r} or a seen-IDs set'
-)
-print('DEDUP_LOGIC_OK')
-\"" "dedup_logic_missing"
+# ── Check 10: Deduplication logic present ─────────────────────────────────────
+check "$PYTHON /tmp/_pipe3_check10.py $EXPECTED" "dedup_logic_missing"
 
 # ── Check 11: producer.py sends correctly-formatted messages ──────────────────
-check "$PYTHON -c \"
-import sys, json
-sys.path.insert(0, '.')
-expected = json.load(open('$EXPECTED'))
-wrapper_key = expected['envelope']['wrapper_key']
-payload_fields = expected['payload_fields']
-
-# producer.py must reference the envelope wrapper_key and payload fields
-producer_src = open('producer.py').read()
-assert wrapper_key in producer_src, (
-    f'producer.py must use envelope wrapper_key={wrapper_key!r}'
-)
-# At least one correct payload field name should appear
-present = [f for f in payload_fields if f in producer_src]
-assert len(present) >= 1, (
-    f'producer.py must reference at least one payload field; found none of {payload_fields}'
-)
-print('PRODUCER_FORMAT_OK')
-\"" "producer_format_wrong"
+check "$PYTHON /tmp/_pipe3_check11.py $EXPECTED" "producer_format_wrong"
 
 # ── Check 12: pytest test suite passes ────────────────────────────────────────
 check "$PYTHON -m pytest tests/test_consumer.py -q --tb=no 2>&1 | tail -3 | grep -E '(passed|no tests ran)'" "pytest_tests_failed"
 
 # ── Check 13: Attestation ─────────────────────────────────────────────────────
-check "$PYTHON -c \"
-import json, sys
-att_path = sys.argv[1] + '/attestation.json'
-att = json.load(open(att_path))
-assert att.get('verdict') == 'pass'
-\" '$SUBMISSION'" "bad_attestation"
+check "$PYTHON /tmp/_pipe3_attestation.py $SUBMISSION" "bad_attestation"
 
 # ── Write score ────────────────────────────────────────────────────────────────
 PARTIAL=$("$PYTHON" -c "print(round($PASSED/max(1,$CHECKS), 2))")

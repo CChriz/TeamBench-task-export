@@ -42,6 +42,12 @@ CACHE_PREFIX=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); pri
 CACHEABLE_JSON=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); print(json.dumps(d['cacheable_resources'], separators=(',',':')))")
 CACHE_KEYS_JSON=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); print(json.dumps(d['cache_keys'], separators=(',',':')))")
 INV_RULES_JSON=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); print(json.dumps(d['invalidation_rules'], separators=(',',':')))")
+# First and second cacheable resource (plain strings, safe for shell substitution)
+CACHEABLE_FIRST=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d['cacheable_resources'][0])")
+CACHEABLE_SECOND=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d['cacheable_resources'][1])")
+# TTLs for each cacheable resource
+TTL_FIRST=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); r=d['cacheable_resources'][0]; print(d['ttl_map'][r])")
+TTL_SECOND=$($PYTHON -c "import json; d=json.load(open('$EXPECTED_JSON')); r=d['cacheable_resources'][1]; print(d['ttl_map'][r])")
 
 # Export JSON vars so Python can read them via os.environ (avoids shell glob expansion of brackets)
 export CACHEABLE_JSON CACHE_KEYS_JSON INV_RULES_JSON
@@ -120,24 +126,20 @@ print('APP_IMPORTS_CACHE_OK')
 
 # ── CHECK 6: Cacheable GET endpoints return source=cache on second call ────
 check "$PYTHON -c \"
-import sys, json, time
+import sys, json, time, os
 sys.path.insert(0, '$WORKSPACE')
 
-# Patch Flask test client
 from app import app
 client = app.test_client()
 
-cacheable = json.loads(r'''$CACHEABLE_JSON''')
+cacheable = json.loads(os.environ['CACHEABLE_JSON'])
 for resource in cacheable:
-    # First call — should hit DB
     r1 = client.get(f'/{resource}')
     assert r1.status_code == 200, f'GET /{resource} returned {r1.status_code}'
-    d1 = json.loads(r1.data)
-    # Second call — should hit cache
     r2 = client.get(f'/{resource}')
     assert r2.status_code == 200
     d2 = json.loads(r2.data)
-    assert d2.get('source') == 'cache', f'GET /{resource} second call source={d2.get(\"source\")!r}, expected cache'
+    assert d2.get('source') == 'cache', f'GET /{resource} second call source={d2.get(\\\"source\\\")!r}, expected cache'
 print('CACHEABLE_ENDPOINTS_CACHED_OK')
 \"" "cacheable_endpoints_not_cached"
 
@@ -185,23 +187,24 @@ sys.path.insert(0, '$WORKSPACE')
 from app import app
 client = app.test_client()
 
+res = '$CACHEABLE_FIRST'
 # Prime the cache
-r1 = client.get('/$RES_A')
+r1 = client.get(f'/{res}')
 assert r1.status_code == 200
 # Verify it is cached
-r2 = client.get('/$RES_A')
+r2 = client.get(f'/{res}')
 d2 = json.loads(r2.data)
-assert d2.get('source') == 'cache', 'Cache was not primed for /$RES_A'
+assert d2.get('source') == 'cache', f'Cache was not primed for /{res}'
 
 # POST to invalidate
 new_item = {'name': 'NewItem', 'value': 999}
-rpost = client.post('/$RES_A', data=json.dumps(new_item), content_type='application/json')
-assert rpost.status_code == 201, f'POST /$RES_A returned {rpost.status_code}'
+rpost = client.post(f'/{res}', data=json.dumps(new_item), content_type='application/json')
+assert rpost.status_code == 201, f'POST /{res} returned {rpost.status_code}'
 
 # Next GET must hit DB (cache was invalidated)
-r3 = client.get('/$RES_A')
+r3 = client.get(f'/{res}')
 d3 = json.loads(r3.data)
-assert d3.get('source') == 'db', f'Expected source=db after POST invalidation, got {d3.get(\"source\")!r}'
+assert d3.get('source') == 'db', f'Expected source=db after POST invalidation, got {d3.get(\\\"source\\\")!r}'
 print('POST_INVALIDATES_CACHE_OK')
 \"" "post_does_not_invalidate_cache"
 
@@ -212,20 +215,21 @@ sys.path.insert(0, '$WORKSPACE')
 from app import app
 client = app.test_client()
 
+res = '$CACHEABLE_FIRST'
 # Prime cache
-client.get('/$RES_A')
-r2 = client.get('/$RES_A')
+client.get(f'/{res}')
+r2 = client.get(f'/{res}')
 d2 = json.loads(r2.data)
-assert d2.get('source') == 'cache', 'Cache not primed for PUT test'
+assert d2.get('source') == 'cache', f'Cache not primed for PUT test on /{res}'
 
 # PUT to update item 1
-rput = client.put('/$RES_A/1', data=json.dumps({'value': 777}), content_type='application/json')
-assert rput.status_code == 200, f'PUT /$RES_A/1 returned {rput.status_code}'
+rput = client.put(f'/{res}/1', data=json.dumps({'value': 777}), content_type='application/json')
+assert rput.status_code == 200, f'PUT /{res}/1 returned {rput.status_code}'
 
 # Next GET must hit DB
-r3 = client.get('/$RES_A')
+r3 = client.get(f'/{res}')
 d3 = json.loads(r3.data)
-assert d3.get('source') == 'db', f'Expected source=db after PUT invalidation, got {d3.get(\"source\")!r}'
+assert d3.get('source') == 'db', f'Expected source=db after PUT invalidation, got {d3.get(\\\"source\\\")!r}'
 print('PUT_INVALIDATES_CACHE_OK')
 \"" "put_does_not_invalidate_cache"
 
@@ -236,32 +240,31 @@ sys.path.insert(0, '$WORKSPACE')
 from app import app
 client = app.test_client()
 
+res = '$CACHEABLE_SECOND'
 # Prime
-client.get('/$RES_B')
-client.get('/$RES_B')  # now cached
+client.get(f'/{res}')
+client.get(f'/{res}')  # now cached
 
 # Write new item
 new_item = {'name': 'FreshItem', 'value': 42}
-rpost = client.post('/$RES_B', data=json.dumps(new_item), content_type='application/json')
+rpost = client.post(f'/{res}', data=json.dumps(new_item), content_type='application/json')
 assert rpost.status_code == 201
 
 # Read again — must include new item in data
-r3 = client.get('/$RES_B')
+r3 = client.get(f'/{res}')
 d3 = json.loads(r3.data)
 names = [item.get('name') for item in d3.get('data', [])]
 assert 'FreshItem' in names, f'Stale cache: new item not in response after POST. names={names}'
 print('NO_STALE_DATA_AFTER_WRITE_OK')
 \"" "stale_data_after_write"
 
-# ── CHECK 12: TTL values are correct in app source ─────────────────────────
+# ── CHECK 12: TTL values are correct in app source (cacheable resources only) ──
 check "$PYTHON -c \"
-import re
 src = open('$WORKSPACE/app.py').read()
-# Look for TTL_A and TTL_B numeric literals anywhere in app.py
-ttl_a_present = '$TTL_A' in src
-ttl_b_present = '$TTL_B' in src
-assert ttl_a_present, f'TTL {TTL_A} for $RES_A not found in app.py'
-assert ttl_b_present, f'TTL {TTL_B} for $RES_B not found in app.py'
+ttl_first = '$TTL_FIRST'
+ttl_second = '$TTL_SECOND'
+assert ttl_first in src, f'TTL {ttl_first} for $CACHEABLE_FIRST not found in app.py'
+assert ttl_second in src, f'TTL {ttl_second} for $CACHEABLE_SECOND not found in app.py'
 print('TTL_VALUES_CORRECT_OK')
 \"" "ttl_values_wrong"
 

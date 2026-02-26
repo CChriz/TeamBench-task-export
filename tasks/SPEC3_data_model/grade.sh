@@ -13,11 +13,13 @@ SUBMISSION="$3"
 TASK_DIR="$4"
 EXPECTED="${5:-$REPORTS/expected.json}"
 
-# Ensure user-installed packages (sqlalchemy, pytest) are on the path
-export PYTHONPATH="<HOME>/.local/lib/python3.10/site-packages:/usr/local/lib/python3.10/dist-packages${PYTHONPATH:+:$PYTHONPATH}"
-PYTEST_BIN="${PYTEST_BIN:-<HOME>/.local/bin/pytest}"
-if ! command -v "$PYTEST_BIN" &>/dev/null; then
-  PYTEST_BIN="python3 -m pytest"
+# Locate a working pytest (handles both Docker fresh-install and local dev envs)
+if python3 -m pytest --version &>/dev/null 2>&1; then
+  PYTEST_CMD="python3 -m pytest"
+elif command -v pytest &>/dev/null; then
+  PYTEST_CMD="pytest"
+else
+  PYTEST_CMD="python3 -m pytest"
 fi
 
 mkdir -p "$REPORTS"
@@ -48,7 +50,7 @@ except Exception:
 check "python3 -m py_compile models.py" "models_syntax_error"
 
 # ── 2. Basic tests pass ───────────────────────────────────────────────────────
-check "PYTHONPATH=\"$PYTHONPATH\" $PYTEST_BIN test_models.py -q --tb=no 2>/dev/null | grep -E '^[0-9]+ passed'" \
+check "$PYTEST_CMD test_models.py -q --tb=no 2>/dev/null | grep -E '^[0-9]+ passed'" \
   "basic_tests_fail"
 
 # ── Helper: run inline Python checks ─────────────────────────────────────────

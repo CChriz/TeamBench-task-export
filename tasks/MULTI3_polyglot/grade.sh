@@ -1,244 +1,284 @@
 #!/usr/bin/env bash
+# Seed-aware grader for MULTI3_polyglot: Polyglot Interface Bug Fix.
+#
+# Args: $1=WORKSPACE $2=REPORTS $3=SUBMISSION $4=TASK_DIR [$5=EXPECTED_JSON]
 set -o pipefail
+
 WORKSPACE="$1"
 REPORTS="$2"
 SUBMISSION="$3"
 TASK_DIR="$4"
-EXPECTED="${5:-}"
+EXPECTED="${5:-$REPORTS/expected.json}"
 
 mkdir -p "$REPORTS"
 
 CHECKS=0; PASSED=0; FAILURES=""
+
 check() {
-  CHECKS=$((CHECKS + 1))
-  if eval "$1" 2>/dev/null; then
-    PASSED=$((PASSED + 1))
-  else
-    FAILURES="${FAILURES:+${FAILURES},}$2"
-  fi
+    local expr="$1"
+    local tag="$2"
+    CHECKS=$((CHECKS + 1))
+    if eval "$expr" 2>/dev/null; then
+        PASSED=$((PASSED + 1))
+    else
+        FAILURES="${FAILURES:+${FAILURES},}${tag}"
+    fi
 }
 
 cd "$WORKSPACE"
 
-# ---------------------------------------------------------------------------
-# Load expected.json
-# ---------------------------------------------------------------------------
-EXPECTED_JSON="$REPORTS/expected.json"
-if [ ! -f "$EXPECTED_JSON" ]; then
-  EXPECTED_JSON="$(dirname "$0")/expected.json"
-fi
+# Ensure __init__.py stubs exist for package imports
+for pkg in backend frontend shared tests; do
+    [ -d "$pkg" ] && touch "$pkg/__init__.py"
+done
 
-# Defaults (seed=0 / user_profiles)
-CORRECT_ENVELOPE_KEY="data"
-CORRECT_DATE_FORMAT="%Y-%m-%d"
-ID_FIELD="user_id"
-DATE_FIELD="joined_at"
-NULL_FIELD="full_name"
-WRONG_ID_KEY="uid"
-CORRECT_ID_KEY="user_id"
-WRONG_SCHEMA_FIELD="fullName"
-CORRECT_SCHEMA_FIELD="full_name"
+# ---------------------------------------------------------------------------
+# Load seed-specific expected values from expected.json
+# ---------------------------------------------------------------------------
+ID_FIELD="config_id"
+DATE_FIELD="updated_at"
+NULL_FIELD="note"
+WRONG_SCHEMA_FIELD="service"
+CORRECT_SCHEMA_FIELD="service_name"
 
-if [ -f "$EXPECTED_JSON" ]; then
-  CORRECT_ENVELOPE_KEY=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('correct_envelope_key','data'))" 2>/dev/null || echo "data")
-  CORRECT_DATE_FORMAT=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('correct_date_format','%Y-%m-%d'))" 2>/dev/null || echo "%Y-%m-%d")
-  ID_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('id_field','user_id'))" 2>/dev/null || echo "user_id")
-  DATE_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('date_field','joined_at'))" 2>/dev/null || echo "joined_at")
-  NULL_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('null_field','full_name'))" 2>/dev/null || echo "full_name")
-  WRONG_ID_KEY=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('wrong_id_key','uid'))" 2>/dev/null || echo "uid")
-  CORRECT_ID_KEY=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('correct_id_key','user_id'))" 2>/dev/null || echo "user_id")
-  WRONG_SCHEMA_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('wrong_schema_field','fullName'))" 2>/dev/null || echo "fullName")
-  CORRECT_SCHEMA_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED_JSON')); print(d.get('correct_schema_field','full_name'))" 2>/dev/null || echo "full_name")
+if [ -f "$EXPECTED" ]; then
+    ID_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('id_field','config_id'))" 2>/dev/null || echo "config_id")
+    DATE_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('date_field','updated_at'))" 2>/dev/null || echo "updated_at")
+    NULL_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('null_field','note'))" 2>/dev/null || echo "note")
+    WRONG_SCHEMA_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('wrong_schema_field','service'))" 2>/dev/null || echo "service")
+    CORRECT_SCHEMA_FIELD=$(python3 -c "import json; d=json.load(open('$EXPECTED')); print(d.get('correct_schema_field','service_name'))" 2>/dev/null || echo "service_name")
 fi
 
 # ---------------------------------------------------------------------------
-# Check 1: backend/processor.py imports without error
+# Check 1: backend/processor.py exists and imports cleanly
 # ---------------------------------------------------------------------------
-check "cd '$WORKSPACE/backend' && python3 -c 'import processor'" "backend_import_error"
+check "test -f '$WORKSPACE/backend/processor.py'" "missing_processor"
+check "python3 -c 'import sys; sys.path.insert(0,\"$WORKSPACE\"); import backend.processor'" "processor_import_error"
 
 # ---------------------------------------------------------------------------
-# Check 2: frontend/handler.py imports without error
+# Check 2: frontend/handler.py exists and imports cleanly
 # ---------------------------------------------------------------------------
-check "cd '$WORKSPACE/frontend' && python3 -c 'import handler'" "frontend_import_error"
+check "test -f '$WORKSPACE/frontend/handler.py'" "missing_handler"
+check "python3 -c 'import sys; sys.path.insert(0,\"$WORKSPACE\"); import frontend.handler'" "handler_import_error"
 
 # ---------------------------------------------------------------------------
-# Check 3: shared/schema.json is valid JSON
+# Check 3: shared/schema.json is valid JSON with required keys
 # ---------------------------------------------------------------------------
-check "python3 -c \"import json; json.load(open('$WORKSPACE/shared/schema.json'))\"" "schema_invalid_json"
-
-# ---------------------------------------------------------------------------
-# Check 4: schema.json does not contain the wrong field name
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import json, sys
-schema = json.load(open('$WORKSPACE/shared/schema.json'))
-text = open('$WORKSPACE/shared/schema.json').read()
-assert '${WRONG_SCHEMA_FIELD}' not in text, \
-    f'schema.json still contains wrong field name: ${WRONG_SCHEMA_FIELD}'
-PYEOF" "schema_wrong_field_name"
-
-# ---------------------------------------------------------------------------
-# Check 5: schema.json contains the correct field name
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
+check "test -f '$WORKSPACE/shared/schema.json'" "missing_schema"
+check "python3 -c \"
 import json
-text = open('$WORKSPACE/shared/schema.json').read()
-assert '${CORRECT_SCHEMA_FIELD}' in text, \
-    f'schema.json missing correct field name: ${CORRECT_SCHEMA_FIELD}'
-PYEOF" "schema_missing_correct_field"
+s = json.load(open('$WORKSPACE/shared/schema.json'))
+assert 'record_fields' in s, 'missing record_fields'
+assert 'envelope' in s, 'missing envelope'
+\"" "schema_invalid_json"
 
 # ---------------------------------------------------------------------------
-# Check 6: backend serialize() uses correct id field key (not wrong key)
+# Check 4: schema.json uses correct field names (no wrong aliases)
 # ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, importlib
-sys.path.insert(0, '$WORKSPACE/backend')
-import processor
-# Call serialize with a minimal record dict
-fields = [f for f in dir(processor) if not f.startswith('_')]
-# Try to find serialize function
-assert hasattr(processor, 'serialize'), 'processor missing serialize()'
-import inspect
-src = inspect.getsource(processor.serialize)
-assert '${CORRECT_ID_KEY}' in src, f'serialize() missing correct id key: ${CORRECT_ID_KEY}'
-assert '${WRONG_ID_KEY}' not in src, f'serialize() still uses wrong id key: ${WRONG_ID_KEY}'
-PYEOF" "backend_wrong_id_key"
+check "python3 -c \"
+import json
+s = json.load(open('$WORKSPACE/shared/schema.json'))
+rf = s['record_fields']
+assert '${CORRECT_SCHEMA_FIELD}' in rf, \
+    f'schema.json missing correct field ${CORRECT_SCHEMA_FIELD}, has: {list(rf.keys())}'
+assert '${WRONG_SCHEMA_FIELD}' not in rf, \
+    f'schema.json still has wrong field name ${WRONG_SCHEMA_FIELD}'
+\"" "schema_wrong_field_name"
 
 # ---------------------------------------------------------------------------
-# Check 7: backend serialize() uses ISO-8601 date format (%Y-%m-%d)
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/backend')
-import processor
-assert hasattr(processor, 'serialize'), 'processor missing serialize()'
-src = inspect.getsource(processor.serialize)
-assert '%Y-%m-%d' in src, 'serialize() does not use %Y-%m-%d date format'
-assert '%m/%d/%Y' not in src, 'serialize() still uses wrong MM/DD/YYYY format'
-PYEOF" "backend_wrong_date_format"
-
-# ---------------------------------------------------------------------------
-# Check 8: backend serialize() does not encode None as sentinel string 'NULL'
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/backend')
-import processor
-assert hasattr(processor, 'serialize'), 'processor missing serialize()'
-src = inspect.getsource(processor.serialize)
-assert \"'NULL'\" not in src and '\"NULL\"' not in src, \
-    \"serialize() still encodes None as string 'NULL'\"
-PYEOF" "backend_null_sentinel"
-
-# ---------------------------------------------------------------------------
-# Check 9: backend uses correct envelope key
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/backend')
-import processor
-src = inspect.getsource(processor)
-assert '\"${CORRECT_ENVELOPE_KEY}\"' in src or \"'${CORRECT_ENVELOPE_KEY}'\" in src, \
-    f'processor.py missing correct envelope key: ${CORRECT_ENVELOPE_KEY}'
-PYEOF" "backend_wrong_envelope_key"
-
-# ---------------------------------------------------------------------------
-# Check 10: frontend handler.py reads correct id field key
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/frontend')
-import handler
-assert hasattr(handler, 'deserialize'), 'handler missing deserialize()'
-src = inspect.getsource(handler.deserialize)
-assert '${CORRECT_ID_KEY}' in src, f'deserialize() missing correct id key: ${CORRECT_ID_KEY}'
-assert '${WRONG_ID_KEY}' not in src, f'deserialize() still reads wrong id key: ${WRONG_ID_KEY}'
-PYEOF" "frontend_wrong_id_key"
-
-# ---------------------------------------------------------------------------
-# Check 11: frontend handler.py parses dates with correct format
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/frontend')
-import handler
-assert hasattr(handler, 'deserialize'), 'handler missing deserialize()'
-src = inspect.getsource(handler.deserialize)
-assert '%Y-%m-%d' in src, 'deserialize() does not use %Y-%m-%d date format'
-assert '%m/%d/%Y' not in src, 'deserialize() still uses wrong MM/DD/YYYY format'
-PYEOF" "frontend_wrong_date_format"
-
-# ---------------------------------------------------------------------------
-# Check 12: frontend handler.py reads correct envelope key
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys, inspect
-sys.path.insert(0, '$WORKSPACE/frontend')
-import handler
-src = inspect.getsource(handler)
-assert '\"${CORRECT_ENVELOPE_KEY}\"' in src or \"'${CORRECT_ENVELOPE_KEY}'\" in src, \
-    f'handler.py missing correct envelope key: ${CORRECT_ENVELOPE_KEY}'
-PYEOF" "frontend_wrong_envelope_key"
-
-# ---------------------------------------------------------------------------
-# Check 13: tests/test_contract.py passes with pytest
-# ---------------------------------------------------------------------------
-check "python3 -m pytest '$WORKSPACE/tests/test_contract.py' -q --tb=no \
-       --rootdir='$WORKSPACE' 2>/dev/null" "test_suite_failures"
-
-# ---------------------------------------------------------------------------
-# Check 14: backend/frontend contract round-trip (serialize then deserialize)
-# ---------------------------------------------------------------------------
-check "python3 - <<'PYEOF'
-import sys
-sys.path.insert(0, '$WORKSPACE/backend')
-sys.path.insert(0, '$WORKSPACE/frontend')
-import processor, handler
-# Check both modules expose serialize/deserialize
-assert hasattr(processor, 'serialize'), 'processor missing serialize()'
-assert hasattr(handler, 'deserialize'), 'handler missing deserialize()'
-# Verify the envelope key is consistent between backend and frontend
-import inspect
-proc_src = inspect.getsource(processor)
-hand_src = inspect.getsource(handler)
-env_key = '${CORRECT_ENVELOPE_KEY}'
-assert env_key in proc_src or \"'\" + env_key + \"'\" in proc_src or '\"' + env_key + '\"' in proc_src, \
-    f'processor.py missing envelope key {env_key}'
-assert env_key in hand_src or \"'\" + env_key + \"'\" in hand_src or '\"' + env_key + '\"' in hand_src, \
-    f'handler.py missing envelope key {env_key}'
-PYEOF" "backend_frontend_contract_mismatch"
-
-# ---------------------------------------------------------------------------
-# Check 15: no syntax errors in any Python file
-# ---------------------------------------------------------------------------
-check "python3 -m py_compile '$WORKSPACE/backend/processor.py' && \
-       python3 -m py_compile '$WORKSPACE/frontend/handler.py' && \
-       python3 -m py_compile '$WORKSPACE/tests/test_contract.py'" "syntax_errors"
-
-# ---------------------------------------------------------------------------
-# Check 16: attestation.json verdict=pass
+# Check 5: schema.json lists all expected spec fields
 # ---------------------------------------------------------------------------
 check "python3 -c \"
 import json, sys
-att = json.load(open(sys.argv[1]))
-assert att.get('verdict') == 'pass', f'verdict={att.get(\\\"verdict\\\")}'
-\" '$SUBMISSION/attestation.json'" "bad_attestation"
+s = json.load(open('$WORKSPACE/shared/schema.json'))
+rf = s['record_fields']
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+for f in [id_field, date_field, null_field]:
+    assert f in rf, f'schema.json missing field {f!r}, has: {list(rf.keys())}'
+\"" "schema_missing_spec_fields"
+
+# ---------------------------------------------------------------------------
+# Check 6: backend serialize_record emits correct ID field key (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import backend.processor as p
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+rec = {id_field: 99, date_field: datetime.date(2024, 3, 10), null_field: None}
+wire = p.serialize_record(rec)
+assert id_field in wire, f'serialize_record emits wrong id key; got: {list(wire.keys())}'
+assert wire[id_field] == 99, f'{id_field} value wrong: {wire[id_field]!r}'
+PYEOF" "backend_wrong_id_key"
+
+# ---------------------------------------------------------------------------
+# Check 7: backend formats dates as ISO-8601 YYYY-MM-DD (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import backend.processor as p
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+rec = {id_field: 1, date_field: datetime.date(2024, 6, 15), null_field: None}
+wire = p.serialize_record(rec)
+val = wire.get(date_field, '')
+assert isinstance(val, str), f'{date_field} must be str in wire, got {type(val).__name__}'
+parts = val.split('-')
+assert len(parts) == 3 and len(parts[0]) == 4, f'Expected YYYY-MM-DD, got {val!r}'
+datetime.date.fromisoformat(val)
+PYEOF" "backend_wrong_date_format"
+
+# ---------------------------------------------------------------------------
+# Check 8: backend encodes None as JSON null (not sentinel string) (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import backend.processor as p
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+rec = {id_field: 1, date_field: datetime.date(2024, 1, 1), null_field: None}
+wire = p.serialize_record(rec)
+val = wire.get(null_field)
+assert val is None, f'{null_field} must be None (JSON null), got {val!r}'
+PYEOF" "backend_null_sentinel"
+
+# ---------------------------------------------------------------------------
+# Check 9: backend serialize_batch wraps records under 'data' key (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import backend.processor as p
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+rec = {id_field: 1, date_field: datetime.date(2024, 1, 1), null_field: None}
+env = p.serialize_batch([rec])
+assert 'data' in env, f'envelope missing data key; has: {list(env.keys())}'
+assert isinstance(env['data'], list), 'envelope[data] must be a list'
+assert env.get('count') == 1, f'count should be 1, got {env.get(\"count\")}'
+PYEOF" "backend_wrong_envelope_key"
+
+# ---------------------------------------------------------------------------
+# Check 10: backend encodes bool fields as bool not int (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import backend.processor as p
+import inspect
+# Find a bool field by inspecting the source
+src = inspect.getsource(p.serialize_record)
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+# Detect bool fields: look for True/False pattern or field names ending in is_/enabled/resolved
+import re
+bool_fields = re.findall(r\"['\"](\w+)['\"].*?int\(record\[", src)
+if bool_fields:
+    for bf in bool_fields:
+        assert False, f'serialize_record still casts {bf} to int — should remain bool'
+# Also check source does not use int() on record values
+assert 'int(record[' not in src, 'serialize_record casts bool field to int — remove int() cast'
+PYEOF" "backend_bool_as_int"
+
+# ---------------------------------------------------------------------------
+# Check 11: frontend deserialize_record reads correct ID key (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import frontend.handler as h
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
+rec = h.deserialize_record(wire)
+assert id_field in rec, f'deserialize_record missing {id_field!r}; has: {list(rec.keys())}'
+assert rec[id_field] == 42, f'{id_field} wrong value: {rec[id_field]!r}'
+PYEOF" "frontend_wrong_id_read"
+
+# ---------------------------------------------------------------------------
+# Check 12: frontend handles None in nullable field without crashing (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import frontend.handler as h
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
+try:
+    rec = h.deserialize_record(wire)
+except AttributeError as e:
+    raise AssertionError(f'handler crashed on None {null_field}: {e}')
+assert rec.get(null_field) is None, f'{null_field} should be None, got {rec.get(null_field)!r}'
+PYEOF" "frontend_null_crash"
+
+# ---------------------------------------------------------------------------
+# Check 13: frontend parses dates as datetime.date objects (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import frontend.handler as h
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
+rec = h.deserialize_record(wire)
+val = rec.get(date_field)
+assert isinstance(val, datetime.date), \
+    f'{date_field} must be datetime.date, got {type(val).__name__}: {val!r}'
+assert val == datetime.date(2024, 6, 15), f'{date_field} wrong: {val!r}'
+PYEOF" "frontend_wrong_date_parse"
+
+# ---------------------------------------------------------------------------
+# Check 14: frontend process_envelope reads from 'data' key (runtime)
+# ---------------------------------------------------------------------------
+check "python3 - <<'PYEOF'
+import sys, datetime
+sys.path.insert(0, '$WORKSPACE')
+import frontend.handler as h
+id_field = '${ID_FIELD}'
+date_field = '${DATE_FIELD}'
+null_field = '${NULL_FIELD}'
+wire = {id_field: 42, date_field: '2024-06-15', null_field: None}
+envelope = {'data': [wire], 'count': 1}
+records = h.process_envelope(envelope)
+assert isinstance(records, list), 'process_envelope must return a list'
+assert len(records) == 1, f'expected 1 record, got {len(records)}'
+PYEOF" "frontend_wrong_envelope_read"
+
+# ---------------------------------------------------------------------------
+# Check 15: full test suite passes (unittest)
+# ---------------------------------------------------------------------------
+check "python3 '$WORKSPACE/tests/test_contract.py' 2>&1 | grep -q '^OK'" "test_suite_failed"
 
 # ---------------------------------------------------------------------------
 # Write score
 # ---------------------------------------------------------------------------
-PARTIAL=$(python3 -c "print(round($PASSED/max(1,$CHECKS), 2))")
+PARTIAL=$(python3 -c "print(round($PASSED/max(1,$CHECKS), 4))" 2>/dev/null || echo "0")
 if [ "$PASSED" -eq "$CHECKS" ]; then
-    SUCCESS=1; PASS=true
+    PASS=true
 else
-    SUCCESS=0; PASS=false
+    PASS=false
 fi
-FM=$(python3 -c "import json; print(json.dumps([x for x in '${FAILURES}'.split(',') if x]))")
+FM=$(python3 -c "import json; print(json.dumps([x for x in '${FAILURES}'.split(',') if x]))" 2>/dev/null || echo "[]")
 
 cat > "$REPORTS/score.json" <<JSON
 {
   "pass": $PASS,
-  "primary": {"success": $SUCCESS},
+  "primary": {"success": $([ "$PASS" = "true" ] && echo 1 || echo 0)},
   "secondary": {
     "checks_passed": $PASSED,
     "checks_total": $CHECKS,
@@ -247,3 +287,6 @@ cat > "$REPORTS/score.json" <<JSON
   "failure_modes": $FM
 }
 JSON
+
+echo "Grade: $PASSED/$CHECKS ($PARTIAL) failures=[${FAILURES}]"
+exit 0
