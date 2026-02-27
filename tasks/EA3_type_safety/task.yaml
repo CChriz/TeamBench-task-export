@@ -1,0 +1,7 @@
+task_id: EA3_type_safety
+category: SWE
+difficulty: hard
+languages: [python]
+description: "Fix 12 real mypy type errors and add 3 type:ignore comments for intentional dynamic patterns"
+tni_pattern: B  # Adversarial Traps (3 errors look fixable but need type:ignore)
+expertise_tools: [mypy]

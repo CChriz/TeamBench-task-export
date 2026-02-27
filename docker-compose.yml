@@ -23,6 +23,13 @@ services:
         source: ${CORPUS_DIR:-./.empty_corpus}
         target: /task/corpus
         read_only: true
+      - type: bind
+        source: ${WORKSPACE_DIR:-${RUN_DIR}/workspace}
+        target: /workspace
+        read_only: true
+      - type: bind
+        source: ${RUN_DIR}/analysis
+        target: /analysis
 
       # Messages: read-write (collaboration channel)
       - type: bind
@@ -62,6 +69,10 @@ services:
       - type: bind
         source: ${TASK_DIR}/brief.md
         target: /task/brief.md
+        read_only: true
+      - type: bind
+        source: ${RUN_DIR}/analysis
+        target: /analysis
         read_only: true
 
     # Network disabled by default (override per-task if needed)

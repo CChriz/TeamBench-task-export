@@ -55,6 +55,11 @@ class AblationCondition(str, Enum):
     TEAM_NO_VERIFY = "team_no_verify"
     TEAM_NO_PLAN = "team_no_plan"
     FULL = "full"
+    # New expertise-asymmetry conditions
+    EXPERTISE_FULL = "expertise_full"
+    EXPERTISE_NO_ANALYSIS = "expertise_no_analysis"
+    EXPERTISE_NO_TEST = "expertise_no_test"
+    EXPERTISE_ORACLE = "expertise_oracle"
 
 
 @dataclass
@@ -379,6 +384,161 @@ def run_ablation_condition(
         )
         return orchestrator.run()
 
+    elif condition == AblationCondition.EXPERTISE_FULL:
+        # Full expertise team: analysis planner + executor + test verifier
+        from harness.orchestrator import ExpertiseOrchestrator
+        orch = ExpertiseOrchestrator(
+            task_dir=task_dir,
+            run_dir=run_dir,
+            adapter=adapter,
+            max_planner_turns=15,
+            max_executor_turns=max_turns,
+            max_verifier_turns=15,
+            max_remediation_loops=max_remediation,
+        )
+        return orch.run()
+
+    elif condition == AblationCondition.EXPERTISE_NO_ANALYSIS:
+        # Executor (receives no analysis) + expertise verifier (runs tests)
+        # Measures value of Planner analysis
+        executor_config = make_executor_config(
+            brief_path=brief_path, workspace_dir=workspace, reports_dir=reports,
+            messages_dir=messages, submission_dir=submission, task_dir=task_dir,
+        )
+        executor_loop = AgentLoop(
+            role_config=executor_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "executor"),
+            max_turns=max_turns,
+        )
+        executor_prompt = (
+            f"You are the Executor for task: {task_id}\n\n"
+            f"## Brief\n{brief_text}\n\n"
+            f"Complete the task based on the brief. No Planner analysis is available.\n"
+            f"Output DONE when done."
+        )
+        executor_turns = executor_loop.run(executor_prompt)
+        phase1 = PhaseResult(phase="execution", turns=executor_turns)
+        result.phases.append(phase1)
+        result.total_turns += len(executor_turns)
+
+        from harness.agent_interface import make_expertise_verifier_config
+        verifier_config = make_expertise_verifier_config(
+            spec_path=spec_path, workspace_dir=workspace, reports_dir=reports,
+            messages_dir=messages, submission_dir=submission, task_dir=task_dir,
+        )
+        verifier_loop = AgentLoop(
+            role_config=verifier_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "verifier", "attempt_0"),
+            max_turns=15,
+        )
+        verifier_prompt = (
+            f"You are the Verifier for task: {task_id}\n\n"
+            f"## Full Specification\n{spec_text}\n\n"
+            f"Run tests to verify the workspace. Write attestation.json.\n"
+            f"Output DONE when done."
+        )
+        verifier_turns = verifier_loop.run(verifier_prompt)
+        phase2 = PhaseResult(phase="verification_0", turns=verifier_turns)
+        result.phases.append(phase2)
+        result.total_turns += len(verifier_turns)
+
+    elif condition == AblationCondition.EXPERTISE_NO_TEST:
+        # Analysis planner + executor, but verifier only reads (no test execution)
+        # Measures value of Verifier test execution
+        from harness.agent_interface import make_analysis_planner_config
+        analysis_dir = os.path.join(run_dir, "analysis")
+        os.makedirs(analysis_dir, exist_ok=True)
+
+        planner_config = make_analysis_planner_config(
+            spec_path=spec_path, messages_dir=messages,
+            workspace_dir=workspace, analysis_dir=analysis_dir, task_dir=task_dir,
+        )
+        planner_loop = AgentLoop(
+            role_config=planner_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "planner"),
+            max_turns=15,
+        )
+        planner_prompt = (
+            f"You are the Planner for task: {task_id}\n\n"
+            f"## Full Specification\n{spec_text}\n\n"
+            f"Run static analysis, write /analysis/planner_report.md, send summary to executor.\n"
+            f"Output DONE when done."
+        )
+        planner_turns = planner_loop.run(planner_prompt)
+        phase1 = PhaseResult(phase="planner_analysis", turns=planner_turns)
+        result.phases.append(phase1)
+        result.total_turns += len(planner_turns)
+        _relay_planner_text(planner_turns, messages)
+
+        executor_config = make_executor_config(
+            brief_path=brief_path, workspace_dir=workspace, reports_dir=reports,
+            messages_dir=messages, submission_dir=submission, task_dir=task_dir,
+        )
+        executor_loop = AgentLoop(
+            role_config=executor_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "executor"),
+            max_turns=max_turns,
+        )
+        executor_prompt = (
+            f"You are the Executor for task: {task_id}\n\n"
+            f"## Brief\n{brief_text}\n\n"
+            f"Read the Planner's analysis at /analysis/planner_report.md, then implement fixes.\n"
+            f"Output DONE when done."
+        )
+        executor_turns = executor_loop.run(executor_prompt)
+        phase2 = PhaseResult(phase="execution", turns=executor_turns)
+        result.phases.append(phase2)
+        result.total_turns += len(executor_turns)
+
+        # Static verifier (read-only, no test execution)
+        verifier_config = make_verifier_config(
+            spec_path=spec_path, workspace_dir=workspace, reports_dir=reports,
+            messages_dir=messages, submission_dir=submission, task_dir=task_dir,
+        )
+        verifier_loop = AgentLoop(
+            role_config=verifier_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "verifier", "attempt_0"),
+            max_turns=15,
+        )
+        verifier_prompt = (
+            f"You are the Verifier for task: {task_id}\n\n"
+            f"## Full Specification\n{spec_text}\n\n"
+            f"Read workspace files to verify requirements. Write attestation.json.\n"
+            f"Output DONE when done."
+        )
+        verifier_turns = verifier_loop.run(verifier_prompt)
+        phase3 = PhaseResult(phase="verification_0", turns=verifier_turns)
+        result.phases.append(phase3)
+        result.total_turns += len(verifier_turns)
+
+    elif condition == AblationCondition.EXPERTISE_ORACLE:
+        # Single agent with all tools + full spec (expertise upper bound)
+        oracle_config = _make_oracle_config(
+            spec_path=spec_path, workspace_dir=workspace, reports_dir=reports,
+            messages_dir=messages, submission_dir=submission, task_dir=task_dir,
+        )
+        loop = AgentLoop(
+            role_config=oracle_config, adapter=adapter,
+            messages_dir=messages,
+            log_dir=os.path.join(logs, "expertise_oracle"),
+            max_turns=max_turns,
+        )
+        prompt = (
+            f"You are the Oracle for task: {task_id}\n\n"
+            f"## Full Specification\n{spec_text}\n\n"
+            f"Complete all requirements. Write attestation.json when done.\n"
+            f"Output DONE when complete."
+        )
+        turns = loop.run(prompt)
+        phase = PhaseResult(phase="expertise_oracle", turns=turns)
+        result.phases.append(phase)
+        result.total_turns += len(turns)
+
     # Check attestation verdict for non-FULL conditions
     att_path = os.path.join(submission, "attestation.json")
     try:
@@ -444,6 +604,28 @@ def compute_ablation_metrics(
     planning_value = p_full - p_no_plan
     verification_value = p_full - p_no_verify
 
+    # Expertise-asymmetry metrics
+    s_expertise_full = rate(condition_scores.get(AblationCondition.EXPERTISE_FULL, []))
+    s_expertise_no_analysis = rate(condition_scores.get(AblationCondition.EXPERTISE_NO_ANALYSIS, []))
+    s_expertise_no_test = rate(condition_scores.get(AblationCondition.EXPERTISE_NO_TEST, []))
+    s_expertise_oracle = rate(condition_scores.get(AblationCondition.EXPERTISE_ORACLE, []))
+
+    if condition_partial:
+        p_expertise_full = avg_partial(condition_partial.get(AblationCondition.EXPERTISE_FULL, []))
+        p_expertise_no_analysis = avg_partial(condition_partial.get(AblationCondition.EXPERTISE_NO_ANALYSIS, []))
+        p_expertise_no_test = avg_partial(condition_partial.get(AblationCondition.EXPERTISE_NO_TEST, []))
+        p_expertise_oracle = avg_partial(condition_partial.get(AblationCondition.EXPERTISE_ORACLE, []))
+    else:
+        p_expertise_full = s_expertise_full
+        p_expertise_no_analysis = s_expertise_no_analysis
+        p_expertise_no_test = s_expertise_no_test
+        p_expertise_oracle = s_expertise_oracle
+
+    analysis_value = p_expertise_full - p_expertise_no_analysis
+    testing_value = p_expertise_full - p_expertise_no_test
+    expertise_necessity_gap = p_expertise_oracle - p_restricted
+    expertise_tni = (p_expertise_full - p_restricted) / max(epsilon, expertise_necessity_gap)
+
     return {
         "s_oracle": round(s_oracle, 4),
         "s_restricted": round(s_restricted, 4),
@@ -461,6 +643,17 @@ def compute_ablation_metrics(
         "collab_efficiency": round(collab_efficiency, 4),
         "planning_value": round(planning_value, 4),
         "verification_value": round(verification_value, 4),
+        "s_expertise_full": round(s_expertise_full, 4),
+        "s_expertise_no_analysis": round(s_expertise_no_analysis, 4),
+        "s_expertise_no_test": round(s_expertise_no_test, 4),
+        "s_expertise_oracle": round(s_expertise_oracle, 4),
+        "p_expertise_full": round(p_expertise_full, 4),
+        "p_expertise_no_analysis": round(p_expertise_no_analysis, 4),
+        "p_expertise_no_test": round(p_expertise_no_test, 4),
+        "p_expertise_oracle": round(p_expertise_oracle, 4),
+        "analysis_value": round(analysis_value, 4),
+        "testing_value": round(testing_value, 4),
+        "expertise_tni": round(expertise_tni, 4),
         "interpretation": {
             "tni": _interpret_tni(tni),
             "team_uplift": f"Team adds {team_uplift:+.1%} over single agent",

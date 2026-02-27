@@ -1,0 +1,7 @@
+task_id: EA2_coverage_gap
+category: Testing
+difficulty: hard
+languages: [python]
+description: "Add tests to reach 90% branch coverage using coverage analysis findings"
+tni_pattern: A  # Hidden Constraints (coverage gaps in non-obvious code paths)
+expertise_tools: [pytest, coverage]

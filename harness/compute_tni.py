@@ -43,6 +43,10 @@ class TaskMetrics:
     team_partial: float = 0.0
     no_plan_partial: float = 0.0
     no_verify_partial: float = 0.0
+    expertise_partial: float = 0.0           # expertise_full condition score
+    expertise_no_analysis_partial: float = 0.0  # expertise_no_analysis score
+    expertise_no_test_partial: float = 0.0   # expertise_no_test score
+    expertise_oracle_partial: float = 0.0    # expertise_oracle score
 
     @property
     def necessity_gap(self) -> float:
@@ -78,6 +82,31 @@ class TaskMetrics:
         if self.no_verify_partial == 0.0 and self.team_partial == 0.0:
             return float("nan")
         return self.team_partial - self.no_verify_partial
+
+    @property
+    def analysis_value(self) -> float:
+        """Value of Planner's static analysis contribution."""
+        if self.expertise_no_analysis_partial == 0.0 and self.expertise_partial == 0.0:
+            return float("nan")
+        return self.expertise_partial - self.expertise_no_analysis_partial
+
+    @property
+    def testing_value(self) -> float:
+        """Value of Verifier's test execution contribution."""
+        if self.expertise_no_test_partial == 0.0 and self.expertise_partial == 0.0:
+            return float("nan")
+        return self.expertise_partial - self.expertise_no_test_partial
+
+    @property
+    def expertise_tni(self) -> float:
+        """TNI for the expertise-asymmetry conditions."""
+        if self.expertise_partial == 0.0 and self.expertise_oracle_partial == 0.0:
+            return float("nan")
+        gap = self.expertise_oracle_partial - self.restricted_partial
+        if abs(gap) < 0.05:
+            return float("nan")
+        raw = (self.expertise_partial - self.restricted_partial) / gap
+        return max(-2.0, min(2.0, raw))
 
     @property
     def classification(self) -> str:
@@ -172,6 +201,10 @@ def compute_from_runs_dir(runs_dir: str) -> list[TaskMetrics]:
             team_partial=cond_scores.get("full", cond_scores.get("team", 0.0)),
             no_plan_partial=cond_scores.get("team_no_plan", 0.0),
             no_verify_partial=cond_scores.get("team_no_verify", 0.0),
+            expertise_partial=cond_scores.get("expertise_full", 0.0),
+            expertise_no_analysis_partial=cond_scores.get("expertise_no_analysis", 0.0),
+            expertise_no_test_partial=cond_scores.get("expertise_no_test", 0.0),
+            expertise_oracle_partial=cond_scores.get("expertise_oracle", 0.0),
         )
         results.append(m)
 
@@ -201,6 +234,10 @@ def compute_from_results_json(results_path: str | list[str]) -> list[TaskMetrics
             team_partial=cond_scores.get("full", 0.0),
             no_plan_partial=cond_scores.get("team_no_plan", 0.0),
             no_verify_partial=cond_scores.get("team_no_verify", 0.0),
+            expertise_partial=cond_scores.get("expertise_full", 0.0),
+            expertise_no_analysis_partial=cond_scores.get("expertise_no_analysis", 0.0),
+            expertise_no_test_partial=cond_scores.get("expertise_no_test", 0.0),
+            expertise_oracle_partial=cond_scores.get("expertise_oracle", 0.0),
         )
         results.append(m)
 
@@ -307,6 +344,13 @@ def to_json(metrics: list[TaskMetrics]) -> dict:
             "planning_value": m.planning_value if not math.isnan(m.planning_value) else None,
             "verification_value": m.verification_value if not math.isnan(m.verification_value) else None,
             "classification": m.classification,
+            "expertise": m.expertise_partial,
+            "expertise_no_analysis": m.expertise_no_analysis_partial,
+            "expertise_no_test": m.expertise_no_test_partial,
+            "expertise_oracle": m.expertise_oracle_partial,
+            "analysis_value": m.analysis_value if not math.isnan(m.analysis_value) else None,
+            "testing_value": m.testing_value if not math.isnan(m.testing_value) else None,
+            "expertise_tni": m.expertise_tni if not math.isnan(m.expertise_tni) else None,
         })
 
     valid_tni = [t["tni"] for t in tasks if t["tni"] is not None and t["necessity_gap"] > 0.05]

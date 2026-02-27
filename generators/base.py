@@ -119,3 +119,46 @@ class TaskGenerator(ABC):
             return False
 
         return True
+
+
+class ExpertiseTaskGenerator(TaskGenerator):
+    """
+    Base class for Expertise-Asymmetry (EA) tasks.
+
+    EA tasks are specifically designed so that the Planner's static analysis
+    tools (bandit, ruff, mypy, etc.) produce findings that are non-trivial
+    for the executor to discover manually.
+
+    Subclasses must:
+    1. Generate workspace with issues that static analysis tools will flag
+    2. Include some false positives that should NOT be fixed
+    3. Provide spec.md that lists all real issues + false positives
+    4. Provide brief.md that only mentions category of work (not specific issues)
+    5. Generate analysis_guidance.md for the analysis planner
+    """
+
+    task_id: str
+    domain: str
+    difficulty: str = "hard"
+    languages: list[str] = ["python"]
+    analysis_tools: list[str] = []  # Tools expected to find issues (e.g., ["bandit", "ruff"])
+    false_positive_count: int = 0   # Number of false positives in the workspace
+
+    @abstractmethod
+    def generate(self, seed: int) -> "ExpertiseGeneratedTask":
+        raise NotImplementedError
+
+
+@dataclass
+class ExpertiseGeneratedTask(GeneratedTask):
+    """Output of an ExpertiseTaskGenerator with additional EA metadata."""
+    analysis_guidance_md: str = ""  # Content for analysis_guidance.md
+    real_issue_count: int = 0       # Number of real issues to fix
+    false_positive_count: int = 0   # Number of false positives to preserve
+    analysis_tools: list[str] = field(default_factory=list)  # Tools to run
+
+    def __post_init__(self):
+        # Include analysis_guidance.md in workspace files if provided
+        if self.analysis_guidance_md:
+            # This is written to task_dir, not workspace_dir, so we use metadata
+            self.metadata["analysis_guidance_md"] = self.analysis_guidance_md

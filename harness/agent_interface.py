@@ -141,15 +141,28 @@ class RunCommandTool(Tool):
     """Execute a shell command in the workspace."""
     name = "run"
 
-    def __init__(self, cwd: str, allowed: bool = True):
+    def __init__(self, cwd: str, allowed: bool = True, allowed_commands: list[str] | None = None):
         self.cwd = cwd
         self.allowed = allowed
+        self.allowed_commands = allowed_commands
 
     def execute(self, cmd: str = "", **kwargs) -> ToolResult:
         if not cmd:
             return ToolResult(stderr="Error: 'cmd' parameter is required", exit_code=1)
         if not self.allowed:
             return ToolResult(stderr="Permission denied: this role cannot execute commands.", exit_code=1)
+        if self.allowed_commands is not None:
+            import shlex
+            try:
+                first_token = shlex.split(cmd)[0] if cmd.strip() else ""
+            except ValueError:
+                first_token = ""
+            if first_token not in self.allowed_commands:
+                return ToolResult(
+                    stderr=f"Permission denied: command '{first_token}' not in analysis allow-list. "
+                           f"Allowed: {', '.join(self.allowed_commands)}",
+                    exit_code=1,
+                )
         try:
             res = subprocess.run(
                 cmd, shell=True, cwd=self.cwd,
@@ -310,6 +323,159 @@ def make_planner_config(
         tools=[
             ReadFileTool(allowed_roots=[os.path.dirname(spec_path), messages_dir], path_map=pm),
             SendMessageTool(messages_dir=messages_dir, sender_role="planner"),
+        ],
+    )
+
+
+# Allowed commands for analysis planner
+_ANALYSIS_PLANNER_COMMANDS = [
+    "bandit", "ruff", "pylint", "mypy", "semgrep",
+    "find", "ls", "cat", "head", "grep", "wc",
+    "python", "python3",
+]
+
+_ANALYSIS_PLANNER_PROMPT = """\
+You are the Planner. You are a static analysis expert with read-only access to the codebase.
+
+PHASE 1 — ANALYSIS (do this first):
+1. Explore workspace: run(cmd='find /workspace -name "*.py" | head -50')
+2. Check if /task/analysis_guidance.md exists: read(path='/task/analysis_guidance.md')
+   If it exists, read it for task-specific guidance before running tools.
+3. Run static analysis:
+   - Security: run(cmd='bandit -r /workspace -f json -q 2>/dev/null || bandit -r /workspace -q')
+   - Style/bugs: run(cmd='ruff check /workspace 2>/dev/null || echo "ruff not available"')
+   - Types: run(cmd='mypy /workspace --ignore-missing-imports 2>&1 | head -50')
+4. Read the spec to understand requirements
+5. Write a report: write(path='/analysis/planner_report.md', content='# Analysis Report\\n...')
+   Include: findings, severity, exact file:line references, false positives to ignore, action priority
+6. Send summary: send_message(to='executor', content='Analysis complete. Key findings: ...')
+
+PHASE 2 — Q&A (answer executor questions):
+- Monitor for messages from executor
+- Answer clarifying questions about requirements or findings
+- Do NOT execute commands on their behalf
+
+You CANNOT edit workspace files.
+"""
+
+
+def make_analysis_planner_config(
+    spec_path: str,
+    messages_dir: str,
+    workspace_dir: str,
+    analysis_dir: str,
+    task_dir: str = "",
+) -> RoleConfig:
+    """Create Analysis Planner config: static analysis tools + read-only workspace access."""
+    if not task_dir:
+        task_dir = os.path.dirname(spec_path)
+    pm = _build_path_map(
+        workspace_dir=workspace_dir,
+        messages_dir=messages_dir,
+        task_dir=task_dir,
+    )
+    # Add analysis dir mapping
+    pm["/analysis/"] = os.path.abspath(analysis_dir)
+    pm["/analysis"] = os.path.abspath(analysis_dir)
+    # Add workspace mapping for /workspace path
+    pm["/workspace/"] = os.path.abspath(workspace_dir)
+    pm["/workspace"] = os.path.abspath(workspace_dir)
+
+    return RoleConfig(
+        role="planner",
+        system_prompt=_ANALYSIS_PLANNER_PROMPT,
+        tools=[
+            RunCommandTool(
+                cwd=workspace_dir,
+                allowed=True,
+                allowed_commands=_ANALYSIS_PLANNER_COMMANDS,
+            ),
+            ReadFileTool(
+                allowed_roots=[
+                    os.path.dirname(spec_path),
+                    workspace_dir,
+                    messages_dir,
+                    task_dir,
+                ],
+                path_map=pm,
+                base_dir=workspace_dir,
+            ),
+            WriteFileTool(
+                allowed_roots=[os.path.abspath(analysis_dir)],
+                path_map=pm,
+                base_dir=os.path.abspath(analysis_dir),
+            ),
+            SendMessageTool(messages_dir=messages_dir, sender_role="planner"),
+        ],
+    )
+
+
+# Allowed commands for expertise verifier
+_EXPERTISE_VERIFIER_COMMANDS = ["pytest", "python", "python3", "bash", "sh", "mutmut"]
+
+_EXPERTISE_VERIFIER_PROMPT = """\
+You are the Verifier. You verify correctness by RUNNING tests, not just reading code.
+
+Workflow:
+1. Read the spec to understand all requirements
+2. Run the test suite: run(cmd='cd /workspace && python -m pytest -v 2>&1')
+   Or if there's a specific test file: run(cmd='cd /workspace && python -m pytest test_*.py -v 2>&1')
+3. Check each spec requirement against test results
+4. For requirements without tests, inspect the code with read()
+5. Write attestation with evidence: include test pass/fail counts in your checklist
+   write(path='attestation.json', content='{"task_id":"...","verdict":"pass","checklist":[...]}')
+6. If fail: send test failure output to executor so they know exactly what broke
+   send_message(to='executor', content='Tests failed: ...')
+
+You CANNOT edit workspace files.
+When done, output DONE.
+"""
+
+
+def make_expertise_verifier_config(
+    spec_path: str,
+    workspace_dir: str,
+    reports_dir: str,
+    messages_dir: str,
+    submission_dir: str,
+    task_dir: str = "",
+) -> RoleConfig:
+    """Create Expertise Verifier config: can run tests to verify correctness."""
+    if not task_dir:
+        task_dir = os.path.dirname(spec_path)
+    pm = _build_path_map(
+        workspace_dir=workspace_dir,
+        reports_dir=reports_dir,
+        messages_dir=messages_dir,
+        submission_dir=submission_dir,
+        task_dir=task_dir,
+    )
+    return RoleConfig(
+        role="verifier",
+        system_prompt=_EXPERTISE_VERIFIER_PROMPT,
+        tools=[
+            RunCommandTool(
+                cwd=workspace_dir,
+                allowed=True,
+                allowed_commands=_EXPERTISE_VERIFIER_COMMANDS,
+            ),
+            ReadFileTool(
+                allowed_roots=[
+                    os.path.dirname(spec_path),
+                    workspace_dir,
+                    reports_dir,
+                    messages_dir,
+                    submission_dir,
+                ],
+                path_map=pm,
+                base_dir=workspace_dir,
+            ),
+            WriteFileTool(
+                allowed_roots=[submission_dir],
+                path_map=pm,
+                base_dir=submission_dir,
+            ),
+            SendMessageTool(messages_dir=messages_dir, sender_role="verifier"),
         ],
     )
 

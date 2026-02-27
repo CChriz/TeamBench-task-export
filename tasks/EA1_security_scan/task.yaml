@@ -1,0 +1,7 @@
+task_id: EA1_security_scan
+category: Security
+difficulty: hard
+languages: [python]
+description: "Fix 8 real security vulnerabilities flagged by bandit while preserving 3 false positives in test fixtures"
+tni_pattern: B  # Adversarial Traps (false positives that look like real issues)
+expertise_tools: [bandit]

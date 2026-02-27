@@ -1,0 +1,7 @@
+task_id: EA4_code_quality
+category: CodeReview
+difficulty: hard
+languages: [python]
+description: "Fix 22 lint violations using ruff/pylint analysis while preserving 3 intentional style choices"
+tni_pattern: B
+expertise_tools: [ruff, pylint]

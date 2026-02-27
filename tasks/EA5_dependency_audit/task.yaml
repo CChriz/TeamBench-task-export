@@ -1,0 +1,7 @@
+task_id: EA5_dependency_audit
+category: Security
+difficulty: hard
+languages: [python]
+description: "Fix 5 CVEs: 3 pin-only upgrades and 2 requiring API migration"
+tni_pattern: D  # Cross-System Contract (API compatibility changes needed)
+expertise_tools: [pip-audit, grep]
