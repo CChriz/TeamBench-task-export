@@ -1,0 +1,136 @@
+{
+  "n_records": 540,
+  "models": [
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-flash-preview"
+  ],
+  "capable_models": [
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-flash-preview"
+  ],
+  "per_model": {
+    "gemini-2.0-flash": {
+      "n": 60,
+      "full_rate": 0.016666666666666666,
+      "oracle_rate": 0.03333333333333333,
+      "no_analysis_rate": 0.0,
+      "tni": -0.017241379310344827,
+      "analysis_value": 0.016666666666666666,
+      "p_full_vs_oracle": 0.8783121687831217,
+      "p_full_vs_no_anal": 0.49605039496050396,
+      "full_ci": [
+        0.0,
+        0.05
+      ],
+      "oracle_ci": [
+        0.0,
+        0.08333333333333333
+      ],
+      "tni_ci": [
+        -0.07407407407407408,
+        0.03389830508474577
+      ]
+    },
+    "gemini-2.0-flash-lite": {
+      "n": 30,
+      "full_rate": 0.0,
+      "oracle_rate": 0.0,
+      "no_analysis_rate": 0.0,
+      "tni": 0.0,
+      "analysis_value": 0.0,
+      "p_full_vs_oracle": 1.0,
+      "p_full_vs_no_anal": 1.0,
+      "full_ci": [
+        0.0,
+        0.0
+      ],
+      "oracle_ci": [
+        0.0,
+        0.0
+      ],
+      "tni_ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "gemini-2.5-flash": {
+      "n": 30,
+      "full_rate": 0.26666666666666666,
+      "oracle_rate": 0.06666666666666667,
+      "no_analysis_rate": 0.1,
+      "tni": 0.2142857142857143,
+      "analysis_value": 0.16666666666666666,
+      "p_full_vs_oracle": 0.0428957104289571,
+      "p_full_vs_no_anal": 0.09059094090590941,
+      "full_ci": [
+        0.13333333333333333,
+        0.43333333333333335
+      ],
+      "oracle_ci": [
+        0.0,
+        0.16666666666666666
+      ],
+      "tni_ci": [
+        0.03571428571428572,
+        0.3928571428571429
+      ]
+    },
+    "gemini-2.5-pro": {
+      "n": 30,
+      "full_rate": 0.16666666666666666,
+      "oracle_rate": 0.03333333333333333,
+      "no_analysis_rate": 0.0,
+      "tni": 0.13793103448275862,
+      "analysis_value": 0.16666666666666666,
+      "p_full_vs_oracle": 0.09449055094490551,
+      "p_full_vs_no_anal": 0.0268973102689731,
+      "full_ci": [
+        0.03333333333333333,
+        0.3
+      ],
+      "oracle_ci": [
+        0.0,
+        0.1
+      ],
+      "tni_ci": [
+        0.0,
+        0.3
+      ]
+    },
+    "gemini-3-flash-preview": {
+      "n": 30,
+      "full_rate": 0.7666666666666667,
+      "oracle_rate": 0.3,
+      "no_analysis_rate": 0.6666666666666666,
+      "tni": 0.6666666666666669,
+      "analysis_value": 0.10000000000000009,
+      "p_full_vs_oracle": 9.999000099990002e-05,
+      "p_full_vs_no_anal": 0.28787121287871215,
+      "full_ci": [
+        0.6,
+        0.9
+      ],
+      "oracle_ci": [
+        0.13333333333333333,
+        0.4666666666666667
+      ],
+      "tni_ci": [
+        0.38888888888888884,
+        0.8695652173913045
+      ]
+    }
+  },
+  "pooled": {
+    "n_full": 90,
+    "tni": 0.30769230769230776,
+    "tni_ci": [
+      0.1756756756756757,
+      0.43373493975903615
+    ],
+    "tni_significant": true
+  }
+}
