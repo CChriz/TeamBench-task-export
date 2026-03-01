@@ -1,5 +1,5 @@
 {
-  "n_records": 600,
+  "n_records": 601,
   "models": [
     "gemini-2.5-flash",
     "gemini-2.5-pro",
@@ -41,7 +41,7 @@
       "tni": 0.13793103448275862,
       "analysis_value": 0.16666666666666666,
       "p_full_vs_oracle": 0.09449055094490551,
-      "p_full_vs_no_anal": 0.0268973102689731,
+      "p_full_vs_no_anal": 0.022797720227977204,
       "full_ci": [
         0.03333333333333333,
         0.3
