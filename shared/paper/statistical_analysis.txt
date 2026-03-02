@@ -2,15 +2,15 @@
 STATISTICAL ANALYSIS — TeamBench Ablation Study
 ======================================================================
 
-Sample: 35 tasks, 320 total runs
+Sample: 35 tasks, 345 total runs
 Model: Gemini 2.5 Flash
 
 --- Condition-Level Partial Scores ---
-  oracle              : avg=0.548  n= 69  pass_rate=0.507 [0.391, 0.623]
-  restricted          : avg=0.536  n= 69  pass_rate=0.464 [0.348, 0.580]
-  full                : avg=0.573  n= 69  pass_rate=0.507 [0.391, 0.623]
-  team_no_plan        : avg=0.568  n= 69  pass_rate=0.507 [0.391, 0.623]
-  team_no_verify      : avg=0.409  n= 44  pass_rate=0.295 [0.159, 0.432]
+  oracle              : avg=0.589  n= 69  pass_rate=0.551 [0.435, 0.667]
+  restricted          : avg=0.577  n= 69  pass_rate=0.507 [0.391, 0.623]
+  full                : avg=0.614  n= 69  pass_rate=0.551 [0.435, 0.667]
+  team_no_plan        : avg=0.609  n= 69  pass_rate=0.551 [0.435, 0.667]
+  team_no_verify      : avg=0.591  n= 69  pass_rate=0.522 [0.406, 0.638]
 
 --- Team Uplift Analysis ---
   Avg uplift (Full - Restricted): +0.048
@@ -19,13 +19,13 @@ Model: Gemini 2.5 Flash
   Neutral:         17/35 (49%)
 
 --- Planning Value ---
-  Avg Planning Value: +0.020
-  Positive: 12/29 (41%)
+  Avg Planning Value: +0.019
+  Positive: 12/30 (40%)
   Max: +0.300 (LH2_budgeted_workflow)
 
 --- Verification Value ---
-  Avg Verification Value: +0.259
-  Positive: 15/29 (52%)
+  Avg Verification Value: +0.028
+  Positive: 10/30 (33%)
 
 --- Team > Oracle (Key Finding) ---
   Tasks where team outperforms oracle: 12/35
