@@ -1,0 +1,8 @@
+task_id: MULTI2_microservice_debug
+category: Multi-language
+difficulty: hard
+languages: [python, go, javascript]
+description: "4 bugs across Python Flask API + Go worker + Node.js proxy + shared config"
+tni_pattern: A
+parameterized: true
+seeds: [0, 1, 2]

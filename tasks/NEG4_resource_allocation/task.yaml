@@ -1,0 +1,11 @@
+task_id: NEG4_resource_allocation
+domain: operations
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+tags: [negotiation, fairness, resource-allocation, priority, quota]
+workspace_file_count: 4
+lines_changed_expected: 30
+parameterized: true

@@ -8,43 +8,156 @@
 \toprule
 Task & Category & Oracle & Restricted & Full & No-Plan & No-Verify & TNI & Plan.V & Ver.V \\
 \midrule
+TRAP6\_deprecated\_api & Adversarial & \textbf{1.00} & 1.00 & 1.00 & 0.00 & 1.00 & -- & +1.00 & +0.00 \\
+TRAP7\_test\_pollution & Adversarial & \textbf{0.80} & 0.80 & 0.80 & 0.80 & 0.80 & -- & +0.00 & +0.00 \\
+TRAP8\_config\_override & Adversarial & \textbf{0.90} & 0.90 & 0.90 & 0.90 & 0.90 & -- & +0.00 & +0.00 \\
 trap1\_spec\_conflict & Adversarial & \textbf{0.93} & 0.93 & 0.93 & 0.93 & 0.93 & -- & +0.00 & +0.00 \\
 trap2\_false\_fix & Adversarial & \textbf{1.00} & 0.92 & 1.00 & 1.00 & 0.79 & 1.00 & +0.00 & +0.21 \\
 trap3\_metric\_mirage & Adversarial & 0.87 & \textbf{1.00} & 1.00 & 1.00 & 1.00 & -0.00 & +0.00 & +0.00 \\
 trap4\_version\_paradox & Adversarial & \textbf{0.55} & 0.30 & 0.53 & 0.55 & 0.30 & 0.89 & -0.03 & +0.22 \\
-trap5\_security\_theater & Adversarial & \textbf{0.84} & 0.71 & 0.81 & 0.86 & 0.81 & 0.82 & -0.05 & +0.00 \\
+trap5\_security\_theater & Adversarial & \textbf{0.62} & 0.24 & 0.60 & 0.95 & 0.90 & 0.94 & -0.36 & -0.31 \\
+CR1\_review\_respond & Code Review & \textbf{0.50} & 0.50 & 0.00 & 0.62 & 0.62 & -- & -0.62 & -0.62 \\
+CR2\_style\_enforce & Code Review & \textbf{0.92} & 0.69 & 0.77 & 0.77 & 0.69 & 0.35 & +0.00 & +0.08 \\
+CR3\_perf\_review & Code Review & 0.90 & 0.90 & \textbf{1.00} & 0.90 & 1.00 & -- & +0.10 & +0.00 \\
 CR4\_api\_review & Code Review & 0.56 & 0.56 & \textbf{0.62} & 0.56 & 0.25 & -- & +0.06 & +0.37 \\
+CR5\_test\_coverage & Code Review & 0.00 & 0.13 & \textbf{0.26} & 0.13 & 0.15 & -1.03 & +0.13 & +0.10 \\
+CR6\_review\_checklist & Code Review & 0.06 & 0.06 & \textbf{0.30} & 0.27 & 0.30 & -- & +0.03 & +0.00 \\
+CROSS5\_event\_schema & Cross-System & 0.70 & \textbf{1.00} & 0.70 & 0.70 & 1.00 & 1.00 & +0.00 & -0.30 \\
+CROSS6\_grpc\_rest\_bridge & Cross-System & \textbf{1.00} & 1.00 & 0.00 & 1.00 & 1.00 & -- & -1.00 & -1.00 \\
+CROSS7\_config\_drift & Cross-System & \textbf{0.60} & 0.60 & 0.60 & 0.60 & 0.60 & -- & +0.00 & +0.00 \\
 cross1\_api\_contract & Cross-System & 0.50 & \textbf{0.83} & 0.83 & 0.83 & 0.87 & -0.00 & +0.00 & -0.03 \\
 cross2\_schema\_evolution & Cross-System & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 0.89 & -- & +0.00 & +0.11 \\
 cross3\_protocol\_bridge & Cross-System & 0.87 & \textbf{1.00} & 1.00 & 1.00 & 1.00 & -0.00 & +0.00 & +0.00 \\
 cross4\_auth\_federation & Cross-System & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
 D1\_schema\_drift & Data Engineering & 0.44 & \textbf{0.50} & 0.50 & 0.38 & 0.38 & -0.00 & +0.12 & +0.12 \\
+D2\_data\_quality & Data Engineering & 0.27 & \textbf{0.82} & 0.36 & 0.82 & 0.36 & 0.84 & -0.46 & +0.00 \\
+D3\_schema\_migration & Data Engineering & 0.73 & \textbf{0.82} & 0.82 & 0.73 & 0.82 & -0.00 & +0.09 & +0.00 \\
+D4\_data\_pipeline & Data Engineering & \textbf{0.59} & 0.59 & 0.00 & 0.59 & 0.65 & -- & -0.59 & -0.65 \\
+D5\_query\_optimize & Data Engineering & 0.80 & \textbf{0.87} & 0.80 & 0.93 & 0.87 & 1.00 & -0.13 & -0.07 \\
+D6\_data\_reconcile & Data Engineering & 0.83 & 0.83 & \textbf{0.89} & 0.83 & 0.72 & -- & +0.06 & +0.17 \\
+D7\_etl\_reconciliation & Data Engineering & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 0.90 & -- & +0.00 & +0.10 \\
+D8\_csv\_cleanup & Data Engineering & 0.30 & 0.26 & \textbf{1.00} & 0.59 & 1.00 & -- & +0.41 & +0.00 \\
+D9\_schema\_validation & Data Engineering & 0.80 & 0.80 & \textbf{0.90} & 0.80 & 0.80 & -- & +0.10 & +0.10 \\
 SQL1\_query\_repair & Data Engineering & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
+SQL2\_query\_optimize & Data Engineering & 0.47 & \textbf{0.87} & 0.87 & 0.47 & 0.47 & -0.00 & +0.40 & +0.40 \\
+DIST5\_leader\_election & Distributed & \textbf{0.20} & 0.20 & 0.20 & 0.20 & 0.20 & -- & +0.00 & +0.00 \\
+DIST6\_distributed\_lock & Distributed & \textbf{1.00} & 0.70 & 0.63 & 0.53 & 1.00 & -0.22 & +0.10 & -0.37 \\
 dist1\_queue\_race & Distributed & \textbf{0.44} & 0.36 & 0.44 & 0.42 & 0.42 & 1.00 & +0.03 & +0.03 \\
 dist2\_consensus\_partition & Distributed & 0.42 & 0.42 & \textbf{0.44} & 0.42 & 0.42 & -- & +0.03 & +0.03 \\
 dist3\_idempotency & Distributed & 0.53 & \textbf{0.67} & 0.42 & 0.72 & 0.81 & 1.80 & -0.31 & -0.39 \\
 dist4\_clock\_skew & Distributed & 0.92 & 0.94 & \textbf{0.97} & 0.83 & 0.72 & -- & +0.14 & +0.25 \\
+INC10\_rollback\_plan & Incident Response & \textbf{0.40} & 0.40 & 0.00 & 0.40 & 0.40 & -- & -0.40 & -0.40 \\
 INC1\_cascade\_failure & Incident Response & 0.80 & 0.80 & \textbf{0.90} & 0.80 & 0.90 & -- & +0.10 & +0.00 \\
+INC2\_data\_corruption & Incident Response & 0.90 & 0.90 & \textbf{1.00} & 0.00 & 1.00 & -- & +1.00 & +0.00 \\
+INC3\_memory\_leak & Incident Response & \textbf{0.92} & 0.83 & 0.00 & 0.00 & 0.00 & -2.00 & -- & -- \\
+INC4\_dns\_miscfg & Incident Response & 0.92 & 0.92 & \textbf{1.00} & 0.58 & 1.00 & -- & +0.42 & +0.00 \\
+INC5\_cert\_expiry & Incident Response & 0.91 & 0.91 & \textbf{1.00} & 0.00 & 1.00 & -- & +1.00 & +0.00 \\
+INC6\_deadlock & Incident Response & \textbf{0.67} & 0.67 & 0.67 & 0.67 & 0.75 & -- & +0.00 & -0.08 \\
+INC7\_rollback & Incident Response & 0.00 & \textbf{0.83} & 0.00 & 0.83 & 0.83 & 1.00 & -0.83 & -0.83 \\
+INC8\_cascading\_timeout & Incident Response & 0.60 & \textbf{0.80} & 0.70 & 0.80 & 0.80 & 0.50 & -0.10 & -0.10 \\
+INC8\_memory\_leak & Incident Response & \textbf{0.80} & 0.80 & 0.70 & 0.70 & 0.80 & -- & +0.00 & -0.10 \\
+INC9\_log\_forensics & Incident Response & \textbf{0.30} & 0.20 & 0.30 & 0.20 & 0.30 & 1.00 & +0.10 & +0.00 \\
 IR1\_evidence\_qa & Information Retrieval & \textbf{0.67} & 0.33 & 0.33 & 0.33 & 0.50 & 0.00 & +0.00 & -0.17 \\
+IR2\_misinformation\_trap & Information Retrieval & \textbf{0.29} & 0.29 & 0.29 & 0.29 & 0.43 & -- & +0.00 & -0.14 \\
+IR3\_multi\_source & Information Retrieval & 0.92 & 0.92 & \textbf{1.00} & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+IR4\_temporal & Information Retrieval & 0.93 & 0.93 & \textbf{1.00} & 0.93 & 0.87 & -- & +0.07 & +0.13 \\
+IR5\_search\_ranking & Information Retrieval & 0.26 & 0.00 & \textbf{0.30} & 0.30 & 0.30 & 1.14 & +0.00 & +0.00 \\
+IR6\_search\_index & Information Retrieval & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
+IR7\_doc\_clustering & Information Retrieval & \textbf{0.75} & 0.75 & 0.75 & 0.00 & 0.88 & -- & +0.75 & -0.13 \\
+IR8\_search\_index & Information Retrieval & 0.80 & \textbf{0.90} & 0.00 & 1.00 & 0.90 & 2.00 & -1.00 & -0.90 \\
 INT1\_pipeline\_repair & Integration & 0.08 & \textbf{0.42} & 0.42 & 0.50 & 0.67 & -0.00 & -0.08 & -0.25 \\
+INT2\_api\_versioning & Integration & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+INT3\_db\_migration & Integration & 0.50 & \textbf{0.60} & 0.00 & 0.40 & 0.70 & 2.00 & -0.40 & -0.70 \\
 LH1\_long\_horizon & Long-Horizon & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
-LH2\_budgeted\_workflow & Long-Horizon & 0.11 & 0.17 & \textbf{0.50} & 0.20 & 0.30 & -2.00 & +0.30 & +0.20 \\
-MULTI1\_fullstack\_fix & Multi-language & 0.75 & 0.50 & \textbf{1.00} & 0.75 & 0.25 & 2.00 & +0.25 & +0.75 \\
+LH2\_budgeted\_workflow & Long-Horizon & 0.04 & 0.06 & \textbf{0.83} & 0.07 & 0.10 & -- & +0.77 & +0.73 \\
+LH3\_multi\_service & Long-Horizon & 0.90 & 0.85 & \textbf{0.95} & 0.90 & 0.95 & 2.00 & +0.05 & +0.00 \\
+LH4\_staged\_deploy & Long-Horizon & \textbf{0.43} & 0.43 & 0.43 & 0.43 & 0.14 & -- & +0.00 & +0.29 \\
+LH5\_data\_migration & Long-Horizon & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.09 & -- & -- & -0.09 \\
+LH6\_audit\_trail & Long-Horizon & \textbf{0.55} & 0.55 & 0.00 & 0.36 & 0.55 & -- & -0.36 & -0.55 \\
+LH7\_zero\_downtime & Long-Horizon & \textbf{0.82} & 0.27 & 0.00 & 0.82 & 0.91 & -0.49 & -0.82 & -0.91 \\
+SCALE1\_codebase\_migration & Long-Horizon & 0.19 & 0.19 & \textbf{0.24} & 0.21 & 0.24 & -- & +0.02 & +0.00 \\
+SYNTH1\_distributed\_debug & Long-Horizon & 0.09 & 0.09 & \textbf{0.18} & 0.06 & 0.15 & -- & +0.12 & +0.03 \\
+MULTI1\_fullstack\_fix & Multi-language & 0.25 & 0.17 & \textbf{1.00} & 0.25 & 0.75 & 2.00 & +0.75 & +0.25 \\
+MULTI2\_api\_frontend & Multi-language & \textbf{0.50} & 0.50 & 0.50 & 0.50 & 0.56 & -- & +0.00 & -0.06 \\
+MULTI2\_microservice\_debug & Multi-language & \textbf{0.90} & 0.90 & 0.90 & 0.90 & 0.90 & -- & +0.00 & +0.00 \\
+MULTI3\_polyglot & Multi-language & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+MULTI4\_monorepo\_fix & Multi-language & 0.90 & 0.90 & \textbf{1.00} & 0.90 & 1.00 & -- & +0.10 & +0.00 \\
+MULTI5\_deploy\_pipeline & Multi-language & 0.17 & 0.20 & \textbf{0.27} & 0.23 & 0.30 & -- & +0.03 & -0.03 \\
+MULTI6\_fullstack\_bug & Multi-language & 0.90 & 0.90 & \textbf{1.00} & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+MULTI7\_polyglot\_test & Multi-language & 0.90 & 0.90 & \textbf{1.00} & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+MULTI8\_sdk\_mismatch & Multi-language & 0.25 & 0.25 & \textbf{0.29} & 0.29 & 0.29 & -- & +0.00 & +0.00 \\
 NEG1\_tradeoff\_config & Negotiation & \textbf{0.50} & 0.50 & 0.40 & 0.50 & 0.40 & -- & -0.10 & +0.00 \\
-O2\_incident\_rootcause & Operations & \textbf{0.60} & 0.40 & 0.60 & 0.40 & 0.80 & 1.00 & +0.20 & -0.20 \\
-PIPE1\_etl\_fix & Pipeline & \textbf{0.73} & 0.36 & 0.73 & 0.64 & 0.73 & 1.00 & +0.09 & +0.00 \\
+NEG2\_cost\_perf & Negotiation & \textbf{1.00} & 0.33 & 1.00 & 0.67 & 0.33 & 1.00 & +0.33 & +0.67 \\
+NEG3\_tech\_debt & Negotiation & 0.80 & 0.80 & \textbf{1.00} & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+NEG4\_resource\_allocation & Negotiation & 0.90 & 0.90 & \textbf{1.00} & 0.90 & 1.00 & -- & +0.10 & +0.00 \\
+NEG5\_sla\_tradeoff & Negotiation & 0.90 & 0.90 & \textbf{1.00} & 0.90 & 1.00 & -- & +0.10 & +0.00 \\
+O1\_service\_health & Operations & 0.00 & 0.00 & \textbf{0.08} & 0.00 & 0.17 & -- & +0.08 & -0.08 \\
+O2\_incident\_rootcause & Operations & \textbf{0.20} & 0.13 & 0.20 & 0.13 & 0.27 & 1.00 & +0.07 & -0.07 \\
+O3\_log\_analysis & Operations & \textbf{0.15} & 0.00 & 0.15 & 0.18 & 0.15 & 1.00 & -0.03 & +0.00 \\
+O4\_monitoring & Operations & \textbf{0.33} & 0.00 & 0.33 & 0.31 & 0.33 & 1.00 & +0.02 & +0.00 \\
+O5\_container\_debug & Operations & 0.60 & 0.60 & \textbf{0.73} & 0.60 & 0.00 & -- & +0.13 & +0.73 \\
+O6\_perf\_tuning & Operations & 0.77 & \textbf{1.00} & 0.00 & 1.00 & 0.00 & 2.00 & -1.00 & -- \\
+O7\_capacity\_planning & Operations & \textbf{1.00} & 0.90 & 1.00 & 1.00 & 1.00 & 1.00 & +0.00 & +0.00 \\
+O8\_dockerfile\_fix & Operations & 0.24 & 0.24 & \textbf{0.29} & 0.00 & 0.00 & -- & +0.29 & +0.29 \\
+O9\_logging\_config & Operations & 0.50 & 0.50 & \textbf{0.60} & 0.00 & 0.60 & -- & +0.60 & +0.00 \\
+PIPE1\_etl\_fix & Pipeline & \textbf{0.24} & 0.12 & 0.24 & 0.21 & 0.24 & 1.00 & +0.03 & +0.00 \\
+PIPE2\_api\_gateway & Pipeline & \textbf{0.92} & 0.92 & 0.00 & 0.92 & 1.00 & -- & -0.92 & -1.00 \\
+PIPE2\_data\_pipeline & Pipeline & \textbf{0.80} & 0.80 & 0.80 & 0.80 & 0.80 & -- & +0.00 & +0.00 \\
+PIPE3\_msg\_queue & Pipeline & \textbf{0.77} & 0.77 & 0.00 & 0.62 & 0.85 & -- & -0.62 & -0.85 \\
+PIPE3\_stream\_processing & Pipeline & \textbf{1.00} & 1.00 & 1.00 & 0.00 & 1.00 & -- & +1.00 & +0.00 \\
+PIPE4\_ci\_cd & Pipeline & 0.93 & 0.93 & \textbf{1.00} & 0.93 & 1.00 & -- & +0.07 & +0.00 \\
 P1\_policy\_config & Policy & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
+P2\_spec\_arbitration & Policy & \textbf{0.25} & 0.00 & 0.00 & 0.00 & 0.50 & 0.00 & -- & -0.50 \\
+P3\_access\_control & Policy & 0.30 & 0.27 & \textbf{0.33} & 0.24 & 0.30 & -- & +0.09 & +0.03 \\
+P4\_data\_retention & Policy & \textbf{0.86} & 0.57 & 0.57 & 0.36 & 0.64 & 0.00 & +0.21 & -0.07 \\
+P5\_audit\_logging & Policy & \textbf{0.93} & 0.93 & 0.93 & 1.00 & 1.00 & -- & -0.07 & -0.07 \\
+P6\_license\_check & Policy & 0.29 & 0.19 & \textbf{1.00} & 0.19 & 1.00 & 2.00 & +0.81 & +0.00 \\
+P7\_data\_retention & Policy & 0.30 & 0.26 & \textbf{1.00} & 0.00 & 1.00 & -- & +1.00 & +0.00 \\
+P8\_access\_control & Policy & 0.30 & 0.30 & \textbf{0.40} & 0.40 & 0.40 & -- & +0.00 & +0.00 \\
+CRYPTO5\_tls\_config & Security & \textbf{0.30} & 0.20 & 0.30 & 0.30 & 0.20 & 1.00 & +0.00 & +0.10 \\
+CRYPTO6\_token\_validation & Security & \textbf{0.90} & 0.90 & 0.90 & 0.90 & 0.90 & -- & +0.00 & +0.00 \\
 SEC1\_vuln\_patch & Security & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
+SEC2\_auth\_bypass & Security & \textbf{0.90} & 0.60 & 0.70 & 0.90 & 0.70 & 0.33 & -0.20 & +0.00 \\
+SEC3\_crypto\_upgrade & Security & 0.28 & 0.18 & \textbf{0.31} & 0.26 & 0.18 & 1.23 & +0.05 & +0.13 \\
+SEC4\_input\_validation & Security & \textbf{0.31} & 0.31 & 0.00 & 0.31 & 0.38 & -- & -0.31 & -0.38 \\
+SEC5\_secrets\_rotation & Security & 0.31 & 0.23 & \textbf{0.64} & 0.00 & 1.00 & 2.00 & +0.64 & -0.36 \\
+SEC6\_csrf\_protection & Security & \textbf{0.85} & 0.46 & 0.46 & 0.77 & 0.54 & 0.00 & -0.31 & -0.08 \\
+SEC7\_rate\_limiting & Security & 0.47 & 0.53 & \textbf{0.60} & 0.33 & 0.67 & -1.17 & +0.27 & -0.07 \\
+SEC8\_dependency\_audit & Security & 0.83 & \textbf{0.92} & 0.92 & 0.83 & 0.67 & -0.00 & +0.09 & +0.25 \\
+SEC9\_vuln\_triage & Security & \textbf{0.77} & 0.69 & 0.00 & 0.62 & 0.77 & -2.00 & -0.62 & -0.77 \\
 crypto1\_nonce\_reuse & Security & \textbf{0.20} & 0.20 & 0.20 & 0.20 & 0.20 & -- & +0.00 & +0.00 \\
 crypto2\_timing\_safe & Security & \textbf{1.00} & 1.00 & 1.00 & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
 crypto3\_cert\_chain & Security & \textbf{0.07} & 0.07 & 0.07 & 0.00 & 0.13 & -- & +0.07 & -0.07 \\
 crypto4\_kdf\_migration & Security & \textbf{0.20} & 0.07 & 0.20 & 0.20 & 0.20 & 1.00 & +0.00 & +0.00 \\
+GO1\_concurrency\_fix & Software Eng. & \textbf{0.75} & 0.75 & 0.00 & 0.50 & 0.88 & -- & -0.50 & -0.88 \\
+GO2\_race\_condition & Software Eng. & 0.92 & 0.92 & \textbf{1.00} & 1.00 & 1.00 & -- & +0.00 & +0.00 \\
+JS1\_api\_migration & Software Eng. & 0.43 & \textbf{0.71} & 0.00 & 0.57 & 0.00 & 2.00 & -0.57 & -- \\
+JS2\_xss\_sanitize & Software Eng. & 0.78 & 0.78 & \textbf{0.87} & 0.87 & 0.00 & -- & +0.00 & +0.87 \\
 S1\_hidden\_spec & Software Eng. & \textbf{0.00} & 0.00 & 0.00 & 0.00 & 0.00 & -- & -- & -- \\
 S2\_dependency\_conflict & Software Eng. & \textbf{0.25} & 0.25 & 0.00 & 0.25 & 0.25 & -- & -0.25 & -0.25 \\
+S3\_refactor\_extract & Software Eng. & \textbf{0.17} & 0.17 & 0.17 & 0.17 & 0.00 & -- & +0.00 & +0.17 \\
+S4\_backward\_compat & Software Eng. & \textbf{0.21} & 0.21 & 0.21 & 0.21 & 0.29 & -- & +0.00 & -0.08 \\
+S5\_error\_handling & Software Eng. & 0.07 & 0.02 & \textbf{0.11} & 0.11 & 0.04 & -- & +0.00 & +0.07 \\
+S6\_caching & Software Eng. & 0.00 & \textbf{0.62} & 0.00 & 0.62 & 0.62 & 1.00 & -0.62 & -0.62 \\
+S7\_env\_config & Software Eng. & 0.24 & 0.24 & \textbf{0.29} & 0.24 & 0.29 & -- & +0.05 & +0.00 \\
 SPEC1\_feature\_impl & Specification & \textbf{0.45} & 0.45 & 0.00 & 0.09 & 0.09 & -- & -0.09 & -0.09 \\
-TEST1\_spec\_to\_tests & Testing & 0.70 & 0.30 & \textbf{0.80} & 0.70 & 0.80 & 1.25 & +0.10 & +0.00 \\
+SPEC2\_api\_design & Specification & \textbf{0.75} & 0.67 & 0.67 & 0.67 & 0.75 & 0.00 & +0.00 & -0.08 \\
+SPEC3\_data\_model & Specification & \textbf{0.26} & 0.00 & 0.26 & 0.00 & 0.00 & 1.00 & +0.26 & +0.26 \\
+SPEC4\_migration & Specification & 0.00 & \textbf{0.85} & 0.85 & 0.85 & 0.85 & -0.00 & +0.00 & +0.00 \\
+SPEC5\_config\_system & Specification & \textbf{0.46} & 0.00 & 0.46 & 0.00 & 0.00 & 1.00 & +0.46 & +0.46 \\
+SPEC6\_rfc\_impl & Specification & 0.95 & 0.95 & \textbf{1.00} & 0.95 & 1.00 & -- & +0.05 & +0.00 \\
+SPEC7\_config\_schema & Specification & \textbf{1.00} & 0.92 & 1.00 & 1.00 & 1.00 & 1.00 & +0.00 & +0.00 \\
+TEST1\_spec\_to\_tests & Testing & 0.23 & 0.10 & \textbf{0.27} & 0.23 & 0.27 & 1.25 & +0.03 & +0.00 \\
+TEST2\_regression & Testing & 0.00 & 0.00 & \textbf{0.67} & 0.58 & 1.00 & -- & +0.09 & -0.33 \\
+TEST3\_integration & Testing & 0.00 & 0.00 & \textbf{0.31} & 0.28 & 0.28 & -- & +0.03 & +0.03 \\
+TEST4\_property & Testing & \textbf{0.29} & 0.00 & 0.29 & 0.29 & 0.29 & 1.00 & +0.00 & +0.00 \\
+TEST5\_mutation\_resistant & Testing & 0.22 & 0.22 & \textbf{0.28} & 0.28 & 0.31 & -- & +0.00 & -0.03 \\
+TEST6\_property\_based & Testing & 0.30 & 0.10 & \textbf{0.67} & 0.10 & 1.00 & 2.00 & +0.57 & -0.33 \\
+TEST7\_integration\_suite & Testing & 0.00 & 0.27 & \textbf{1.00} & 0.27 & 1.00 & -2.00 & +0.73 & +0.00 \\
+TEST8\_unit\_basic & Testing & 0.75 & 0.75 & \textbf{0.88} & 0.88 & 0.88 & -- & +0.00 & +0.00 \\
+TEST9\_mock\_service & Testing & 0.30 & 0.00 & \textbf{0.33} & 0.26 & 1.00 & 1.12 & +0.07 & -0.67 \\
 \midrule
-\textbf{Average} & (35 tasks) & 0.51 & 0.48 & 0.53 & 0.52 & 0.51 & 0.57 & +0.02 & +0.02 \\
+\textbf{Average} & (148 tasks) & 0.54 & 0.53 & 0.53 & 0.51 & 0.60 & 0.64 & +0.02 & -0.06 \\
 \bottomrule
 \end{tabular}
 \end{table*}

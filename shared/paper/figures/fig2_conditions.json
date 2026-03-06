@@ -1,5 +1,32 @@
 [
   {
+    "task_id": "CR1_review_respond",
+    "category": "Code Review",
+    "oracle": 0.5,
+    "restricted": 0.5,
+    "full": 0.0,
+    "no_plan": 0.62,
+    "no_verify": 0.62
+  },
+  {
+    "task_id": "CR2_style_enforce",
+    "category": "Code Review",
+    "oracle": 0.92,
+    "restricted": 0.69,
+    "full": 0.77,
+    "no_plan": 0.77,
+    "no_verify": 0.69
+  },
+  {
+    "task_id": "CR3_perf_review",
+    "category": "Code Review",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 0.9,
+    "no_verify": 1.0
+  },
+  {
     "task_id": "CR4_api_review",
     "category": "Code Review",
     "oracle": 0.56,
@@ -7,6 +34,69 @@
     "full": 0.62,
     "no_plan": 0.56,
     "no_verify": 0.25
+  },
+  {
+    "task_id": "CR5_test_coverage",
+    "category": "Code Review",
+    "oracle": 0.0,
+    "restricted": 0.127,
+    "full": 0.257,
+    "no_plan": 0.127,
+    "no_verify": 0.153
+  },
+  {
+    "task_id": "CR6_review_checklist",
+    "category": "Code Review",
+    "oracle": 0.06,
+    "restricted": 0.06,
+    "full": 0.303,
+    "no_plan": 0.273,
+    "no_verify": 0.303
+  },
+  {
+    "task_id": "CROSS5_event_schema",
+    "category": "Cross-System",
+    "oracle": 0.7,
+    "restricted": 1.0,
+    "full": 0.7,
+    "no_plan": 0.7,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "CROSS6_grpc_rest_bridge",
+    "category": "Cross-System",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 0.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "CROSS7_config_drift",
+    "category": "Cross-System",
+    "oracle": 0.6,
+    "restricted": 0.6,
+    "full": 0.6,
+    "no_plan": 0.6,
+    "no_verify": 0.6
+  },
+  {
+    "task_id": "CRYPTO5_tls_config",
+    "category": "Security",
+    "oracle": 0.3,
+    "restricted": 0.2,
+    "full": 0.3,
+    "no_plan": 0.3,
+    "no_verify": 0.2
+  },
+  {
+    "task_id": "CRYPTO6_token_validation",
+    "category": "Security",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 0.9,
+    "no_plan": 0.9,
+    "no_verify": 0.9
   },
   {
     "task_id": "D1_schema_drift",
@@ -18,6 +108,123 @@
     "no_verify": 0.38
   },
   {
+    "task_id": "D2_data_quality",
+    "category": "Data Engineering",
+    "oracle": 0.27,
+    "restricted": 0.82,
+    "full": 0.36,
+    "no_plan": 0.82,
+    "no_verify": 0.36
+  },
+  {
+    "task_id": "D3_schema_migration",
+    "category": "Data Engineering",
+    "oracle": 0.73,
+    "restricted": 0.82,
+    "full": 0.82,
+    "no_plan": 0.73,
+    "no_verify": 0.82
+  },
+  {
+    "task_id": "D4_data_pipeline",
+    "category": "Data Engineering",
+    "oracle": 0.59,
+    "restricted": 0.59,
+    "full": 0.0,
+    "no_plan": 0.59,
+    "no_verify": 0.65
+  },
+  {
+    "task_id": "D5_query_optimize",
+    "category": "Data Engineering",
+    "oracle": 0.8,
+    "restricted": 0.87,
+    "full": 0.8,
+    "no_plan": 0.93,
+    "no_verify": 0.87
+  },
+  {
+    "task_id": "D6_data_reconcile",
+    "category": "Data Engineering",
+    "oracle": 0.83,
+    "restricted": 0.83,
+    "full": 0.89,
+    "no_plan": 0.83,
+    "no_verify": 0.72
+  },
+  {
+    "task_id": "D7_etl_reconciliation",
+    "category": "Data Engineering",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 0.9
+  },
+  {
+    "task_id": "D8_csv_cleanup",
+    "category": "Data Engineering",
+    "oracle": 0.297,
+    "restricted": 0.26,
+    "full": 1.0,
+    "no_plan": 0.593,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "D9_schema_validation",
+    "category": "Data Engineering",
+    "oracle": 0.8,
+    "restricted": 0.8,
+    "full": 0.9,
+    "no_plan": 0.8,
+    "no_verify": 0.8
+  },
+  {
+    "task_id": "DIST5_leader_election",
+    "category": "Distributed",
+    "oracle": 0.2,
+    "restricted": 0.2,
+    "full": 0.2,
+    "no_plan": 0.2,
+    "no_verify": 0.2
+  },
+  {
+    "task_id": "DIST6_distributed_lock",
+    "category": "Distributed",
+    "oracle": 1.0,
+    "restricted": 0.7,
+    "full": 0.633,
+    "no_plan": 0.533,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "GO1_concurrency_fix",
+    "category": "Software Eng.",
+    "oracle": 0.75,
+    "restricted": 0.75,
+    "full": 0.0,
+    "no_plan": 0.5,
+    "no_verify": 0.88
+  },
+  {
+    "task_id": "GO2_race_condition",
+    "category": "Software Eng.",
+    "oracle": 0.92,
+    "restricted": 0.92,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "INC10_rollback_plan",
+    "category": "Incident Response",
+    "oracle": 0.4,
+    "restricted": 0.4,
+    "full": 0.0,
+    "no_plan": 0.4,
+    "no_verify": 0.4
+  },
+  {
     "task_id": "INC1_cascade_failure",
     "category": "Incident Response",
     "oracle": 0.8,
@@ -25,6 +232,87 @@
     "full": 0.9,
     "no_plan": 0.8,
     "no_verify": 0.9
+  },
+  {
+    "task_id": "INC2_data_corruption",
+    "category": "Incident Response",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "INC3_memory_leak",
+    "category": "Incident Response",
+    "oracle": 0.92,
+    "restricted": 0.83,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "INC4_dns_miscfg",
+    "category": "Incident Response",
+    "oracle": 0.92,
+    "restricted": 0.92,
+    "full": 1.0,
+    "no_plan": 0.58,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "INC5_cert_expiry",
+    "category": "Incident Response",
+    "oracle": 0.91,
+    "restricted": 0.91,
+    "full": 1.0,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "INC6_deadlock",
+    "category": "Incident Response",
+    "oracle": 0.67,
+    "restricted": 0.67,
+    "full": 0.67,
+    "no_plan": 0.67,
+    "no_verify": 0.75
+  },
+  {
+    "task_id": "INC7_rollback",
+    "category": "Incident Response",
+    "oracle": 0.0,
+    "restricted": 0.83,
+    "full": 0.0,
+    "no_plan": 0.83,
+    "no_verify": 0.83
+  },
+  {
+    "task_id": "INC8_cascading_timeout",
+    "category": "Incident Response",
+    "oracle": 0.6,
+    "restricted": 0.8,
+    "full": 0.7,
+    "no_plan": 0.8,
+    "no_verify": 0.8
+  },
+  {
+    "task_id": "INC8_memory_leak",
+    "category": "Incident Response",
+    "oracle": 0.8,
+    "restricted": 0.8,
+    "full": 0.7,
+    "no_plan": 0.7,
+    "no_verify": 0.8
+  },
+  {
+    "task_id": "INC9_log_forensics",
+    "category": "Incident Response",
+    "oracle": 0.3,
+    "restricted": 0.2,
+    "full": 0.3,
+    "no_plan": 0.2,
+    "no_verify": 0.3
   },
   {
     "task_id": "INT1_pipeline_repair",
@@ -36,6 +324,24 @@
     "no_verify": 0.67
   },
   {
+    "task_id": "INT2_api_versioning",
+    "category": "Integration",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "INT3_db_migration",
+    "category": "Integration",
+    "oracle": 0.5,
+    "restricted": 0.6,
+    "full": 0.0,
+    "no_plan": 0.4,
+    "no_verify": 0.7
+  },
+  {
     "task_id": "IR1_evidence_qa",
     "category": "Information Retrieval",
     "oracle": 0.67,
@@ -45,22 +351,229 @@
     "no_verify": 0.5
   },
   {
+    "task_id": "IR2_misinformation_trap",
+    "category": "Information Retrieval",
+    "oracle": 0.29,
+    "restricted": 0.29,
+    "full": 0.29,
+    "no_plan": 0.29,
+    "no_verify": 0.43
+  },
+  {
+    "task_id": "IR3_multi_source",
+    "category": "Information Retrieval",
+    "oracle": 0.92,
+    "restricted": 0.92,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "IR4_temporal",
+    "category": "Information Retrieval",
+    "oracle": 0.93,
+    "restricted": 0.93,
+    "full": 1.0,
+    "no_plan": 0.93,
+    "no_verify": 0.87
+  },
+  {
+    "task_id": "IR5_search_ranking",
+    "category": "Information Retrieval",
+    "oracle": 0.26,
+    "restricted": 0.0,
+    "full": 0.297,
+    "no_plan": 0.297,
+    "no_verify": 0.297
+  },
+  {
+    "task_id": "IR6_search_index",
+    "category": "Information Retrieval",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "IR7_doc_clustering",
+    "category": "Information Retrieval",
+    "oracle": 0.75,
+    "restricted": 0.75,
+    "full": 0.75,
+    "no_plan": 0.0,
+    "no_verify": 0.88
+  },
+  {
+    "task_id": "IR8_search_index",
+    "category": "Information Retrieval",
+    "oracle": 0.8,
+    "restricted": 0.9,
+    "full": 0.0,
+    "no_plan": 1.0,
+    "no_verify": 0.9
+  },
+  {
+    "task_id": "JS1_api_migration",
+    "category": "Software Eng.",
+    "oracle": 0.43,
+    "restricted": 0.71,
+    "full": 0.0,
+    "no_plan": 0.57,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "JS2_xss_sanitize",
+    "category": "Software Eng.",
+    "oracle": 0.78,
+    "restricted": 0.78,
+    "full": 0.87,
+    "no_plan": 0.87,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "LH1_long_horizon",
+    "category": "Long-Horizon",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
     "task_id": "LH2_budgeted_workflow",
     "category": "Long-Horizon",
-    "oracle": 0.11,
-    "restricted": 0.17,
-    "full": 0.5,
-    "no_plan": 0.2,
-    "no_verify": 0.3
+    "oracle": 0.037,
+    "restricted": 0.057,
+    "full": 0.833,
+    "no_plan": 0.067,
+    "no_verify": 0.1
+  },
+  {
+    "task_id": "LH3_multi_service",
+    "category": "Long-Horizon",
+    "oracle": 0.9,
+    "restricted": 0.85,
+    "full": 0.95,
+    "no_plan": 0.9,
+    "no_verify": 0.95
+  },
+  {
+    "task_id": "LH4_staged_deploy",
+    "category": "Long-Horizon",
+    "oracle": 0.43,
+    "restricted": 0.43,
+    "full": 0.43,
+    "no_plan": 0.43,
+    "no_verify": 0.14
+  },
+  {
+    "task_id": "LH5_data_migration",
+    "category": "Long-Horizon",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.09
+  },
+  {
+    "task_id": "LH6_audit_trail",
+    "category": "Long-Horizon",
+    "oracle": 0.55,
+    "restricted": 0.55,
+    "full": 0.0,
+    "no_plan": 0.36,
+    "no_verify": 0.55
+  },
+  {
+    "task_id": "LH7_zero_downtime",
+    "category": "Long-Horizon",
+    "oracle": 0.82,
+    "restricted": 0.27,
+    "full": 0.0,
+    "no_plan": 0.82,
+    "no_verify": 0.91
   },
   {
     "task_id": "MULTI1_fullstack_fix",
     "category": "Multi-language",
-    "oracle": 0.75,
-    "restricted": 0.5,
+    "oracle": 0.25,
+    "restricted": 0.167,
     "full": 1.0,
-    "no_plan": 0.75,
-    "no_verify": 0.25
+    "no_plan": 0.25,
+    "no_verify": 0.75
+  },
+  {
+    "task_id": "MULTI2_api_frontend",
+    "category": "Multi-language",
+    "oracle": 0.5,
+    "restricted": 0.5,
+    "full": 0.5,
+    "no_plan": 0.5,
+    "no_verify": 0.56
+  },
+  {
+    "task_id": "MULTI2_microservice_debug",
+    "category": "Multi-language",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 0.9,
+    "no_plan": 0.9,
+    "no_verify": 0.9
+  },
+  {
+    "task_id": "MULTI3_polyglot",
+    "category": "Multi-language",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "MULTI4_monorepo_fix",
+    "category": "Multi-language",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 0.9,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "MULTI5_deploy_pipeline",
+    "category": "Multi-language",
+    "oracle": 0.167,
+    "restricted": 0.2,
+    "full": 0.267,
+    "no_plan": 0.233,
+    "no_verify": 0.3
+  },
+  {
+    "task_id": "MULTI6_fullstack_bug",
+    "category": "Multi-language",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "MULTI7_polyglot_test",
+    "category": "Multi-language",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "MULTI8_sdk_mismatch",
+    "category": "Multi-language",
+    "oracle": 0.25,
+    "restricted": 0.25,
+    "full": 0.293,
+    "no_plan": 0.293,
+    "no_verify": 0.293
   },
   {
     "task_id": "NEG1_tradeoff_config",
@@ -72,40 +585,256 @@
     "no_verify": 0.4
   },
   {
+    "task_id": "NEG2_cost_perf",
+    "category": "Negotiation",
+    "oracle": 1.0,
+    "restricted": 0.333,
+    "full": 1.0,
+    "no_plan": 0.667,
+    "no_verify": 0.333
+  },
+  {
+    "task_id": "NEG3_tech_debt",
+    "category": "Negotiation",
+    "oracle": 0.8,
+    "restricted": 0.8,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "NEG4_resource_allocation",
+    "category": "Negotiation",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 0.9,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "NEG5_sla_tradeoff",
+    "category": "Negotiation",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 0.9,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "O1_service_health",
+    "category": "Operations",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.083,
+    "no_plan": 0.0,
+    "no_verify": 0.167
+  },
+  {
     "task_id": "O2_incident_rootcause",
     "category": "Operations",
+    "oracle": 0.2,
+    "restricted": 0.133,
+    "full": 0.2,
+    "no_plan": 0.133,
+    "no_verify": 0.267
+  },
+  {
+    "task_id": "O3_log_analysis",
+    "category": "Operations",
+    "oracle": 0.153,
+    "restricted": 0.0,
+    "full": 0.153,
+    "no_plan": 0.18,
+    "no_verify": 0.153
+  },
+  {
+    "task_id": "O4_monitoring",
+    "category": "Operations",
+    "oracle": 0.333,
+    "restricted": 0.0,
+    "full": 0.333,
+    "no_plan": 0.31,
+    "no_verify": 0.333
+  },
+  {
+    "task_id": "O5_container_debug",
+    "category": "Operations",
     "oracle": 0.6,
-    "restricted": 0.4,
+    "restricted": 0.6,
+    "full": 0.73,
+    "no_plan": 0.6,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "O6_perf_tuning",
+    "category": "Operations",
+    "oracle": 0.77,
+    "restricted": 1.0,
+    "full": 0.0,
+    "no_plan": 1.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "O7_capacity_planning",
+    "category": "Operations",
+    "oracle": 1.0,
+    "restricted": 0.9,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "O8_dockerfile_fix",
+    "category": "Operations",
+    "oracle": 0.237,
+    "restricted": 0.237,
+    "full": 0.287,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "O9_logging_config",
+    "category": "Operations",
+    "oracle": 0.5,
+    "restricted": 0.5,
     "full": 0.6,
-    "no_plan": 0.4,
-    "no_verify": 0.8
+    "no_plan": 0.0,
+    "no_verify": 0.6
   },
   {
     "task_id": "P1_policy_config",
     "category": "Policy",
-    "oracle": 0.93,
-    "restricted": 0.43,
-    "full": 0.5,
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "P2_spec_arbitration",
+    "category": "Policy",
+    "oracle": 0.25,
+    "restricted": 0.0,
+    "full": 0.0,
     "no_plan": 0.0,
     "no_verify": 0.5
   },
   {
+    "task_id": "P3_access_control",
+    "category": "Policy",
+    "oracle": 0.303,
+    "restricted": 0.273,
+    "full": 0.333,
+    "no_plan": 0.243,
+    "no_verify": 0.303
+  },
+  {
+    "task_id": "P4_data_retention",
+    "category": "Policy",
+    "oracle": 0.86,
+    "restricted": 0.57,
+    "full": 0.57,
+    "no_plan": 0.36,
+    "no_verify": 0.64
+  },
+  {
+    "task_id": "P5_audit_logging",
+    "category": "Policy",
+    "oracle": 0.93,
+    "restricted": 0.93,
+    "full": 0.93,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "P6_license_check",
+    "category": "Policy",
+    "oracle": 0.287,
+    "restricted": 0.19,
+    "full": 1.0,
+    "no_plan": 0.19,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "P7_data_retention",
+    "category": "Policy",
+    "oracle": 0.297,
+    "restricted": 0.26,
+    "full": 1.0,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "P8_access_control",
+    "category": "Policy",
+    "oracle": 0.3,
+    "restricted": 0.3,
+    "full": 0.4,
+    "no_plan": 0.4,
+    "no_verify": 0.4
+  },
+  {
     "task_id": "PIPE1_etl_fix",
     "category": "Pipeline",
-    "oracle": 0.73,
-    "restricted": 0.36,
-    "full": 0.73,
-    "no_plan": 0.64,
-    "no_verify": 0.73
+    "oracle": 0.243,
+    "restricted": 0.12,
+    "full": 0.243,
+    "no_plan": 0.213,
+    "no_verify": 0.243
+  },
+  {
+    "task_id": "PIPE2_api_gateway",
+    "category": "Pipeline",
+    "oracle": 0.92,
+    "restricted": 0.92,
+    "full": 0.0,
+    "no_plan": 0.92,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "PIPE2_data_pipeline",
+    "category": "Pipeline",
+    "oracle": 0.8,
+    "restricted": 0.8,
+    "full": 0.8,
+    "no_plan": 0.8,
+    "no_verify": 0.8
+  },
+  {
+    "task_id": "PIPE3_msg_queue",
+    "category": "Pipeline",
+    "oracle": 0.77,
+    "restricted": 0.77,
+    "full": 0.0,
+    "no_plan": 0.62,
+    "no_verify": 0.85
+  },
+  {
+    "task_id": "PIPE3_stream_processing",
+    "category": "Pipeline",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "PIPE4_ci_cd",
+    "category": "Pipeline",
+    "oracle": 0.93,
+    "restricted": 0.93,
+    "full": 1.0,
+    "no_plan": 0.93,
+    "no_verify": 1.0
   },
   {
     "task_id": "S1_hidden_spec",
     "category": "Software Eng.",
     "oracle": 0.0,
-    "restricted": 0.5,
-    "full": 0.12,
+    "restricted": 0.0,
+    "full": 0.0,
     "no_plan": 0.0,
-    "no_verify": 0.12
+    "no_verify": 0.0
   },
   {
     "task_id": "S2_dependency_conflict",
@@ -117,13 +846,139 @@
     "no_verify": 0.25
   },
   {
+    "task_id": "S3_refactor_extract",
+    "category": "Software Eng.",
+    "oracle": 0.17,
+    "restricted": 0.17,
+    "full": 0.17,
+    "no_plan": 0.17,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "S4_backward_compat",
+    "category": "Software Eng.",
+    "oracle": 0.21,
+    "restricted": 0.21,
+    "full": 0.21,
+    "no_plan": 0.21,
+    "no_verify": 0.29
+  },
+  {
+    "task_id": "S5_error_handling",
+    "category": "Software Eng.",
+    "oracle": 0.067,
+    "restricted": 0.023,
+    "full": 0.11,
+    "no_plan": 0.11,
+    "no_verify": 0.043
+  },
+  {
+    "task_id": "S6_caching",
+    "category": "Software Eng.",
+    "oracle": 0.0,
+    "restricted": 0.62,
+    "full": 0.0,
+    "no_plan": 0.62,
+    "no_verify": 0.62
+  },
+  {
+    "task_id": "S7_env_config",
+    "category": "Software Eng.",
+    "oracle": 0.237,
+    "restricted": 0.237,
+    "full": 0.287,
+    "no_plan": 0.237,
+    "no_verify": 0.287
+  },
+  {
+    "task_id": "SCALE1_codebase_migration",
+    "category": "Long-Horizon",
+    "oracle": 0.19,
+    "restricted": 0.19,
+    "full": 0.237,
+    "no_plan": 0.213,
+    "no_verify": 0.237
+  },
+  {
     "task_id": "SEC1_vuln_patch",
     "category": "Security",
-    "oracle": 0.42,
-    "restricted": 0.42,
-    "full": 0.75,
-    "no_plan": 0.58,
-    "no_verify": 0.75
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "SEC2_auth_bypass",
+    "category": "Security",
+    "oracle": 0.9,
+    "restricted": 0.6,
+    "full": 0.7,
+    "no_plan": 0.9,
+    "no_verify": 0.7
+  },
+  {
+    "task_id": "SEC3_crypto_upgrade",
+    "category": "Security",
+    "oracle": 0.283,
+    "restricted": 0.18,
+    "full": 0.307,
+    "no_plan": 0.257,
+    "no_verify": 0.18
+  },
+  {
+    "task_id": "SEC4_input_validation",
+    "category": "Security",
+    "oracle": 0.31,
+    "restricted": 0.31,
+    "full": 0.0,
+    "no_plan": 0.31,
+    "no_verify": 0.38
+  },
+  {
+    "task_id": "SEC5_secrets_rotation",
+    "category": "Security",
+    "oracle": 0.307,
+    "restricted": 0.23,
+    "full": 0.64,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "SEC6_csrf_protection",
+    "category": "Security",
+    "oracle": 0.85,
+    "restricted": 0.46,
+    "full": 0.46,
+    "no_plan": 0.77,
+    "no_verify": 0.54
+  },
+  {
+    "task_id": "SEC7_rate_limiting",
+    "category": "Security",
+    "oracle": 0.47,
+    "restricted": 0.53,
+    "full": 0.6,
+    "no_plan": 0.33,
+    "no_verify": 0.67
+  },
+  {
+    "task_id": "SEC8_dependency_audit",
+    "category": "Security",
+    "oracle": 0.83,
+    "restricted": 0.92,
+    "full": 0.92,
+    "no_plan": 0.83,
+    "no_verify": 0.67
+  },
+  {
+    "task_id": "SEC9_vuln_triage",
+    "category": "Security",
+    "oracle": 0.77,
+    "restricted": 0.69,
+    "full": 0.0,
+    "no_plan": 0.62,
+    "no_verify": 0.77
   },
   {
     "task_id": "SPEC1_feature_impl",
@@ -135,12 +990,345 @@
     "no_verify": 0.09
   },
   {
+    "task_id": "SPEC2_api_design",
+    "category": "Specification",
+    "oracle": 0.75,
+    "restricted": 0.67,
+    "full": 0.67,
+    "no_plan": 0.67,
+    "no_verify": 0.75
+  },
+  {
+    "task_id": "SPEC3_data_model",
+    "category": "Specification",
+    "oracle": 0.262,
+    "restricted": 0.0,
+    "full": 0.262,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "SPEC4_migration",
+    "category": "Specification",
+    "oracle": 0.0,
+    "restricted": 0.85,
+    "full": 0.85,
+    "no_plan": 0.85,
+    "no_verify": 0.85
+  },
+  {
+    "task_id": "SPEC5_config_system",
+    "category": "Specification",
+    "oracle": 0.457,
+    "restricted": 0.0,
+    "full": 0.457,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "SPEC6_rfc_impl",
+    "category": "Specification",
+    "oracle": 0.95,
+    "restricted": 0.95,
+    "full": 1.0,
+    "no_plan": 0.95,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "SPEC7_config_schema",
+    "category": "Specification",
+    "oracle": 1.0,
+    "restricted": 0.917,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "SQL1_query_repair",
+    "category": "Data Engineering",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.0,
+    "no_plan": 0.0,
+    "no_verify": 0.0
+  },
+  {
+    "task_id": "SQL2_query_optimize",
+    "category": "Data Engineering",
+    "oracle": 0.47,
+    "restricted": 0.87,
+    "full": 0.87,
+    "no_plan": 0.47,
+    "no_verify": 0.47
+  },
+  {
+    "task_id": "SYNTH1_distributed_debug",
+    "category": "Long-Horizon",
+    "oracle": 0.09,
+    "restricted": 0.09,
+    "full": 0.183,
+    "no_plan": 0.06,
+    "no_verify": 0.15
+  },
+  {
     "task_id": "TEST1_spec_to_tests",
     "category": "Testing",
-    "oracle": 0.7,
-    "restricted": 0.3,
+    "oracle": 0.233,
+    "restricted": 0.1,
+    "full": 0.267,
+    "no_plan": 0.233,
+    "no_verify": 0.267
+  },
+  {
+    "task_id": "TEST2_regression",
+    "category": "Testing",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.667,
+    "no_plan": 0.577,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "TEST3_integration",
+    "category": "Testing",
+    "oracle": 0.0,
+    "restricted": 0.0,
+    "full": 0.307,
+    "no_plan": 0.277,
+    "no_verify": 0.277
+  },
+  {
+    "task_id": "TEST4_property",
+    "category": "Testing",
+    "oracle": 0.287,
+    "restricted": 0.0,
+    "full": 0.287,
+    "no_plan": 0.287,
+    "no_verify": 0.287
+  },
+  {
+    "task_id": "TEST5_mutation_resistant",
+    "category": "Testing",
+    "oracle": 0.223,
+    "restricted": 0.223,
+    "full": 0.277,
+    "no_plan": 0.277,
+    "no_verify": 0.307
+  },
+  {
+    "task_id": "TEST6_property_based",
+    "category": "Testing",
+    "oracle": 0.3,
+    "restricted": 0.1,
+    "full": 0.667,
+    "no_plan": 0.1,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "TEST7_integration_suite",
+    "category": "Testing",
+    "oracle": 0.0,
+    "restricted": 0.267,
+    "full": 1.0,
+    "no_plan": 0.267,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "TEST8_unit_basic",
+    "category": "Testing",
+    "oracle": 0.75,
+    "restricted": 0.75,
+    "full": 0.88,
+    "no_plan": 0.88,
+    "no_verify": 0.88
+  },
+  {
+    "task_id": "TEST9_mock_service",
+    "category": "Testing",
+    "oracle": 0.297,
+    "restricted": 0.0,
+    "full": 0.333,
+    "no_plan": 0.26,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "TRAP6_deprecated_api",
+    "category": "Adversarial",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 0.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "TRAP7_test_pollution",
+    "category": "Adversarial",
+    "oracle": 0.8,
+    "restricted": 0.8,
     "full": 0.8,
-    "no_plan": 0.7,
+    "no_plan": 0.8,
     "no_verify": 0.8
+  },
+  {
+    "task_id": "TRAP8_config_override",
+    "category": "Adversarial",
+    "oracle": 0.9,
+    "restricted": 0.9,
+    "full": 0.9,
+    "no_plan": 0.9,
+    "no_verify": 0.9
+  },
+  {
+    "task_id": "cross1_api_contract",
+    "category": "Cross-System",
+    "oracle": 0.5,
+    "restricted": 0.833,
+    "full": 0.833,
+    "no_plan": 0.833,
+    "no_verify": 0.867
+  },
+  {
+    "task_id": "cross2_schema_evolution",
+    "category": "Cross-System",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 0.889
+  },
+  {
+    "task_id": "cross3_protocol_bridge",
+    "category": "Cross-System",
+    "oracle": 0.867,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "cross4_auth_federation",
+    "category": "Cross-System",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "crypto1_nonce_reuse",
+    "category": "Security",
+    "oracle": 0.2,
+    "restricted": 0.2,
+    "full": 0.2,
+    "no_plan": 0.2,
+    "no_verify": 0.2
+  },
+  {
+    "task_id": "crypto2_timing_safe",
+    "category": "Security",
+    "oracle": 1.0,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "crypto3_cert_chain",
+    "category": "Security",
+    "oracle": 0.067,
+    "restricted": 0.067,
+    "full": 0.067,
+    "no_plan": 0.0,
+    "no_verify": 0.133
+  },
+  {
+    "task_id": "crypto4_kdf_migration",
+    "category": "Security",
+    "oracle": 0.2,
+    "restricted": 0.067,
+    "full": 0.2,
+    "no_plan": 0.2,
+    "no_verify": 0.2
+  },
+  {
+    "task_id": "dist1_queue_race",
+    "category": "Distributed",
+    "oracle": 0.444,
+    "restricted": 0.361,
+    "full": 0.444,
+    "no_plan": 0.417,
+    "no_verify": 0.417
+  },
+  {
+    "task_id": "dist2_consensus_partition",
+    "category": "Distributed",
+    "oracle": 0.417,
+    "restricted": 0.417,
+    "full": 0.444,
+    "no_plan": 0.417,
+    "no_verify": 0.417
+  },
+  {
+    "task_id": "dist3_idempotency",
+    "category": "Distributed",
+    "oracle": 0.528,
+    "restricted": 0.667,
+    "full": 0.417,
+    "no_plan": 0.722,
+    "no_verify": 0.806
+  },
+  {
+    "task_id": "dist4_clock_skew",
+    "category": "Distributed",
+    "oracle": 0.917,
+    "restricted": 0.944,
+    "full": 0.972,
+    "no_plan": 0.833,
+    "no_verify": 0.722
+  },
+  {
+    "task_id": "trap1_spec_conflict",
+    "category": "Adversarial",
+    "oracle": 0.933,
+    "restricted": 0.933,
+    "full": 0.933,
+    "no_plan": 0.933,
+    "no_verify": 0.933
+  },
+  {
+    "task_id": "trap2_false_fix",
+    "category": "Adversarial",
+    "oracle": 1.0,
+    "restricted": 0.917,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 0.792
+  },
+  {
+    "task_id": "trap3_metric_mirage",
+    "category": "Adversarial",
+    "oracle": 0.867,
+    "restricted": 1.0,
+    "full": 1.0,
+    "no_plan": 1.0,
+    "no_verify": 1.0
+  },
+  {
+    "task_id": "trap4_version_paradox",
+    "category": "Adversarial",
+    "oracle": 0.553,
+    "restricted": 0.303,
+    "full": 0.527,
+    "no_plan": 0.553,
+    "no_verify": 0.303
+  },
+  {
+    "task_id": "trap5_security_theater",
+    "category": "Adversarial",
+    "oracle": 0.62,
+    "restricted": 0.237,
+    "full": 0.597,
+    "no_plan": 0.953,
+    "no_verify": 0.903
   }
 ]

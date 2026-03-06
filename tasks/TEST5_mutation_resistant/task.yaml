@@ -1,0 +1,11 @@
+task_id: TEST5_mutation_resistant
+domain: testing
+difficulty: hard
+languages: [python]
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 4
+lines_changed_expected: 80
+tags: [mutation-testing, test-generation, edge-cases]

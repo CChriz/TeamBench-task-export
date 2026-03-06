@@ -1,0 +1,128 @@
+{
+  "A": {
+    "name": "Hidden Constraints",
+    "n_tasks": 10,
+    "tasks": [
+      "CRYPTO6_token_validation",
+      "D7_etl_reconciliation",
+      "DIST5_leader_election",
+      "DIST6_distributed_lock",
+      "INC9_log_forensics",
+      "MULTI2_microservice_debug",
+      "MULTI5_deploy_pipeline",
+      "crypto3_cert_chain",
+      "dist1_queue_race",
+      "dist4_clock_skew"
+    ],
+    "avg_tni": 1.029,
+    "avg_uplift": -0.021,
+    "avg_planning_value": 0.047,
+    "avg_verification_value": -0.009,
+    "team_gt_oracle": 2,
+    "team_gt_oracle_pct": 0.2,
+    "avg_oracle_score": 0.589,
+    "avg_full_score": 0.568
+  },
+  "B": {
+    "name": "Adversarial Traps",
+    "n_tasks": 12,
+    "tasks": [
+      "CRYPTO5_tls_config",
+      "INC8_cascading_timeout",
+      "INC8_memory_leak",
+      "INT2_api_versioning",
+      "TRAP6_deprecated_api",
+      "TRAP7_test_pollution",
+      "TRAP8_config_override",
+      "crypto1_nonce_reuse",
+      "trap1_spec_conflict",
+      "trap2_false_fix",
+      "trap4_version_paradox",
+      "trap5_security_theater"
+    ],
+    "avg_tni": 0.996,
+    "avg_uplift": -0.004,
+    "avg_planning_value": 0.043,
+    "avg_verification_value": 0.002,
+    "team_gt_oracle": 1,
+    "team_gt_oracle_pct": 0.08,
+    "avg_oracle_score": 0.726,
+    "avg_full_score": 0.721
+  },
+  "C": {
+    "name": "Multi-Criteria Opt.",
+    "n_tasks": 5,
+    "tasks": [
+      "IR6_search_index",
+      "O7_capacity_planning",
+      "SPEC7_config_schema",
+      "crypto4_kdf_migration",
+      "dist3_idempotency"
+    ],
+    "avg_tni": 0.758,
+    "avg_uplift": -0.022,
+    "avg_planning_value": -0.061,
+    "avg_verification_value": -0.078,
+    "team_gt_oracle": 0,
+    "team_gt_oracle_pct": 0.0,
+    "avg_oracle_score": 0.546,
+    "avg_full_score": 0.523
+  },
+  "D": {
+    "name": "Cross-System Contract",
+    "n_tasks": 8,
+    "tasks": [
+      "CROSS5_event_schema",
+      "CROSS6_grpc_rest_bridge",
+      "CROSS7_config_drift",
+      "MULTI4_monorepo_fix",
+      "MULTI8_sdk_mismatch",
+      "PIPE3_stream_processing",
+      "cross1_api_contract",
+      "cross3_protocol_bridge"
+    ],
+    "avg_tni": 1.013,
+    "avg_uplift": -0.049,
+    "avg_planning_value": 0.012,
+    "avg_verification_value": -0.167,
+    "team_gt_oracle": 4,
+    "team_gt_oracle_pct": 0.5,
+    "avg_oracle_score": 0.727,
+    "avg_full_score": 0.678
+  },
+  "E": {
+    "name": "Compliance Rules",
+    "n_tasks": 2,
+    "tasks": [
+      "P8_access_control",
+      "cross4_auth_federation"
+    ],
+    "avg_tni": 1.167,
+    "avg_uplift": 0.05,
+    "avg_planning_value": 0.0,
+    "avg_verification_value": 0.0,
+    "team_gt_oracle": 1,
+    "team_gt_oracle_pct": 0.5,
+    "avg_oracle_score": 0.65,
+    "avg_full_score": 0.7
+  },
+  "F": {
+    "name": "Ordered Dependencies",
+    "n_tasks": 5,
+    "tasks": [
+      "INC10_rollback_plan",
+      "INT3_db_migration",
+      "PIPE2_data_pipeline",
+      "cross2_schema_evolution",
+      "dist2_consensus_partition"
+    ],
+    "avg_tni": 0.613,
+    "avg_uplift": -0.174,
+    "avg_planning_value": -0.154,
+    "avg_verification_value": -0.192,
+    "team_gt_oracle": 1,
+    "team_gt_oracle_pct": 0.2,
+    "avg_oracle_score": 0.623,
+    "avg_full_score": 0.449
+  }
+}

@@ -1,0 +1,8 @@
+task_id: TRAP7_test_pollution
+category: Adversarial
+difficulty: hard
+languages: [python]
+description: "8 test failures; 3 from test pollution (shared mutable state); 5 from real code bugs"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

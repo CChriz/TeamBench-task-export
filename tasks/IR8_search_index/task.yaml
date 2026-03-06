@@ -1,0 +1,11 @@
+task_id: IR8_search_index
+domain: information_retrieval
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+tags: [search, inverted-index, bm25, tokenization, information-retrieval]
+workspace_file_count: 3
+lines_changed_expected: 30
+parameterized: true

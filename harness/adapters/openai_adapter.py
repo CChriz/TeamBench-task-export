@@ -2,18 +2,19 @@
 OpenAI adapter for TeamBench agent driver.
 
 Implements ToolCallAdapter using the `openai` Python SDK.
-Supports GPT-4o, GPT-4-turbo, o1, o3, and other OpenAI chat models.
+Supports GPT-4o, GPT-4-turbo, GPT-5-nano, GPT-5-mini, o1, o3, and other OpenAI chat models.
 
 Requires: pip install openai
-API key:  OPENAI_API_KEY environment variable
+API key:  OPENAI_API_KEY environment variable or ~/CoDaS_v4/.env
 """
 from __future__ import annotations
 
 import json
 import os
+import time
 from typing import Any
 
-from harness.agent_interface import AdapterResponse, ToolCallAdapter
+from harness.agent_interface import AdapterResponse, ModelAdapter, ToolCallAdapter
 
 
 def _standard_to_openai_functions(tools: list[dict]) -> list[dict]:
@@ -31,11 +32,32 @@ def _standard_to_openai_functions(tools: list[dict]) -> list[dict]:
     ]
 
 
-class OpenAIAdapter(ToolCallAdapter):
+def _load_all_openai_keys() -> list[str]:
+    """Load all OPENAI_API_KEY* values from ~/CoDaS_v4/.env and local .env."""
+    keys = []
+    seen = set()
+    for env_path in [os.path.expanduser("~/CoDaS_v4/.env"), ".env"]:
+        if not os.path.exists(env_path):
+            continue
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("OPENAI_API_KEY") and "=" in line:
+                    val = line.split("=", 1)[1].strip().strip('"').strip("'")
+                    if val and val not in seen:
+                        keys.append(val)
+                        seen.add(val)
+    env_key = os.environ.get("OPENAI_API_KEY", "")
+    if env_key and env_key not in seen:
+        keys.insert(0, env_key)
+    return keys
+
+
+class OpenAIAdapter(ModelAdapter, ToolCallAdapter):
     """OpenAI GPT/o-series adapter for TeamBench.
 
     Uses the openai >= 1.0 SDK with the chat completions API and
-    parallel function calling.
+    parallel function calling. Supports API key rotation for resilience.
     """
 
     def __init__(
@@ -47,6 +69,7 @@ class OpenAIAdapter(ToolCallAdapter):
     ):
         try:
             import openai
+            self._openai = openai
         except ImportError as exc:
             raise ImportError(
                 "The 'openai' package is required for OpenAIAdapter. "
@@ -59,12 +82,55 @@ class OpenAIAdapter(ToolCallAdapter):
         self._total_input_tokens = 0
         self._total_output_tokens = 0
 
-        key = api_key or os.environ.get("OPENAI_API_KEY", "")
-        if not key:
+        if api_key:
+            self._keys = [api_key]
+        else:
+            self._keys = _load_all_openai_keys()
+        if not self._keys:
             raise ValueError(
-                "OPENAI_API_KEY not set. Provide api_key or set the environment variable."
+                "No OPENAI_API_KEY found. Provide api_key or set the environment variable."
             )
-        self._client = openai.OpenAI(api_key=key)
+        self._key_index = 0
+        self._client = self._openai.OpenAI(api_key=self._keys[0])
+        if len(self._keys) > 1:
+            print(f"  [openai] Loaded {len(self._keys)} API keys for rotation")
+
+    def _rotate_key(self) -> None:
+        """Switch to the next API key in the rotation."""
+        if len(self._keys) <= 1:
+            return
+        self._key_index = (self._key_index + 1) % len(self._keys)
+        self._client = self._openai.OpenAI(api_key=self._keys[self._key_index])
+
+    # ------------------------------------------------------------------
+    # ModelAdapter (simple text generation)
+    # ------------------------------------------------------------------
+
+    def generate(self, messages: list[dict], **kwargs) -> str:
+        """Simple text generation (ModelAdapter contract)."""
+        oai_messages = []
+        for msg in messages:
+            role = msg.get("role", "user")
+            if role == "tool":
+                role = "user"
+            oai_messages.append({"role": role, "content": msg.get("content", "")})
+
+        api_kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": oai_messages,
+        }
+        # GPT-5 and o-series use max_completion_tokens; older models use max_tokens
+        if self.model.startswith(("gpt-5", "o1", "o3", "o4")):
+            api_kwargs["max_completion_tokens"] = self.max_tokens
+        else:
+            api_kwargs["max_tokens"] = self.max_tokens
+        if not self.model.startswith(("o1", "o3", "o4", "gpt-5")):
+            api_kwargs["temperature"] = self.temperature
+
+        response = self._call_with_retry(**api_kwargs)
+        self._track_usage(response)
+        choice = response.choices[0] if response.choices else None
+        return (choice.message.content or "") if choice else ""
 
     # ------------------------------------------------------------------
     # ToolCallAdapter interface
@@ -83,16 +149,20 @@ class OpenAIAdapter(ToolCallAdapter):
         kwargs: dict[str, Any] = {
             "model": self.model,
             "messages": oai_messages,
-            "max_tokens": self.max_tokens,
         }
-        # o-series reasoning models do not support temperature
-        if not self.model.startswith(("o1", "o3", "o4")):
+        # GPT-5 and o-series use max_completion_tokens; older models use max_tokens
+        if self.model.startswith(("gpt-5", "o1", "o3", "o4")):
+            kwargs["max_completion_tokens"] = self.max_tokens
+        else:
+            kwargs["max_tokens"] = self.max_tokens
+        # o-series and GPT-5 models do not support custom temperature
+        if not self.model.startswith(("o1", "o3", "o4", "gpt-5")):
             kwargs["temperature"] = self.temperature
         if oai_tools:
             kwargs["tools"] = oai_tools
             kwargs["tool_choice"] = "auto"
 
-        response = self._client.chat.completions.create(**kwargs)
+        response = self._call_with_retry(**kwargs)
         self._track_usage(response)
         return self._parse_response(response)
 
@@ -147,6 +217,27 @@ class OpenAIAdapter(ToolCallAdapter):
 
         done = "DONE" in text or "TASK_COMPLETE" in text
         return AdapterResponse(text=text, tool_calls=tool_calls, done=done)
+
+    def _call_with_retry(self, max_retries: int = 8, **kwargs) -> Any:
+        """Call OpenAI API with exponential backoff and key rotation."""
+        for attempt in range(max_retries):
+            try:
+                return self._client.chat.completions.create(**kwargs)
+            except Exception as e:
+                error_str = str(e).lower()
+                retryable = ("429" in error_str or "rate" in error_str
+                             or "503" in error_str or "unavailable" in error_str
+                             or "overloaded" in error_str or "server_error" in error_str
+                             or "timeout" in error_str)
+                if retryable:
+                    self._rotate_key()
+                    wait = min(2 ** attempt * 2, 120)
+                    key_info = f" (key {self._key_index + 1}/{len(self._keys)})" if len(self._keys) > 1 else ""
+                    print(f"  [retry] {attempt + 1}/{max_retries} in {wait}s{key_info}...")
+                    time.sleep(wait)
+                    continue
+                raise
+        raise RuntimeError(f"OpenAI API failed after {max_retries} retries")
 
     def _track_usage(self, response: Any) -> None:
         """Accumulate token counts from response usage."""

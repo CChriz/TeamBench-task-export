@@ -1,0 +1,11 @@
+task_id: O9_logging_config
+domain: operations
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [logging, configuration, pii-masking, structured-logging]
+workspace_file_count: 4
+lines_changed_expected: 50
+parameterized: true

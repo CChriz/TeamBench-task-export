@@ -1,17 +1,149 @@
 task_id,category,planning_value,verification_value,team_uplift,team_gt_oracle
+CR1_review_respond,Code Review,-0.62,-0.62,-0.5,False
+CR2_style_enforce,Code Review,0.0,0.08,0.08,False
+CR3_perf_review,Code Review,0.1,0.0,0.1,True
 CR4_api_review,Code Review,0.06,0.37,0.06,True
+CR5_test_coverage,Code Review,0.13,0.1033,0.13,True
+CR6_review_checklist,Code Review,0.03,0.0,0.2433,True
+CROSS5_event_schema,Cross-System,0.0,-0.3,-0.3,False
+CROSS6_grpc_rest_bridge,Cross-System,-1.0,-1.0,-1.0,False
+CROSS7_config_drift,Cross-System,0.0,0.0,0.0,False
+CRYPTO5_tls_config,Security,0.0,0.1,0.1,False
+CRYPTO6_token_validation,Security,0.0,0.0,0.0,False
 D1_schema_drift,Data Engineering,0.12,0.12,0.0,True
+D2_data_quality,Data Engineering,-0.46,0.0,-0.46,True
+D3_schema_migration,Data Engineering,0.09,0.0,0.0,True
+D4_data_pipeline,Data Engineering,-0.59,-0.65,-0.59,False
+D5_query_optimize,Data Engineering,-0.13,-0.07,-0.07,False
+D6_data_reconcile,Data Engineering,0.06,0.17,0.06,True
+D7_etl_reconciliation,Data Engineering,0.0,0.1,0.0,False
+D8_csv_cleanup,Data Engineering,0.4067,0.0,0.74,True
+D9_schema_validation,Data Engineering,0.1,0.1,0.1,True
+DIST5_leader_election,Distributed,0.0,0.0,0.0,False
+DIST6_distributed_lock,Distributed,0.1,-0.3667,-0.0667,False
+GO1_concurrency_fix,Software Eng.,-0.5,-0.88,-0.75,False
+GO2_race_condition,Software Eng.,0.0,0.0,0.08,True
+INC10_rollback_plan,Incident Response,-0.4,-0.4,-0.4,False
 INC1_cascade_failure,Incident Response,0.1,0.0,0.1,True
+INC2_data_corruption,Incident Response,1.0,0.0,0.1,True
+INC3_memory_leak,Incident Response,0.0,0.0,-0.83,False
+INC4_dns_miscfg,Incident Response,0.42,0.0,0.08,True
+INC5_cert_expiry,Incident Response,1.0,0.0,0.09,True
+INC6_deadlock,Incident Response,0.0,-0.08,0.0,False
+INC7_rollback,Incident Response,-0.83,-0.83,-0.83,False
+INC8_cascading_timeout,Incident Response,-0.1,-0.1,-0.1,True
+INC8_memory_leak,Incident Response,0.0,-0.1,-0.1,False
+INC9_log_forensics,Incident Response,0.1,0.0,0.1,False
 INT1_pipeline_repair,Integration,-0.08,-0.25,0.0,True
+INT2_api_versioning,Integration,0.0,0.0,0.0,False
+INT3_db_migration,Integration,-0.4,-0.7,-0.6,False
 IR1_evidence_qa,Information Retrieval,0.0,-0.17,0.0,False
-LH2_budgeted_workflow,Long-Horizon,0.3,0.2,0.33,True
-MULTI1_fullstack_fix,Multi-language,0.25,0.75,0.5,True
+IR2_misinformation_trap,Information Retrieval,0.0,-0.14,0.0,False
+IR3_multi_source,Information Retrieval,0.0,0.0,0.08,True
+IR4_temporal,Information Retrieval,0.07,0.13,0.07,True
+IR5_search_ranking,Information Retrieval,0.0,0.0,0.2967,True
+IR6_search_index,Information Retrieval,0.0,0.0,0.0,False
+IR7_doc_clustering,Information Retrieval,0.75,-0.13,0.0,False
+IR8_search_index,Information Retrieval,-1.0,-0.9,-0.9,False
+JS1_api_migration,Software Eng.,-0.57,0.0,-0.71,False
+JS2_xss_sanitize,Software Eng.,0.0,0.87,0.09,True
+LH1_long_horizon,Long-Horizon,0.0,0.0,0.0,False
+LH2_budgeted_workflow,Long-Horizon,0.7667,0.7333,0.7767,True
+LH3_multi_service,Long-Horizon,0.05,0.0,0.1,True
+LH4_staged_deploy,Long-Horizon,0.0,0.29,0.0,False
+LH5_data_migration,Long-Horizon,0.0,-0.09,0.0,False
+LH6_audit_trail,Long-Horizon,-0.36,-0.55,-0.55,False
+LH7_zero_downtime,Long-Horizon,-0.82,-0.91,-0.27,False
+MULTI1_fullstack_fix,Multi-language,0.75,0.25,0.8333,True
+MULTI2_api_frontend,Multi-language,0.0,-0.06,0.0,False
+MULTI2_microservice_debug,Multi-language,0.0,0.0,0.0,False
+MULTI3_polyglot,Multi-language,0.0,0.0,0.0,False
+MULTI4_monorepo_fix,Multi-language,0.1,0.0,0.1,True
+MULTI5_deploy_pipeline,Multi-language,0.0333,-0.0333,0.0667,True
+MULTI6_fullstack_bug,Multi-language,0.0,0.0,0.1,True
+MULTI7_polyglot_test,Multi-language,0.0,0.0,0.1,True
+MULTI8_sdk_mismatch,Multi-language,0.0,0.0,0.0433,True
 NEG1_tradeoff_config,Negotiation,-0.1,0.0,-0.1,False
-O2_incident_rootcause,Operations,0.2,-0.2,0.2,False
-P1_policy_config,Policy,0.5,0.0,0.07,False
-PIPE1_etl_fix,Pipeline,0.09,0.0,0.37,False
-S1_hidden_spec,Software Eng.,0.12,0.0,-0.38,True
+NEG2_cost_perf,Negotiation,0.3333,0.6667,0.6667,False
+NEG3_tech_debt,Negotiation,0.0,0.0,0.2,True
+NEG4_resource_allocation,Negotiation,0.1,0.0,0.1,True
+NEG5_sla_tradeoff,Negotiation,0.1,0.0,0.1,True
+O1_service_health,Operations,0.0833,-0.0833,0.0833,True
+O2_incident_rootcause,Operations,0.0667,-0.0667,0.0667,False
+O3_log_analysis,Operations,-0.0267,0.0,0.1533,False
+O4_monitoring,Operations,0.0233,0.0,0.3333,False
+O5_container_debug,Operations,0.13,0.73,0.13,True
+O6_perf_tuning,Operations,-1.0,0.0,-1.0,False
+O7_capacity_planning,Operations,0.0,0.0,0.1,False
+O8_dockerfile_fix,Operations,0.2867,0.2867,0.05,True
+O9_logging_config,Operations,0.6,0.0,0.1,True
+P1_policy_config,Policy,0.0,0.0,0.0,False
+P2_spec_arbitration,Policy,0.0,-0.5,0.0,False
+P3_access_control,Policy,0.09,0.03,0.06,True
+P4_data_retention,Policy,0.21,-0.07,0.0,False
+P5_audit_logging,Policy,-0.07,-0.07,0.0,False
+P6_license_check,Policy,0.81,0.0,0.81,True
+P7_data_retention,Policy,1.0,0.0,0.74,True
+P8_access_control,Policy,0.0,0.0,0.1,True
+PIPE1_etl_fix,Pipeline,0.03,0.0,0.1233,False
+PIPE2_api_gateway,Pipeline,-0.92,-1.0,-0.92,False
+PIPE2_data_pipeline,Pipeline,0.0,0.0,0.0,False
+PIPE3_msg_queue,Pipeline,-0.62,-0.85,-0.77,False
+PIPE3_stream_processing,Pipeline,1.0,0.0,0.0,False
+PIPE4_ci_cd,Pipeline,0.07,0.0,0.07,True
+S1_hidden_spec,Software Eng.,0.0,0.0,0.0,False
 S2_dependency_conflict,Software Eng.,-0.25,-0.25,-0.25,False
-SEC1_vuln_patch,Security,0.17,0.0,0.33,True
+S3_refactor_extract,Software Eng.,0.0,0.17,0.0,False
+S4_backward_compat,Software Eng.,0.0,-0.08,0.0,False
+S5_error_handling,Software Eng.,0.0,0.0667,0.0867,True
+S6_caching,Software Eng.,-0.62,-0.62,-0.62,False
+S7_env_config,Software Eng.,0.05,0.0,0.05,True
+SCALE1_codebase_migration,Long-Horizon,0.0233,0.0,0.0467,True
+SEC1_vuln_patch,Security,0.0,0.0,0.0,False
+SEC2_auth_bypass,Security,-0.2,0.0,0.1,False
+SEC3_crypto_upgrade,Security,0.05,0.1267,0.1267,True
+SEC4_input_validation,Security,-0.31,-0.38,-0.31,False
+SEC5_secrets_rotation,Security,0.64,-0.36,0.41,True
+SEC6_csrf_protection,Security,-0.31,-0.08,0.0,False
+SEC7_rate_limiting,Security,0.27,-0.07,0.07,True
+SEC8_dependency_audit,Security,0.09,0.25,0.0,True
+SEC9_vuln_triage,Security,-0.62,-0.77,-0.69,False
 SPEC1_feature_impl,Specification,-0.09,-0.09,-0.45,False
-TEST1_spec_to_tests,Testing,0.1,0.0,0.5,True
+SPEC2_api_design,Specification,0.0,-0.08,0.0,False
+SPEC3_data_model,Specification,0.262,0.262,0.262,False
+SPEC4_migration,Specification,0.0,0.0,0.0,True
+SPEC5_config_system,Specification,0.4567,0.4567,0.4567,False
+SPEC6_rfc_impl,Specification,0.05,0.0,0.05,True
+SPEC7_config_schema,Specification,0.0,0.0,0.0833,False
+SQL1_query_repair,Data Engineering,0.0,0.0,0.0,False
+SQL2_query_optimize,Data Engineering,0.4,0.4,0.0,True
+SYNTH1_distributed_debug,Long-Horizon,0.1233,0.0333,0.0933,True
+TEST1_spec_to_tests,Testing,0.0333,0.0,0.1667,True
+TEST2_regression,Testing,0.09,-0.3333,0.6667,True
+TEST3_integration,Testing,0.03,0.03,0.3067,True
+TEST4_property,Testing,0.0,0.0,0.2867,False
+TEST5_mutation_resistant,Testing,0.0,-0.03,0.0533,True
+TEST6_property_based,Testing,0.5667,-0.3333,0.5667,True
+TEST7_integration_suite,Testing,0.7333,0.0,0.7333,True
+TEST8_unit_basic,Testing,0.0,0.0,0.13,True
+TEST9_mock_service,Testing,0.0733,-0.6667,0.3333,True
+TRAP6_deprecated_api,Adversarial,1.0,0.0,0.0,False
+TRAP7_test_pollution,Adversarial,0.0,0.0,0.0,False
+TRAP8_config_override,Adversarial,0.0,0.0,0.0,False
+cross1_api_contract,Cross-System,0.0,-0.0333,0.0,True
+cross2_schema_evolution,Cross-System,0.0,0.1111,0.0,False
+cross3_protocol_bridge,Cross-System,0.0,0.0,0.0,True
+cross4_auth_federation,Cross-System,0.0,0.0,0.0,False
+crypto1_nonce_reuse,Security,0.0,0.0,0.0,False
+crypto2_timing_safe,Security,0.0,0.0,0.0,False
+crypto3_cert_chain,Security,0.0667,-0.0667,0.0,False
+crypto4_kdf_migration,Security,0.0,0.0,0.1333,False
+dist1_queue_race,Distributed,0.0278,0.0278,0.0833,False
+dist2_consensus_partition,Distributed,0.0278,0.0278,0.0278,True
+dist3_idempotency,Distributed,-0.3055,-0.3889,-0.25,False
+dist4_clock_skew,Distributed,0.1389,0.25,0.0278,True
+trap1_spec_conflict,Adversarial,0.0,0.0,0.0,False
+trap2_false_fix,Adversarial,0.0,0.2083,0.0833,False
+trap3_metric_mirage,Adversarial,0.0,0.0,0.0,True
+trap4_version_paradox,Adversarial,-0.0267,0.2233,0.2233,False
+trap5_security_theater,Adversarial,-0.3567,-0.3067,0.36,False

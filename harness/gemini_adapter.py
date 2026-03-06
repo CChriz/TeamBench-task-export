@@ -41,11 +41,34 @@ def _standard_to_gemini_declarations(tools: list[dict]) -> list[types.Tool]:
     return [types.Tool(function_declarations=declarations)]
 
 
+def _load_all_gemini_keys() -> list[str]:
+    """Load all GEMINI_API_KEY* values from ~/CoDaS_v4/.env and local .env."""
+    keys = []
+    seen = set()
+    for env_path in [os.path.expanduser("~/CoDaS_v4/.env"), ".env"]:
+        if not os.path.exists(env_path):
+            continue
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("GEMINI_API_KEY") and "=" in line:
+                    val = line.split("=", 1)[1].strip().strip('"').strip("'")
+                    if val and val not in seen:
+                        keys.append(val)
+                        seen.add(val)
+    # Also check environment variable
+    env_key = os.environ.get("GEMINI_API_KEY", "")
+    if env_key and env_key not in seen:
+        keys.insert(0, env_key)
+    return keys
+
+
 class GeminiAdapter(ModelAdapter, ToolCallAdapter):
     """Gemini model adapter with tool calling support.
 
     Implements both ModelAdapter (simple text generation) and
     ToolCallAdapter (standard tool-calling interface used by AgentLoop).
+    Supports API key rotation across multiple keys for resilience against 503 errors.
     """
 
     def __init__(
@@ -61,10 +84,40 @@ class GeminiAdapter(ModelAdapter, ToolCallAdapter):
         self._total_input_tokens = 0
         self._total_output_tokens = 0
 
-        key = api_key or os.environ.get("GEMINI_API_KEY", "")
-        if not key:
-            raise ValueError("GEMINI_API_KEY not set. Provide api_key or set the environment variable.")
-        self.client = genai.Client(api_key=key)
+        if api_key:
+            self._keys = [api_key]
+        else:
+            self._keys = _load_all_gemini_keys()
+        if not self._keys:
+            raise ValueError("No GEMINI_API_KEY found. Provide api_key or set the environment variable.")
+        # Validate keys: remove any that return 400 INVALID_ARGUMENT
+        valid_keys = []
+        for k in self._keys:
+            try:
+                test_client = genai.Client(api_key=k)
+                test_client.models.generate_content(
+                    model=self.model,
+                    contents=[types.Content(role="user", parts=[types.Part.from_text(text="hi")])],
+                    config=types.GenerateContentConfig(max_output_tokens=5),
+                )
+                valid_keys.append(k)
+            except Exception as e:
+                if "invalid_argument" in str(e).lower() or "api key not valid" in str(e).lower():
+                    print(f"  [gemini] Skipping invalid key ({k[:8]}...)")
+                else:
+                    valid_keys.append(k)  # Keep keys that fail for other reasons (503/429)
+        self._keys = valid_keys or self._keys[:1]  # Fallback to first key if all fail
+        self._key_index = 0
+        self.client = genai.Client(api_key=self._keys[0])
+        if len(self._keys) > 1:
+            print(f"  [gemini] Loaded {len(self._keys)} valid API keys for rotation")
+
+    def _rotate_key(self) -> None:
+        """Switch to the next API key in the rotation."""
+        if len(self._keys) <= 1:
+            return
+        self._key_index = (self._key_index + 1) % len(self._keys)
+        self.client = genai.Client(api_key=self._keys[self._key_index])
 
     # ------------------------------------------------------------------
     # ModelAdapter (simple text generation)
@@ -178,9 +231,9 @@ class GeminiAdapter(ModelAdapter, ToolCallAdapter):
         contents: list[types.Content],
         system_instruction: str | None = None,
         tools: list[types.Tool] | None = None,
-        max_retries: int = 5,
+        max_retries: int = 8,
     ) -> types.GenerateContentResponse:
-        """Call Gemini API with exponential backoff for rate limits."""
+        """Call Gemini API with exponential backoff and key rotation for 503/429 errors."""
         config = types.GenerateContentConfig(
             temperature=self.temperature,
             max_output_tokens=self.max_output_tokens,
@@ -198,9 +251,15 @@ class GeminiAdapter(ModelAdapter, ToolCallAdapter):
                 )
             except Exception as e:
                 error_str = str(e).lower()
-                if "429" in error_str or "resource_exhausted" in error_str or "rate" in error_str:
-                    wait = min(2 ** attempt * 2, 60)
-                    print(f"  [rate-limit] Retry {attempt + 1}/{max_retries} in {wait}s...")
+                retryable = ("429" in error_str or "resource_exhausted" in error_str
+                             or "rate" in error_str or "503" in error_str
+                             or "unavailable" in error_str
+                             or "api key not valid" in error_str)
+                if retryable:
+                    self._rotate_key()
+                    wait = min(2 ** attempt * 2, 120)
+                    key_info = f" (key {self._key_index + 1}/{len(self._keys)})" if len(self._keys) > 1 else ""
+                    print(f"  [retry] {attempt + 1}/{max_retries} in {wait}s{key_info}...")
                     time.sleep(wait)
                     continue
                 raise

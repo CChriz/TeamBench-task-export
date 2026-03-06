@@ -1,0 +1,11 @@
+task_id: LH6_audit_trail
+domain: long_horizon
+difficulty: hard
+languages: [python]
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 8
+lines_changed_expected: 80
+tags: [audit-trail, bug-fix, constraint, long-horizon]

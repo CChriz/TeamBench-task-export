@@ -1,0 +1,8 @@
+task_id: SPEC7_config_schema
+category: SWE
+difficulty: hard
+languages: [python]
+description: "Implement config validator from 15-field JSON schema with cross-field constraints"
+tni_pattern: C
+parameterized: true
+seeds: [0, 1, 2]

@@ -2,54 +2,107 @@
 STATISTICAL ANALYSIS — TeamBench Ablation Study
 ======================================================================
 
-Sample: 35 tasks, 345 total runs
+Sample: 148 tasks, 1392 total runs
 Model: Gemini 2.5 Flash
 
 --- Condition-Level Partial Scores ---
-  oracle              : avg=0.589  n= 69  pass_rate=0.551 [0.435, 0.667]
-  restricted          : avg=0.577  n= 69  pass_rate=0.507 [0.391, 0.623]
-  full                : avg=0.614  n= 69  pass_rate=0.551 [0.435, 0.667]
-  team_no_plan        : avg=0.609  n= 69  pass_rate=0.551 [0.435, 0.667]
-  team_no_verify      : avg=0.591  n= 69  pass_rate=0.522 [0.406, 0.638]
+  oracle              : avg=0.470  n=256  pass_rate=0.473 [0.414, 0.535]
+  restricted          : avg=0.433  n=256  pass_rate=0.449 [0.387, 0.512]
+  full                : avg=0.525  n=256  pass_rate=0.523 [0.465, 0.586]
+  team_no_plan        : avg=0.455  n=256  pass_rate=0.465 [0.402, 0.527]
+  team_no_verify      : avg=0.554  n=256  pass_rate=0.555 [0.492, 0.613]
 
 --- Team Uplift Analysis ---
-  Avg uplift (Full - Restricted): +0.048
-  Positive uplift: 14/35 (40%)
-  Negative uplift: 4/35 (11%)
-  Neutral:         17/35 (49%)
+  Avg uplift (Full - Restricted): +0.003
+  Positive uplift: 73/148 (49%)
+  Negative uplift: 28/148 (19%)
+  Neutral:         47/148 (32%)
 
 --- Planning Value ---
-  Avg Planning Value: +0.019
-  Positive: 12/30 (40%)
-  Max: +0.300 (LH2_budgeted_workflow)
+  Avg Planning Value: +0.020
+  Positive: 60/139 (43%)
+  Max: +1.000 (INC2_data_corruption)
 
 --- Verification Value ---
-  Avg Verification Value: +0.028
-  Positive: 10/30 (33%)
+  Avg Verification Value: -0.066
+  Positive: 32/139 (23%)
 
 --- Team > Oracle (Key Finding) ---
-  Tasks where team outperforms oracle: 12/35
-    LH2_budgeted_workflow     +0.39
+  Tasks where team outperforms oracle: 65/148
+    TEST7_integration_suite   +1.00
+    SPEC4_migration           +0.85
+    LH2_budgeted_workflow     +0.80
+    MULTI1_fullstack_fix      +0.75
+    P6_license_check          +0.71
+    D8_csv_cleanup            +0.70
+    P7_data_retention         +0.70
+    TEST2_regression          +0.67
+    SQL2_query_optimize       +0.40
+    TEST6_property_based      +0.37
     INT1_pipeline_repair      +0.34
     cross1_api_contract       +0.33
-    MULTI1_fullstack_fix      +0.25
+    SEC5_secrets_rotation     +0.33
+    TEST3_integration         +0.31
+    CR5_test_coverage         +0.26
+    CR6_review_checklist      +0.24
+    NEG3_tech_debt            +0.20
     cross3_protocol_bridge    +0.13
     trap3_metric_mirage       +0.13
-    TEST1_spec_to_tests       +0.10
+    O5_container_debug        +0.13
+    SEC7_rate_limiting        +0.13
+    TEST8_unit_basic          +0.13
+    P8_access_control         +0.10
+    MULTI5_deploy_pipeline    +0.10
+    CR3_perf_review           +0.10
+    D9_schema_validation      +0.10
     INC1_cascade_failure      +0.10
+    INC2_data_corruption      +0.10
+    INC8_cascading_timeout    +0.10
+    MULTI4_monorepo_fix       +0.10
+    MULTI6_fullstack_bug      +0.10
+    MULTI7_polyglot_test      +0.10
+    NEG4_resource_allocation  +0.10
+    NEG5_sla_tradeoff         +0.10
+    O9_logging_config         +0.10
+    SYNTH1_distributed_debug  +0.09
+    SEC8_dependency_audit     +0.09
+    D2_data_quality           +0.09
+    D3_schema_migration       +0.09
+    INC5_cert_expiry          +0.09
+    JS2_xss_sanitize          +0.09
+    O1_service_health         +0.08
+    GO2_race_condition        +0.08
+    INC4_dns_miscfg           +0.08
+    IR3_multi_source          +0.08
+    IR4_temporal              +0.07
+    PIPE4_ci_cd               +0.07
+    D6_data_reconcile         +0.06
     D1_schema_drift           +0.06
     CR4_api_review            +0.06
     dist4_clock_skew          +0.06
+    TEST5_mutation_resistant  +0.05
+    SPEC6_rfc_impl            +0.05
+    O8_dockerfile_fix         +0.05
+    S7_env_config             +0.05
+    LH3_multi_service         +0.05
+    SCALE1_codebase_migration +0.05
+    MULTI8_sdk_mismatch       +0.04
+    S5_error_handling         +0.04
+    IR5_search_ranking        +0.04
+    TEST9_mock_service        +0.04
+    TEST1_spec_to_tests       +0.03
+    P3_access_control         +0.03
     dist2_consensus_partition +0.03
+    SEC3_crypto_upgrade       +0.02
 
-  Interpretation: On 12/35 tasks, the 3-role team with
+  Interpretation: On 65/148 tasks, the 3-role team with
   remediation loops outperforms a single oracle agent with full access.
   This demonstrates that role separation and verification-driven
   iteration provide complementary value beyond raw capability.
 
 --- Sample Size Guidance ---
   To detect 10pp difference at p<0.05 with 80% power: n=393 per condition
-  Current: 35 tasks x 1 seed = 35 instances per condition
-  Recommended: 35 tasks x 3 seeds = 105 instances per condition
+  Current: 148 tasks x 1 seed = 148 instances per condition
+  Recommended: 148 tasks x 3 seeds = 444 instances per condition
 
 ======================================================================

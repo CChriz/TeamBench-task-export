@@ -1,0 +1,8 @@
+task_id: TRAP6_deprecated_api
+category: Adversarial
+difficulty: hard
+languages: [python]
+description: "Migrate 5/8 callsites to new API; 3 must keep deprecated version due to vendored dependency"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

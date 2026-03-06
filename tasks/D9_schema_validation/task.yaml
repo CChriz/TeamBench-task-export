@@ -1,0 +1,11 @@
+task_id: D9_schema_validation
+domain: data
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [json, schema-validation, data-pipeline]
+workspace_file_count: 5
+lines_changed_expected: 50
+parameterized: true

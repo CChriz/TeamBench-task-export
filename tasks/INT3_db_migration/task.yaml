@@ -1,0 +1,8 @@
+task_id: INT3_db_migration
+category: SWE
+difficulty: hard
+languages: [python, sql]
+description: "Schema migration with 4 bugs: FK order, missing default, index collision, wrong rollback"
+tni_pattern: F
+parameterized: true
+seeds: [0, 1, 2]

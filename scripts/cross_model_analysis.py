@@ -1,0 +1,467 @@
+#!/usr/bin/env python3
+"""
+TeamBench cross-model TNI analysis.
+
+Loads ablation results from multiple JSON files (one per model), computes
+per-task TNI for each model, and generates cross-model comparison outputs.
+
+Outputs:
+  shared/paper/table_cross_model.tex  — LaTeX cross-model TNI comparison table
+  shared/paper/cross_model_stats.json — per-task/per-model stats + Spearman correlations
+
+Usage:
+    python scripts/cross_model_analysis.py \\
+        --files shared/ablation_results/crypto_dist_g3flash.json \\
+                shared/ablation_results/trap_cross_g3flash.json \\
+        --labels "G3-Flash" \\
+        --output-dir shared/paper
+
+    # Auto-discover all ablation JSONs in a directory:
+    python scripts/cross_model_analysis.py --dir shared/ablation_results
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import os
+import sys
+from collections import defaultdict
+from dataclasses import dataclass, field
+
+# Allow running as a script from repo root.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from harness.compute_tni import TaskMetrics
+from harness.paper_tables import CATEGORY_MAP, runs_to_task_metrics
+
+
+# -----------------------------------------------------------------------
+# Data loading
+# -----------------------------------------------------------------------
+
+def load_model_results(paths: list[str]) -> dict[str, list[dict]]:
+    """
+    Load and merge runs from one or more ablation JSON files, grouped by model.
+
+    Returns: {model_name: [run, ...]}
+    """
+    model_runs: dict[str, list[dict]] = defaultdict(list)
+    seen: dict[str, set] = defaultdict(set)
+
+    for path in paths:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        model = data.get("model", os.path.basename(path).replace(".json", ""))
+        for run in data.get("runs", []):
+            key = (run["task_id"], run["condition"], run.get("seed", 0))
+            if key not in seen[model]:
+                seen[model].add(key)
+                model_runs[model].append(run)
+
+    return dict(model_runs)
+
+
+def task_metrics_for_model(runs: list[dict]) -> dict[str, TaskMetrics]:
+    """Convert a flat list of runs to {task_id: TaskMetrics}."""
+    metrics_list = runs_to_task_metrics(runs)
+    return {m.task_id: m for m in metrics_list}
+
+
+# -----------------------------------------------------------------------
+# TNI & stat helpers
+# -----------------------------------------------------------------------
+
+def _task_category(task_id: str) -> str:
+    prefix = ""
+    first_part = task_id.split("_")[0] if "_" in task_id else task_id
+    for ch in first_part:
+        if ch.isalpha():
+            prefix += ch
+        else:
+            break
+    return CATEGORY_MAP.get(prefix.upper(), prefix.upper())
+
+
+def spearman_rank_correlation(x: list[float], y: list[float]) -> float:
+    """Compute Spearman rank correlation between two equal-length lists."""
+    n = len(x)
+    if n < 3:
+        return float("nan")
+
+    def _ranks(vals: list[float]) -> list[float]:
+        sorted_vals = sorted(enumerate(vals), key=lambda kv: kv[1])
+        ranks = [0.0] * n
+        i = 0
+        while i < n:
+            j = i
+            while j < n - 1 and sorted_vals[j + 1][1] == sorted_vals[i][1]:
+                j += 1
+            avg_rank = (i + j) / 2.0 + 1.0
+            for k in range(i, j + 1):
+                ranks[sorted_vals[k][0]] = avg_rank
+            i = j + 1
+        return ranks
+
+    rx = _ranks(x)
+    ry = _ranks(y)
+    mean_rx = sum(rx) / n
+    mean_ry = sum(ry) / n
+    cov = sum((rx[i] - mean_rx) * (ry[i] - mean_ry) for i in range(n))
+    std_rx = math.sqrt(sum((r - mean_rx) ** 2 for r in rx))
+    std_ry = math.sqrt(sum((r - mean_ry) ** 2 for r in ry))
+    denom = std_rx * std_ry
+    if denom < 1e-9:
+        return float("nan")
+    return cov / denom
+
+
+def _tni_val(m: TaskMetrics) -> float | None:
+    """Return TNI if valid, else None."""
+    if math.isnan(m.tni) or abs(m.necessity_gap) <= 0.05:
+        return None
+    return m.tni
+
+
+# -----------------------------------------------------------------------
+# LaTeX table generation
+# -----------------------------------------------------------------------
+
+def generate_cross_model_table(
+    all_tasks: list[str],
+    model_metrics: dict[str, dict[str, TaskMetrics]],
+    model_names: list[str],
+) -> str:
+    """
+    Generate LaTeX cross-model TNI comparison table.
+
+    Columns: Task | Category | Oracle_m1 | Team_m1 | TNI_m1 | ... (per model) | Consistent?
+    """
+    n_models = len(model_names)
+    col_spec = "ll" + "ccc" * n_models + "c"
+
+    header_parts = []
+    for mn in model_names:
+        short = mn[:12]
+        header_parts.append(f"Oracle & Team & TNI ({short})")
+    consistent_col = "Consist."
+
+    lines = [
+        "% Auto-generated by scripts/cross_model_analysis.py",
+        "\\begin{table*}[t]",
+        "\\centering",
+        "\\caption{Cross-model TNI comparison. "
+        "Each model group shows Oracle / Full-team partial scores and TNI. "
+        "``Consist.'' marks tasks where all models agree on team direction (+ or -).}",
+        "\\label{tab:cross-model}",
+        "\\scriptsize",
+        f"\\begin{{tabular}}{{{col_spec}}}",
+        "\\toprule",
+        "Task & Category & " + " & ".join(header_parts) + f" & {consistent_col} \\\\",
+        "\\midrule",
+    ]
+
+    for task_id in sorted(all_tasks):
+        cat = _task_category(task_id)
+        task_short = task_id.replace("_", "\\_")
+        cells = []
+        uplifts = []
+        for mn in model_names:
+            m = model_metrics.get(mn, {}).get(task_id)
+            if m is None:
+                cells.append("-- & -- & --")
+                continue
+            tni_v = _tni_val(m)
+            tni_s = f"{tni_v:.2f}" if tni_v is not None else "--"
+            cells.append(f"{m.oracle_partial:.2f} & {m.team_partial:.2f} & {tni_s}")
+            uplifts.append(m.team_uplift)
+
+        # Consistent = all models agree on uplift direction
+        if len(uplifts) >= 2:
+            pos = sum(1 for u in uplifts if u > 0.01)
+            neg = sum(1 for u in uplifts if u < -0.01)
+            consistent = "\\cmark" if pos == len(uplifts) or neg == len(uplifts) else ""
+        else:
+            consistent = ""
+
+        lines.append(f"{task_short} & {cat} & " + " & ".join(cells) + f" & {consistent} \\\\")
+
+    # Aggregate row
+    lines.append("\\midrule")
+    agg_cells = []
+    for mn in model_names:
+        metrics_map = model_metrics.get(mn, {})
+        ms = [metrics_map[t] for t in all_tasks if t in metrics_map]
+        if not ms:
+            agg_cells.append("-- & -- & --")
+            continue
+        avg_o = sum(m.oracle_partial for m in ms) / len(ms)
+        avg_t = sum(m.team_partial for m in ms) / len(ms)
+        valid_tni = [tni_v for m in ms for tni_v in [_tni_val(m)] if tni_v is not None]
+        avg_tni = sum(valid_tni) / len(valid_tni) if valid_tni else float("nan")
+        tni_s = f"{avg_tni:.2f}" if not math.isnan(avg_tni) else "--"
+        agg_cells.append(f"{avg_o:.2f} & {avg_t:.2f} & {tni_s}")
+
+    n_all = len(all_tasks)
+    lines.append(
+        f"\\textbf{{Average}} & ({n_all} tasks) & "
+        + " & ".join(agg_cells)
+        + " & -- \\\\"
+    )
+
+    lines.extend([
+        "\\bottomrule",
+        "\\end{tabular}",
+        "\\end{table*}",
+    ])
+    return "\n".join(lines)
+
+
+# -----------------------------------------------------------------------
+# JSON stats generation
+# -----------------------------------------------------------------------
+
+def generate_cross_model_stats(
+    all_tasks: list[str],
+    model_metrics: dict[str, dict[str, TaskMetrics]],
+    model_names: list[str],
+) -> dict:
+    """Generate comprehensive cross-model statistics JSON."""
+
+    # Per-task, per-model metrics
+    per_task = {}
+    for task_id in all_tasks:
+        entry: dict = {"task_id": task_id, "category": _task_category(task_id), "models": {}}
+        for mn in model_names:
+            m = model_metrics.get(mn, {}).get(task_id)
+            if m is None:
+                entry["models"][mn] = None
+                continue
+            tni_v = _tni_val(m)
+            entry["models"][mn] = {
+                "oracle": round(m.oracle_partial, 4),
+                "restricted": round(m.restricted_partial, 4),
+                "team": round(m.team_partial, 4),
+                "necessity_gap": round(m.necessity_gap, 4),
+                "tni": round(tni_v, 4) if tni_v is not None else None,
+                "team_uplift": round(m.team_uplift, 4),
+                "classification": m.classification,
+            }
+        per_task[task_id] = entry
+
+    # Per-model aggregate
+    per_model: dict = {}
+    for mn in model_names:
+        metrics_map = model_metrics.get(mn, {})
+        ms = [metrics_map[t] for t in all_tasks if t in metrics_map]
+        if not ms:
+            per_model[mn] = {"task_count": 0}
+            continue
+        valid_tni = [tni_v for m in ms for tni_v in [_tni_val(m)] if tni_v is not None]
+        avg_tni = sum(valid_tni) / len(valid_tni) if valid_tni else None
+        team_wins = sum(1 for m in ms if m.team_uplift > 0.01)
+        per_model[mn] = {
+            "task_count": len(ms),
+            "avg_oracle": round(sum(m.oracle_partial for m in ms) / len(ms), 4),
+            "avg_restricted": round(sum(m.restricted_partial for m in ms) / len(ms), 4),
+            "avg_team": round(sum(m.team_partial for m in ms) / len(ms), 4),
+            "avg_uplift": round(sum(m.team_uplift for m in ms) / len(ms), 4),
+            "avg_tni": round(avg_tni, 4) if avg_tni is not None else None,
+            "valid_tni_count": len(valid_tni),
+            "team_helps_count": team_wins,
+            "team_helps_pct": round(team_wins / len(ms), 4),
+        }
+
+    # Spearman rank correlations between all model pairs (by TNI)
+    correlations: dict = {}
+    for i, m1 in enumerate(model_names):
+        for m2 in model_names[i + 1:]:
+            shared_tasks = [
+                t for t in all_tasks
+                if t in model_metrics.get(m1, {}) and t in model_metrics.get(m2, {})
+            ]
+            if len(shared_tasks) < 3:
+                correlations[f"{m1}_vs_{m2}"] = {"spearman_tni": None, "n_tasks": len(shared_tasks)}
+                continue
+            tni_m1 = [_tni_val(model_metrics[m1][t]) or 0.0 for t in shared_tasks]
+            tni_m2 = [_tni_val(model_metrics[m2][t]) or 0.0 for t in shared_tasks]
+            uplift_m1 = [model_metrics[m1][t].team_uplift for t in shared_tasks]
+            uplift_m2 = [model_metrics[m2][t].team_uplift for t in shared_tasks]
+            correlations[f"{m1}_vs_{m2}"] = {
+                "n_tasks": len(shared_tasks),
+                "spearman_tni": round(spearman_rank_correlation(tni_m1, tni_m2), 4),
+                "spearman_uplift": round(spearman_rank_correlation(uplift_m1, uplift_m2), 4),
+                "shared_tasks": shared_tasks,
+            }
+
+    # Tasks where all models agree team helps / hurts
+    consistent_helps = [
+        t for t in all_tasks
+        if all(
+            model_metrics.get(mn, {}).get(t) is not None
+            and model_metrics[mn][t].team_uplift > 0.01
+            for mn in model_names
+            if mn in model_metrics
+        )
+        and len([mn for mn in model_names if mn in model_metrics]) >= 2
+    ]
+    consistent_hurts = [
+        t for t in all_tasks
+        if all(
+            model_metrics.get(mn, {}).get(t) is not None
+            and model_metrics[mn][t].team_uplift < -0.01
+            for mn in model_names
+            if mn in model_metrics
+        )
+        and len([mn for mn in model_names if mn in model_metrics]) >= 2
+    ]
+
+    return {
+        "models": model_names,
+        "total_tasks": len(all_tasks),
+        "per_model": per_model,
+        "pairwise_correlations": correlations,
+        "consistent_team_helps": consistent_helps,
+        "consistent_team_hurts": consistent_hurts,
+        "per_task": list(per_task.values()),
+    }
+
+
+# -----------------------------------------------------------------------
+# CLI
+# -----------------------------------------------------------------------
+
+def _print_summary(stats: dict) -> None:
+    print("\n" + "=" * 65)
+    print("Cross-Model TNI Summary")
+    print("=" * 65)
+    print(f"  Models:     {', '.join(stats['models'])}")
+    print(f"  Tasks:      {stats['total_tasks']}")
+    print()
+    for mn, s in stats["per_model"].items():
+        if s.get("task_count", 0) == 0:
+            print(f"  {mn}: no data")
+            continue
+        print(f"  {mn}:")
+        print(f"    Tasks: {s['task_count']}, Avg Oracle: {s['avg_oracle']:.3f}, "
+              f"Avg Team: {s['avg_team']:.3f}")
+        print(f"    Avg Uplift: {s['avg_uplift']:+.3f}, "
+              f"Team Helps: {s['team_helps_count']}/{s['task_count']} "
+              f"({s['team_helps_pct']:.0%})")
+        tni_s = f"{s['avg_tni']:.3f}" if s.get("avg_tni") is not None else "N/A"
+        print(f"    Avg TNI: {tni_s} (valid on {s['valid_tni_count']} tasks)")
+
+    if stats["pairwise_correlations"]:
+        print()
+        print("  Pairwise Spearman correlations (TNI / Uplift):")
+        for pair, corr in stats["pairwise_correlations"].items():
+            if corr.get("spearman_tni") is None:
+                print(f"    {pair}: insufficient data (n={corr['n_tasks']})")
+            else:
+                print(f"    {pair}: TNI r={corr['spearman_tni']:.3f}, "
+                      f"Uplift r={corr['spearman_uplift']:.3f} (n={corr['n_tasks']})")
+
+    if stats["consistent_team_helps"]:
+        print(f"\n  Consistently team-helps ({len(stats['consistent_team_helps'])} tasks):")
+        print(f"    {', '.join(stats['consistent_team_helps'])}")
+    if stats["consistent_team_hurts"]:
+        print(f"\n  Consistently team-hurts ({len(stats['consistent_team_hurts'])} tasks):")
+        print(f"    {', '.join(stats['consistent_team_hurts'])}")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="TeamBench cross-model TNI analysis",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    ap.add_argument(
+        "--files", nargs="+",
+        help="Ablation JSON files (one or more, may span multiple models)",
+    )
+    ap.add_argument(
+        "--dir",
+        help="Auto-discover ablation JSONs in this directory",
+    )
+    ap.add_argument(
+        "--labels", nargs="+",
+        help="Override model labels (matched by order to --files). "
+             "Defaults to the 'model' field inside each JSON.",
+    )
+    ap.add_argument(
+        "--output-dir", default="shared/paper",
+        help="Output directory (default: shared/paper)",
+    )
+    args = ap.parse_args()
+
+    if not args.files and not args.dir:
+        ap.error("Provide --files or --dir.")
+
+    paths: list[str] = []
+    if args.dir:
+        d = os.path.abspath(args.dir)
+        paths = sorted(
+            os.path.join(d, fn)
+            for fn in os.listdir(d)
+            if fn.endswith(".json") and not fn.startswith(".")
+        )
+        if not paths:
+            print(f"No JSON files found in {d}", file=sys.stderr)
+            sys.exit(1)
+        print(f"Auto-discovered {len(paths)} JSON files in {d}")
+    if args.files:
+        paths += [os.path.abspath(p) for p in args.files]
+
+    # Load and group by model
+    model_runs = load_model_results(paths)
+    model_names = sorted(model_runs.keys())
+
+    # Override labels if provided
+    if args.labels:
+        if len(args.labels) != len(model_names):
+            ap.error(
+                f"--labels count ({len(args.labels)}) must match number of "
+                f"discovered models ({len(model_names)}: {model_names})"
+            )
+        rename_map = dict(zip(model_names, args.labels))
+        model_runs = {rename_map[k]: v for k, v in model_runs.items()}
+        model_names = args.labels
+
+    print(f"Models: {model_names}")
+    for mn in model_names:
+        print(f"  {mn}: {len(model_runs[mn])} runs")
+
+    # Compute per-task metrics for each model
+    model_metrics: dict[str, dict[str, TaskMetrics]] = {}
+    for mn in model_names:
+        model_metrics[mn] = task_metrics_for_model(model_runs[mn])
+
+    # Union of all tasks
+    all_tasks: list[str] = sorted(
+        set(t for mm in model_metrics.values() for t in mm.keys())
+    )
+    print(f"Total unique tasks: {len(all_tasks)}")
+
+    # Generate outputs
+    os.makedirs(os.path.abspath(args.output_dir), exist_ok=True)
+
+    table = generate_cross_model_table(all_tasks, model_metrics, model_names)
+    table_path = os.path.join(args.output_dir, "table_cross_model.tex")
+    with open(table_path, "w", encoding="utf-8") as f:
+        f.write(table)
+
+    stats = generate_cross_model_stats(all_tasks, model_metrics, model_names)
+    stats_path = os.path.join(args.output_dir, "cross_model_stats.json")
+    with open(stats_path, "w", encoding="utf-8") as f:
+        json.dump(stats, f, indent=2, ensure_ascii=False)
+
+    print(f"\nOutputs:")
+    print(f"  {table_path}")
+    print(f"  {stats_path}")
+
+    _print_summary(stats)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,11 @@
+task_id: SEC9_vuln_triage
+domain: security
+difficulty: hard
+languages: [python]
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 8
+lines_changed_expected: 60
+tags: [vulnerability-triage, false-positive, security-audit]

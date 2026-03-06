@@ -1,17 +1,149 @@
 task_id,difficulty,difficulty_num,oracle,full,team_uplift,category
+cross1_api_contract,unknown,0,0.5,0.8333,0.0,Cross-System
+cross2_schema_evolution,unknown,0,1.0,1.0,0.0,Cross-System
+cross3_protocol_bridge,unknown,0,0.8667,1.0,0.0,Cross-System
+cross4_auth_federation,unknown,0,1.0,1.0,0.0,Cross-System
+crypto1_nonce_reuse,unknown,0,0.2,0.2,0.0,Security
+crypto2_timing_safe,unknown,0,1.0,1.0,0.0,Security
+crypto3_cert_chain,unknown,0,0.0667,0.0667,0.0,Security
+crypto4_kdf_migration,unknown,0,0.2,0.2,0.1333,Security
+dist1_queue_race,unknown,0,0.4445,0.4445,0.0833,Distributed
+dist2_consensus_partition,unknown,0,0.4167,0.4445,0.0278,Distributed
+dist3_idempotency,unknown,0,0.5278,0.4167,-0.25,Distributed
+dist4_clock_skew,unknown,0,0.9167,0.9722,0.0278,Distributed
+trap1_spec_conflict,unknown,0,0.9333,0.9333,0.0,Adversarial
+trap2_false_fix,unknown,0,1.0,1.0,0.0833,Adversarial
+trap3_metric_mirage,unknown,0,0.8667,1.0,0.0,Adversarial
+trap4_version_paradox,unknown,0,0.5533,0.5267,0.2233,Adversarial
+trap5_security_theater,unknown,0,0.62,0.5967,0.36,Adversarial
+CR2_style_enforce,easy,1,0.92,0.77,0.08,Code Review
+D8_csv_cleanup,easy,1,0.2967,1.0,0.74,Data Engineering
 IR1_evidence_qa,easy,1,0.67,0.33,0.0,Information Retrieval
+O8_dockerfile_fix,easy,1,0.2367,0.2867,0.05,Operations
+P6_license_check,easy,1,0.2867,1.0,0.81,Policy
+S7_env_config,easy,1,0.2367,0.2867,0.05,Software Eng.
+TEST8_unit_basic,easy,1,0.75,0.88,0.13,Testing
+CR1_review_respond,medium,2,0.5,0.0,-0.5,Code Review
+CR3_perf_review,medium,2,0.9,1.0,0.1,Code Review
+CR5_test_coverage,medium,2,0.0,0.2567,0.13,Code Review
 D1_schema_drift,medium,2,0.44,0.5,0.0,Data Engineering
-P1_policy_config,medium,2,0.93,0.5,0.07,Policy
-PIPE1_etl_fix,medium,2,0.73,0.73,0.37,Pipeline
-TEST1_spec_to_tests,medium,2,0.7,0.8,0.5,Testing
+D2_data_quality,medium,2,0.27,0.36,-0.46,Data Engineering
+D9_schema_validation,medium,2,0.8,0.9,0.1,Data Engineering
+INC5_cert_expiry,medium,2,0.91,1.0,0.09,Incident Response
+IR5_search_ranking,medium,2,0.26,0.2967,0.2967,Information Retrieval
+IR6_search_index,medium,2,0.0,0.0,0.0,Information Retrieval
+IR7_doc_clustering,medium,2,0.75,0.75,0.0,Information Retrieval
+NEG3_tech_debt,medium,2,0.8,1.0,0.2,Negotiation
+O1_service_health,medium,2,0.0,0.0833,0.0833,Operations
+O9_logging_config,medium,2,0.5,0.6,0.1,Operations
+P1_policy_config,medium,2,0.0,0.0,0.0,Policy
+P5_audit_logging,medium,2,0.93,0.93,0.0,Policy
+P7_data_retention,medium,2,0.2967,1.0,0.74,Policy
+PIPE1_etl_fix,medium,2,0.2433,0.2433,0.1233,Pipeline
+PIPE2_api_gateway,medium,2,0.92,0.0,-0.92,Pipeline
+PIPE4_ci_cd,medium,2,0.93,1.0,0.07,Pipeline
+S5_error_handling,medium,2,0.0667,0.11,0.0867,Software Eng.
+SEC6_csrf_protection,medium,2,0.85,0.46,0.0,Security
+SPEC2_api_design,medium,2,0.75,0.67,0.0,Specification
+SPEC3_data_model,medium,2,0.262,0.262,0.262,Specification
+SQL1_query_repair,medium,2,0.0,0.0,0.0,Data Engineering
+TEST1_spec_to_tests,medium,2,0.2333,0.2667,0.1667,Testing
+TEST9_mock_service,medium,2,0.2967,0.3333,0.3333,Testing
 CR4_api_review,hard,3,0.56,0.62,0.06,Code Review
+CR6_review_checklist,hard,3,0.06,0.3033,0.2433,Code Review
+CROSS5_event_schema,hard,3,0.7,0.7,-0.3,Cross-System
+CROSS6_grpc_rest_bridge,hard,3,1.0,0.0,-1.0,Cross-System
+CROSS7_config_drift,hard,3,0.6,0.6,0.0,Cross-System
+CRYPTO5_tls_config,hard,3,0.3,0.3,0.1,Security
+CRYPTO6_token_validation,hard,3,0.9,0.9,0.0,Security
+D3_schema_migration,hard,3,0.73,0.82,0.0,Data Engineering
+D4_data_pipeline,hard,3,0.59,0.0,-0.59,Data Engineering
+D5_query_optimize,hard,3,0.8,0.8,-0.07,Data Engineering
+D7_etl_reconciliation,hard,3,1.0,1.0,0.0,Data Engineering
+DIST5_leader_election,hard,3,0.2,0.2,0.0,Distributed
+DIST6_distributed_lock,hard,3,1.0,0.6333,-0.0667,Distributed
+GO2_race_condition,hard,3,0.92,1.0,0.08,Software Eng.
+INC10_rollback_plan,hard,3,0.4,0.0,-0.4,Incident Response
 INC1_cascade_failure,hard,3,0.8,0.9,0.1,Incident Response
+INC2_data_corruption,hard,3,0.9,1.0,0.1,Incident Response
+INC3_memory_leak,hard,3,0.92,0.0,-0.83,Incident Response
+INC4_dns_miscfg,hard,3,0.92,1.0,0.08,Incident Response
+INC7_rollback,hard,3,0.0,0.0,-0.83,Incident Response
+INC8_cascading_timeout,hard,3,0.6,0.7,-0.1,Incident Response
+INC8_memory_leak,hard,3,0.8,0.7,-0.1,Incident Response
+INC9_log_forensics,hard,3,0.3,0.3,0.1,Incident Response
 INT1_pipeline_repair,hard,3,0.08,0.42,0.0,Integration
-MULTI1_fullstack_fix,hard,3,0.75,1.0,0.5,Multi-language
+INT2_api_versioning,hard,3,1.0,1.0,0.0,Integration
+INT3_db_migration,hard,3,0.5,0.0,-0.6,Integration
+IR2_misinformation_trap,hard,3,0.29,0.29,0.0,Information Retrieval
+IR3_multi_source,hard,3,0.92,1.0,0.08,Information Retrieval
+IR4_temporal,hard,3,0.93,1.0,0.07,Information Retrieval
+IR8_search_index,hard,3,0.8,0.0,-0.9,Information Retrieval
+JS1_api_migration,hard,3,0.43,0.0,-0.71,Software Eng.
+JS2_xss_sanitize,hard,3,0.78,0.87,0.09,Software Eng.
+LH1_long_horizon,hard,3,0.0,0.0,0.0,Long-Horizon
+LH4_staged_deploy,hard,3,0.43,0.43,0.0,Long-Horizon
+LH6_audit_trail,hard,3,0.55,0.0,-0.55,Long-Horizon
+LH7_zero_downtime,hard,3,0.82,0.0,-0.27,Long-Horizon
+MULTI1_fullstack_fix,hard,3,0.25,1.0,0.8333,Multi-language
+MULTI2_api_frontend,hard,3,0.5,0.5,0.0,Multi-language
+MULTI2_microservice_debug,hard,3,0.9,0.9,0.0,Multi-language
+MULTI3_polyglot,hard,3,1.0,1.0,0.0,Multi-language
+MULTI4_monorepo_fix,hard,3,0.9,1.0,0.1,Multi-language
+MULTI5_deploy_pipeline,hard,3,0.1667,0.2667,0.0667,Multi-language
+MULTI6_fullstack_bug,hard,3,0.9,1.0,0.1,Multi-language
+MULTI7_polyglot_test,hard,3,0.9,1.0,0.1,Multi-language
+MULTI8_sdk_mismatch,hard,3,0.25,0.2933,0.0433,Multi-language
 NEG1_tradeoff_config,hard,3,0.5,0.4,-0.1,Negotiation
-O2_incident_rootcause,hard,3,0.6,0.6,0.2,Operations
-S1_hidden_spec,hard,3,0.0,0.12,-0.38,Software Eng.
+NEG2_cost_perf,hard,3,1.0,1.0,0.6667,Negotiation
+NEG4_resource_allocation,hard,3,0.9,1.0,0.1,Negotiation
+NEG5_sla_tradeoff,hard,3,0.9,1.0,0.1,Negotiation
+O2_incident_rootcause,hard,3,0.2,0.2,0.0667,Operations
+O3_log_analysis,hard,3,0.1533,0.1533,0.1533,Operations
+O4_monitoring,hard,3,0.3333,0.3333,0.3333,Operations
+O5_container_debug,hard,3,0.6,0.73,0.13,Operations
+O7_capacity_planning,hard,3,1.0,1.0,0.1,Operations
+P2_spec_arbitration,hard,3,0.25,0.0,0.0,Policy
+P3_access_control,hard,3,0.3033,0.3333,0.06,Policy
+P4_data_retention,hard,3,0.86,0.57,0.0,Policy
+P8_access_control,hard,3,0.3,0.4,0.1,Policy
+PIPE2_data_pipeline,hard,3,0.8,0.8,0.0,Pipeline
+PIPE3_msg_queue,hard,3,0.77,0.0,-0.77,Pipeline
+PIPE3_stream_processing,hard,3,1.0,1.0,0.0,Pipeline
+S1_hidden_spec,hard,3,0.0,0.0,0.0,Software Eng.
 S2_dependency_conflict,hard,3,0.25,0.0,-0.25,Software Eng.
-SEC1_vuln_patch,hard,3,0.42,0.75,0.33,Security
+S3_refactor_extract,hard,3,0.17,0.17,0.0,Software Eng.
+S4_backward_compat,hard,3,0.21,0.21,0.0,Software Eng.
+S6_caching,hard,3,0.0,0.0,-0.62,Software Eng.
+SEC1_vuln_patch,hard,3,0.0,0.0,0.0,Security
+SEC2_auth_bypass,hard,3,0.9,0.7,0.1,Security
+SEC3_crypto_upgrade,hard,3,0.2833,0.3067,0.1267,Security
+SEC4_input_validation,hard,3,0.31,0.0,-0.31,Security
+SEC5_secrets_rotation,hard,3,0.3067,0.64,0.41,Security
+SEC7_rate_limiting,hard,3,0.47,0.6,0.07,Security
+SEC9_vuln_triage,hard,3,0.77,0.0,-0.69,Security
 SPEC1_feature_impl,hard,3,0.45,0.0,-0.45,Specification
-LH2_budgeted_workflow,expert,4,0.11,0.5,0.33,Long-Horizon
+SPEC4_migration,hard,3,0.0,0.85,0.0,Specification
+SPEC5_config_system,hard,3,0.4567,0.4567,0.4567,Specification
+SPEC6_rfc_impl,hard,3,0.95,1.0,0.05,Specification
+SPEC7_config_schema,hard,3,1.0,1.0,0.0833,Specification
+SQL2_query_optimize,hard,3,0.47,0.87,0.0,Data Engineering
+TEST2_regression,hard,3,0.0,0.6667,0.6667,Testing
+TEST3_integration,hard,3,0.0,0.3067,0.3067,Testing
+TEST4_property,hard,3,0.2867,0.2867,0.2867,Testing
+TEST5_mutation_resistant,hard,3,0.2233,0.2767,0.0533,Testing
+TEST6_property_based,hard,3,0.3,0.6667,0.5667,Testing
+TEST7_integration_suite,hard,3,0.0,1.0,0.7333,Testing
+TRAP6_deprecated_api,hard,3,1.0,1.0,0.0,Adversarial
+TRAP7_test_pollution,hard,3,0.8,0.8,0.0,Adversarial
+TRAP8_config_override,hard,3,0.9,0.9,0.0,Adversarial
+D6_data_reconcile,expert,4,0.83,0.89,0.06,Data Engineering
+GO1_concurrency_fix,expert,4,0.75,0.0,-0.75,Software Eng.
+INC6_deadlock,expert,4,0.67,0.67,0.0,Incident Response
+LH2_budgeted_workflow,expert,4,0.0367,0.8333,0.7767,Long-Horizon
+LH3_multi_service,expert,4,0.9,0.95,0.1,Long-Horizon
+LH5_data_migration,expert,4,0.0,0.0,0.0,Long-Horizon
+O6_perf_tuning,expert,4,0.77,0.0,-1.0,Operations
+SCALE1_codebase_migration,expert,4,0.19,0.2367,0.0467,Long-Horizon
+SEC8_dependency_audit,expert,4,0.83,0.92,0.0,Security
+SYNTH1_distributed_debug,expert,4,0.09,0.1833,0.0933,Long-Horizon

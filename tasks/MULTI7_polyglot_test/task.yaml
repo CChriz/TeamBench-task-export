@@ -1,0 +1,11 @@
+task_id: MULTI7_polyglot_test
+domain: software
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python, bash, sql]
+tags: [polyglot, deployment, migration, multi-language, cross-layer]
+workspace_file_count: 6
+lines_changed_expected: 20
+parameterized: true

@@ -1,0 +1,983 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "LH3_multi_service",
+    "LH4_staged_deploy",
+    "LH5_data_migration",
+    "LH6_audit_trail",
+    "LH7_zero_downtime",
+    "PIPE2_api_gateway",
+    "PIPE2_data_pipeline",
+    "PIPE3_msg_queue",
+    "PIPE3_stream_processing",
+    "PIPE4_ci_cd",
+    "IR2_misinformation_trap",
+    "IR3_multi_source",
+    "IR4_temporal",
+    "IR5_search_ranking",
+    "IR6_search_index",
+    "IR7_doc_clustering",
+    "IR8_search_index",
+    "MULTI2_api_frontend",
+    "MULTI2_microservice_debug",
+    "MULTI3_polyglot",
+    "MULTI4_monorepo_fix",
+    "MULTI5_deploy_pipeline",
+    "MULTI6_fullstack_bug",
+    "MULTI7_polyglot_test",
+    "MULTI8_sdk_mismatch",
+    "INT2_api_versioning",
+    "INT3_db_migration"
+  ],
+  "seeds": [
+    0
+  ],
+  "completed": 135,
+  "runs": [
+    {
+      "task_id": "LH3_multi_service",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "LH3_multi_service",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.85
+    },
+    {
+      "task_id": "LH3_multi_service",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.95
+    },
+    {
+      "task_id": "LH3_multi_service",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "LH3_multi_service",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.95
+    },
+    {
+      "task_id": "LH4_staged_deploy",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "LH4_staged_deploy",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "LH4_staged_deploy",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.14
+    },
+    {
+      "task_id": "LH4_staged_deploy",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "LH4_staged_deploy",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "LH5_data_migration",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "LH5_data_migration",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "LH5_data_migration",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.09
+    },
+    {
+      "task_id": "LH5_data_migration",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "LH5_data_migration",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "LH6_audit_trail",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.55
+    },
+    {
+      "task_id": "LH6_audit_trail",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.55
+    },
+    {
+      "task_id": "LH6_audit_trail",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.55
+    },
+    {
+      "task_id": "LH6_audit_trail",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.36
+    },
+    {
+      "task_id": "LH6_audit_trail",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "LH7_zero_downtime",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.82
+    },
+    {
+      "task_id": "LH7_zero_downtime",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.27
+    },
+    {
+      "task_id": "LH7_zero_downtime",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.91
+    },
+    {
+      "task_id": "LH7_zero_downtime",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.82
+    },
+    {
+      "task_id": "LH7_zero_downtime",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "PIPE2_api_gateway",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "PIPE2_api_gateway",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "PIPE2_api_gateway",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE2_api_gateway",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "PIPE2_api_gateway",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "PIPE2_data_pipeline",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "PIPE2_data_pipeline",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "PIPE2_data_pipeline",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "PIPE2_data_pipeline",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "PIPE2_data_pipeline",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "PIPE3_msg_queue",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.77
+    },
+    {
+      "task_id": "PIPE3_msg_queue",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.77
+    },
+    {
+      "task_id": "PIPE3_msg_queue",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.85
+    },
+    {
+      "task_id": "PIPE3_msg_queue",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.62
+    },
+    {
+      "task_id": "PIPE3_msg_queue",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "PIPE3_stream_processing",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE3_stream_processing",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE3_stream_processing",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE3_stream_processing",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "PIPE3_stream_processing",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE4_ci_cd",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "PIPE4_ci_cd",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "PIPE4_ci_cd",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "PIPE4_ci_cd",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "PIPE4_ci_cd",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR2_misinformation_trap",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.29
+    },
+    {
+      "task_id": "IR2_misinformation_trap",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.29
+    },
+    {
+      "task_id": "IR2_misinformation_trap",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "IR2_misinformation_trap",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.29
+    },
+    {
+      "task_id": "IR2_misinformation_trap",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.29
+    },
+    {
+      "task_id": "IR3_multi_source",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "IR3_multi_source",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "IR3_multi_source",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR3_multi_source",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR3_multi_source",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR4_temporal",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "IR4_temporal",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "IR4_temporal",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.87
+    },
+    {
+      "task_id": "IR4_temporal",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.93
+    },
+    {
+      "task_id": "IR4_temporal",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.78
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.89
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.89
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.89
+    },
+    {
+      "task_id": "IR6_search_index",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR6_search_index",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR6_search_index",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR6_search_index",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR6_search_index",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR7_doc_clustering",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "IR7_doc_clustering",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "IR7_doc_clustering",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.88
+    },
+    {
+      "task_id": "IR7_doc_clustering",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "IR7_doc_clustering",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "IR8_search_index",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "IR8_search_index",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "IR8_search_index",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "IR8_search_index",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "IR8_search_index",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "MULTI2_api_frontend",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "MULTI2_api_frontend",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "MULTI2_api_frontend",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.56
+    },
+    {
+      "task_id": "MULTI2_api_frontend",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "MULTI2_api_frontend",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "MULTI2_microservice_debug",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI2_microservice_debug",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI2_microservice_debug",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI2_microservice_debug",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI2_microservice_debug",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI3_polyglot",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI3_polyglot",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI3_polyglot",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI3_polyglot",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI3_polyglot",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI4_monorepo_fix",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI4_monorepo_fix",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI4_monorepo_fix",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI4_monorepo_fix",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI4_monorepo_fix",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI5_deploy_pipeline",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "MULTI5_deploy_pipeline",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "MULTI5_deploy_pipeline",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI5_deploy_pipeline",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.7
+    },
+    {
+      "task_id": "MULTI5_deploy_pipeline",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "MULTI6_fullstack_bug",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI6_fullstack_bug",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI6_fullstack_bug",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI6_fullstack_bug",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI6_fullstack_bug",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI7_polyglot_test",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI7_polyglot_test",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "MULTI7_polyglot_test",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI7_polyglot_test",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI7_polyglot_test",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "MULTI8_sdk_mismatch",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "MULTI8_sdk_mismatch",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "MULTI8_sdk_mismatch",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.88
+    },
+    {
+      "task_id": "MULTI8_sdk_mismatch",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.88
+    },
+    {
+      "task_id": "MULTI8_sdk_mismatch",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.88
+    },
+    {
+      "task_id": "INT2_api_versioning",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "INT2_api_versioning",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "INT2_api_versioning",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "INT2_api_versioning",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "INT2_api_versioning",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "INT3_db_migration",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "INT3_db_migration",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "INT3_db_migration",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.7
+    },
+    {
+      "task_id": "INT3_db_migration",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.4
+    },
+    {
+      "task_id": "INT3_db_migration",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    }
+  ]
+}

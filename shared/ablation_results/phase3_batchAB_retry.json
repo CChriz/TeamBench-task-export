@@ -1,0 +1,491 @@
+{
+  "model": "gemini-3-flash-preview",
+  "runs": [
+    {
+      "condition": "team_no_verify",
+      "task_id": "MULTI1_fullstack_fix",
+      "seed": 2,
+      "run_id": "20260306_081524_af28b472",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 140.7
+    },
+    {
+      "condition": "full",
+      "task_id": "NEG2_cost_perf",
+      "seed": 2,
+      "run_id": "20260306_081749_b1f555ac",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 953.4
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O1_service_health",
+      "seed": 1,
+      "run_id": "20260306_083343_3d57457c",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.25
+      },
+      "elapsed_sec": 211.0
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O1_service_health",
+      "seed": 2,
+      "run_id": "20260306_083731_1c31a87f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      },
+      "elapsed_sec": 172.5
+    },
+    {
+      "condition": "full",
+      "task_id": "O1_service_health",
+      "seed": 1,
+      "run_id": "20260306_084040_e076ef41",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.0
+      },
+      "elapsed_sec": 523.2
+    },
+    {
+      "condition": "full",
+      "task_id": "O1_service_health",
+      "seed": 2,
+      "run_id": "20260306_084940_3d1fdf1f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      },
+      "elapsed_sec": 591.6
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O3_log_analysis",
+      "seed": 2,
+      "run_id": "20260306_085941_7721fd55",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "elapsed_sec": 208.6
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "O3_log_analysis",
+      "seed": 1,
+      "run_id": "20260306_090319_67b39abd",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "elapsed_sec": 553.6
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "O3_log_analysis",
+      "seed": 2,
+      "run_id": "20260306_091242_f5e13e67",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "elapsed_sec": 162.6
+    },
+    {
+      "condition": "restricted",
+      "task_id": "P6_license_check",
+      "seed": 1,
+      "run_id": "20260306_091534_2e2929c1",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      },
+      "elapsed_sec": 78.3
+    },
+    {
+      "condition": "restricted",
+      "task_id": "P6_license_check",
+      "seed": 2,
+      "run_id": "20260306_091653_40fbee52",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.29
+      },
+      "elapsed_sec": 107.7
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "P6_license_check",
+      "seed": 2,
+      "run_id": "20260306_091842_f3989a22",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      },
+      "elapsed_sec": 152.7
+    },
+    {
+      "condition": "full",
+      "task_id": "P6_license_check",
+      "seed": 1,
+      "run_id": "20260306_092115_45d00163",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 928.8
+    },
+    {
+      "condition": "oracle",
+      "task_id": "P7_data_retention",
+      "seed": 1,
+      "run_id": "20260306_093646_502b7618",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "elapsed_sec": 38.7
+    },
+    {
+      "condition": "oracle",
+      "task_id": "P7_data_retention",
+      "seed": 2,
+      "run_id": "20260306_093725_bf421d56",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "elapsed_sec": 55.3
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "P7_data_retention",
+      "seed": 1,
+      "run_id": "20260306_093821_80a292da",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 96.6
+    },
+    {
+      "condition": "full",
+      "task_id": "P7_data_retention",
+      "seed": 1,
+      "run_id": "20260306_093959_84d82bbe",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 699.4
+    },
+    {
+      "condition": "restricted",
+      "task_id": "PIPE1_etl_fix",
+      "seed": 1,
+      "run_id": "20260306_095140_79a906f9",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.55
+      },
+      "elapsed_sec": 285.6
+    },
+    {
+      "condition": "full",
+      "task_id": "PIPE1_etl_fix",
+      "seed": 2,
+      "run_id": "20260306_095626_adcd1e29",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "elapsed_sec": 321.2
+    },
+    {
+      "condition": "restricted",
+      "task_id": "S5_error_handling",
+      "seed": 2,
+      "run_id": "20260306_100149_83161e29",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.33
+      },
+      "elapsed_sec": 85.0
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "S5_error_handling",
+      "seed": 2,
+      "run_id": "20260306_100332_b723199d",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.4
+      },
+      "elapsed_sec": 158.5
+    },
+    {
+      "condition": "full",
+      "task_id": "S5_error_handling",
+      "seed": 1,
+      "run_id": "20260306_100633_edf6ac42",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 1044.1
+    },
+    {
+      "condition": "full",
+      "task_id": "S5_error_handling",
+      "seed": 2,
+      "run_id": "20260306_102423_13c293f8",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.33
+      },
+      "elapsed_sec": 543.0
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SEC1_vuln_patch",
+      "seed": 1,
+      "run_id": "20260306_103357_2130305f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.58
+      },
+      "elapsed_sec": 135.8
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "SEC1_vuln_patch",
+      "seed": 1,
+      "run_id": "20260306_103615_f2884f64",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      },
+      "elapsed_sec": 399.5
+    },
+    {
+      "condition": "full",
+      "task_id": "SEC1_vuln_patch",
+      "seed": 1,
+      "run_id": "20260306_104256_1b9d277f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      },
+      "elapsed_sec": 1344.3
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SEC3_crypto_upgrade",
+      "seed": 1,
+      "run_id": "20260306_110522_161aa4c3",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.62
+      },
+      "elapsed_sec": 151.2
+    },
+    {
+      "condition": "oracle",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 1,
+      "run_id": "20260306_110754_73d2663d",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      },
+      "elapsed_sec": 179.4
+    },
+    {
+      "condition": "oracle",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 2,
+      "run_id": "20260306_111100_6f8ebe0b",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 127.2
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 1,
+      "run_id": "20260306_111313_6746a9de",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 194.9
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 2,
+      "run_id": "20260306_111634_7a40dddf",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 160.4
+    },
+    {
+      "condition": "full",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 1,
+      "run_id": "20260306_111922_9ba86e23",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 1331.1
+    },
+    {
+      "condition": "full",
+      "task_id": "SEC5_secrets_rotation",
+      "seed": 2,
+      "run_id": "20260306_114150_d1f1fb72",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 505.2
+    },
+    {
+      "condition": "oracle",
+      "task_id": "SPEC3_data_model",
+      "seed": 2,
+      "run_id": "20260306_115028_67b8cedd",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.857
+      },
+      "elapsed_sec": 180.5
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SPEC5_config_system",
+      "seed": 1,
+      "run_id": "20260306_115352_b83728ab",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.68
+      },
+      "elapsed_sec": 69.4
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SPEC5_config_system",
+      "seed": 2,
+      "run_id": "20260306_115508_d4d040fa",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.53
+      },
+      "elapsed_sec": 118.2
+    },
+    {
+      "condition": "full",
+      "task_id": "SPEC5_config_system",
+      "seed": 2,
+      "run_id": "20260306_115710_6dae55c6",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 691.1
+    },
+    {
+      "condition": "full",
+      "task_id": "SYNTH1_distributed_debug",
+      "seed": 1,
+      "run_id": "20260306_120844_85e2b8fd",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.36
+      },
+      "elapsed_sec": 941.0
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST2_regression",
+      "seed": 2,
+      "run_id": "20260306_122439_ea695045",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 174.5
+    },
+    {
+      "condition": "oracle",
+      "task_id": "TEST4_property",
+      "seed": 1,
+      "run_id": "20260306_122817_1ba37edc",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 34.6
+    },
+    {
+      "condition": "oracle",
+      "task_id": "TEST4_property",
+      "seed": 2,
+      "run_id": "20260306_122857_ba633ff8",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 34.2
+    },
+    {
+      "condition": "restricted",
+      "task_id": "TEST4_property",
+      "seed": 1,
+      "run_id": "20260306_122936_3f45a3be",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "elapsed_sec": 60.4
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST4_property",
+      "seed": 2,
+      "run_id": "20260306_123040_97f4cae2",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 117.2
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST9_mock_service",
+      "seed": 1,
+      "run_id": "20260306_123243_41ca517c",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 158.7
+    }
+  ],
+  "total": 44,
+  "scored": 44
+}

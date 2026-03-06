@@ -1,0 +1,11 @@
+task_id: NEG5_sla_tradeoff
+domain: operations
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+tags: [negotiation, sla, tradeoff, consistency, availability]
+workspace_file_count: 4
+lines_changed_expected: 25
+parameterized: true

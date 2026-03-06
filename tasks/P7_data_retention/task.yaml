@@ -1,0 +1,11 @@
+task_id: P7_data_retention
+domain: policy
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [gdpr, data-retention, privacy, policy-compliance]
+workspace_file_count: 5
+lines_changed_expected: 55
+parameterized: true

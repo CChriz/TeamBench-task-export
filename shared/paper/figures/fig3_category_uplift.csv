@@ -1,16 +1,19 @@
 category,count,avg_uplift,min_uplift,max_uplift
-Specification,1,-0.45,-0.45,-0.45
-Software Eng.,2,-0.315,-0.38,-0.25
-Negotiation,1,-0.1,-0.1,-0.1
-Data Engineering,1,0.0,0.0,0.0
-Integration,1,0.0,0.0,0.0
-Information Retrieval,1,0.0,0.0,0.0
-Code Review,1,0.06,0.06,0.06
-Policy,1,0.07,0.07,0.07
-Incident Response,1,0.1,0.1,0.1
-Operations,1,0.2,0.2,0.2
-Long-Horizon,1,0.33,0.33,0.33
-Security,1,0.33,0.33,0.33
-Pipeline,1,0.37,0.37,0.37
-Multi-language,1,0.5,0.5,0.5
-Testing,1,0.5,0.5,0.5
+Pipeline,6,-0.2494,-0.92,0.1233
+Integration,3,-0.2,-0.6,0.0
+Cross-System,7,-0.1857,-1.0,0.0
+Software Eng.,11,-0.1839,-0.75,0.09
+Incident Response,11,-0.1627,-0.83,0.1
+Information Retrieval,8,-0.0567,-0.9,0.2967
+Distributed,6,-0.0296,-0.25,0.0833
+Data Engineering,11,-0.02,-0.59,0.74
+Security,15,-0.004,-0.69,0.41
+Operations,9,0.0019,-1.0,0.3333
+Code Review,6,0.0189,-0.5,0.2433
+Long-Horizon,9,0.0219,-0.55,0.7767
+Specification,7,0.0574,-0.45,0.4567
+Adversarial,8,0.0833,0.0,0.36
+Multi-language,9,0.1381,0.0,0.8333
+Negotiation,5,0.1933,-0.1,0.6667
+Policy,8,0.2138,0.0,0.81
+Testing,9,0.3604,0.0533,0.7333

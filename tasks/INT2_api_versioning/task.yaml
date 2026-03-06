@@ -1,0 +1,8 @@
+task_id: INT2_api_versioning
+category: SWE
+difficulty: hard
+languages: [python]
+description: "v1 to v2 API migration with 5 breaking changes; 2 must be shimmed for backward compat"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

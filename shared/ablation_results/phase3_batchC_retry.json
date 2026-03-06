@@ -1,0 +1,579 @@
+{
+  "model": "gemini-3.1-flash-lite-preview",
+  "runs": [
+    {
+      "condition": "full",
+      "task_id": "O2_incident_rootcause",
+      "seed": 1,
+      "run_id": "20260306_074458_6afbf35a",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 308.4
+    },
+    {
+      "condition": "full",
+      "task_id": "O2_incident_rootcause",
+      "seed": 2,
+      "run_id": "20260306_075015_a319516f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 138.2
+    },
+    {
+      "condition": "oracle",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 2,
+      "run_id": "20260306_075241_493c8e81",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 261.7
+    },
+    {
+      "condition": "restricted",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 1,
+      "run_id": "20260306_075703_10e76e18",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 43.2
+    },
+    {
+      "condition": "restricted",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 2,
+      "run_id": "20260306_075747_d4dd9a43",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 66.1
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 1,
+      "run_id": "20260306_075854_73a751c7",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "elapsed_sec": 143.3
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 2,
+      "run_id": "20260306_080118_d8536663",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "elapsed_sec": 134.4
+    },
+    {
+      "condition": "full",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 1,
+      "run_id": "20260306_080333_07a7296a",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 185.2
+    },
+    {
+      "condition": "full",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 2,
+      "run_id": "20260306_080639_77524d2d",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 325.7
+    },
+    {
+      "condition": "oracle",
+      "task_id": "P3_access_control",
+      "seed": 2,
+      "run_id": "20260306_081205_debc8e2d",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      },
+      "elapsed_sec": 85.1
+    },
+    {
+      "condition": "restricted",
+      "task_id": "P3_access_control",
+      "seed": 1,
+      "run_id": "20260306_081333_f5183020",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "elapsed_sec": 35.3
+    },
+    {
+      "condition": "restricted",
+      "task_id": "P3_access_control",
+      "seed": 2,
+      "run_id": "20260306_081411_1c2b55d9",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "elapsed_sec": 85.5
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "P3_access_control",
+      "seed": 1,
+      "run_id": "20260306_081540_fdda3907",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.73
+      },
+      "elapsed_sec": 229.0
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "P3_access_control",
+      "seed": 2,
+      "run_id": "20260306_081932_436d7102",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      },
+      "elapsed_sec": 325.2
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "P3_access_control",
+      "seed": 1,
+      "run_id": "20260306_082500_34dd07e4",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      },
+      "elapsed_sec": 260.4
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "P3_access_control",
+      "seed": 2,
+      "run_id": "20260306_082925_08002ede",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      },
+      "elapsed_sec": 242.8
+    },
+    {
+      "condition": "full",
+      "task_id": "P3_access_control",
+      "seed": 1,
+      "run_id": "20260306_083332_98a08bdd",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "elapsed_sec": 540.8
+    },
+    {
+      "condition": "full",
+      "task_id": "P3_access_control",
+      "seed": 2,
+      "run_id": "20260306_084240_5bae9ccb",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "elapsed_sec": 902.8
+    },
+    {
+      "condition": "oracle",
+      "task_id": "S7_env_config",
+      "seed": 1,
+      "run_id": "20260306_085746_e0b913dc",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      },
+      "elapsed_sec": 56.0
+    },
+    {
+      "condition": "restricted",
+      "task_id": "S7_env_config",
+      "seed": 1,
+      "run_id": "20260306_085842_4d794f6f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      },
+      "elapsed_sec": 28.4
+    },
+    {
+      "condition": "restricted",
+      "task_id": "S7_env_config",
+      "seed": 2,
+      "run_id": "20260306_085911_f4f4880e",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      },
+      "elapsed_sec": 17.7
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "S7_env_config",
+      "seed": 2,
+      "run_id": "20260306_085930_aa07b2fd",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 104.2
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "S7_env_config",
+      "seed": 1,
+      "run_id": "20260306_090114_76e04ca7",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 47.8
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "S7_env_config",
+      "seed": 2,
+      "run_id": "20260306_090203_d3972515",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 62.4
+    },
+    {
+      "condition": "full",
+      "task_id": "S7_env_config",
+      "seed": 1,
+      "run_id": "20260306_090306_5e336423",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 301.2
+    },
+    {
+      "condition": "full",
+      "task_id": "S7_env_config",
+      "seed": 2,
+      "run_id": "20260306_090807_70aa74ec",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "elapsed_sec": 214.2
+    },
+    {
+      "condition": "oracle",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 1,
+      "run_id": "20260306_091142_ab604f53",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.43
+      },
+      "elapsed_sec": 76.4
+    },
+    {
+      "condition": "oracle",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 2,
+      "run_id": "20260306_091302_489107c7",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      },
+      "elapsed_sec": 279.4
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 1,
+      "run_id": "20260306_091744_e7da39bf",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      },
+      "elapsed_sec": 118.0
+    },
+    {
+      "condition": "restricted",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 2,
+      "run_id": "20260306_091944_71a0d4d0",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.43
+      },
+      "elapsed_sec": 144.3
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 2,
+      "run_id": "20260306_092211_27f7e91a",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      },
+      "elapsed_sec": 178.3
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 1,
+      "run_id": "20260306_092511_bdfbc984",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      },
+      "elapsed_sec": 171.3
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 2,
+      "run_id": "20260306_092804_fbce48a4",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      },
+      "elapsed_sec": 89.8
+    },
+    {
+      "condition": "full",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 1,
+      "run_id": "20260306_092935_6bf12e36",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      },
+      "elapsed_sec": 637.5
+    },
+    {
+      "condition": "full",
+      "task_id": "SCALE1_codebase_migration",
+      "seed": 2,
+      "run_id": "20260306_094014_25c44902",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      },
+      "elapsed_sec": 390.3
+    },
+    {
+      "condition": "oracle",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 2,
+      "run_id": "20260306_094647_96f88539",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 1065.4
+    },
+    {
+      "condition": "restricted",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 1,
+      "run_id": "20260306_100652_267ebb5f",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      },
+      "elapsed_sec": 242.0
+    },
+    {
+      "condition": "restricted",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 2,
+      "run_id": "20260306_101308_58a15257",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "elapsed_sec": 128.0
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 1,
+      "run_id": "20260306_101740_28060643",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      },
+      "elapsed_sec": 219.2
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 2,
+      "run_id": "20260306_102402_00ada44c",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 631.2
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 1,
+      "run_id": "20260306_103724_48992c31",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "elapsed_sec": 462.0
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 1,
+      "run_id": "20260306_104733_f609616c",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 158.5
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 2,
+      "run_id": "20260306_105231_e41812a9",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "elapsed_sec": 507.3
+    },
+    {
+      "condition": "oracle",
+      "task_id": "TEST7_integration_suite",
+      "seed": 1,
+      "run_id": "20260306_110329_0df3c1a5",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 118.6
+    },
+    {
+      "condition": "restricted",
+      "task_id": "TEST7_integration_suite",
+      "seed": 1,
+      "run_id": "20260306_110542_93087488",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 55.6
+    },
+    {
+      "condition": "restricted",
+      "task_id": "TEST7_integration_suite",
+      "seed": 2,
+      "run_id": "20260306_110649_5e012975",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "elapsed_sec": 74.2
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST7_integration_suite",
+      "seed": 1,
+      "run_id": "20260306_110813_f4412067",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 217.8
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST7_integration_suite",
+      "seed": 2,
+      "run_id": "20260306_111203_9aae6d09",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 319.9
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "TEST7_integration_suite",
+      "seed": 1,
+      "run_id": "20260306_111736_b5d07d40",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      },
+      "elapsed_sec": 107.6
+    },
+    {
+      "condition": "team_no_plan",
+      "task_id": "TEST7_integration_suite",
+      "seed": 2,
+      "run_id": "20260306_111936_2a3fa401",
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "elapsed_sec": 117.1
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST7_integration_suite",
+      "seed": 1,
+      "run_id": "20260306_112150_a8aeb498",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 102.2
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST7_integration_suite",
+      "seed": 2,
+      "run_id": "20260306_112348_c1027477",
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "elapsed_sec": 130.5
+    }
+  ],
+  "total": 52,
+  "scored": 52
+}

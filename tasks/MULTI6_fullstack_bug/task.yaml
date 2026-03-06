@@ -1,0 +1,11 @@
+task_id: MULTI6_fullstack_bug
+domain: software
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python, javascript]
+tags: [fullstack, flask, react, multi-language, api-contract]
+workspace_file_count: 7
+lines_changed_expected: 25
+parameterized: true

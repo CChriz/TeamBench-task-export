@@ -1,0 +1,8 @@
+task_id: O7_capacity_planning
+category: Operations
+difficulty: hard
+languages: [python]
+description: "3 services with performance issues; fix under SLA constraint (p99 < 100ms, error rate < 0.1%)"
+tni_pattern: C
+parameterized: true
+seeds: [0, 1, 2]

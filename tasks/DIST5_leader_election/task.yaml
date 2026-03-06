@@ -1,0 +1,8 @@
+task_id: DIST5_leader_election
+category: Distributed
+difficulty: hard
+languages: [python]
+description: "Bully leader election with 3 bugs + 2 network partition edge cases"
+tni_pattern: A
+parameterized: true
+seeds: [0, 1, 2]

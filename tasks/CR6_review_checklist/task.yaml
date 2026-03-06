@@ -1,0 +1,11 @@
+task_id: CR6_review_checklist
+domain: code_review
+difficulty: hard
+languages: [python]
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 4
+lines_changed_expected: 60
+tags: [code-review, triage, severity, false-positives, security, pr-review]

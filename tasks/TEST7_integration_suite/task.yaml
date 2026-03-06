@@ -1,0 +1,11 @@
+task_id: TEST7_integration_suite
+domain: testing
+difficulty: hard
+languages: [python]
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 6
+lines_changed_expected: 150
+tags: [integration-testing, contract-testing, microservices, api-contracts]

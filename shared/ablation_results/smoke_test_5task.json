@@ -1,0 +1,199 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "TRAP6_deprecated_api",
+    "CROSS5_event_schema",
+    "TEST5_mutation_resistant",
+    "D8_csv_cleanup",
+    "P8_access_control"
+  ],
+  "seeds": [
+    0
+  ],
+  "completed": "2026-03-02T18:21:43.660526+00:00",
+  "metrics": {
+    "s_oracle": 0.2,
+    "s_restricted": 0.0,
+    "s_full": 0.4,
+    "s_no_verify": 0.0,
+    "s_no_plan": 0.0,
+    "p_oracle": 0.762,
+    "p_restricted": 0.0,
+    "p_full": 0.706,
+    "p_no_verify": 0.0,
+    "p_no_plan": 0.0,
+    "necessity_gap": 0.762,
+    "tni": 0.9265,
+    "team_uplift": 0.706,
+    "collab_efficiency": 0.9265,
+    "planning_value": 0.706,
+    "verification_value": 0.706,
+    "s_expertise_full": 0.0,
+    "s_expertise_no_analysis": 0.0,
+    "s_expertise_no_test": 0.0,
+    "s_expertise_oracle": 0.0,
+    "p_expertise_full": 0.0,
+    "p_expertise_no_analysis": 0.0,
+    "p_expertise_no_test": 0.0,
+    "p_expertise_oracle": 0.0,
+    "analysis_value": 0.0,
+    "testing_value": 0.0,
+    "expertise_tni": 0.0,
+    "interpretation": {
+      "tni": "Teamwork fully recovers the performance gap.",
+      "team_uplift": "Team adds +70.6% over single agent",
+      "collab_efficiency": "Team reaches 92.7% of oracle ceiling via collaboration",
+      "planning_value": "Planning adds +70.6% partial score",
+      "verification_value": "Verification adds +70.6% partial score"
+    }
+  },
+  "per_condition": {
+    "oracle": {
+      "passes": 1,
+      "total": 5,
+      "success_rate": 0.2
+    },
+    "full": {
+      "passes": 2,
+      "total": 5,
+      "success_rate": 0.4
+    }
+  },
+  "runs": [
+    {
+      "condition": "oracle",
+      "task_id": "TRAP6_deprecated_api",
+      "seed": 0,
+      "run_id": "20260302_173705_f9126640",
+      "run_dir": "shared/ablation_results/ablation_runs/TRAP6_deprecated_api/20260302_173705_f9126640",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 56.2,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "oracle",
+      "task_id": "CROSS5_event_schema",
+      "seed": 0,
+      "run_id": "20260302_173812_f6e6424e",
+      "run_dir": "shared/ablation_results/ablation_runs/CROSS5_event_schema/20260302_173812_f6e6424e",
+      "pass": false,
+      "partial_score": 0.7,
+      "elapsed_sec": 38.3,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "oracle",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 0,
+      "run_id": "20260302_173854_80271a3e",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST5_mutation_resistant/20260302_173854_80271a3e",
+      "pass": false,
+      "partial_score": 0.92,
+      "elapsed_sec": 165.0,
+      "failure_modes": [
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "oracle",
+      "task_id": "D8_csv_cleanup",
+      "seed": 0,
+      "run_id": "20260302_174215_f3e280d7",
+      "run_dir": "shared/ablation_results/ablation_runs/D8_csv_cleanup/20260302_174215_f3e280d7",
+      "pass": false,
+      "partial_score": 0.89,
+      "elapsed_sec": 95.2,
+      "failure_modes": [
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "oracle",
+      "task_id": "P8_access_control",
+      "seed": 0,
+      "run_id": "20260302_174353_3e340c90",
+      "run_dir": "shared/ablation_results/ablation_runs/P8_access_control/20260302_174353_3e340c90",
+      "pass": false,
+      "partial_score": 0.3,
+      "elapsed_sec": 71.6,
+      "failure_modes": [
+        "violations_not_fixed",
+        "exceptions_broken",
+        "violation_1_not_fixed",
+        "violation_2_not_fixed",
+        "violation_3_not_fixed",
+        "violation_4_not_fixed",
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TRAP6_deprecated_api",
+      "seed": 0,
+      "run_id": "20260302_174508_fdef8e9f",
+      "run_dir": "shared/ablation_results/ablation_runs/TRAP6_deprecated_api/20260302_174508_fdef8e9f",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 288.6,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "CROSS5_event_schema",
+      "seed": 0,
+      "run_id": "20260302_175005_52e50ab7",
+      "run_dir": "shared/ablation_results/ablation_runs/CROSS5_event_schema/20260302_175005_52e50ab7",
+      "pass": false,
+      "partial_score": 0.7,
+      "elapsed_sec": 282.2,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST5_mutation_resistant",
+      "seed": 0,
+      "run_id": "20260302_175451_a9841d2d",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST5_mutation_resistant/20260302_175451_a9841d2d",
+      "pass": false,
+      "partial_score": 0.83,
+      "elapsed_sec": 750.9,
+      "failure_modes": [
+        "mutant_05_not_caught",
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "D8_csv_cleanup",
+      "seed": 0,
+      "run_id": "20260302_180802_839c8c48",
+      "run_dir": "shared/ablation_results/ablation_runs/D8_csv_cleanup/20260302_180802_839c8c48",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 537.5,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "P8_access_control",
+      "seed": 0,
+      "run_id": "20260302_181702_ba8f1887",
+      "run_dir": "shared/ablation_results/ablation_runs/P8_access_control/20260302_181702_ba8f1887",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 281.4,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    }
+  ]
+}

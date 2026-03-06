@@ -1,5 +1,176 @@
 [
   {
+    "task_id": "cross1_api_contract",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.5,
+    "full": 0.8333,
+    "team_uplift": 0.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "cross2_schema_evolution",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "cross3_protocol_bridge",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.8667,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "cross4_auth_federation",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "crypto1_nonce_reuse",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.2,
+    "full": 0.2,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "crypto2_timing_safe",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "crypto3_cert_chain",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.0667,
+    "full": 0.0667,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "crypto4_kdf_migration",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.2,
+    "full": 0.2,
+    "team_uplift": 0.1333,
+    "category": "Security"
+  },
+  {
+    "task_id": "dist1_queue_race",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.4445,
+    "full": 0.4445,
+    "team_uplift": 0.0833,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "dist2_consensus_partition",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.4167,
+    "full": 0.4445,
+    "team_uplift": 0.0278,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "dist3_idempotency",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.5278,
+    "full": 0.4167,
+    "team_uplift": -0.25,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "dist4_clock_skew",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.9167,
+    "full": 0.9722,
+    "team_uplift": 0.0278,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "trap1_spec_conflict",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.9333,
+    "full": 0.9333,
+    "team_uplift": 0.0,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "trap2_false_fix",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0833,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "trap3_metric_mirage",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.8667,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "trap4_version_paradox",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.5533,
+    "full": 0.5267,
+    "team_uplift": 0.2233,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "trap5_security_theater",
+    "difficulty": "unknown",
+    "difficulty_num": 0,
+    "oracle": 0.62,
+    "full": 0.5967,
+    "team_uplift": 0.36,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "CR2_style_enforce",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.92,
+    "full": 0.77,
+    "team_uplift": 0.08,
+    "category": "Code Review"
+  },
+  {
+    "task_id": "D8_csv_cleanup",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.2967,
+    "full": 1.0,
+    "team_uplift": 0.74,
+    "category": "Data Engineering"
+  },
+  {
     "task_id": "IR1_evidence_qa",
     "difficulty": "easy",
     "difficulty_num": 1,
@@ -7,6 +178,69 @@
     "full": 0.33,
     "team_uplift": 0.0,
     "category": "Information Retrieval"
+  },
+  {
+    "task_id": "O8_dockerfile_fix",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.2367,
+    "full": 0.2867,
+    "team_uplift": 0.05,
+    "category": "Operations"
+  },
+  {
+    "task_id": "P6_license_check",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.2867,
+    "full": 1.0,
+    "team_uplift": 0.81,
+    "category": "Policy"
+  },
+  {
+    "task_id": "S7_env_config",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.2367,
+    "full": 0.2867,
+    "team_uplift": 0.05,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "TEST8_unit_basic",
+    "difficulty": "easy",
+    "difficulty_num": 1,
+    "oracle": 0.75,
+    "full": 0.88,
+    "team_uplift": 0.13,
+    "category": "Testing"
+  },
+  {
+    "task_id": "CR1_review_respond",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.5,
+    "full": 0.0,
+    "team_uplift": -0.5,
+    "category": "Code Review"
+  },
+  {
+    "task_id": "CR3_perf_review",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Code Review"
+  },
+  {
+    "task_id": "CR5_test_coverage",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.0,
+    "full": 0.2567,
+    "team_uplift": 0.13,
+    "category": "Code Review"
   },
   {
     "task_id": "D1_schema_drift",
@@ -18,30 +252,201 @@
     "category": "Data Engineering"
   },
   {
+    "task_id": "D2_data_quality",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.27,
+    "full": 0.36,
+    "team_uplift": -0.46,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "D9_schema_validation",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.8,
+    "full": 0.9,
+    "team_uplift": 0.1,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "INC5_cert_expiry",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.91,
+    "full": 1.0,
+    "team_uplift": 0.09,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "IR5_search_ranking",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.26,
+    "full": 0.2967,
+    "team_uplift": 0.2967,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "IR6_search_index",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "IR7_doc_clustering",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.75,
+    "full": 0.75,
+    "team_uplift": 0.0,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "NEG3_tech_debt",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.8,
+    "full": 1.0,
+    "team_uplift": 0.2,
+    "category": "Negotiation"
+  },
+  {
+    "task_id": "O1_service_health",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.0,
+    "full": 0.0833,
+    "team_uplift": 0.0833,
+    "category": "Operations"
+  },
+  {
+    "task_id": "O9_logging_config",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.5,
+    "full": 0.6,
+    "team_uplift": 0.1,
+    "category": "Operations"
+  },
+  {
     "task_id": "P1_policy_config",
     "difficulty": "medium",
     "difficulty_num": 2,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Policy"
+  },
+  {
+    "task_id": "P5_audit_logging",
+    "difficulty": "medium",
+    "difficulty_num": 2,
     "oracle": 0.93,
-    "full": 0.5,
-    "team_uplift": 0.07,
+    "full": 0.93,
+    "team_uplift": 0.0,
+    "category": "Policy"
+  },
+  {
+    "task_id": "P7_data_retention",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.2967,
+    "full": 1.0,
+    "team_uplift": 0.74,
     "category": "Policy"
   },
   {
     "task_id": "PIPE1_etl_fix",
     "difficulty": "medium",
     "difficulty_num": 2,
-    "oracle": 0.73,
-    "full": 0.73,
-    "team_uplift": 0.37,
+    "oracle": 0.2433,
+    "full": 0.2433,
+    "team_uplift": 0.1233,
     "category": "Pipeline"
+  },
+  {
+    "task_id": "PIPE2_api_gateway",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.92,
+    "full": 0.0,
+    "team_uplift": -0.92,
+    "category": "Pipeline"
+  },
+  {
+    "task_id": "PIPE4_ci_cd",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.93,
+    "full": 1.0,
+    "team_uplift": 0.07,
+    "category": "Pipeline"
+  },
+  {
+    "task_id": "S5_error_handling",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.0667,
+    "full": 0.11,
+    "team_uplift": 0.0867,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "SEC6_csrf_protection",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.85,
+    "full": 0.46,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "SPEC2_api_design",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.75,
+    "full": 0.67,
+    "team_uplift": 0.0,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SPEC3_data_model",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.262,
+    "full": 0.262,
+    "team_uplift": 0.262,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SQL1_query_repair",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Data Engineering"
   },
   {
     "task_id": "TEST1_spec_to_tests",
     "difficulty": "medium",
     "difficulty_num": 2,
-    "oracle": 0.7,
-    "full": 0.8,
-    "team_uplift": 0.5,
+    "oracle": 0.2333,
+    "full": 0.2667,
+    "team_uplift": 0.1667,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST9_mock_service",
+    "difficulty": "medium",
+    "difficulty_num": 2,
+    "oracle": 0.2967,
+    "full": 0.3333,
+    "team_uplift": 0.3333,
     "category": "Testing"
   },
   {
@@ -54,11 +459,200 @@
     "category": "Code Review"
   },
   {
+    "task_id": "CR6_review_checklist",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.06,
+    "full": 0.3033,
+    "team_uplift": 0.2433,
+    "category": "Code Review"
+  },
+  {
+    "task_id": "CROSS5_event_schema",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.7,
+    "full": 0.7,
+    "team_uplift": -0.3,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "CROSS6_grpc_rest_bridge",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 0.0,
+    "team_uplift": -1.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "CROSS7_config_drift",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.6,
+    "full": 0.6,
+    "team_uplift": 0.0,
+    "category": "Cross-System"
+  },
+  {
+    "task_id": "CRYPTO5_tls_config",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3,
+    "full": 0.3,
+    "team_uplift": 0.1,
+    "category": "Security"
+  },
+  {
+    "task_id": "CRYPTO6_token_validation",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 0.9,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "D3_schema_migration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.73,
+    "full": 0.82,
+    "team_uplift": 0.0,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "D4_data_pipeline",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.59,
+    "full": 0.0,
+    "team_uplift": -0.59,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "D5_query_optimize",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.8,
+    "full": 0.8,
+    "team_uplift": -0.07,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "D7_etl_reconciliation",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "DIST5_leader_election",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.2,
+    "full": 0.2,
+    "team_uplift": 0.0,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "DIST6_distributed_lock",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 0.6333,
+    "team_uplift": -0.0667,
+    "category": "Distributed"
+  },
+  {
+    "task_id": "GO2_race_condition",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.92,
+    "full": 1.0,
+    "team_uplift": 0.08,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "INC10_rollback_plan",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.4,
+    "full": 0.0,
+    "team_uplift": -0.4,
+    "category": "Incident Response"
+  },
+  {
     "task_id": "INC1_cascade_failure",
     "difficulty": "hard",
     "difficulty_num": 3,
     "oracle": 0.8,
     "full": 0.9,
+    "team_uplift": 0.1,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC2_data_corruption",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC3_memory_leak",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.92,
+    "full": 0.0,
+    "team_uplift": -0.83,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC4_dns_miscfg",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.92,
+    "full": 1.0,
+    "team_uplift": 0.08,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC7_rollback",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": -0.83,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC8_cascading_timeout",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.6,
+    "full": 0.7,
+    "team_uplift": -0.1,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC8_memory_leak",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.8,
+    "full": 0.7,
+    "team_uplift": -0.1,
+    "category": "Incident Response"
+  },
+  {
+    "task_id": "INC9_log_forensics",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3,
+    "full": 0.3,
     "team_uplift": 0.1,
     "category": "Incident Response"
   },
@@ -72,12 +666,192 @@
     "category": "Integration"
   },
   {
+    "task_id": "INT2_api_versioning",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Integration"
+  },
+  {
+    "task_id": "INT3_db_migration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.5,
+    "full": 0.0,
+    "team_uplift": -0.6,
+    "category": "Integration"
+  },
+  {
+    "task_id": "IR2_misinformation_trap",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.29,
+    "full": 0.29,
+    "team_uplift": 0.0,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "IR3_multi_source",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.92,
+    "full": 1.0,
+    "team_uplift": 0.08,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "IR4_temporal",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.93,
+    "full": 1.0,
+    "team_uplift": 0.07,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "IR8_search_index",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.8,
+    "full": 0.0,
+    "team_uplift": -0.9,
+    "category": "Information Retrieval"
+  },
+  {
+    "task_id": "JS1_api_migration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.43,
+    "full": 0.0,
+    "team_uplift": -0.71,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "JS2_xss_sanitize",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.78,
+    "full": 0.87,
+    "team_uplift": 0.09,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "LH1_long_horizon",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "LH4_staged_deploy",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.43,
+    "full": 0.43,
+    "team_uplift": 0.0,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "LH6_audit_trail",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.55,
+    "full": 0.0,
+    "team_uplift": -0.55,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "LH7_zero_downtime",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.82,
+    "full": 0.0,
+    "team_uplift": -0.27,
+    "category": "Long-Horizon"
+  },
+  {
     "task_id": "MULTI1_fullstack_fix",
     "difficulty": "hard",
     "difficulty_num": 3,
-    "oracle": 0.75,
+    "oracle": 0.25,
     "full": 1.0,
-    "team_uplift": 0.5,
+    "team_uplift": 0.8333,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI2_api_frontend",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.5,
+    "full": 0.5,
+    "team_uplift": 0.0,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI2_microservice_debug",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 0.9,
+    "team_uplift": 0.0,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI3_polyglot",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI4_monorepo_fix",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI5_deploy_pipeline",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.1667,
+    "full": 0.2667,
+    "team_uplift": 0.0667,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI6_fullstack_bug",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI7_polyglot_test",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Multi-language"
+  },
+  {
+    "task_id": "MULTI8_sdk_mismatch",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.25,
+    "full": 0.2933,
+    "team_uplift": 0.0433,
     "category": "Multi-language"
   },
   {
@@ -90,21 +864,147 @@
     "category": "Negotiation"
   },
   {
+    "task_id": "NEG2_cost_perf",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.6667,
+    "category": "Negotiation"
+  },
+  {
+    "task_id": "NEG4_resource_allocation",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Negotiation"
+  },
+  {
+    "task_id": "NEG5_sla_tradeoff",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Negotiation"
+  },
+  {
     "task_id": "O2_incident_rootcause",
     "difficulty": "hard",
     "difficulty_num": 3,
-    "oracle": 0.6,
-    "full": 0.6,
-    "team_uplift": 0.2,
+    "oracle": 0.2,
+    "full": 0.2,
+    "team_uplift": 0.0667,
     "category": "Operations"
+  },
+  {
+    "task_id": "O3_log_analysis",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.1533,
+    "full": 0.1533,
+    "team_uplift": 0.1533,
+    "category": "Operations"
+  },
+  {
+    "task_id": "O4_monitoring",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3333,
+    "full": 0.3333,
+    "team_uplift": 0.3333,
+    "category": "Operations"
+  },
+  {
+    "task_id": "O5_container_debug",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.6,
+    "full": 0.73,
+    "team_uplift": 0.13,
+    "category": "Operations"
+  },
+  {
+    "task_id": "O7_capacity_planning",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.1,
+    "category": "Operations"
+  },
+  {
+    "task_id": "P2_spec_arbitration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.25,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Policy"
+  },
+  {
+    "task_id": "P3_access_control",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3033,
+    "full": 0.3333,
+    "team_uplift": 0.06,
+    "category": "Policy"
+  },
+  {
+    "task_id": "P4_data_retention",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.86,
+    "full": 0.57,
+    "team_uplift": 0.0,
+    "category": "Policy"
+  },
+  {
+    "task_id": "P8_access_control",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3,
+    "full": 0.4,
+    "team_uplift": 0.1,
+    "category": "Policy"
+  },
+  {
+    "task_id": "PIPE2_data_pipeline",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.8,
+    "full": 0.8,
+    "team_uplift": 0.0,
+    "category": "Pipeline"
+  },
+  {
+    "task_id": "PIPE3_msg_queue",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.77,
+    "full": 0.0,
+    "team_uplift": -0.77,
+    "category": "Pipeline"
+  },
+  {
+    "task_id": "PIPE3_stream_processing",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Pipeline"
   },
   {
     "task_id": "S1_hidden_spec",
     "difficulty": "hard",
     "difficulty_num": 3,
     "oracle": 0.0,
-    "full": 0.12,
-    "team_uplift": -0.38,
+    "full": 0.0,
+    "team_uplift": 0.0,
     "category": "Software Eng."
   },
   {
@@ -117,12 +1017,93 @@
     "category": "Software Eng."
   },
   {
+    "task_id": "S3_refactor_extract",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.17,
+    "full": 0.17,
+    "team_uplift": 0.0,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "S4_backward_compat",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.21,
+    "full": 0.21,
+    "team_uplift": 0.0,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "S6_caching",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": -0.62,
+    "category": "Software Eng."
+  },
+  {
     "task_id": "SEC1_vuln_patch",
     "difficulty": "hard",
     "difficulty_num": 3,
-    "oracle": 0.42,
-    "full": 0.75,
-    "team_uplift": 0.33,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC2_auth_bypass",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 0.7,
+    "team_uplift": 0.1,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC3_crypto_upgrade",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.2833,
+    "full": 0.3067,
+    "team_uplift": 0.1267,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC4_input_validation",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.31,
+    "full": 0.0,
+    "team_uplift": -0.31,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC5_secrets_rotation",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3067,
+    "full": 0.64,
+    "team_uplift": 0.41,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC7_rate_limiting",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.47,
+    "full": 0.6,
+    "team_uplift": 0.07,
+    "category": "Security"
+  },
+  {
+    "task_id": "SEC9_vuln_triage",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.77,
+    "full": 0.0,
+    "team_uplift": -0.69,
     "category": "Security"
   },
   {
@@ -135,12 +1116,219 @@
     "category": "Specification"
   },
   {
+    "task_id": "SPEC4_migration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.85,
+    "team_uplift": 0.0,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SPEC5_config_system",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.4567,
+    "full": 0.4567,
+    "team_uplift": 0.4567,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SPEC6_rfc_impl",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.95,
+    "full": 1.0,
+    "team_uplift": 0.05,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SPEC7_config_schema",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0833,
+    "category": "Specification"
+  },
+  {
+    "task_id": "SQL2_query_optimize",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.47,
+    "full": 0.87,
+    "team_uplift": 0.0,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "TEST2_regression",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.6667,
+    "team_uplift": 0.6667,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST3_integration",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 0.3067,
+    "team_uplift": 0.3067,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST4_property",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.2867,
+    "full": 0.2867,
+    "team_uplift": 0.2867,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST5_mutation_resistant",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.2233,
+    "full": 0.2767,
+    "team_uplift": 0.0533,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST6_property_based",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.3,
+    "full": 0.6667,
+    "team_uplift": 0.5667,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TEST7_integration_suite",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.0,
+    "full": 1.0,
+    "team_uplift": 0.7333,
+    "category": "Testing"
+  },
+  {
+    "task_id": "TRAP6_deprecated_api",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 1.0,
+    "full": 1.0,
+    "team_uplift": 0.0,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "TRAP7_test_pollution",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.8,
+    "full": 0.8,
+    "team_uplift": 0.0,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "TRAP8_config_override",
+    "difficulty": "hard",
+    "difficulty_num": 3,
+    "oracle": 0.9,
+    "full": 0.9,
+    "team_uplift": 0.0,
+    "category": "Adversarial"
+  },
+  {
+    "task_id": "D6_data_reconcile",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.83,
+    "full": 0.89,
+    "team_uplift": 0.06,
+    "category": "Data Engineering"
+  },
+  {
+    "task_id": "GO1_concurrency_fix",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.75,
+    "full": 0.0,
+    "team_uplift": -0.75,
+    "category": "Software Eng."
+  },
+  {
+    "task_id": "INC6_deadlock",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.67,
+    "full": 0.67,
+    "team_uplift": 0.0,
+    "category": "Incident Response"
+  },
+  {
     "task_id": "LH2_budgeted_workflow",
     "difficulty": "expert",
     "difficulty_num": 4,
-    "oracle": 0.11,
-    "full": 0.5,
-    "team_uplift": 0.33,
+    "oracle": 0.0367,
+    "full": 0.8333,
+    "team_uplift": 0.7767,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "LH3_multi_service",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.9,
+    "full": 0.95,
+    "team_uplift": 0.1,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "LH5_data_migration",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.0,
+    "full": 0.0,
+    "team_uplift": 0.0,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "O6_perf_tuning",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.77,
+    "full": 0.0,
+    "team_uplift": -1.0,
+    "category": "Operations"
+  },
+  {
+    "task_id": "SCALE1_codebase_migration",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.19,
+    "full": 0.2367,
+    "team_uplift": 0.0467,
+    "category": "Long-Horizon"
+  },
+  {
+    "task_id": "SEC8_dependency_audit",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.83,
+    "full": 0.92,
+    "team_uplift": 0.0,
+    "category": "Security"
+  },
+  {
+    "task_id": "SYNTH1_distributed_debug",
+    "difficulty": "expert",
+    "difficulty_num": 4,
+    "oracle": 0.09,
+    "full": 0.1833,
+    "team_uplift": 0.0933,
     "category": "Long-Horizon"
   }
 ]

@@ -1,0 +1,8 @@
+task_id: INC8_memory_leak
+category: Incident
+difficulty: hard
+languages: [python]
+description: "Memory growth in 3 components; 1 real leak, 1 expected cache, 1 test-only artifact"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

@@ -1,0 +1,398 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "CR6_review_checklist",
+    "IR5_search_ranking",
+    "MULTI1_fullstack_fix",
+    "NEG2_cost_perf",
+    "O3_log_analysis",
+    "O4_monitoring",
+    "TEST1_spec_to_tests",
+    "TEST2_regression",
+    "TEST3_integration",
+    "TEST4_property",
+    "TEST6_property_based",
+    "TEST9_mock_service"
+  ],
+  "seeds": [
+    1,
+    2
+  ],
+  "completed": "2026-03-05T00:43:37.902037+00:00",
+  "metrics": {
+    "s_oracle": 0.0,
+    "s_restricted": 0.0,
+    "s_full": 0.0,
+    "s_no_verify": 0.2083,
+    "s_no_plan": 0.0,
+    "p_oracle": 0.0,
+    "p_restricted": 0.0,
+    "p_full": 0.0,
+    "p_no_verify": 0.5988,
+    "p_no_plan": 0.0,
+    "necessity_gap": 0.0,
+    "tni": 0.0,
+    "team_uplift": 0.0,
+    "collab_efficiency": 0.0,
+    "planning_value": 0.0,
+    "verification_value": -0.5988,
+    "s_expertise_full": 0.0,
+    "s_expertise_no_analysis": 0.0,
+    "s_expertise_no_test": 0.0,
+    "s_expertise_oracle": 0.0,
+    "p_expertise_full": 0.0,
+    "p_expertise_no_analysis": 0.0,
+    "p_expertise_no_test": 0.0,
+    "p_expertise_oracle": 0.0,
+    "analysis_value": 0.0,
+    "testing_value": 0.0,
+    "expertise_tni": 0.0,
+    "interpretation": {
+      "tni": "Teamwork provides minimal improvement.",
+      "team_uplift": "Team adds +0.0% over single agent",
+      "collab_efficiency": "Team reaches 0.0% of oracle ceiling via collaboration",
+      "planning_value": "Planning adds +0.0% partial score",
+      "verification_value": "Verification adds -59.9% partial score"
+    }
+  },
+  "per_condition": {
+    "team_no_verify": {
+      "passes": 5,
+      "total": 24,
+      "success_rate": 0.2083
+    }
+  },
+  "runs": [
+    {
+      "condition": "team_no_verify",
+      "task_id": "CR6_review_checklist",
+      "seed": 1,
+      "run_id": "20260304_233518_d7231428",
+      "run_dir": "shared/ablation_results/ablation_runs/CR6_review_checklist/20260304_233518_d7231428",
+      "pass": false,
+      "partial_score": 0.91,
+      "elapsed_sec": 175.8,
+      "failure_modes": [
+        "missing_or_insufficient_findings"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "CR6_review_checklist",
+      "seed": 2,
+      "run_id": "20260304_233815_820a593b",
+      "run_dir": "shared/ablation_results/ablation_runs/CR6_review_checklist/20260304_233815_820a593b",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 109.9,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "IR5_search_ranking",
+      "seed": 1,
+      "run_id": "20260304_234005_8162fba0",
+      "run_dir": "shared/ablation_results/ablation_runs/IR5_search_ranking/20260304_234005_8162fba0",
+      "pass": false,
+      "partial_score": 0.89,
+      "elapsed_sec": 96.0,
+      "failure_modes": [
+        "tiebreak_wrong"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "IR5_search_ranking",
+      "seed": 2,
+      "run_id": "20260304_234142_e30c5fc3",
+      "run_dir": "shared/ablation_results/ablation_runs/IR5_search_ranking/20260304_234142_e30c5fc3",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 28.4,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "MULTI1_fullstack_fix",
+      "seed": 1,
+      "run_id": "20260304_234210_e2311853",
+      "run_dir": "shared/ablation_results/ablation_runs/MULTI1_fullstack_fix/20260304_234210_e2311853",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 156.0,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "MULTI1_fullstack_fix",
+      "seed": 2,
+      "run_id": "20260304_234450_01370af2",
+      "run_dir": "shared/ablation_results/ablation_runs/MULTI1_fullstack_fix/20260304_234450_01370af2",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 57.9,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "NEG2_cost_perf",
+      "seed": 1,
+      "run_id": "20260304_234548_7eeeaece",
+      "run_dir": "shared/ablation_results/ablation_runs/NEG2_cost_perf/20260304_234548_7eeeaece",
+      "pass": false,
+      "partial_score": 0.67,
+      "elapsed_sec": 147.4,
+      "failure_modes": [
+        "cost_exceeds_budget",
+        "reliability_below_threshold",
+        "over_provisioned",
+        "simulator_check_fail"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "NEG2_cost_perf",
+      "seed": 2,
+      "run_id": "20260304_234816_a263ede3",
+      "run_dir": "shared/ablation_results/ablation_runs/NEG2_cost_perf/20260304_234816_a263ede3",
+      "pass": false,
+      "partial_score": 0.67,
+      "elapsed_sec": 114.6,
+      "failure_modes": [
+        "cost_exceeds_budget",
+        "reliability_below_threshold",
+        "over_provisioned",
+        "simulator_check_fail"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O3_log_analysis",
+      "seed": 1,
+      "run_id": "20260304_235012_cf33abd7",
+      "run_dir": "shared/ablation_results/ablation_runs/O3_log_analysis/20260304_235012_cf33abd7",
+      "pass": false,
+      "partial_score": 0.31,
+      "elapsed_sec": 146.6,
+      "failure_modes": [
+        "missing_root_cause_file",
+        "root_cause_missing_signal_a",
+        "root_cause_missing_signal_b",
+        "root_cause_missing_subsystem",
+        "root_cause_missing_fix_file",
+        "fix_not_applied",
+        "code_fix_not_applied",
+        "primary_endpoint_not_200",
+        "service_crashed_after_start"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O3_log_analysis",
+      "seed": 2,
+      "run_id": "20260304_235248_1122dce8",
+      "run_dir": "shared/ablation_results/ablation_runs/O3_log_analysis/20260304_235248_1122dce8",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 124.5,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O4_monitoring",
+      "seed": 1,
+      "run_id": "20260304_235452_62dfa468",
+      "run_dir": "shared/ablation_results/ablation_runs/O4_monitoring/20260304_235452_62dfa468",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 291.3,
+      "failure_modes": [
+        "routing_critical_wrong",
+        "routing_info_wrong"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "O4_monitoring",
+      "seed": 2,
+      "run_id": "20260304_235950_b5e031c9",
+      "run_dir": "shared/ablation_results/ablation_runs/O4_monitoring/20260304_235950_b5e031c9",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 237.7,
+      "failure_modes": [
+        "routing_critical_wrong",
+        "routing_warning_wrong"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST1_spec_to_tests",
+      "seed": 1,
+      "run_id": "20260305_000349_57ed8fb0",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST1_spec_to_tests/20260305_000349_57ed8fb0",
+      "pass": false,
+      "partial_score": 0.8,
+      "elapsed_sec": 230.2,
+      "failure_modes": [
+        "mutant_02_not_caught",
+        "mutant_05_not_caught"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST1_spec_to_tests",
+      "seed": 2,
+      "run_id": "20260305_000841_f688b053",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST1_spec_to_tests/20260305_000841_f688b053",
+      "pass": false,
+      "partial_score": 0.7,
+      "elapsed_sec": 230.2,
+      "failure_modes": [
+        "mutant_03_not_caught",
+        "mutant_05_not_caught",
+        "insufficient_mutation_detection"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST2_regression",
+      "seed": 1,
+      "run_id": "20260305_001418_e020f144",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST2_regression/20260305_001418_e020f144",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 207.7,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST2_regression",
+      "seed": 2,
+      "run_id": "20260305_001814_fc20fa3c",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST2_regression/20260305_001814_fc20fa3c",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 138.9,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST3_integration",
+      "seed": 1,
+      "run_id": "20260305_002033_088baccb",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST3_integration/20260305_002033_088baccb",
+      "pass": false,
+      "partial_score": 0.92,
+      "elapsed_sec": 165.5,
+      "failure_modes": [
+        "schema_not_verified"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST3_integration",
+      "seed": 2,
+      "run_id": "20260305_002330_f9eadae5",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST3_integration/20260305_002330_f9eadae5",
+      "pass": false,
+      "partial_score": 0.92,
+      "elapsed_sec": 169.1,
+      "failure_modes": [
+        "schema_not_verified"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST4_property",
+      "seed": 1,
+      "run_id": "20260305_002633_e0f1bb18",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST4_property/20260305_002633_e0f1bb18",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 132.5,
+      "failure_modes": [
+        "tests_fail_on_correct_module"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST4_property",
+      "seed": 2,
+      "run_id": "20260305_002849_ae165176",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST4_property/20260305_002849_ae165176",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 47.0,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST6_property_based",
+      "seed": 1,
+      "run_id": "20260305_002936_db11242a",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST6_property_based/20260305_002936_db11242a",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 338.2,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST6_property_based",
+      "seed": 2,
+      "run_id": "20260305_003524_0749e7b4",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST6_property_based/20260305_003524_0749e7b4",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 206.2,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST9_mock_service",
+      "seed": 1,
+      "run_id": "20260305_003902_da7bfe68",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST9_mock_service/20260305_003902_da7bfe68",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 161.2,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "TEST9_mock_service",
+      "seed": 2,
+      "run_id": "20260305_004143_dfb3c3b2",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST9_mock_service/20260305_004143_dfb3c3b2",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 109.3,
+      "failure_modes": [],
+      "error": null
+    }
+  ]
+}

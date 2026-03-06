@@ -1,0 +1,17 @@
+task_id: INC10_rollback_plan
+domain: incident
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+tags: [incident-response, rollback, dependency-ordering, planning]
+workspace_file_count: 8
+lines_changed_expected: 50
+parameterized: true
+tni_pattern: F
+category: Incident-Response
+description: >
+  Three services failed after a coordinated deployment. Produce a rollback_plan.json
+  that respects the service dependency graph (leaf-first ordering), includes health
+  checks between steps, and captures pre-rollback snapshot and post-rollback verification.

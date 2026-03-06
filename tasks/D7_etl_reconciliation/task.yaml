@@ -1,0 +1,8 @@
+task_id: D7_etl_reconciliation
+category: Data
+difficulty: hard
+languages: [python]
+description: "ETL produced wrong totals; 3 transform bugs + 2 data quality issues; reconcile against source"
+tni_pattern: A
+parameterized: true
+seeds: [0, 1, 2]

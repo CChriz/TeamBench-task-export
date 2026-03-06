@@ -1,0 +1,11 @@
+task_id: D8_csv_cleanup
+domain: data
+network: false
+time_limit_sec: 600
+seeds: [0, 1, 2]
+difficulty: easy
+languages: [python]
+tags: [csv, data-cleaning, pandas]
+workspace_file_count: 2
+lines_changed_expected: 25
+parameterized: true

@@ -4,7 +4,12 @@
 set -e
 
 ABLATION_FILES=""
-for f in shared/ablation_test.json shared/ablation_5task.json shared/ablation_10task.json; do
+# Original ablation files
+for f in shared/ablation_preliminary.json shared/ablation_5task.json shared/ablation_10task.json; do
+    [ -f "$f" ] && ABLATION_FILES="$ABLATION_FILES $f"
+done
+# Expanded ablation results
+for f in shared/ablation_results/*.json; do
     [ -f "$f" ] && ABLATION_FILES="$ABLATION_FILES $f"
 done
 
@@ -41,6 +46,10 @@ python3 -m harness.compute_tni --ablation $ABLATION_FILES --output shared/paper/
 if [ -d "shared/ablation_runs" ]; then
     python3 -m harness.compute_tni --runs-dir shared/ablation_runs --output shared/paper/tni_from_runs.json 2>/dev/null || true
 fi
+
+echo ""
+echo "=== Generating design pattern analysis (Table 6) ==="
+python3 scripts/design_pattern_analysis.py --files $ABLATION_FILES --output-dir shared/paper/
 
 echo ""
 echo "=== All paper outputs generated ==="

@@ -1,0 +1,515 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "TRAP6_deprecated_api",
+    "TRAP7_test_pollution",
+    "TRAP8_config_override",
+    "CROSS5_event_schema",
+    "CROSS6_grpc_rest_bridge",
+    "CROSS7_config_drift",
+    "CRYPTO5_tls_config",
+    "CRYPTO6_token_validation",
+    "DIST5_leader_election",
+    "DIST6_distributed_lock",
+    "GO1_concurrency_fix",
+    "GO2_race_condition",
+    "JS1_api_migration",
+    "JS2_xss_sanitize"
+  ],
+  "seeds": [
+    0
+  ],
+  "completed": 70,
+  "runs": [
+    {
+      "task_id": "TRAP6_deprecated_api",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "TRAP6_deprecated_api",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "TRAP6_deprecated_api",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "TRAP6_deprecated_api",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "TRAP6_deprecated_api",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "TRAP7_test_pollution",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "TRAP7_test_pollution",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "TRAP7_test_pollution",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "TRAP7_test_pollution",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "TRAP7_test_pollution",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.8
+    },
+    {
+      "task_id": "TRAP8_config_override",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "TRAP8_config_override",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "TRAP8_config_override",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "TRAP8_config_override",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "TRAP8_config_override",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CROSS5_event_schema",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.7
+    },
+    {
+      "task_id": "CROSS5_event_schema",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.7
+    },
+    {
+      "task_id": "CROSS5_event_schema",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS5_event_schema",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS5_event_schema",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.7
+    },
+    {
+      "task_id": "CROSS6_grpc_rest_bridge",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS6_grpc_rest_bridge",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS6_grpc_rest_bridge",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS6_grpc_rest_bridge",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "CROSS6_grpc_rest_bridge",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "CROSS7_config_drift",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CROSS7_config_drift",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CROSS7_config_drift",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CROSS7_config_drift",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CROSS7_config_drift",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO6_token_validation",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO6_token_validation",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO6_token_validation",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO6_token_validation",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "CRYPTO6_token_validation",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "DIST5_leader_election",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.2
+    },
+    {
+      "task_id": "DIST5_leader_election",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.2
+    },
+    {
+      "task_id": "DIST5_leader_election",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.2
+    },
+    {
+      "task_id": "DIST5_leader_election",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.2
+    },
+    {
+      "task_id": "DIST5_leader_election",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.2
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.1
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.6
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.9
+    },
+    {
+      "task_id": "GO1_concurrency_fix",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "GO1_concurrency_fix",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.75
+    },
+    {
+      "task_id": "GO1_concurrency_fix",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.88
+    },
+    {
+      "task_id": "GO1_concurrency_fix",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.5
+    },
+    {
+      "task_id": "GO1_concurrency_fix",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "GO2_race_condition",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "GO2_race_condition",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.92
+    },
+    {
+      "task_id": "GO2_race_condition",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "GO2_race_condition",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "GO2_race_condition",
+      "condition": "full",
+      "seed": 0,
+      "pass": true,
+      "partial_score": 1.0
+    },
+    {
+      "task_id": "JS1_api_migration",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.43
+    },
+    {
+      "task_id": "JS1_api_migration",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.71
+    },
+    {
+      "task_id": "JS1_api_migration",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "JS1_api_migration",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.57
+    },
+    {
+      "task_id": "JS1_api_migration",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "JS2_xss_sanitize",
+      "condition": "oracle",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.78
+    },
+    {
+      "task_id": "JS2_xss_sanitize",
+      "condition": "restricted",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.78
+    },
+    {
+      "task_id": "JS2_xss_sanitize",
+      "condition": "team_no_verify",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.0
+    },
+    {
+      "task_id": "JS2_xss_sanitize",
+      "condition": "team_no_plan",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.87
+    },
+    {
+      "task_id": "JS2_xss_sanitize",
+      "condition": "full",
+      "seed": 0,
+      "pass": false,
+      "partial_score": 0.87
+    }
+  ]
+}

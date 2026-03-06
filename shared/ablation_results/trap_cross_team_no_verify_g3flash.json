@@ -1,0 +1,429 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "trap1_spec_conflict",
+    "trap2_false_fix",
+    "trap3_metric_mirage",
+    "trap4_version_paradox",
+    "trap5_security_theater",
+    "cross1_api_contract",
+    "cross2_schema_evolution",
+    "cross3_protocol_bridge",
+    "cross4_auth_federation"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "completed": "2026-03-02T01:32:34.767757+00:00",
+  "metrics": {
+    "s_oracle": 0.0,
+    "s_restricted": 0.0,
+    "s_full": 0.0,
+    "s_no_verify": 0.0,
+    "s_no_plan": 0.0,
+    "p_oracle": 0.0,
+    "p_restricted": 0.0,
+    "p_full": 0.0,
+    "p_no_verify": 0.0,
+    "p_no_plan": 0.0,
+    "necessity_gap": 0.0,
+    "tni": 0.0,
+    "team_uplift": 0.0,
+    "collab_efficiency": 0.0,
+    "planning_value": 0.0,
+    "verification_value": 0.0,
+    "s_expertise_full": 0.0,
+    "s_expertise_no_analysis": 0.0,
+    "s_expertise_no_test": 0.0,
+    "s_expertise_oracle": 0.0,
+    "p_expertise_full": 0.0,
+    "p_expertise_no_analysis": 0.0,
+    "p_expertise_no_test": 0.0,
+    "p_expertise_oracle": 0.0,
+    "analysis_value": 0.0,
+    "testing_value": 0.0,
+    "expertise_tni": 0.0,
+    "interpretation": {
+      "tni": "Teamwork provides minimal improvement.",
+      "team_uplift": "Team adds +0.0% over single agent",
+      "collab_efficiency": "Team reaches 0.0% of oracle ceiling via collaboration",
+      "planning_value": "Planning adds +0.0% partial score",
+      "verification_value": "Verification adds +0.0% partial score"
+    }
+  },
+  "per_condition": {
+    "team_no_verify": {
+      "passes": 0,
+      "total": 27,
+      "success_rate": 0.0
+    }
+  },
+  "runs": [
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap1_spec_conflict",
+      "seed": 0,
+      "run_id": "20260302_003321_ad02dd56",
+      "run_dir": "shared/ablation_results/ablation_runs/trap1_spec_conflict/20260302_003321_ad02dd56",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 131.7,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap1_spec_conflict",
+      "seed": 1,
+      "run_id": "20260302_003533_9a3e17b0",
+      "run_dir": "shared/ablation_results/ablation_runs/trap1_spec_conflict/20260302_003533_9a3e17b0",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 154.7,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap1_spec_conflict",
+      "seed": 2,
+      "run_id": "20260302_003808_d80d5049",
+      "run_dir": "shared/ablation_results/ablation_runs/trap1_spec_conflict/20260302_003808_d80d5049",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 158.3,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap2_false_fix",
+      "seed": 0,
+      "run_id": "20260302_004046_29642737",
+      "run_dir": "shared/ablation_results/ablation_runs/trap2_false_fix/20260302_004046_29642737",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 143.1,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap2_false_fix",
+      "seed": 1,
+      "run_id": "20260302_004309_5e7e1c6a",
+      "run_dir": "shared/ablation_results/ablation_runs/trap2_false_fix/20260302_004309_5e7e1c6a",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 135.6,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap2_false_fix",
+      "seed": 2,
+      "run_id": "20260302_004525_2e2b8dec",
+      "run_dir": "shared/ablation_results/ablation_runs/trap2_false_fix/20260302_004525_2e2b8dec",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 135.0,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap3_metric_mirage",
+      "seed": 0,
+      "run_id": "20260302_004740_7808e16c",
+      "run_dir": "shared/ablation_results/ablation_runs/trap3_metric_mirage/20260302_004740_7808e16c",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 12.4,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap3_metric_mirage",
+      "seed": 1,
+      "run_id": "20260302_004752_c47f81ad",
+      "run_dir": "shared/ablation_results/ablation_runs/trap3_metric_mirage/20260302_004752_c47f81ad",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 85.8,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap3_metric_mirage",
+      "seed": 2,
+      "run_id": "20260302_004918_cac2fcac",
+      "run_dir": "shared/ablation_results/ablation_runs/trap3_metric_mirage/20260302_004918_cac2fcac",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 130.8,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap4_version_paradox",
+      "seed": 0,
+      "run_id": "20260302_005129_8c7b1bbc",
+      "run_dir": "shared/ablation_results/ablation_runs/trap4_version_paradox/20260302_005129_8c7b1bbc",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 188.2,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap4_version_paradox",
+      "seed": 1,
+      "run_id": "20260302_005437_f9bb62ee",
+      "run_dir": "shared/ablation_results/ablation_runs/trap4_version_paradox/20260302_005437_f9bb62ee",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 252.2,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap4_version_paradox",
+      "seed": 2,
+      "run_id": "20260302_005849_b586bf6d",
+      "run_dir": "shared/ablation_results/ablation_runs/trap4_version_paradox/20260302_005849_b586bf6d",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 121.1,
+      "failure_modes": [],
+      "error": "502 Bad Gateway. {'message': '<!DOCTYPE html>\\n<html lang=en>\\n  <meta charset=utf-8>\\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\\n  <title>Error 502 (Server Error)!!1</title>\\n  <style>\\n    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}\\n  </style>\\n  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>\\n  <p><b>502.</b> <ins>That\u2019s an error.</ins>\\n  <p>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.  <ins>That\u2019s all we know.</ins>\\n', 'status': 'Bad Gateway'}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap5_security_theater",
+      "seed": 0,
+      "run_id": "20260302_010050_2574d6f3",
+      "run_dir": "shared/ablation_results/ablation_runs/trap5_security_theater/20260302_010050_2574d6f3",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 220.6,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap5_security_theater",
+      "seed": 1,
+      "run_id": "20260302_010431_7a4de5ec",
+      "run_dir": "shared/ablation_results/ablation_runs/trap5_security_theater/20260302_010431_7a4de5ec",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 307.3,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "trap5_security_theater",
+      "seed": 2,
+      "run_id": "20260302_010938_11063ee6",
+      "run_dir": "shared/ablation_results/ablation_runs/trap5_security_theater/20260302_010938_11063ee6",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 115.3,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross1_api_contract",
+      "seed": 0,
+      "run_id": "20260302_011133_90aed78a",
+      "run_dir": "shared/ablation_results/ablation_runs/cross1_api_contract/20260302_011133_90aed78a",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 117.1,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross1_api_contract",
+      "seed": 1,
+      "run_id": "20260302_011331_a1e9772b",
+      "run_dir": "shared/ablation_results/ablation_runs/cross1_api_contract/20260302_011331_a1e9772b",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 47.8,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross1_api_contract",
+      "seed": 2,
+      "run_id": "20260302_011418_0c6857ca",
+      "run_dir": "shared/ablation_results/ablation_runs/cross1_api_contract/20260302_011418_0c6857ca",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 121.0,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross2_schema_evolution",
+      "seed": 0,
+      "run_id": "20260302_011619_3b3c9c50",
+      "run_dir": "shared/ablation_results/ablation_runs/cross2_schema_evolution/20260302_011619_3b3c9c50",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 161.4,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross2_schema_evolution",
+      "seed": 1,
+      "run_id": "20260302_011901_5ddd227d",
+      "run_dir": "shared/ablation_results/ablation_runs/cross2_schema_evolution/20260302_011901_5ddd227d",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 146.3,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross2_schema_evolution",
+      "seed": 2,
+      "run_id": "20260302_012127_1adfb51c",
+      "run_dir": "shared/ablation_results/ablation_runs/cross2_schema_evolution/20260302_012127_1adfb51c",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 139.2,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross3_protocol_bridge",
+      "seed": 0,
+      "run_id": "20260302_012346_a70453c7",
+      "run_dir": "shared/ablation_results/ablation_runs/cross3_protocol_bridge/20260302_012346_a70453c7",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 2.8,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross3_protocol_bridge",
+      "seed": 1,
+      "run_id": "20260302_012349_acfb4f93",
+      "run_dir": "shared/ablation_results/ablation_runs/cross3_protocol_bridge/20260302_012349_acfb4f93",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 102.1,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross3_protocol_bridge",
+      "seed": 2,
+      "run_id": "20260302_012531_0a0f65ed",
+      "run_dir": "shared/ablation_results/ablation_runs/cross3_protocol_bridge/20260302_012531_0a0f65ed",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 113.2,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross4_auth_federation",
+      "seed": 0,
+      "run_id": "20260302_012724_845f51a1",
+      "run_dir": "shared/ablation_results/ablation_runs/cross4_auth_federation/20260302_012724_845f51a1",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 55.4,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross4_auth_federation",
+      "seed": 1,
+      "run_id": "20260302_012820_32ba4708",
+      "run_dir": "shared/ablation_results/ablation_runs/cross4_auth_federation/20260302_012820_32ba4708",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 125.9,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    },
+    {
+      "condition": "team_no_verify",
+      "task_id": "cross4_auth_federation",
+      "seed": 2,
+      "run_id": "20260302_013026_9c93e6cf",
+      "run_dir": "shared/ablation_results/ablation_runs/cross4_auth_federation/20260302_013026_9c93e6cf",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 128.6,
+      "failure_modes": [
+        "grader_no_score"
+      ],
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+task_id: CRYPTO5_tls_config
+category: Security
+difficulty: hard
+languages: [python]
+description: "TLS config with 5 audit findings; 2 are intentional for legacy client backward compat"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

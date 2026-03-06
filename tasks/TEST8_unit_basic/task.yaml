@@ -1,0 +1,11 @@
+task_id: TEST8_unit_basic
+domain: testing
+network: false
+time_limit_sec: 600
+seeds: [0, 1, 2]
+difficulty: easy
+languages: [python]
+tags: [unit-testing, bug-fix, pytest]
+workspace_file_count: 2
+lines_changed_expected: 30
+parameterized: true

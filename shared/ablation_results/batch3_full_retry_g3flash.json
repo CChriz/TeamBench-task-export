@@ -1,0 +1,317 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "INC10_rollback_plan",
+    "INC2_data_corruption",
+    "INC3_memory_leak",
+    "INC4_dns_miscfg",
+    "INC5_cert_expiry",
+    "INC6_deadlock",
+    "INC7_rollback",
+    "INC8_cascading_timeout",
+    "INC8_memory_leak",
+    "INC9_log_forensics",
+    "O1_service_health",
+    "O3_log_analysis",
+    "O4_monitoring",
+    "O5_container_debug",
+    "O6_perf_tuning",
+    "O7_capacity_planning",
+    "O8_dockerfile_fix",
+    "O9_logging_config"
+  ],
+  "seeds": [
+    0
+  ],
+  "completed": "2026-03-03T21:20:45.241952+00:00",
+  "metrics": {
+    "s_oracle": 0.0,
+    "s_restricted": 0.0,
+    "s_full": 0.2778,
+    "s_no_verify": 0.0,
+    "s_no_plan": 0.0,
+    "p_oracle": 0.0,
+    "p_restricted": 0.0,
+    "p_full": 0.5706,
+    "p_no_verify": 0.0,
+    "p_no_plan": 0.0,
+    "necessity_gap": 0.0,
+    "tni": 57.0556,
+    "team_uplift": 0.5706,
+    "collab_efficiency": 0.0,
+    "planning_value": 0.5706,
+    "verification_value": 0.5706,
+    "s_expertise_full": 0.0,
+    "s_expertise_no_analysis": 0.0,
+    "s_expertise_no_test": 0.0,
+    "s_expertise_oracle": 0.0,
+    "p_expertise_full": 0.0,
+    "p_expertise_no_analysis": 0.0,
+    "p_expertise_no_test": 0.0,
+    "p_expertise_oracle": 0.0,
+    "analysis_value": 0.0,
+    "testing_value": 0.0,
+    "expertise_tni": 0.0,
+    "interpretation": {
+      "tni": "Teamwork fully recovers the performance gap.",
+      "team_uplift": "Team adds +57.1% over single agent",
+      "collab_efficiency": "Team reaches 0.0% of oracle ceiling via collaboration",
+      "planning_value": "Planning adds +57.1% partial score",
+      "verification_value": "Verification adds +57.1% partial score"
+    }
+  },
+  "per_condition": {
+    "full": {
+      "passes": 5,
+      "total": 18,
+      "success_rate": 0.2778
+    }
+  },
+  "runs": [
+    {
+      "condition": "full",
+      "task_id": "INC10_rollback_plan",
+      "seed": 0,
+      "run_id": "20260303_173320_0a7f2acb",
+      "run_dir": "shared/ablation_results/ablation_runs/INC10_rollback_plan/20260303_173320_0a7f2acb",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 91.1,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "full",
+      "task_id": "INC2_data_corruption",
+      "seed": 0,
+      "run_id": "20260303_173451_cfe9e07f",
+      "run_dir": "shared/ablation_results/ablation_runs/INC2_data_corruption/20260303_173451_cfe9e07f",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 2329.8,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC3_memory_leak",
+      "seed": 0,
+      "run_id": "20260303_181350_2582166e",
+      "run_dir": "shared/ablation_results/ablation_runs/INC3_memory_leak/20260303_181350_2582166e",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 1514.7,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "full",
+      "task_id": "INC4_dns_miscfg",
+      "seed": 0,
+      "run_id": "20260303_183905_f2077a18",
+      "run_dir": "shared/ablation_results/ablation_runs/INC4_dns_miscfg/20260303_183905_f2077a18",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 834.9,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC5_cert_expiry",
+      "seed": 0,
+      "run_id": "20260303_185302_4df9415a",
+      "run_dir": "shared/ablation_results/ablation_runs/INC5_cert_expiry/20260303_185302_4df9415a",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 428.1,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC6_deadlock",
+      "seed": 0,
+      "run_id": "20260303_190013_14f1f305",
+      "run_dir": "shared/ablation_results/ablation_runs/INC6_deadlock/20260303_190013_14f1f305",
+      "pass": false,
+      "partial_score": 0.67,
+      "elapsed_sec": 1308.5,
+      "failure_modes": [
+        "lock_ordering_not_fixed",
+        "check_fix_fails",
+        "lock_hierarchy_inconsistent",
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC7_rollback",
+      "seed": 0,
+      "run_id": "20260303_192205_8a6feb95",
+      "run_dir": "shared/ablation_results/ablation_runs/INC7_rollback/20260303_192205_8a6feb95",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 81.6,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "full",
+      "task_id": "INC8_cascading_timeout",
+      "seed": 0,
+      "run_id": "20260303_192327_74050904",
+      "run_dir": "shared/ablation_results/ablation_runs/INC8_cascading_timeout/20260303_192327_74050904",
+      "pass": false,
+      "partial_score": 0.7,
+      "elapsed_sec": 1059.6,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC8_memory_leak",
+      "seed": 0,
+      "run_id": "20260303_194247_b4540c58",
+      "run_dir": "shared/ablation_results/ablation_runs/INC8_memory_leak/20260303_194247_b4540c58",
+      "pass": false,
+      "partial_score": 0.7,
+      "elapsed_sec": 376.6,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "INC9_log_forensics",
+      "seed": 0,
+      "run_id": "20260303_194915_51e87f9e",
+      "run_dir": "shared/ablation_results/ablation_runs/INC9_log_forensics/20260303_194915_51e87f9e",
+      "pass": false,
+      "partial_score": 0.3,
+      "elapsed_sec": 447.8,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O1_service_health",
+      "seed": 0,
+      "run_id": "20260303_195646_ae79410b",
+      "run_dir": "shared/ablation_results/ablation_runs/O1_service_health/20260303_195646_ae79410b",
+      "pass": false,
+      "partial_score": 0.25,
+      "elapsed_sec": 600.6,
+      "failure_modes": [
+        "healthcheck_body_mismatch_or_timeout",
+        "service_died_early",
+        "missing_service_log"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O3_log_analysis",
+      "seed": 0,
+      "run_id": "20260303_200711_8fd54b2a",
+      "run_dir": "shared/ablation_results/ablation_runs/O3_log_analysis/20260303_200711_8fd54b2a",
+      "pass": false,
+      "partial_score": 0.46,
+      "elapsed_sec": 882.1,
+      "failure_modes": [
+        "missing_root_cause_file",
+        "root_cause_missing_signal_a",
+        "root_cause_missing_signal_b",
+        "root_cause_missing_subsystem",
+        "root_cause_missing_fix_file",
+        "fix_not_applied",
+        "code_fix_not_applied"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O4_monitoring",
+      "seed": 0,
+      "run_id": "20260303_202203_7e603071",
+      "run_dir": "shared/ablation_results/ablation_runs/O4_monitoring/20260303_202203_7e603071",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 478.6,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O5_container_debug",
+      "seed": 0,
+      "run_id": "20260303_203008_af6838d1",
+      "run_dir": "shared/ablation_results/ablation_runs/O5_container_debug/20260303_203008_af6838d1",
+      "pass": false,
+      "partial_score": 0.73,
+      "elapsed_sec": 730.4,
+      "failure_modes": [
+        "wrong_base_image",
+        "missing_fix_notes",
+        "fix_notes_incomplete",
+        "dockerfile_not_modified"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O6_perf_tuning",
+      "seed": 0,
+      "run_id": "20260303_204236_4e05533e",
+      "run_dir": "shared/ablation_results/ablation_runs/O6_perf_tuning/20260303_204236_4e05533e",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 1003.3,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "full",
+      "task_id": "O7_capacity_planning",
+      "seed": 0,
+      "run_id": "20260303_205919_84b731a0",
+      "run_dir": "shared/ablation_results/ablation_runs/O7_capacity_planning/20260303_205919_84b731a0",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 286.4,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O8_dockerfile_fix",
+      "seed": 0,
+      "run_id": "20260303_210407_6b35f62b",
+      "run_dir": "shared/ablation_results/ablation_runs/O8_dockerfile_fix/20260303_210407_6b35f62b",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 195.7,
+      "failure_modes": [
+        "wrong_port"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O9_logging_config",
+      "seed": 0,
+      "run_id": "20260303_210724_97241cd8",
+      "run_dir": "shared/ablation_results/ablation_runs/O9_logging_config/20260303_210724_97241cd8",
+      "pass": false,
+      "partial_score": 0.6,
+      "elapsed_sec": 799.3,
+      "failure_modes": [
+        "root_level_wrong",
+        "missing_structured_fields",
+        "pii_email_leaked",
+        "pii_password_leaked"
+      ],
+      "error": null
+    }
+  ]
+}

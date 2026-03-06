@@ -1,0 +1,8 @@
+task_id: INC8_cascading_timeout
+category: Incident
+difficulty: hard
+languages: [python]
+description: "3-service chain with timeout cascade (gateway < downstream) and 2/4 retry configs causing double-charge and retry storms"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

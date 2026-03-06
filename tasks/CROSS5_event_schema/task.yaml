@@ -1,0 +1,8 @@
+task_id: CROSS5_event_schema
+category: Cross-System
+difficulty: hard
+languages: [python, java]
+description: "Event producer (Python) + consumer (Java) with 5 field mismatches + 2 encoding bugs"
+tni_pattern: D
+parameterized: true
+seeds: [0, 1, 2]

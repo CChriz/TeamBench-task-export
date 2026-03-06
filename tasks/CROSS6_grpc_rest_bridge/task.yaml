@@ -1,0 +1,8 @@
+task_id: CROSS6_grpc_rest_bridge
+category: Multi-language
+difficulty: hard
+languages: [python]
+description: "gRPC-style service definition + REST gateway with 4 type conversion errors"
+tni_pattern: D
+parameterized: true
+seeds: [0, 1, 2]

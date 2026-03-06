@@ -1,0 +1,1256 @@
+{
+  "model": "gemini-3-flash-preview",
+  "seeds": [
+    1,
+    2
+  ],
+  "conditions": [
+    "oracle",
+    "restricted",
+    "team_no_verify",
+    "team_no_plan",
+    "full"
+  ],
+  "runs": [
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_093856_3465fe90"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_094039_0c6e5cb9"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_112249_af1a1a17"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      },
+      "run_id": "20260304_112414_b6a1ae03"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_175243_b17a7b02"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      },
+      "run_id": "20260304_175632_88e7e67e"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      },
+      "run_id": "20260304_234548_7eeeaece"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      },
+      "run_id": "20260304_234816_a263ede3"
+    },
+    {
+      "task_id": "NEG2_cost_perf",
+      "condition": "full",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260305_012109_a6af9a7e"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.21
+      },
+      "run_id": "20260304_094231_bdd6e327"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.36
+      },
+      "run_id": "20260304_094448_75c3e000"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.21
+      },
+      "run_id": "20260304_112528_fc3d2f4a"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.21
+      },
+      "run_id": "20260304_112612_231d93cd"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260304_235452_62dfa468"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.93
+      },
+      "run_id": "20260304_180031_918b1b35"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.71
+      },
+      "run_id": "20260304_181156_6b33ade5"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260304_235950_b5e031c9"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260305_013849_8d4b83e8"
+    },
+    {
+      "task_id": "O4_monitoring",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.36
+      },
+      "run_id": "20260305_015905_d3f39183"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      },
+      "run_id": "20260304_094901_c210a122"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      },
+      "run_id": "20260304_095524_ca4b4719"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_112747_54f635fd"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_113201_78ce300d"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_182214_a7ae559c"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_182703_25961419"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "run_id": "20260304_201000_f75ac60c"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "full",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_202359_016730dc"
+    },
+    {
+      "task_id": "TEST2_regression",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260305_001418_e020f144"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_095800_9184f238"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_100125_d218a41a"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_113415_a1c4ffe8"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_113640_f118d62a"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_163636_6fb3fb58"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_183137_4ab75363"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_183544_fbaef2e0"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260304_203144_aa3dda49"
+    },
+    {
+      "task_id": "TEST9_mock_service",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260305_030048_031be989"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "run_id": "20260304_100355_08df53f6"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      },
+      "run_id": "20260304_100644_50693058"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "run_id": "20260304_113944_8f453dd9"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "run_id": "20260304_114334_0a224509"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "run_id": "20260304_183935_f3471578"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "run_id": "20260304_184236_12f83a82"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "run_id": "20260304_203916_c4105121"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      },
+      "run_id": "20260304_205224_af31bd5b"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "run_id": "20260305_002033_088baccb"
+    },
+    {
+      "task_id": "TEST3_integration",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      },
+      "run_id": "20260305_002330_f9eadae5"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_101010_3b008891"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_101134_744dacc7"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_114634_fead622d"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      },
+      "run_id": "20260304_115304_0c801730"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260304_184652_f3d17651"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260304_210726_71bc3607"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260304_211450_091439bd"
+    },
+    {
+      "task_id": "IR5_search_ranking",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.89
+      },
+      "run_id": "20260304_234005_8162fba0"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260304_115537_d74a2adc"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260305_002633_e0f1bb18"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260304_185111_e5256945"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260304_185227_7932c5b3"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260305_021357_f7028c81"
+    },
+    {
+      "task_id": "TEST4_property",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      },
+      "run_id": "20260305_023006_f67fca7d"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_101336_895cf008"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_101715_93dc743e"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_115843_175e08ce"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_121126_7d3e35fd"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_171012_e4479435"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_172046_9a650cb0"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_185337_2ebb7938"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "run_id": "20260304_190557_c397376a"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_212905_535f8d9e"
+    },
+    {
+      "task_id": "DIST6_distributed_lock",
+      "condition": "full",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_213223_9fca0f8b"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.714
+      },
+      "run_id": "20260304_103359_920631de"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.714
+      },
+      "run_id": "20260304_121722_f6e9388f"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.857
+      },
+      "run_id": "20260304_122148_4caa2cba"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.714
+      },
+      "run_id": "20260304_173150_9ed5596b"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.071
+      },
+      "run_id": "20260304_173510_08780f7d"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.714
+      },
+      "run_id": "20260304_191628_691fa174"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.786
+      },
+      "run_id": "20260304_191946_53f264da"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.714
+      },
+      "run_id": "20260304_214137_01c3820f"
+    },
+    {
+      "task_id": "SPEC3_data_model",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.857
+      },
+      "run_id": "20260304_214426_96f4f069"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "run_id": "20260304_103845_14583552"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "run_id": "20260304_104502_16099914"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "run_id": "20260304_123453_7cf67ab0"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      },
+      "run_id": "20260304_192352_db1604b7"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.18
+      },
+      "run_id": "20260304_192916_1832eaf5"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      },
+      "run_id": "20260304_215316_3c5ce8d5"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      },
+      "run_id": "20260304_233518_d7231428"
+    },
+    {
+      "task_id": "CR6_review_checklist",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      },
+      "run_id": "20260305_010439_518c29d4"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_110112_39cf36ba"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.3
+      },
+      "run_id": "20260304_110441_3e598d2a"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.4
+      },
+      "run_id": "20260304_124516_a921a8d0"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.3
+      },
+      "run_id": "20260304_124717_7ecc6350"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_174253_fc474787"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.4
+      },
+      "run_id": "20260304_193354_1d5b693e"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.3
+      },
+      "run_id": "20260304_193611_bbc75388"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260305_002936_db11242a"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "full",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260305_023923_3c5e5e47"
+    },
+    {
+      "task_id": "TEST6_property_based",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260305_024703_d9f0e063"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_110623_a84fee5c"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_110832_21fdceaa"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_124943_082fa18f"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_125100_f2ea8af8"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_193813_87ec4898"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.88
+      },
+      "run_id": "20260304_194349_1b73b00f"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "full",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_222043_034fa0b0"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260304_234210_e2311853"
+    },
+    {
+      "task_id": "MULTI1_fullstack_fix",
+      "condition": "full",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      },
+      "run_id": "20260305_011701_184bbd47"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "run_id": "20260304_110942_80255153"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      },
+      "run_id": "20260304_111344_3e00b50a"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "run_id": "20260304_125258_35a294ad"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "run_id": "20260304_125943_c884b734"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "run_id": "20260304_194552_d4ac85f0"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      },
+      "run_id": "20260304_194914_b71c13e0"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_222545_7c257a03"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      },
+      "run_id": "20260304_224206_8781fd37"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      },
+      "run_id": "20260305_000349_57ed8fb0"
+    },
+    {
+      "task_id": "TEST1_spec_to_tests",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      },
+      "run_id": "20260305_000841_f688b053"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.31
+      },
+      "run_id": "20260304_112022_c9465beb"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "run_id": "20260304_112116_0ca17acc"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "run_id": "20260304_130318_f7db9482"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "run_id": "20260304_130641_9fe169d4"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "run_id": "20260304_225333_fe5505b0"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      },
+      "run_id": "20260304_231433_19b8fdd4"
+    },
+    {
+      "task_id": "O3_log_analysis",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.31
+      },
+      "run_id": "20260304_235012_cf33abd7"
+    }
+  ]
+}

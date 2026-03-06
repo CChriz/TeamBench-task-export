@@ -1,0 +1,11 @@
+task_id: S7_env_config
+domain: swe
+network: false
+time_limit_sec: 600
+seeds: [0, 1, 2]
+difficulty: easy
+languages: [python]
+tags: [environment-variables, configuration, bug-fix]
+workspace_file_count: 3
+lines_changed_expected: 20
+parameterized: true

@@ -1,0 +1,258 @@
+{
+  "model": "gemini-3-flash-preview",
+  "tasks": [
+    "CR6_review_checklist",
+    "MULTI1_fullstack_fix",
+    "NEG2_cost_perf",
+    "O4_monitoring",
+    "TEST4_property",
+    "TEST6_property_based",
+    "TEST9_mock_service"
+  ],
+  "seeds": [
+    1,
+    2
+  ],
+  "completed": "2026-03-05T03:31:50.375329+00:00",
+  "metrics": {
+    "s_oracle": 0.0,
+    "s_restricted": 0.0,
+    "s_full": 0.2857,
+    "s_no_verify": 0.0,
+    "s_no_plan": 0.0,
+    "p_oracle": 0.0,
+    "p_restricted": 0.0,
+    "p_full": 0.8107,
+    "p_no_verify": 0.0,
+    "p_no_plan": 0.0,
+    "necessity_gap": 0.0,
+    "tni": 81.0714,
+    "team_uplift": 0.8107,
+    "collab_efficiency": 0.0,
+    "planning_value": 0.8107,
+    "verification_value": 0.8107,
+    "s_expertise_full": 0.0,
+    "s_expertise_no_analysis": 0.0,
+    "s_expertise_no_test": 0.0,
+    "s_expertise_oracle": 0.0,
+    "p_expertise_full": 0.0,
+    "p_expertise_no_analysis": 0.0,
+    "p_expertise_no_test": 0.0,
+    "p_expertise_oracle": 0.0,
+    "analysis_value": 0.0,
+    "testing_value": 0.0,
+    "expertise_tni": 0.0,
+    "interpretation": {
+      "tni": "Teamwork fully recovers the performance gap.",
+      "team_uplift": "Team adds +81.1% over single agent",
+      "collab_efficiency": "Team reaches 0.0% of oracle ceiling via collaboration",
+      "planning_value": "Planning adds +81.1% partial score",
+      "verification_value": "Verification adds +81.1% partial score"
+    }
+  },
+  "per_condition": {
+    "full": {
+      "passes": 4,
+      "total": 14,
+      "success_rate": 0.2857
+    }
+  },
+  "runs": [
+    {
+      "condition": "full",
+      "task_id": "CR6_review_checklist",
+      "seed": 1,
+      "run_id": "20260305_004406_1eb99a59",
+      "run_dir": "shared/ablation_results/ablation_runs/CR6_review_checklist/20260305_004406_1eb99a59",
+      "pass": false,
+      "partial_score": 0.82,
+      "elapsed_sec": 1231.9,
+      "failure_modes": [
+        "missing_or_insufficient_findings",
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "CR6_review_checklist",
+      "seed": 2,
+      "run_id": "20260305_010439_518c29d4",
+      "run_dir": "shared/ablation_results/ablation_runs/CR6_review_checklist/20260305_010439_518c29d4",
+      "pass": false,
+      "partial_score": 0.91,
+      "elapsed_sec": 381.0,
+      "failure_modes": [
+        "missing_or_insufficient_findings"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "MULTI1_fullstack_fix",
+      "seed": 1,
+      "run_id": "20260305_011101_62f3a511",
+      "run_dir": "shared/ablation_results/ablation_runs/MULTI1_fullstack_fix/20260305_011101_62f3a511",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 356.5,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "MULTI1_fullstack_fix",
+      "seed": 2,
+      "run_id": "20260305_011701_184bbd47",
+      "run_dir": "shared/ablation_results/ablation_runs/MULTI1_fullstack_fix/20260305_011701_184bbd47",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 241.4,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "NEG2_cost_perf",
+      "seed": 1,
+      "run_id": "20260305_012109_a6af9a7e",
+      "run_dir": "shared/ablation_results/ablation_runs/NEG2_cost_perf/20260305_012109_a6af9a7e",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 354.5,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "NEG2_cost_perf",
+      "seed": 2,
+      "run_id": "20260305_012710_5420c360",
+      "run_dir": "shared/ablation_results/ablation_runs/NEG2_cost_perf/20260305_012710_5420c360",
+      "pass": false,
+      "partial_score": 0.0,
+      "elapsed_sec": 699.1,
+      "failure_modes": [],
+      "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    },
+    {
+      "condition": "full",
+      "task_id": "O4_monitoring",
+      "seed": 1,
+      "run_id": "20260305_013849_8d4b83e8",
+      "run_dir": "shared/ablation_results/ablation_runs/O4_monitoring/20260305_013849_8d4b83e8",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 1214.2,
+      "failure_modes": [
+        "routing_critical_wrong",
+        "routing_info_wrong"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "O4_monitoring",
+      "seed": 2,
+      "run_id": "20260305_015905_d3f39183",
+      "run_dir": "shared/ablation_results/ablation_runs/O4_monitoring/20260305_015905_d3f39183",
+      "pass": false,
+      "partial_score": 0.36,
+      "elapsed_sec": 889.7,
+      "failure_modes": [
+        "latency_warning_threshold_wrong",
+        "latency_critical_threshold_wrong",
+        "error_rate_warning_threshold_wrong",
+        "error_rate_critical_threshold_wrong",
+        "availability_warning_threshold_wrong",
+        "availability_critical_threshold_wrong",
+        "routing_critical_wrong",
+        "routing_warning_wrong",
+        "simulator_failed"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST4_property",
+      "seed": 1,
+      "run_id": "20260305_021357_f7028c81",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST4_property/20260305_021357_f7028c81",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 964.5,
+      "failure_modes": [
+        "tests_fail_on_correct_module"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST4_property",
+      "seed": 2,
+      "run_id": "20260305_023006_f67fca7d",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST4_property/20260305_023006_f67fca7d",
+      "pass": false,
+      "partial_score": 0.86,
+      "elapsed_sec": 554.1,
+      "failure_modes": [
+        "tests_fail_on_correct_module"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST6_property_based",
+      "seed": 1,
+      "run_id": "20260305_023923_3c5e5e47",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST6_property_based/20260305_023923_3c5e5e47",
+      "pass": true,
+      "partial_score": 1.0,
+      "elapsed_sec": 444.5,
+      "failure_modes": [],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST6_property_based",
+      "seed": 2,
+      "run_id": "20260305_024703_d9f0e063",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST6_property_based/20260305_024703_d9f0e063",
+      "pass": false,
+      "partial_score": 0.9,
+      "elapsed_sec": 814.2,
+      "failure_modes": [
+        "bad_attestation"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST9_mock_service",
+      "seed": 1,
+      "run_id": "20260305_030048_031be989",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST9_mock_service/20260305_030048_031be989",
+      "pass": false,
+      "partial_score": 0.89,
+      "elapsed_sec": 967.2,
+      "failure_modes": [
+        "missing_api_coverage"
+      ],
+      "error": null
+    },
+    {
+      "condition": "full",
+      "task_id": "TEST9_mock_service",
+      "seed": 2,
+      "run_id": "20260305_031659_efcdb09e",
+      "run_dir": "shared/ablation_results/ablation_runs/TEST9_mock_service/20260305_031659_efcdb09e",
+      "pass": false,
+      "partial_score": 0.89,
+      "elapsed_sec": 886.6,
+      "failure_modes": [
+        "missing_api_coverage"
+      ],
+      "error": null
+    }
+  ]
+}

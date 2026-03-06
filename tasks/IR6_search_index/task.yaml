@@ -1,0 +1,18 @@
+task_id: IR6_search_index
+domain: ir
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [information-retrieval, tfidf, inverted-index, ranking]
+workspace_file_count: 23
+lines_changed_expected: 80
+parameterized: true
+tni_pattern: C
+category: Information-Retrieval
+description: >
+  Build a TF-IDF inverted index over 22 domain documents and answer 5 search
+  queries. The Planner knows the exact tokenization rules, stop-word list, and
+  TF-IDF formula. The Executor must produce index.json and results.json with
+  correct top-3 rankings per query.

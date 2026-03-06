@@ -1,0 +1,13 @@
+task_id: MULTI8_sdk_mismatch
+domain: software
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+category: Multi-language
+tni_pattern: D
+tags: [sdk, openapi, api-contract, multi-language, field-mismatch]
+workspace_file_count: 5
+lines_changed_expected: 15
+parameterized: true

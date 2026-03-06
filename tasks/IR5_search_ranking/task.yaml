@@ -1,0 +1,11 @@
+task_id: IR5_search_ranking
+domain: information_retrieval
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [search, tf-idf, ranking, information-retrieval]
+workspace_file_count: 4
+lines_changed_expected: 40
+parameterized: true

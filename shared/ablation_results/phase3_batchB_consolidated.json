@@ -1,0 +1,880 @@
+{
+  "model": "gemini-3-flash-preview",
+  "seeds": [
+    1,
+    2
+  ],
+  "conditions": [
+    "oracle",
+    "restricted",
+    "team_no_verify",
+    "team_no_plan",
+    "full"
+  ],
+  "runs": [
+    {
+      "task_id": "P6_license_check",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      }
+    },
+    {
+      "task_id": "P6_license_check",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.86
+      }
+    },
+    {
+      "task_id": "P6_license_check",
+      "condition": "full",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "P6_license_check",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "P6_license_check",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.57
+      }
+    },
+    {
+      "task_id": "P6_license_check",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.54
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.31
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.85
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.31
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.31
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      }
+    },
+    {
+      "task_id": "CR5_test_coverage",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.38
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.62
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.85
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.77
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.77
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "SEC3_crypto_upgrade",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.85
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.73
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.64
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.73
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.55
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.91
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.73
+      }
+    },
+    {
+      "task_id": "PIPE1_etl_fix",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.82
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.53
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.53
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "full",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.53
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.68
+      }
+    },
+    {
+      "task_id": "SPEC5_config_system",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.75
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.83
+      }
+    },
+    {
+      "task_id": "SEC1_vuln_patch",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.67
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.7
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "full",
+      "seed": 1,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "LH2_budgeted_workflow",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "CRYPTO5_tls_config",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.9
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.18
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.18
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.09
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.18
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.27
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.18
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.27
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.27
+      }
+    },
+    {
+      "task_id": "SYNTH1_distributed_debug",
+      "condition": "full",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.36
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.2
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.8
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "team_no_verify",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.13
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.33
+      }
+    },
+    {
+      "task_id": "S5_error_handling",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.6
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.25
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.25
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "oracle",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0
+      }
+    },
+    {
+      "task_id": "O1_service_health",
+      "condition": "oracle",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.5
+      }
+    },
+    {
+      "task_id": "SEC5_secrets_rotation",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      }
+    },
+    {
+      "task_id": "SEC5_secrets_rotation",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "SEC5_secrets_rotation",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.69
+      }
+    },
+    {
+      "task_id": "SEC5_secrets_rotation",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.92
+      }
+    },
+    {
+      "task_id": "D8_csv_cleanup",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "D8_csv_cleanup",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "D8_csv_cleanup",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "D8_csv_cleanup",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "team_no_verify",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "team_no_plan",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "team_no_plan",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "restricted",
+      "seed": 1,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "full",
+      "seed": 2,
+      "pass": true,
+      "secondary": {
+        "partial_score": 1.0
+      }
+    },
+    {
+      "task_id": "P7_data_retention",
+      "condition": "restricted",
+      "seed": 2,
+      "pass": false,
+      "secondary": {
+        "partial_score": 0.78
+      }
+    }
+  ]
+}

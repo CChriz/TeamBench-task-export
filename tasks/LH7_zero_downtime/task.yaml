@@ -1,0 +1,11 @@
+task_id: LH7_zero_downtime
+domain: long
+difficulty: hard
+languages: [python, sql]
+network: false
+time_limit_sec: 1500
+seeds: [0, 1, 2]
+parameterized: true
+workspace_file_count: 8
+lines_changed_expected: 100
+tags: [database-migration, zero-downtime, deployment, sqlalchemy, ordering]

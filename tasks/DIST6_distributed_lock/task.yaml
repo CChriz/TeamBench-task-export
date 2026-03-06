@@ -1,0 +1,8 @@
+task_id: DIST6_distributed_lock
+category: Distributed
+difficulty: hard
+languages: [python]
+description: "Redis-style distributed lock with 4 bugs: no fencing token, stale TTL, fixed retry delay, unchecked release ownership"
+tni_pattern: A
+parameterized: true
+seeds: [0, 1, 2]

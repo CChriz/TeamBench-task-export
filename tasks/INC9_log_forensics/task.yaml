@@ -1,0 +1,18 @@
+task_id: INC9_log_forensics
+domain: incident
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+difficulty: hard
+languages: [python]
+tags: [incident-response, log-analysis, forensics, root-cause, red-herring]
+workspace_file_count: 7
+lines_changed_expected: 0
+parameterized: true
+tni_pattern: A
+category: Incident-Response
+description: >
+  Analyse 500+ log lines from 3 services to identify the root cause of a cascading
+  failure. Two red herrings are present: a high-error-rate batch job (expected,
+  documented) and clock-skew that makes svc_c appear to fail before svc_b.
+  Produce root_cause_report.json with timeline, root cause, and false-lead explanations.

@@ -1,107 +1,128 @@
 [
   {
-    "category": "Specification",
-    "count": 1,
-    "avg_uplift": -0.45,
-    "min_uplift": -0.45,
-    "max_uplift": -0.45
-  },
-  {
-    "category": "Software Eng.",
-    "count": 2,
-    "avg_uplift": -0.315,
-    "min_uplift": -0.38,
-    "max_uplift": -0.25
-  },
-  {
-    "category": "Negotiation",
-    "count": 1,
-    "avg_uplift": -0.1,
-    "min_uplift": -0.1,
-    "max_uplift": -0.1
-  },
-  {
-    "category": "Data Engineering",
-    "count": 1,
-    "avg_uplift": 0.0,
-    "min_uplift": 0.0,
-    "max_uplift": 0.0
+    "category": "Pipeline",
+    "count": 6,
+    "avg_uplift": -0.2494,
+    "min_uplift": -0.92,
+    "max_uplift": 0.1233
   },
   {
     "category": "Integration",
-    "count": 1,
-    "avg_uplift": 0.0,
-    "min_uplift": 0.0,
+    "count": 3,
+    "avg_uplift": -0.2,
+    "min_uplift": -0.6,
     "max_uplift": 0.0
   },
   {
-    "category": "Information Retrieval",
-    "count": 1,
-    "avg_uplift": 0.0,
-    "min_uplift": 0.0,
+    "category": "Cross-System",
+    "count": 7,
+    "avg_uplift": -0.1857,
+    "min_uplift": -1.0,
     "max_uplift": 0.0
   },
   {
-    "category": "Code Review",
-    "count": 1,
-    "avg_uplift": 0.06,
-    "min_uplift": 0.06,
-    "max_uplift": 0.06
-  },
-  {
-    "category": "Policy",
-    "count": 1,
-    "avg_uplift": 0.07,
-    "min_uplift": 0.07,
-    "max_uplift": 0.07
+    "category": "Software Eng.",
+    "count": 11,
+    "avg_uplift": -0.1839,
+    "min_uplift": -0.75,
+    "max_uplift": 0.09
   },
   {
     "category": "Incident Response",
-    "count": 1,
-    "avg_uplift": 0.1,
-    "min_uplift": 0.1,
+    "count": 11,
+    "avg_uplift": -0.1627,
+    "min_uplift": -0.83,
     "max_uplift": 0.1
   },
   {
-    "category": "Operations",
-    "count": 1,
-    "avg_uplift": 0.2,
-    "min_uplift": 0.2,
-    "max_uplift": 0.2
+    "category": "Information Retrieval",
+    "count": 8,
+    "avg_uplift": -0.0567,
+    "min_uplift": -0.9,
+    "max_uplift": 0.2967
   },
   {
-    "category": "Long-Horizon",
-    "count": 1,
-    "avg_uplift": 0.33,
-    "min_uplift": 0.33,
-    "max_uplift": 0.33
+    "category": "Distributed",
+    "count": 6,
+    "avg_uplift": -0.0296,
+    "min_uplift": -0.25,
+    "max_uplift": 0.0833
+  },
+  {
+    "category": "Data Engineering",
+    "count": 11,
+    "avg_uplift": -0.02,
+    "min_uplift": -0.59,
+    "max_uplift": 0.74
   },
   {
     "category": "Security",
-    "count": 1,
-    "avg_uplift": 0.33,
-    "min_uplift": 0.33,
-    "max_uplift": 0.33
+    "count": 15,
+    "avg_uplift": -0.004,
+    "min_uplift": -0.69,
+    "max_uplift": 0.41
   },
   {
-    "category": "Pipeline",
-    "count": 1,
-    "avg_uplift": 0.37,
-    "min_uplift": 0.37,
-    "max_uplift": 0.37
+    "category": "Operations",
+    "count": 9,
+    "avg_uplift": 0.0019,
+    "min_uplift": -1.0,
+    "max_uplift": 0.3333
+  },
+  {
+    "category": "Code Review",
+    "count": 6,
+    "avg_uplift": 0.0189,
+    "min_uplift": -0.5,
+    "max_uplift": 0.2433
+  },
+  {
+    "category": "Long-Horizon",
+    "count": 9,
+    "avg_uplift": 0.0219,
+    "min_uplift": -0.55,
+    "max_uplift": 0.7767
+  },
+  {
+    "category": "Specification",
+    "count": 7,
+    "avg_uplift": 0.0574,
+    "min_uplift": -0.45,
+    "max_uplift": 0.4567
+  },
+  {
+    "category": "Adversarial",
+    "count": 8,
+    "avg_uplift": 0.0833,
+    "min_uplift": 0.0,
+    "max_uplift": 0.36
   },
   {
     "category": "Multi-language",
-    "count": 1,
-    "avg_uplift": 0.5,
-    "min_uplift": 0.5,
-    "max_uplift": 0.5
+    "count": 9,
+    "avg_uplift": 0.1381,
+    "min_uplift": 0.0,
+    "max_uplift": 0.8333
+  },
+  {
+    "category": "Negotiation",
+    "count": 5,
+    "avg_uplift": 0.1933,
+    "min_uplift": -0.1,
+    "max_uplift": 0.6667
+  },
+  {
+    "category": "Policy",
+    "count": 8,
+    "avg_uplift": 0.2138,
+    "min_uplift": 0.0,
+    "max_uplift": 0.81
   },
   {
     "category": "Testing",
-    "count": 1,
-    "avg_uplift": 0.5,
-    "min_uplift": 0.5,
-    "max_uplift": 0.5
+    "count": 9,
+    "avg_uplift": 0.3604,
+    "min_uplift": 0.0533,
+    "max_uplift": 0.7333
   }
 ]

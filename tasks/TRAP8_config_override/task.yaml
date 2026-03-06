@@ -1,0 +1,8 @@
+task_id: TRAP8_config_override
+category: Adversarial
+difficulty: hard
+languages: [python]
+description: "4/10 env var overrides are intentional design choices; 6 are bugs (wrong types, stale values, security violations)"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

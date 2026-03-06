@@ -1,0 +1,8 @@
+task_id: CROSS7_config_drift
+category: Operations
+difficulty: hard
+languages: [python]
+description: "3 microservices sharing config; each has drifted differently; reconcile without breaking any"
+tni_pattern: D
+parameterized: true
+seeds: [0, 1, 2]

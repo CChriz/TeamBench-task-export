@@ -1,0 +1,11 @@
+task_id: P6_license_check
+domain: policy
+network: false
+time_limit_sec: 600
+seeds: [0, 1, 2]
+difficulty: easy
+languages: [python]
+tags: [license, compliance, dependency-management]
+workspace_file_count: 3
+lines_changed_expected: 15
+parameterized: true

@@ -1,0 +1,11 @@
+task_id: IR7_doc_clustering
+domain: information_retrieval
+network: false
+time_limit_sec: 900
+seeds: [0, 1, 2]
+difficulty: medium
+languages: [python]
+tags: [clustering, tfidf, kmeans, cosine-similarity, information-retrieval]
+workspace_file_count: 3
+lines_changed_expected: 20
+parameterized: true
