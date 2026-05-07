@@ -1,0 +1,659 @@
+{
+  "computed_at": "2026-05-06T03:10:37.923146",
+  "task_set": "leaderboard_90_tasks.json",
+  "n_tasks": 90,
+  "dropped_from_lb100": [
+    "GH1000_numpy_19869",
+    "GH1001_numpy_30855",
+    "GH1002_scipy_24753",
+    "GH1003_scipy_24496",
+    "GH1004_dask_11665",
+    "GH1005_ray_60236",
+    "GH1008_spaCy_12749",
+    "GH1009_spaCy_12486",
+    "GH1010_great_expectati_10406",
+    "GH144_psycopg_1247"
+  ],
+  "models": {
+    "claude-haiku-4-5": {
+      "oracle": {
+        "passed": 11,
+        "valid_n": 90,
+        "rate": 0.12222222222222222,
+        "source": "lb100_haiku45_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 26,
+        "valid_n": 90,
+        "rate": 0.28888888888888886,
+        "source": "lb100_haiku45_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 18,
+        "valid_n": 90,
+        "rate": 0.2,
+        "source": "lb100_haiku45_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 2,
+        "valid_n": 17,
+        "rate": 0.11764705882352941,
+        "source": "lb100_haiku45_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 23,
+        "valid_n": 90,
+        "rate": 0.25555555555555554,
+        "source": "lb100_haiku45_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "claude-opus-4-7": {
+      "oracle": {
+        "passed": 18,
+        "valid_n": 90,
+        "rate": 0.2,
+        "source": "lb100_opus47_seed0.json"
+      },
+      "restricted": {
+        "passed": 21,
+        "valid_n": 90,
+        "rate": 0.23333333333333334,
+        "source": "lb100_opus47_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 28,
+        "valid_n": 90,
+        "rate": 0.3111111111111111,
+        "source": "lb100_opus47_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 30,
+        "valid_n": 90,
+        "rate": 0.3333333333333333,
+        "source": "lb100_opus47_seed0.json"
+      },
+      "full": {
+        "passed": 14,
+        "valid_n": 89,
+        "rate": 0.15730337078651685,
+        "source": "lb100_opus47_seed0.json"
+      }
+    },
+    "claude-sonnet-4-6": {
+      "oracle": {
+        "passed": 7,
+        "valid_n": 90,
+        "rate": 0.07777777777777778,
+        "source": "lb100_sonnet46_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 25,
+        "valid_n": 90,
+        "rate": 0.2777777777777778,
+        "source": "lb100_sonnet46_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 10,
+        "valid_n": 44,
+        "rate": 0.22727272727272727,
+        "source": "lb100_sonnet46_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 6,
+        "valid_n": 38,
+        "rate": 0.15789473684210525,
+        "source": "lb100_sonnet46_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 24,
+        "valid_n": 85,
+        "rate": 0.2823529411764706,
+        "source": "lb100_sonnet46_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gemini-2-5-pro": {
+      "oracle": {
+        "passed": 0,
+        "valid_n": 90,
+        "rate": 0.0,
+        "source": "lb100_gemini25pro_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_plan": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_verify": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      }
+    },
+    "gemini-3-1-flash-lite-preview": {
+      "oracle": {
+        "passed": 4,
+        "valid_n": 89,
+        "rate": 0.0449438202247191,
+        "source": "lb100_gemini31lite_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 13,
+        "valid_n": 90,
+        "rate": 0.14444444444444443,
+        "source": "lb100_g31lite_3cond_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 9,
+        "valid_n": 90,
+        "rate": 0.1,
+        "source": "lb100_g31lite_3cond_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 16,
+        "valid_n": 89,
+        "rate": 0.1797752808988764,
+        "source": "lb100_g31lite_3cond_seed0.json"
+      },
+      "full": {
+        "passed": 14,
+        "valid_n": 88,
+        "rate": 0.1590909090909091,
+        "source": "lb100_gemini31lite_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gemini-3-1-pro-preview": {
+      "oracle": {
+        "passed": 13,
+        "valid_n": 89,
+        "rate": 0.14606741573033707,
+        "source": "lb100_gemini-3.1-pro-preview_seed0.json"
+      },
+      "restricted": {
+        "passed": 18,
+        "valid_n": 89,
+        "rate": 0.20224719101123595,
+        "source": "lb100_gemini-3.1-pro-preview_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 15,
+        "valid_n": 78,
+        "rate": 0.19230769230769232,
+        "source": "lb100_gemini-3.1-pro-preview_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 23,
+        "valid_n": 88,
+        "rate": 0.26136363636363635,
+        "source": "lb100_gemini-3.1-pro-preview_seed0.json"
+      },
+      "full": {
+        "passed": 25,
+        "valid_n": 88,
+        "rate": 0.2840909090909091,
+        "source": "lb100_gemini-3.1-pro-preview_seed0.json"
+      }
+    },
+    "gemini-3-flash-preview": {
+      "oracle": {
+        "passed": 11,
+        "valid_n": 90,
+        "rate": 0.12222222222222222,
+        "source": "lb100_gemini3flash_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 14,
+        "valid_n": 90,
+        "rate": 0.15555555555555556,
+        "source": "lb100_g3flash_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 8,
+        "valid_n": 90,
+        "rate": 0.08888888888888889,
+        "source": "lb100_g3flash_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 25,
+        "valid_n": 90,
+        "rate": 0.2777777777777778,
+        "source": "lb100_g3flash_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 22,
+        "valid_n": 90,
+        "rate": 0.24444444444444444,
+        "source": "lb100_gemini3flash_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gemma-4-31b": {
+      "oracle": {
+        "passed": 15,
+        "valid_n": 70,
+        "rate": 0.21428571428571427,
+        "source": "lb100_gemma4-31b_seed0.json"
+      },
+      "restricted": {
+        "passed": 23,
+        "valid_n": 70,
+        "rate": 0.32857142857142857,
+        "source": "lb100_gemma4-31b_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 21,
+        "valid_n": 59,
+        "rate": 0.3559322033898305,
+        "source": "lb100_gemma4-31b_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 18,
+        "valid_n": 75,
+        "rate": 0.24,
+        "source": "lb100_gemma4-31b_seed0.json"
+      },
+      "full": {
+        "passed": 20,
+        "valid_n": 55,
+        "rate": 0.36363636363636365,
+        "source": "lb100_gemma4-31b_seed0.json"
+      }
+    },
+    "gpt-5-4": {
+      "oracle": {
+        "passed": 11,
+        "valid_n": 90,
+        "rate": 0.12222222222222222,
+        "source": "lb100_gpt54_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 31,
+        "valid_n": 89,
+        "rate": 0.34831460674157305,
+        "source": "lb100_gpt54_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 21,
+        "valid_n": 89,
+        "rate": 0.23595505617977527,
+        "source": "lb100_gpt54_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 35,
+        "valid_n": 90,
+        "rate": 0.3888888888888889,
+        "source": "lb100_gpt54_3cond_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 25,
+        "valid_n": 90,
+        "rate": 0.2777777777777778,
+        "source": "lb100_gpt54_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gpt-5-4-mini": {
+      "oracle": {
+        "passed": 17,
+        "valid_n": 90,
+        "rate": 0.18888888888888888,
+        "source": "lb100_gpt-5.4-mini_oraclefull_seed0.json.checkpoint.jsonl+lb100_gpt5mini_5cond_seed0.json"
+      },
+      "restricted": {
+        "passed": 21,
+        "valid_n": 90,
+        "rate": 0.23333333333333334,
+        "source": "lb100_gpt5mini_5cond_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 22,
+        "valid_n": 90,
+        "rate": 0.24444444444444444,
+        "source": "lb100_gpt5mini_5cond_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 22,
+        "valid_n": 90,
+        "rate": 0.24444444444444444,
+        "source": "lb100_gpt5mini_5cond_seed0.json"
+      },
+      "full": {
+        "passed": 27,
+        "valid_n": 90,
+        "rate": 0.3,
+        "source": "lb100_gpt-5.4-mini_oraclefull_seed0.json.checkpoint.jsonl+lb100_gpt5mini_5cond_seed0.json"
+      }
+    },
+    "gpt-5-4-nano": {
+      "oracle": {
+        "passed": 4,
+        "valid_n": 90,
+        "rate": 0.044444444444444446,
+        "source": "lb100_gpt-5.4-nano_oraclefull_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 16,
+        "valid_n": 89,
+        "rate": 0.1797752808988764,
+        "source": "lb100_gpt5nano_3cond_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 9,
+        "valid_n": 86,
+        "rate": 0.10465116279069768,
+        "source": "lb100_gpt5nano_3cond_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 17,
+        "valid_n": 89,
+        "rate": 0.19101123595505617,
+        "source": "lb100_gpt5nano_3cond_seed0.json"
+      },
+      "full": {
+        "passed": 6,
+        "valid_n": 24,
+        "rate": 0.25,
+        "source": "lb100_gpt-5.4-nano_oraclefull_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gpt-5-nano": {
+      "oracle": {
+        "passed": 5,
+        "valid_n": 90,
+        "rate": 0.05555555555555555,
+        "source": "lb100_gpt5nano_oraclefull_seed0.json"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_plan": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_verify": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "full": {
+        "passed": 6,
+        "valid_n": 89,
+        "rate": 0.06741573033707865,
+        "source": "lb100_gpt5nano_oraclefull_seed0.json"
+      }
+    },
+    "gpt-oss-120b": {
+      "oracle": {
+        "passed": 2,
+        "valid_n": 90,
+        "rate": 0.022222222222222223,
+        "source": "lb100_gpt-oss-120b_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 90,
+        "rate": 0.0,
+        "source": "lb100_gpt-oss-120b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 1,
+        "valid_n": 90,
+        "rate": 0.011111111111111112,
+        "source": "lb100_gpt-oss-120b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 9,
+        "valid_n": 90,
+        "rate": 0.1,
+        "source": "lb100_gpt-oss-120b_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 14,
+        "rate": 0.0,
+        "source": "lb100_gpt-oss-120b_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "gpt-oss-20b": {
+      "oracle": {
+        "passed": 6,
+        "valid_n": 90,
+        "rate": 0.06666666666666667,
+        "source": "lb100_gpt-oss-20b_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 11,
+        "valid_n": 90,
+        "rate": 0.12222222222222222,
+        "source": "lb100_gpt-oss-20b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 8,
+        "valid_n": 90,
+        "rate": 0.08888888888888889,
+        "source": "lb100_gpt-oss-20b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 7,
+        "valid_n": 90,
+        "rate": 0.07777777777777778,
+        "source": "lb100_gpt-oss-20b_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 1,
+        "valid_n": 75,
+        "rate": 0.013333333333333334,
+        "source": "lb100_gpt-oss-20b_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "qwen3-14b": {
+      "oracle": {
+        "passed": 3,
+        "valid_n": 90,
+        "rate": 0.03333333333333333,
+        "source": "lb100_qwen3-14b-or_seed0.json"
+      },
+      "restricted": {
+        "passed": 2,
+        "valid_n": 90,
+        "rate": 0.022222222222222223,
+        "source": "lb100_qwen3-14b-or_seed0.json"
+      },
+      "team_no_plan": {
+        "passed": 2,
+        "valid_n": 90,
+        "rate": 0.022222222222222223,
+        "source": "lb100_qwen3-14b-or_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 1,
+        "valid_n": 90,
+        "rate": 0.011111111111111112,
+        "source": "lb100_qwen3-14b-or_seed0.json"
+      },
+      "full": {
+        "passed": 2,
+        "valid_n": 90,
+        "rate": 0.022222222222222223,
+        "source": "lb100_qwen3-14b-or_seed0.json"
+      }
+    },
+    "qwen3-30b-a3b": {
+      "oracle": {
+        "passed": 2,
+        "valid_n": 44,
+        "rate": 0.045454545454545456,
+        "source": "lb100_qwen3-30b-a3b-or_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_plan": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_verify": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      }
+    },
+    "qwen3-32b": {
+      "oracle": {
+        "passed": 0,
+        "valid_n": 90,
+        "rate": 0.0,
+        "source": "lb100_qwen3-32b-or_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 3,
+        "valid_n": 90,
+        "rate": 0.03333333333333333,
+        "source": "lb100_qwen3-32b-or_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 1,
+        "valid_n": 90,
+        "rate": 0.011111111111111112,
+        "source": "lb100_qwen3-32b-or_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 5,
+        "valid_n": 90,
+        "rate": 0.05555555555555555,
+        "source": "lb100_qwen3-32b-or_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 1,
+        "valid_n": 89,
+        "rate": 0.011235955056179775,
+        "source": "lb100_qwen3-32b-or_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "qwen3-4b": {
+      "oracle": {
+        "passed": 1,
+        "valid_n": 87,
+        "rate": 0.011494252873563218,
+        "source": "lb100_qwen3-4b_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_plan": {
+        "passed": 1,
+        "valid_n": 88,
+        "rate": 0.011363636363636364,
+        "source": "lb100_qwen3-4b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_verify": {
+        "passed": 0,
+        "valid_n": 88,
+        "rate": 0.0,
+        "source": "lb100_qwen3-4b_seed0.json.checkpoint.jsonl"
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 14,
+        "rate": 0.0,
+        "source": "lb100_qwen3-4b_seed0.json.checkpoint.jsonl"
+      }
+    },
+    "qwen3-8b": {
+      "oracle": {
+        "passed": 1,
+        "valid_n": 90,
+        "rate": 0.011111111111111112,
+        "source": "lb100_qwen3-8b-or_seed0.json"
+      },
+      "restricted": {
+        "passed": 4,
+        "valid_n": 90,
+        "rate": 0.044444444444444446,
+        "source": "lb100_qwen3-8b-or_seed0.json+lb100_qwen3-8b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 1,
+        "valid_n": 90,
+        "rate": 0.011111111111111112,
+        "source": "lb100_qwen3-8b-or_seed0.json"
+      },
+      "team_no_verify": {
+        "passed": 3,
+        "valid_n": 90,
+        "rate": 0.03333333333333333,
+        "source": "lb100_qwen3-8b-or_seed0.json"
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 89,
+        "rate": 0.0,
+        "source": "lb100_qwen3-8b-or_seed0.json"
+      }
+    },
+    "qwen3.5-0.8b": {
+      "oracle": {
+        "passed": 0,
+        "valid_n": 86,
+        "rate": 0.0,
+        "source": "lb100_qwen35-0.8b_seed0.json.checkpoint.jsonl"
+      },
+      "restricted": {
+        "passed": 0,
+        "valid_n": 18,
+        "rate": 0.0,
+        "source": "lb100_qwen35-0.8b_seed0.json.checkpoint.jsonl"
+      },
+      "team_no_plan": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "team_no_verify": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      },
+      "full": {
+        "passed": 0,
+        "valid_n": 0,
+        "rate": null,
+        "source": null
+      }
+    }
+  }
+}
