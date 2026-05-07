@@ -887,7 +887,7 @@ are recruited researchers / students. Three modes mirror the §3 conditions:
 
 | Path | What it is | Use for |
 |---|---|---|
-| Firebase RTDB tree `teambench_new` (`https://<redacted-firebase-host>`) | Authoritative analysis tree, structured `tasks/{task_id}/{mode}/sessions/{session_id}` (rolled out 2026-04-25) | All current numbers below |
+| Firebase RTDB tree `teambench_new` (project URL withheld for participant privacy; available to reviewers on request through the corresponding author) | Authoritative analysis tree, structured `tasks/{task_id}/{mode}/sessions/{session_id}` (rolled out 2026-04-25) | All current numbers below |
 | Firebase RTDB tree `teambench/sessions` (legacy) | Pre-2026-04-25 sessions and stale-tab v2-bypass writes | Audit / reconciliation only — do **not** use for paper numbers |
 | `human_eval/firebase/count_participants.py` | Filtering + counting script — drops dev/test identities, requires `phase=='completed'` and a submitted survey for the participant's role | Reproduce numbers below; pass `--source legacy` to compare against the legacy tree |
 | `human_eval/selected_20_tasks.json` | Stratified 20-task target subset (seed 42, 2026-04-13), 18 of 21 categories represented | Defines the planned target coverage |
@@ -900,10 +900,10 @@ A row is counted only if **all** of the following hold:
 2. The participant has a `survey/{role}` entry under their session blob (v2 path).
 3. Identity passes the dev-pollution filter: real-shaped email (`*@*.*`), name length ≥ 2, neither name nor email matches `test*` / `admin*` / `team_test_*` / `probe*` / single-char / 1-3-char-all-lowercase patterns.
 
-Identity quirks worth noting before tightening the filter:
-- `<redacted-email>` ("<redacted-name>") is real participant **<redacted-name>** — placeholder-looking email but a genuine session, do not drop.
-- `<redacted-email>` and `<redacted-email>` are both **Taehan Kim**, so the 13 unique emails below correspond to **12 distinct humans**.
-- One Eugene PIPE2 team-mode survey was backfilled to Firebase from participant-dictated values on 2026-05-01 (he forgot to submit). Both Firebase paths carry `backfilled: true` and `backfillReason` so the analysis pipeline can isolate it.
+Identity quirks worth noting before tightening the filter (participant identities anonymized in this public version):
+- One participant used a placeholder-looking email but submitted genuine sessions — keep, do not drop.
+- Two of the 13 unique emails belong to one participant who used both an institutional and a personal address, so de-duped count is 12 distinct humans.
+- One team-mode survey was backfilled to Firebase from participant-dictated values on 2026-05-01 (the participant forgot to submit). Both Firebase paths carry `backfilled: true` and `backfillReason` so the analysis pipeline can isolate it.
 
 ### Current coverage (NEW tree, 2026-05-01)
 
@@ -917,7 +917,7 @@ team    |       7       |       7       |        7       |        6
 TOTAL   |      12*      |      13       |       30       |       17**
 ```
 
-\* Email-uniqueness lists solo as 5 because Taehan Kim used both emails in CR2_style_enforce/solo (one session each); de-duped by person, solo is 4 humans and the total is 12.
+\* Email-uniqueness lists solo as 5 because one participant used two addresses in CR2_style_enforce/solo (one session each); de-duped by person, solo is 4 humans and the total is 12.
 \** 17 distinct task_ids across all three modes; 9 of those overlap with `selected_20_tasks.json`.
 
 Total participant×session completions (counts each role-assignment in a team session separately): **42** = solo 8 + hybrid 15 + team 19. (Six of the seven team sessions have all 3 role-survey entries; one CR2 session has only 2 surviving role surveys.)
@@ -954,27 +954,29 @@ TEST8_unit_basic         | team    |      3       |    1     | no
 
 20-task-target coverage: **solo 3 / 20, hybrid 4 / 20, team 3 / 20** (CR4_api_review, IR2_misinformation_trap, PIPE2_data_pipeline).
 
-### Per-participant breakdown (13 emails, 12 distinct humans)
+### Per-participant breakdown (anonymized; 13 emails, 12 distinct humans)
+
+Identities are withheld in this public release per participant privacy and IRB exempt-status conditions. The shape of the contribution distribution is reproduced below.
 
 ```
-email                              | display name        | task-mode completions | distinct tasks
------------------------------------+---------------------+-----------------------+----------------
-<redacted-email>                        | Eugene              |          9            |       8
-ybkim95@mit.edu                    | Yubin Kim           |          8            |       6
-<redacted-email>                  | Taehan Kim          |          7            |       4
-<redacted-email>                       | <redacted-name> (<redacted-name>) |          4            |       4
-<redacted-email>         | <redacted-name>           |          2            |       2
-<redacted-email>           | Taehan Kim (alt)    |          2            |       2     (same person as <redacted-email>)
-<redacted-email>               | <redacted-name>            |          2            |       2
-<redacted-email>                   | <redacted-name>       |          2            |       2
-<redacted-email>                   | <redacted-name>    |          2            |       2
-<redacted-email>       | <redacted-name>     |          1            |       1
-<redacted-email>            | <redacted-name>           |          1            |       1
-<redacted-email>          | <redacted-name>     |          1            |       1
-<redacted-email>            | <redacted-name>         |          1            |       1
+participant | task-mode completions | distinct tasks
+------------+-----------------------+----------------
+P01         |          9            |       8
+P02         |          8            |       6
+P03         |          7            |       4
+P04         |          4            |       4
+P05         |          2            |       2
+P05*        |          2            |       2     (same person as P05, second address)
+P06         |          2            |       2
+P07         |          2            |       2
+P08         |          2            |       2
+P09         |          1            |       1
+P10         |          1            |       1
+P11         |          1            |       1
+P12         |          1            |       1
 ```
 
-Total task-mode completions: 42. Top 3 contributors (Eugene, Yubin, Taehan) account for 24 of 42 (57%) — the data is heavily concentrated and any per-task-mode-cell pass-rate must be reported with this concentration in mind.
+Total task-mode completions: 42. Top 3 participants account for 24 of 42 (57%) — the data is heavily concentrated and any per-task-mode-cell pass-rate must be reported with this concentration in mind.
 
 ### Behavior metrics by mode (2026-05-01)
 
@@ -1060,8 +1062,8 @@ python3 human_eval/firebase/count_participants.py --debug                # rejec
 3. **Team coverage**: 3 of 20 target tasks (CR4, IR2, PIPE2). Team sessions need 3 humans simultaneously — recruitment bottleneck. Need ≥17 more target tasks.
 4. **Hybrid override confound**: until the eligibility filter (`overrode_grader ≤ 2` AND wall-clock ≥ 5 minutes) is applied, hybrid pass rate is contaminated. Currently 5/15 sessions self-report override ≥ 3.
 5. **Scope decision for §3.8**: report restricted to `selected_20_tasks.json` (current target, low n on each cell) or report on all 17 distinct collected task_ids (better n, weaker stratification claim). Currently §3.8 reports on the broader collection but maintains the 20-task minimum-cell rule for any per-task-rate claim.
-6. **De-dup**: resolve Taehan Kim's two emails before computing per-participant pass-rate or learning-curve statistics. Email-only dedup currently overcounts unique humans by 1 in solo and 1 in total.
-7. **Eugene PIPE2 backfill**: one team-executor survey row for `PIPE2_data_pipeline_4uiwseht` was dictated post-session and written with `backfilled: true`. Exclude from any inter-rater-agreement analysis on the open-ended response field.
+6. **De-dup**: resolve the one participant who used two addresses before computing per-participant pass-rate or learning-curve statistics. Email-only dedup currently overcounts unique humans by 1 in solo and 1 in total.
+7. **PIPE2 backfill**: one team-executor survey row for `PIPE2_data_pipeline_4uiwseht` was dictated post-session and written with `backfilled: true`. Exclude from any inter-rater-agreement analysis on the open-ended response field.
 
 ---
 
