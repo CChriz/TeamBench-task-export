@@ -2,6 +2,7 @@
 
 A benchmark for evaluating multi-agent LLM coordination under **OS-enforced** Planner / Executor / Verifier role separation.
 
+[![arXiv](https://img.shields.io/badge/arXiv-2605.07073-b31b1b)](https://arxiv.org/abs/2605.07073)
 [![HF Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-ybkim95%2Fteambench-yellow)](https://huggingface.co/datasets/ybkim95/teambench)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Website](https://img.shields.io/badge/site-teambench.github.io-blue)](https://teambench.github.io)
