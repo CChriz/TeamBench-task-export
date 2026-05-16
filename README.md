@@ -15,11 +15,22 @@ TeamBench measures the marginal contribution of each role in an LLM agent team. 
 
 ## Install
 
+With pip:
+
 ```bash
 git clone https://github.com/ybkim95/TeamBench.git
 cd TeamBench
 pip install -e ".[all]"           # add provider SDKs (anthropic, openai, google-genai)
 docker compose build              # OS-enforced role separation requires Docker
+```
+
+Or with [uv](https://github.com/astral-sh/uv) for a reproducible install from `uv.lock`:
+
+```bash
+git clone https://github.com/ybkim95/TeamBench.git
+cd TeamBench
+uv sync --all-extras
+docker compose build
 ```
 
 Set the providers you want to evaluate:
@@ -135,6 +146,11 @@ python -m harness.ablation \
 1. Run the full sweep across the 5 conditions on the 90 leaderboard tasks (`leaderboard/data/leaderboard_90_tasks.json`).
 2. Open a PR adding `shared/ablation_results/lb90_<your-model>_seed0.json`.
 3. Maintainers manually re-run the deterministic graders to verify the submission before adding the model to the leaderboard; the leaderboard only ranks verified submissions.
+
+Notes:
+
+- One of the 90 leaderboard tasks, `GH120_redis-py_3863`, is currently under re-curation. Runs against it return a 0 score until the spec is restored; the remaining 89 tasks are fully evaluable. Tracking issue will follow.
+- Graders run inside Docker sandboxes that write intermediate artifacts under `/tmp` inside the container, so the host stays clean. When you use `--model mock` the harness runs on the host instead, and a few grader-side files (such as `pipe3_*.py`, `trap*_results.json`) may appear under your host `/tmp`. They are safe to delete.
 
 ---
 

@@ -1,0 +1,11 @@
+task_id: GH120_redis-py_3863
+title: "Redis ConnectionPool repr leaks password (upstream PR #3863) — under re-curation"
+category: Real-World GitHub
+difficulty: medium
+status: under_re_curation
+upstream_pr: https://github.com/redis/redis-py/pull/3863
+notes: |
+  The static workspace and full specification for this task have not yet been
+  restored to the public release snapshot. The grader returns a 0 score with
+  failure_mode `task_under_re_curation` so that LB90 sweeps complete instead
+  of crashing on this slot. Recovery is tracked in the issue tracker.
