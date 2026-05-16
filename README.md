@@ -47,15 +47,18 @@ python -m harness.ablation \
 
 The output writes one `score.json` per (task, condition) under `shared/runs/example/`. Each file contains `passed: true|false` and a partial score in `[0, 1]` from the deterministic grader.
 
-The full TeamBench-90 leaderboard sweep:
+The full TeamBench-90 leaderboard sweep (all 5 conditions across the 90 stratified tasks):
 
 ```bash
-python -m harness.run_all \
-    --tasks $(jq -r '.[]' leaderboard/data/leaderboard_90_tasks.json) \
+python -m harness.ablation \
+    --model <your-model> \
+    --tasks $(jq -r '.tasks[].task_id' leaderboard/data/leaderboard_90_tasks.json) \
     --seeds 0 \
-    --runs_dir shared/runs/lb90_<model> \
-    --output shared/ablation_results/lb90_<model>_seed0.json
+    --conditions oracle restricted full team_no_plan team_no_verify \
+    --output shared/ablation_results/lb90_<your-model>_seed0.json
 ```
+
+The 90 task IDs are listed under the `tasks[].task_id` keys of `leaderboard/data/leaderboard_90_tasks.json` (a JSON object, not an array; `jq -r '.tasks[].task_id'` extracts them).
 
 Aggregate scores and compute TNI:
 

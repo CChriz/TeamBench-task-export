@@ -23,4 +23,4 @@ pip install -r requirements.txt
 python app.py
 ```
 
-The app loads data from `data/cross_model_stats.json`.
+The app loads data from `data/leaderboard_data.json` (per-model TeamBench-90 results). `data/cross_model_stats.json` holds the role-mixing breakdown used in the cross-provider tab.
