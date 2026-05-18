@@ -7,28 +7,11 @@
   "cross_model_models": [
     "Claude Haiku 4.5",
     "Claude Sonnet 4.6",
-    "CodeGemma 7B",
-    "DeepSeek-R1-Distill-32B",
-    "Devstral-24B",
     "GPT-5 Mini",
     "GPT-5 Nano",
-    "GPT-5.3 Chat",
-    "GPT-5.4",
-    "GPT-OSS-20B",
     "Gemini 3 Flash",
     "Gemini 3.1 Lite",
-    "Gemma 3 27B",
-    "Qwen2.5-Coder-32B",
-    "Qwen3-14B",
-    "Qwen3-4B",
-    "Qwen3-8B",
-    "Qwen3-Coder-30B-A3B",
-    "Qwen3.5-0.8B",
-    "Qwen3.5-27B",
-    "Qwen3.5-2B",
-    "Qwen3.5-35B-A3B",
-    "Qwen3.5-4B",
-    "Qwen3.5-9B"
+    "Qwen3.5-35B-A3B"
   ],
   "aggregate": {
     "avg_team": 0.7544,
@@ -36,7 +19,7 @@
     "avg_uplift": 0.0553,
     "avg_tni": 0.5336,
     "team_helps_count": 14,
-    "high_tni_count": 3
+    "high_tni_count": 5
   },
   "categories": [
     "Adversarial",
@@ -166,28 +149,11 @@
     "models": [
       "Claude Haiku 4.5",
       "Claude Sonnet 4.6",
-      "CodeGemma 7B",
-      "DeepSeek-R1-Distill-32B",
-      "Devstral-24B",
       "GPT-5 Mini",
       "GPT-5 Nano",
-      "GPT-5.3 Chat",
-      "GPT-5.4",
-      "GPT-OSS-20B",
       "Gemini 3 Flash",
       "Gemini 3.1 Lite",
-      "Gemma 3 27B",
-      "Qwen2.5-Coder-32B",
-      "Qwen3-14B",
-      "Qwen3-4B",
-      "Qwen3-8B",
-      "Qwen3-Coder-30B-A3B",
-      "Qwen3.5-0.8B",
-      "Qwen3.5-27B",
-      "Qwen3.5-2B",
-      "Qwen3.5-35B-A3B",
-      "Qwen3.5-4B",
-      "Qwen3.5-9B"
+      "Qwen3.5-35B-A3B"
     ],
     "total_tasks": 28,
     "per_model": {
@@ -219,48 +185,6 @@
         "team_helps_count": 10,
         "team_helps_pct": 0.3571
       },
-      "CodeGemma 7B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.0,
-        "avg_restricted": 0.0,
-        "avg_team": 0.0,
-        "avg_no_plan": 0.0,
-        "avg_no_verify": 0.0,
-        "avg_uplift": 0.0,
-        "avg_tni": 0.0,
-        "valid_tni_count": 0,
-        "team_helps_count": 0,
-        "team_helps_pct": 0.0
-      },
-      "DeepSeek-R1-Distill-32B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.3262,
-        "avg_restricted": 0.3162,
-        "avg_team": 0.1269,
-        "avg_no_plan": 0.3162,
-        "avg_no_verify": 0.2629,
-        "avg_uplift": -0.1993,
-        "avg_tni": 0.0,
-        "valid_tni_count": 2,
-        "team_helps_count": 0,
-        "team_helps_pct": 0.0
-      },
-      "Devstral-24B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.0,
-        "avg_restricted": 0.0,
-        "avg_team": 0.0,
-        "avg_no_plan": 0.0,
-        "avg_no_verify": 0.0,
-        "avg_uplift": 0.0,
-        "avg_tni": 0.0,
-        "valid_tni_count": 0,
-        "team_helps_count": 0,
-        "team_helps_pct": 0.0
-      },
       "GPT-5 Mini": {
         "task_count": 28,
         "run_count": 140,
@@ -288,48 +212,6 @@
         "valid_tni_count": 21,
         "team_helps_count": 22,
         "team_helps_pct": 0.7857
-      },
-      "GPT-5.3 Chat": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.6112,
-        "avg_restricted": 0.5028,
-        "avg_team": 0.6667,
-        "avg_no_plan": 0.5038,
-        "avg_no_verify": 0.6863,
-        "avg_uplift": 0.0555,
-        "avg_tni": 0.8919,
-        "valid_tni_count": 11,
-        "team_helps_count": 17,
-        "team_helps_pct": 0.6071
-      },
-      "GPT-5.4": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.7353,
-        "avg_restricted": 0.691,
-        "avg_team": 0.8579,
-        "avg_no_plan": 0.7963,
-        "avg_no_verify": 0.7464,
-        "avg_uplift": 0.1225,
-        "avg_tni": 0.7713,
-        "valid_tni_count": 12,
-        "team_helps_count": 20,
-        "team_helps_pct": 0.7143
-      },
-      "GPT-OSS-20B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.4482,
-        "avg_restricted": 0.3694,
-        "avg_team": 0.3035,
-        "avg_no_plan": 0.3851,
-        "avg_no_verify": 0.4179,
-        "avg_uplift": -0.1447,
-        "avg_tni": 0.8558,
-        "valid_tni_count": 14,
-        "team_helps_count": 6,
-        "team_helps_pct": 0.2143
       },
       "Gemini 3 Flash": {
         "task_count": 28,
@@ -359,132 +241,6 @@
         "team_helps_count": 16,
         "team_helps_pct": 0.5714
       },
-      "Gemma 3 27B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.1519,
-        "avg_restricted": 0.2144,
-        "avg_team": 0.0,
-        "avg_no_plan": 0.2869,
-        "avg_no_verify": 0.0,
-        "avg_uplift": -0.1519,
-        "avg_tni": 0.6667,
-        "valid_tni_count": 9,
-        "team_helps_count": 0,
-        "team_helps_pct": 0.0
-      },
-      "Qwen2.5-Coder-32B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.3498,
-        "avg_restricted": 0.3359,
-        "avg_team": 0.3348,
-        "avg_no_plan": 0.338,
-        "avg_no_verify": 0.4252,
-        "avg_uplift": -0.015,
-        "avg_tni": 0.7287,
-        "valid_tni_count": 3,
-        "team_helps_count": 1,
-        "team_helps_pct": 0.0357
-      },
-      "Qwen3-14B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.295,
-        "avg_restricted": 0.308,
-        "avg_team": 0.3279,
-        "avg_no_plan": 0.313,
-        "avg_no_verify": 0.3469,
-        "avg_uplift": 0.0328,
-        "avg_tni": 0.2605,
-        "valid_tni_count": 14,
-        "team_helps_count": 11,
-        "team_helps_pct": 0.3929
-      },
-      "Qwen3-4B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.26,
-        "avg_restricted": 0.2866,
-        "avg_team": 0.1807,
-        "avg_no_plan": 0.2836,
-        "avg_no_verify": 0.2879,
-        "avg_uplift": -0.0793,
-        "avg_tni": 0.4372,
-        "valid_tni_count": 11,
-        "team_helps_count": 1,
-        "team_helps_pct": 0.0357
-      },
-      "Qwen3-8B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.3197,
-        "avg_restricted": 0.2927,
-        "avg_team": 0.2954,
-        "avg_no_plan": 0.3216,
-        "avg_no_verify": 0.3534,
-        "avg_uplift": -0.0243,
-        "avg_tni": 0.3404,
-        "valid_tni_count": 13,
-        "team_helps_count": 9,
-        "team_helps_pct": 0.3214
-      },
-      "Qwen3-Coder-30B-A3B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.2429,
-        "avg_restricted": 0.2507,
-        "avg_team": 0.0296,
-        "avg_no_plan": 0.1425,
-        "avg_no_verify": 0.0954,
-        "avg_uplift": -0.2132,
-        "avg_tni": 0.5307,
-        "valid_tni_count": 11,
-        "team_helps_count": 1,
-        "team_helps_pct": 0.0357
-      },
-      "Qwen3.5-0.8B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.3968,
-        "avg_restricted": 0.3154,
-        "avg_team": 0.3432,
-        "avg_no_plan": 0.32,
-        "avg_no_verify": 0.4113,
-        "avg_uplift": -0.0536,
-        "avg_tni": 0.1944,
-        "valid_tni_count": 9,
-        "team_helps_count": 4,
-        "team_helps_pct": 0.1429
-      },
-      "Qwen3.5-27B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.2432,
-        "avg_restricted": 0.1493,
-        "avg_team": 0.0643,
-        "avg_no_plan": 0.19,
-        "avg_no_verify": 0.065,
-        "avg_uplift": -0.179,
-        "avg_tni": -0.1618,
-        "valid_tni_count": 12,
-        "team_helps_count": 2,
-        "team_helps_pct": 0.0714
-      },
-      "Qwen3.5-2B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.3957,
-        "avg_restricted": 0.3179,
-        "avg_team": 0.3506,
-        "avg_no_plan": 0.3104,
-        "avg_no_verify": 0.4561,
-        "avg_uplift": -0.0452,
-        "avg_tni": 0.125,
-        "valid_tni_count": 8,
-        "team_helps_count": 9,
-        "team_helps_pct": 0.3214
-      },
       "Qwen3.5-35B-A3B": {
         "task_count": 28,
         "run_count": 135,
@@ -498,73 +254,27 @@
         "valid_tni_count": 12,
         "team_helps_count": 9,
         "team_helps_pct": 0.3214
-      },
-      "Qwen3.5-4B": {
-        "task_count": 28,
-        "run_count": 136,
-        "avg_oracle": 0.5061,
-        "avg_restricted": 0.4756,
-        "avg_team": 0.5118,
-        "avg_no_plan": 0.5878,
-        "avg_no_verify": 0.562,
-        "avg_uplift": 0.0057,
-        "avg_tni": 0.5947,
-        "valid_tni_count": 18,
-        "team_helps_count": 9,
-        "team_helps_pct": 0.3214
-      },
-      "Qwen3.5-9B": {
-        "task_count": 28,
-        "run_count": 140,
-        "avg_oracle": 0.6284,
-        "avg_restricted": 0.5689,
-        "avg_team": 0.5002,
-        "avg_no_plan": 0.5889,
-        "avg_no_verify": 0.5744,
-        "avg_uplift": -0.1281,
-        "avg_tni": 0.6244,
-        "valid_tni_count": 20,
-        "team_helps_count": 10,
-        "team_helps_pct": 0.3571
       }
     },
-    "consistent_team_helps": [],
+    "consistent_team_helps": [
+      "CR5_test_coverage",
+      "D8_csv_cleanup",
+      "INC4_dns_miscfg",
+      "MULTI1_fullstack_fix",
+      "O2_incident_rootcause",
+      "P1_policy_config",
+      "P3_access_control",
+      "PIPE1_etl_fix",
+      "SEC1_vuln_patch",
+      "TEST1_spec_to_tests",
+      "TEST2_regression"
+    ],
     "consistent_team_hurts": [],
     "per_task": [
       {
         "task_id": "CR5_test_coverage",
         "category": "Code Review",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.38,
             "restricted": 0.38,
@@ -584,36 +294,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.0,
-            "no_plan": 0.38,
-            "no_verify": 0.0,
-            "team_uplift": -0.38,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.77,
-            "restricted": 0.77,
-            "team": 1.0,
-            "no_plan": 0.38,
-            "no_verify": 0.0,
-            "team_uplift": 0.23,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.38,
@@ -635,16 +315,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.0,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": -0.38,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.38,
             "restricted": 0.77,
@@ -655,46 +325,6 @@
             "tni": 4.6,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.31,
-            "restricted": 0.69,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.77,
-            "team_uplift": 0.07,
-            "tni": -6.2,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.0,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": -0.38,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.38,
             "restricted": 0.0,
@@ -703,66 +333,6 @@
             "no_verify": 0.46,
             "team_uplift": 0.0,
             "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.85,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.0,
-            "no_plan": 0.46,
-            "no_verify": 0.38,
-            "team_uplift": -0.38,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.77,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": 0.39,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.46,
-            "team_uplift": 0.38,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.38,
-            "restricted": 0.38,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
             "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
@@ -781,36 +351,6 @@
         "task_id": "CROSS1_api_contract",
         "category": "Cross-System",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.3,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -830,36 +370,6 @@
             "team_uplift": -0.1,
             "tni": 0.0,
             "classification": "TEAM-HURTS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 1.0,
-            "restricted": 0.5,
-            "team": 0.3,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": -0.7,
-            "tni": -0.4,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.7,
-            "restricted": 0.7,
-            "team": 0.9,
-            "no_plan": 1.0,
-            "no_verify": 0.6,
-            "team_uplift": 0.2,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.9,
@@ -881,16 +391,6 @@
             "tni": 0.4,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.5,
-            "restricted": 0.7,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.3,
-            "team_uplift": -0.5,
-            "tni": -14.0,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.9,
             "restricted": 0.9,
@@ -898,46 +398,6 @@
             "no_plan": 0.9,
             "no_verify": 0.8,
             "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.3,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.4,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": -0.2,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.9,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.4,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.2,
             "tni": null,
             "classification": "TEAM-HELPS"
           },
@@ -950,66 +410,6 @@
             "team_uplift": -0.6,
             "tni": -2.0,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.2,
-            "restricted": 0.3,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.4,
-            "team_uplift": -0.2,
-            "tni": -6.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.4,
-            "team_uplift": -0.6,
-            "tni": -2.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.3,
-            "restricted": 0.0,
-            "team": 0.4,
-            "no_plan": 0.3,
-            "no_verify": 0.3,
-            "team_uplift": 0.1,
-            "tni": 1.3333,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.1,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.7,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -14.0,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 1.0,
@@ -1027,36 +427,6 @@
         "task_id": "CROSS3_protocol_bridge",
         "category": "Cross-System",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.0,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": -0.2,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -1076,36 +446,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 1.0,
-            "restricted": 1.0,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.7,
-            "restricted": 0.7,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.7,
-            "team_uplift": 0.3,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 1.0,
@@ -1127,16 +467,6 @@
             "tni": 0.25,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 1.0,
-            "restricted": 1.0,
-            "team": 1.0,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -1147,111 +477,11 @@
             "tni": null,
             "classification": "NEUTRAL"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.4,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": -0.2,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 1.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -1.0,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 1.0,
-            "restricted": 0.2,
-            "team": 1.0,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 1.0,
             "restricted": 1.0,
             "team": 1.0,
             "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 1.0,
-            "restricted": 1.0,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 1.0,
-            "restricted": 1.0,
-            "team": 0.0,
-            "no_plan": 1.0,
-            "no_verify": 0.0,
-            "team_uplift": -1.0,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.2,
-            "team": 1.0,
-            "no_plan": 0.2,
-            "no_verify": 0.0,
-            "team_uplift": 1.0,
-            "tni": 16.0,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.2,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.1,
-            "team_uplift": 0.0,
-            "tni": -4.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.0,
-            "no_verify": 0.2,
-            "team_uplift": 0.2,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
             "no_verify": 0.2,
             "team_uplift": 0.0,
             "tni": null,
@@ -1273,36 +503,6 @@
         "task_id": "CRYPTO1_nonce_reuse",
         "category": "Security",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.5,
             "restricted": 1.0,
@@ -1322,36 +522,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.2,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.2,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 1.0,
-            "restricted": 1.0,
-            "team": 1.0,
-            "no_plan": 0.4,
-            "no_verify": 1.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.6,
-            "restricted": 0.6,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.6,
-            "team_uplift": 0.4,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 1.0,
@@ -1373,16 +543,6 @@
             "tni": 0.5,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 1.0,
-            "restricted": 0.2,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.7,
-            "team_uplift": -1.0,
-            "tni": -0.25,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.7,
             "restricted": 1.0,
@@ -1393,46 +553,6 @@
             "tni": 0.0,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.2,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.2,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.9,
-            "restricted": 0.2,
-            "team": 0.2,
-            "no_plan": 0.2,
-            "no_verify": 0.9,
-            "team_uplift": -0.7,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -1441,66 +561,6 @@
             "no_verify": 0.2,
             "team_uplift": -0.6,
             "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 1.0,
-            "restricted": 0.2,
-            "team": 0.4,
-            "no_plan": 1.0,
-            "no_verify": 0.2,
-            "team_uplift": -0.6,
-            "tni": 0.25,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.9,
-            "restricted": 0.7,
-            "team": 1.0,
-            "no_plan": 0.7,
-            "no_verify": 0.9,
-            "team_uplift": 0.1,
-            "tni": 1.5,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.5,
-            "restricted": 0.2,
-            "team": 0.3,
-            "no_plan": 0.0,
-            "no_verify": 0.2,
-            "team_uplift": -0.2,
-            "tni": 0.3333,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.4,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.2,
-            "no_verify": 0.4,
-            "team_uplift": -0.1,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.4,
-            "restricted": 0.2,
-            "team": 0.4,
-            "no_plan": 0.2,
-            "no_verify": 0.7,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 1.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 1.0,
-            "team_uplift": -1.0,
-            "tni": 0.0,
             "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
@@ -1519,36 +579,6 @@
         "task_id": "D1_schema_drift",
         "category": "Data Engineering",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.0,
-            "team_uplift": -0.12,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.75,
             "restricted": 0.75,
@@ -1568,36 +598,6 @@
             "team_uplift": -0.19,
             "tni": 0.2692,
             "classification": "TEAM-HURTS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.12,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.0,
-            "team_uplift": -0.12,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.56,
-            "restricted": 0.44,
-            "team": 0.5,
-            "no_plan": 0.38,
-            "no_verify": 0.5,
-            "team_uplift": -0.06,
-            "tni": 0.5,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.88,
-            "restricted": 0.62,
-            "team": 0.94,
-            "no_plan": 0.62,
-            "no_verify": 0.94,
-            "team_uplift": 0.06,
-            "tni": 1.2308,
-            "classification": "HIGH-TNI"
           },
           "GPT-5 Mini": {
             "oracle": 0.62,
@@ -1619,16 +619,6 @@
             "tni": 1.48,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.56,
-            "restricted": 0.12,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.44,
-            "team_uplift": -0.56,
-            "tni": -0.2727,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.88,
             "restricted": 0.62,
@@ -1639,46 +629,6 @@
             "tni": 1.2308,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.12,
-            "no_plan": 0.12,
-            "no_verify": 0.19,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.12,
-            "no_plan": 0.12,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.75,
-            "restricted": 0.62,
-            "team": 0.0,
-            "no_plan": 0.69,
-            "no_verify": 0.0,
-            "team_uplift": -0.75,
-            "tni": -4.7692,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.56,
-            "no_plan": 0.12,
-            "no_verify": 0.19,
-            "team_uplift": 0.44,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.62,
             "restricted": 0.5,
@@ -1688,66 +638,6 @@
             "team_uplift": 0.19,
             "tni": 2.5833,
             "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.88,
-            "restricted": 0.12,
-            "team": 0.81,
-            "no_plan": 0.0,
-            "no_verify": 0.81,
-            "team_uplift": -0.07,
-            "tni": 0.9079,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.81,
-            "restricted": 0.81,
-            "team": 0.81,
-            "no_plan": 0.62,
-            "no_verify": 0.81,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.12,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -2.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.12,
-            "team": 0.0,
-            "no_plan": 0.12,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -2.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.56,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -11.2,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.62,
@@ -1765,36 +655,6 @@
         "task_id": "D8_csv_cleanup",
         "category": "Data Engineering",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0,
-            "restricted": 0.22,
-            "team": 0.22,
-            "no_plan": 0.22,
-            "no_verify": 0.0,
-            "team_uplift": 0.22,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.89,
             "restricted": 0.78,
@@ -1806,36 +666,6 @@
             "classification": "HIGH-TNI"
           },
           "Gemini 3 Flash": {
-            "oracle": 0.89,
-            "restricted": 0.78,
-            "team": 1.0,
-            "no_plan": 0.78,
-            "no_verify": 1.0,
-            "team_uplift": 0.11,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.22,
-            "restricted": 0.22,
-            "team": 0.0,
-            "no_plan": 0.22,
-            "no_verify": 0.0,
-            "team_uplift": -0.22,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.89,
-            "restricted": 0.22,
-            "team": 1.0,
-            "no_plan": 0.67,
-            "no_verify": 1.0,
-            "team_uplift": 0.11,
-            "tni": 1.1642,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
             "oracle": 0.89,
             "restricted": 0.78,
             "team": 1.0,
@@ -1865,16 +695,6 @@
             "tni": 0.8358,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.89,
-            "restricted": 0.22,
-            "team": 0.0,
-            "no_plan": 0.67,
-            "no_verify": 1.0,
-            "team_uplift": -0.89,
-            "tni": -0.3284,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.89,
             "restricted": 0.78,
@@ -1885,46 +705,6 @@
             "tni": 2.0,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.22,
-            "restricted": 0.22,
-            "team": 0.22,
-            "no_plan": 0.22,
-            "no_verify": 0.33,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.22,
-            "restricted": 0.22,
-            "team": 0.22,
-            "no_plan": 0.22,
-            "no_verify": 0.33,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.89,
-            "restricted": 0.78,
-            "team": 0.0,
-            "no_plan": 0.78,
-            "no_verify": 0.0,
-            "team_uplift": -0.89,
-            "tni": -7.0909,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.22,
-            "restricted": 0.22,
-            "team": 0.22,
-            "no_plan": 0.22,
-            "no_verify": 0.33,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.89,
             "restricted": 0.22,
@@ -1934,66 +714,6 @@
             "team_uplift": 0.11,
             "tni": 1.1642,
             "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.0,
-            "restricted": 0.22,
-            "team": 1.0,
-            "no_plan": 0.67,
-            "no_verify": 1.0,
-            "team_uplift": 1.0,
-            "tni": 15.6,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.89,
-            "restricted": 0.11,
-            "team": 1.0,
-            "no_plan": 0.67,
-            "no_verify": 1.0,
-            "team_uplift": 0.11,
-            "tni": 1.141,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.22,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.33,
-            "team_uplift": 0.0,
-            "tni": -4.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.22,
-            "team": 0.0,
-            "no_plan": 0.22,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -4.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.22,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -4.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.67,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -13.4,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.89,
@@ -2011,36 +731,6 @@
         "task_id": "DIST1_queue_race",
         "category": "Distributed",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0833,
-            "restricted": 0.0833,
-            "team": 0.0833,
-            "no_plan": 0.0833,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.3333,
             "restricted": 0.3333,
@@ -2060,36 +750,6 @@
             "team_uplift": -0.0833,
             "tni": 0.0,
             "classification": "TEAM-HURTS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0833,
-            "restricted": 0.0833,
-            "team": 0.0,
-            "no_plan": 0.0833,
-            "no_verify": 0.0,
-            "team_uplift": -0.0833,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.3333,
-            "restricted": 0.1667,
-            "team": 0.4167,
-            "no_plan": 0.4167,
-            "no_verify": 0.4167,
-            "team_uplift": 0.0834,
-            "tni": 1.5006,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
-            "oracle": 0.5,
-            "restricted": 0.5,
-            "team": 1.0,
-            "no_plan": 0.9167,
-            "no_verify": 0.5,
-            "team_uplift": 0.5,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.4167,
@@ -2111,16 +771,6 @@
             "tni": 1.6668,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.25,
-            "restricted": 0.0833,
-            "team": 0.4167,
-            "no_plan": 0.3333,
-            "no_verify": 0.0,
-            "team_uplift": 0.1667,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.5,
             "restricted": 0.0833,
@@ -2129,46 +779,6 @@
             "no_verify": 0.4167,
             "team_uplift": -0.0833,
             "tni": 0.8001,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.0833,
-            "restricted": 0.0833,
-            "team": 0.0833,
-            "no_plan": 0.0833,
-            "no_verify": 0.0833,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.5,
-            "restricted": 0.5,
-            "team": 0.5,
-            "no_plan": 0.5,
-            "no_verify": 0.6667,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.5,
-            "restricted": 0.5,
-            "team": 0.4167,
-            "no_plan": 0.5,
-            "no_verify": 0.5,
-            "team_uplift": -0.0833,
-            "tni": null,
             "classification": "TEAM-HURTS"
           },
           "Qwen3.5-35B-A3B": {
@@ -2180,66 +790,6 @@
             "team_uplift": -0.9167,
             "tni": -9.9916,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.5,
-            "restricted": 0.6667,
-            "team": 0.0,
-            "no_plan": 0.8333,
-            "no_verify": 0.8333,
-            "team_uplift": -0.5,
-            "tni": -13.334,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.5,
-            "restricted": 0.8333,
-            "team": 0.0,
-            "no_plan": 0.8333,
-            "no_verify": 0.8333,
-            "team_uplift": -0.5,
-            "tni": -16.666,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.0833,
-            "team": 0.0,
-            "no_plan": 0.0833,
-            "no_verify": 0.0833,
-            "team_uplift": 0.0,
-            "tni": -1.666,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0833,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -1.666,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.0833,
-            "team": 0.0,
-            "no_plan": 0.0833,
-            "no_verify": 0.0833,
-            "team_uplift": 0.0,
-            "tni": -1.666,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.0833,
@@ -2257,36 +807,6 @@
         "task_id": "INC1_cascade_failure",
         "category": "Incident Response",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.0,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": -0.8,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.8,
             "restricted": 0.8,
@@ -2306,36 +826,6 @@
             "team_uplift": 0.0,
             "tni": 1.0,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.0,
-            "no_plan": 0.8,
-            "no_verify": 0.0,
-            "team_uplift": -0.8,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.9,
-            "no_plan": 0.9,
-            "no_verify": 0.9,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.9,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.8,
@@ -2357,16 +847,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.9,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.8,
             "restricted": 0.8,
@@ -2375,46 +855,6 @@
             "no_verify": 0.9,
             "team_uplift": 0.1,
             "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.6,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.2,
-            "tni": 0.0,
             "classification": "TEAM-HELPS"
           },
           "Qwen3.5-35B-A3B": {
@@ -2426,66 +866,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.9,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.8,
-            "no_plan": 0.8,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.0,
-            "no_plan": 0.9,
-            "no_verify": 0.9,
-            "team_uplift": -0.8,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.8,
-            "tni": null,
-            "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.8,
@@ -2503,36 +883,6 @@
         "task_id": "INC4_dns_miscfg",
         "category": "Incident Response",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.0,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": -0.58,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.58,
             "restricted": 0.58,
@@ -2552,36 +902,6 @@
             "team_uplift": 0.08,
             "tni": 1.2353,
             "classification": "HIGH-TNI"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.58,
-            "team": 0.0,
-            "no_plan": 0.58,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -11.6,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.92,
-            "restricted": 0.58,
-            "team": 1.0,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": 0.08,
-            "tni": 1.2353,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
-            "oracle": 0.92,
-            "restricted": 0.92,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
-            "team_uplift": 0.08,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.92,
@@ -2603,16 +923,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.75,
-            "restricted": 0.58,
-            "team": 0.58,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": -0.17,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.92,
             "restricted": 0.92,
@@ -2623,112 +933,12 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.58,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.75,
-            "no_plan": 0.67,
-            "no_verify": 0.67,
-            "team_uplift": 0.17,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.92,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 1.0,
-            "team_uplift": -0.92,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.75,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": 0.17,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.58,
             "restricted": 0.58,
             "team": 0.58,
             "no_plan": 0.58,
             "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.58,
-            "restricted": 0.75,
-            "team": 0.58,
-            "no_plan": 0.92,
-            "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": -3.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.92,
-            "restricted": 0.92,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.83,
-            "team_uplift": 0.08,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.58,
-            "no_plan": 0.67,
-            "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.58,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.58,
-            "restricted": 0.58,
-            "team": 0.5,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": -0.08,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.0,
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
@@ -2749,36 +959,6 @@
         "task_id": "IR1_evidence_qa",
         "category": "Information Retrieval",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": -0.33,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.33,
             "restricted": 0.33,
@@ -2795,36 +975,6 @@
             "team": 0.33,
             "no_plan": 0.33,
             "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.83,
-            "restricted": 0.33,
-            "team": 1.0,
-            "no_plan": 0.33,
-            "no_verify": 0.83,
-            "team_uplift": 0.17,
-            "tni": 1.34,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
-            "oracle": 0.83,
-            "restricted": 0.83,
-            "team": 0.83,
-            "no_plan": 0.83,
-            "no_verify": 1.0,
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
@@ -2849,16 +999,6 @@
             "tni": 0.0,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.33,
-            "no_plan": 0.33,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.33,
             "restricted": 0.33,
@@ -2869,46 +1009,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.33,
-            "no_plan": 0.33,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.83,
-            "restricted": 0.33,
-            "team": 0.33,
-            "no_plan": 0.33,
-            "no_verify": 0.5,
-            "team_uplift": -0.5,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.5,
-            "restricted": 0.33,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": -0.5,
-            "tni": -1.9412,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.33,
-            "no_plan": 0.33,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.33,
             "restricted": 0.33,
@@ -2918,66 +1018,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.33,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.33,
-            "restricted": 0.67,
-            "team": 0.67,
-            "no_plan": 0.67,
-            "no_verify": 0.5,
-            "team_uplift": 0.34,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.83,
-            "restricted": 0.33,
-            "team": 0.5,
-            "no_plan": 0.33,
-            "no_verify": 0.5,
-            "team_uplift": -0.33,
-            "tni": 0.34,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.33,
-            "restricted": 0.33,
-            "team": 0.0,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": -0.33,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.67,
-            "restricted": 0.33,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.5,
-            "team_uplift": -0.67,
-            "tni": -0.9706,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.33,
-            "restricted": 0.17,
-            "team": 0.83,
-            "no_plan": 0.33,
-            "no_verify": 0.0,
-            "team_uplift": 0.5,
-            "tni": 4.125,
-            "classification": "HIGH-TNI"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.5,
@@ -2995,36 +1035,6 @@
         "task_id": "MULTI1_fullstack_fix",
         "category": "Multi-language",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.12,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.88,
             "restricted": 0.88,
@@ -3036,36 +1046,6 @@
             "classification": "TEAM-HELPS"
           },
           "Gemini 3 Flash": {
-            "oracle": 0.88,
-            "restricted": 0.88,
-            "team": 1.0,
-            "no_plan": 0.88,
-            "no_verify": 1.0,
-            "team_uplift": 0.12,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.88,
-            "restricted": 0.88,
-            "team": 0.5,
-            "no_plan": 0.88,
-            "no_verify": 1.0,
-            "team_uplift": -0.38,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.4": {
             "oracle": 0.88,
             "restricted": 0.88,
             "team": 1.0,
@@ -3095,16 +1075,6 @@
             "tni": 2.0,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.75,
             "restricted": 0.75,
@@ -3112,46 +1082,6 @@
             "no_plan": 0.88,
             "no_verify": 1.0,
             "team_uplift": 0.25,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.12,
-            "no_plan": 0.12,
-            "no_verify": 0.25,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.62,
-            "no_plan": 0.12,
-            "no_verify": 0.25,
-            "team_uplift": 0.5,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 0.38,
-            "no_plan": 0.38,
-            "no_verify": 0.88,
-            "team_uplift": 0.26,
             "tni": null,
             "classification": "TEAM-HELPS"
           },
@@ -3164,66 +1094,6 @@
             "team_uplift": 0.12,
             "tni": null,
             "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.12,
-            "restricted": 0.12,
-            "team": 1.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": 0.88,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.12,
-            "restricted": 0.75,
-            "team": 1.0,
-            "no_plan": 0.88,
-            "no_verify": 0.38,
-            "team_uplift": 0.88,
-            "tni": 5.0,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.38,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.38,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.12,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.12,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.88,
@@ -3241,36 +1111,6 @@
         "task_id": "NEG1_tradeoff_config",
         "category": "Negotiation",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.4,
-            "team_uplift": -0.3,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.3,
             "restricted": 0.4,
@@ -3290,36 +1130,6 @@
             "team_uplift": 0.3,
             "tni": 0.0,
             "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.3,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -6.0,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.5,
-            "restricted": 0.5,
-            "team": 0.3,
-            "no_plan": 0.5,
-            "no_verify": 0.4,
-            "team_uplift": -0.2,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.7,
-            "restricted": 0.7,
-            "team": 0.7,
-            "no_plan": 0.7,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "GPT-5 Mini": {
             "oracle": 0.7,
@@ -3341,16 +1151,6 @@
             "tni": -0.5,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.3,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": -0.3,
-            "tni": -8.0,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.3,
             "restricted": 0.4,
@@ -3361,46 +1161,6 @@
             "tni": 2.0,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.3,
-            "restricted": 0.5,
-            "team": 0.3,
-            "no_plan": 0.3,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": -4.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.5,
-            "no_plan": 0.5,
-            "no_verify": 0.4,
-            "team_uplift": 0.2,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.3,
             "restricted": 0.6,
@@ -3410,66 +1170,6 @@
             "team_uplift": 0.2,
             "tni": -2.0,
             "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.5,
-            "restricted": 0.6,
-            "team": 0.5,
-            "no_plan": 0.0,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": -2.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.5,
-            "restricted": 0.6,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.8,
-            "team_uplift": -0.5,
-            "tni": -12.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.3,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": -6.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.3,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.3,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.7,
@@ -3487,36 +1187,6 @@
         "task_id": "O1_service_health",
         "category": "Operations",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.5,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.5,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.5,
             "restricted": 0.0,
@@ -3537,36 +1207,6 @@
             "tni": null,
             "classification": "NEUTRAL"
           },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.25,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": 0.25,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.5,
-            "restricted": 0.25,
-            "team": 0.25,
-            "no_plan": 0.25,
-            "no_verify": 0.25,
-            "team_uplift": -0.25,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "GPT-5 Mini": {
             "oracle": 0.25,
             "restricted": 0.25,
@@ -3587,16 +1227,6 @@
             "tni": -5.0,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.5,
             "restricted": 0.75,
@@ -3607,46 +1237,6 @@
             "tni": -5.0,
             "classification": "NEUTRAL"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.5,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": -0.5,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.5,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": -0.5,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.25,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.0,
-            "team_uplift": -0.25,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.5,
-            "no_plan": 0.0,
-            "no_verify": 0.75,
-            "team_uplift": 0.5,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.5,
             "restricted": 0.5,
@@ -3656,66 +1246,6 @@
             "team_uplift": -0.5,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.5,
-            "no_verify": 0.25,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.0,
-            "restricted": 0.5,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": -10.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.25,
-            "restricted": 0.0,
-            "team": 0.25,
-            "no_plan": 0.5,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.5,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.25,
-            "team_uplift": 0.0,
-            "tni": -10.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.5,
@@ -3733,36 +1263,6 @@
         "task_id": "O2_incident_rootcause",
         "category": "Operations",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.6,
             "restricted": 0.4,
@@ -3774,36 +1274,6 @@
             "classification": "HIGH-TNI"
           },
           "Gemini 3 Flash": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.8,
-            "no_plan": 0.4,
-            "no_verify": 0.8,
-            "team_uplift": 0.2,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.8,
-            "no_plan": 0.4,
-            "no_verify": 0.8,
-            "team_uplift": 0.2,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
             "oracle": 0.6,
             "restricted": 0.4,
             "team": 0.8,
@@ -3833,16 +1303,6 @@
             "tni": 2.0,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.8,
-            "no_plan": 0.4,
-            "no_verify": 0.8,
-            "team_uplift": 0.2,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.6,
             "restricted": 0.4,
@@ -3853,46 +1313,6 @@
             "tni": 2.0,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.8,
-            "no_plan": 0.4,
-            "no_verify": 0.0,
-            "team_uplift": 0.2,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.6,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.2,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.6,
             "restricted": 0.4,
@@ -3902,66 +1322,6 @@
             "team_uplift": 0.0,
             "tni": 1.0,
             "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.6,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.6,
-            "no_plan": 0.6,
-            "no_verify": 0.8,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.8,
-            "team_uplift": -0.6,
-            "tni": -2.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.0,
-            "team_uplift": -0.6,
-            "tni": -2.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.8,
-            "team_uplift": -0.6,
-            "tni": -2.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.6,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.6,
-            "tni": -2.0,
-            "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.6,
@@ -3979,36 +1339,6 @@
         "task_id": "O3_log_analysis",
         "category": "Operations",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.31,
-            "restricted": 0.31,
-            "team": 0.31,
-            "no_plan": 0.31,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.31,
             "restricted": 0.38,
@@ -4024,36 +1354,6 @@
             "restricted": 0.38,
             "team": 0.31,
             "no_plan": 0.38,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": -1.4,
-            "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.31,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.31,
-            "restricted": 0.31,
-            "team": 0.31,
-            "no_plan": 0.31,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.31,
-            "restricted": 0.38,
-            "team": 0.31,
-            "no_plan": 0.31,
             "no_verify": 0.31,
             "team_uplift": 0.0,
             "tni": -1.4,
@@ -4079,16 +1379,6 @@
             "tni": 0.0,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.31,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.38,
             "restricted": 0.31,
@@ -4099,112 +1389,12 @@
             "tni": 1.0,
             "classification": "NEUTRAL"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.31,
-            "restricted": 0.31,
-            "team": 0.31,
-            "no_plan": 0.31,
-            "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.46,
-            "restricted": 0.46,
-            "team": 0.46,
-            "no_plan": 0.46,
-            "no_verify": 0.46,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.46,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.46,
             "restricted": 0.46,
             "team": 0.46,
             "no_plan": 0.31,
             "no_verify": 0.31,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.25,
-            "restricted": 0.46,
-            "team": 0.46,
-            "no_plan": 0.46,
-            "no_verify": 0.46,
-            "team_uplift": 0.21,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.46,
-            "restricted": 0.46,
-            "team": 0.46,
-            "no_plan": 0.54,
-            "no_verify": 0.46,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.31,
-            "restricted": 0.31,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.31,
-            "team_uplift": -0.31,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.31,
-            "restricted": 0.31,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.31,
-            "team_uplift": -0.31,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.31,
-            "team": 0.31,
-            "no_plan": 0.0,
-            "no_verify": 0.31,
-            "team_uplift": 0.31,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
@@ -4225,36 +1415,6 @@
         "task_id": "P1_policy_config",
         "category": "Policy",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.93,
             "restricted": 0.93,
@@ -4266,36 +1426,6 @@
             "classification": "TEAM-HELPS"
           },
           "Gemini 3 Flash": {
-            "oracle": 0.93,
-            "restricted": 0.93,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.07,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.93,
-            "restricted": 0.93,
-            "team": 1.0,
-            "no_plan": 0.07,
-            "no_verify": 1.0,
-            "team_uplift": 0.07,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
             "oracle": 0.93,
             "restricted": 0.93,
             "team": 1.0,
@@ -4325,16 +1455,6 @@
             "tni": 1.1094,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.93,
-            "restricted": 0.0,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.07,
-            "tni": 1.0753,
-            "classification": "HIGH-TNI"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.0,
             "restricted": 0.93,
@@ -4345,46 +1465,6 @@
             "tni": 1.4,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.93,
-            "restricted": 0.93,
-            "team": 1.0,
-            "no_plan": 0.5,
-            "no_verify": 0.0,
-            "team_uplift": 0.07,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.93,
             "restricted": 0.93,
@@ -4394,66 +1474,6 @@
             "team_uplift": 0.07,
             "tni": null,
             "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.93,
-            "restricted": 0.0,
-            "team": 1.0,
-            "no_plan": 0.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.07,
-            "tni": 1.0753,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.93,
-            "restricted": 0.93,
-            "team": 0.79,
-            "no_plan": 0.93,
-            "no_verify": 0.57,
-            "team_uplift": -0.14,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.07,
-            "team": 0.43,
-            "no_plan": 0.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.43,
-            "tni": 7.2,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.93,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.07,
-            "no_verify": 1.0,
-            "team_uplift": -0.93,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.93,
-            "restricted": 0.0,
-            "team": 1.0,
-            "no_plan": 0.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.07,
-            "tni": 1.0753,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.93,
-            "restricted": 0.5,
-            "team": 0.0,
-            "no_plan": 0.43,
-            "no_verify": 0.0,
-            "team_uplift": -0.93,
-            "tni": -1.1628,
-            "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.93,
@@ -4471,36 +1491,6 @@
         "task_id": "P3_access_control",
         "category": "Policy",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.0,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": -0.45,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.64,
             "restricted": 0.82,
@@ -4520,36 +1510,6 @@
             "team_uplift": -0.49,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.0,
-            "no_plan": 0.45,
-            "no_verify": 0.0,
-            "team_uplift": -0.45,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.91,
-            "no_plan": 0.45,
-            "no_verify": 0.73,
-            "team_uplift": 0.46,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.82,
-            "restricted": 0.91,
-            "team": 0.91,
-            "no_plan": 0.91,
-            "no_verify": 1.0,
-            "team_uplift": 0.09,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.45,
@@ -4571,16 +1531,6 @@
             "tni": 1.4865,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.45,
-            "restricted": 0.82,
-            "team": 0.91,
-            "no_plan": 0.82,
-            "no_verify": 0.55,
-            "team_uplift": 0.46,
-            "tni": 1.8,
-            "classification": "HIGH-TNI"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.82,
             "restricted": 0.82,
@@ -4591,46 +1541,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.45,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.45,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.45,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -9.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.45,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.45,
             "restricted": 0.73,
@@ -4640,66 +1550,6 @@
             "team_uplift": 0.37,
             "tni": 1.8,
             "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.82,
-            "no_plan": 0.73,
-            "no_verify": 0.55,
-            "team_uplift": 0.37,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.73,
-            "restricted": 0.82,
-            "team": 0.09,
-            "no_plan": 0.82,
-            "no_verify": 0.55,
-            "team_uplift": -0.64,
-            "tni": -14.6,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.55,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.45,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.45,
-            "restricted": 0.45,
-            "team": 0.55,
-            "no_plan": 0.45,
-            "no_verify": 0.55,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.82,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.82,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.82,
@@ -4717,36 +1567,6 @@
         "task_id": "PIPE1_etl_fix",
         "category": "Pipeline",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.0,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": -0.36,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.73,
             "restricted": 0.64,
@@ -4766,36 +1586,6 @@
             "team_uplift": 0.09,
             "tni": null,
             "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.0,
-            "no_plan": 0.36,
-            "no_verify": 0.0,
-            "team_uplift": -0.36,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.73,
-            "no_plan": 0.36,
-            "no_verify": 0.82,
-            "team_uplift": 0.37,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.73,
-            "restricted": 0.73,
-            "team": 0.73,
-            "no_plan": 0.82,
-            "no_verify": 0.73,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "GPT-5 Mini": {
             "oracle": 0.73,
@@ -4817,16 +1607,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.73,
-            "restricted": 0.73,
-            "team": 0.73,
-            "no_plan": 0.82,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.64,
             "restricted": 0.73,
@@ -4837,46 +1617,6 @@
             "tni": 0.0,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.36,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.36,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.36,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.36,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.36,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.64,
             "restricted": 0.64,
@@ -4886,66 +1626,6 @@
             "team_uplift": -0.28,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.36,
-            "restricted": 0.64,
-            "team": 0.36,
-            "no_plan": 0.73,
-            "no_verify": 0.45,
-            "team_uplift": 0.0,
-            "tni": -5.6,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.64,
-            "restricted": 0.73,
-            "team": 0.73,
-            "no_plan": 0.73,
-            "no_verify": 0.73,
-            "team_uplift": 0.09,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.0,
-            "no_plan": 0.45,
-            "no_verify": 0.45,
-            "team_uplift": -0.36,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.36,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.36,
-            "restricted": 0.36,
-            "team": 0.45,
-            "no_plan": 0.36,
-            "no_verify": 0.45,
-            "team_uplift": 0.09,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.64,
@@ -4963,36 +1643,6 @@
         "task_id": "SEC1_vuln_patch",
         "category": "Security",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.42,
-            "restricted": 0.42,
-            "team": 0.42,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.75,
             "restricted": 0.5,
@@ -5013,36 +1663,6 @@
             "tni": 0.0,
             "classification": "TEAM-HELPS"
           },
-          "Gemma 3 27B": {
-            "oracle": 0.42,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.42,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.75,
-            "restricted": 0.58,
-            "team": 0.83,
-            "no_plan": 0.58,
-            "no_verify": 0.83,
-            "team_uplift": 0.08,
-            "tni": 1.4706,
-            "classification": "HIGH-TNI"
-          },
-          "GPT-5.4": {
-            "oracle": 0.75,
-            "restricted": 0.67,
-            "team": 0.83,
-            "no_plan": 0.83,
-            "no_verify": 0.83,
-            "team_uplift": 0.08,
-            "tni": 2.0,
-            "classification": "HIGH-TNI"
-          },
           "GPT-5 Mini": {
             "oracle": 0.75,
             "restricted": 0.67,
@@ -5063,16 +1683,6 @@
             "tni": 1.0,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.75,
-            "restricted": 0.75,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.83,
-            "team_uplift": -0.75,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.75,
             "restricted": 0.75,
@@ -5080,46 +1690,6 @@
             "no_plan": 0.75,
             "no_verify": 0.83,
             "team_uplift": 0.08,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.42,
-            "restricted": 0.42,
-            "team": 0.42,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.42,
-            "restricted": 0.42,
-            "team": 0.58,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.16,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.67,
-            "team": 0.0,
-            "no_plan": 0.58,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -13.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.42,
-            "restricted": 0.42,
-            "team": 0.75,
-            "no_plan": 0.42,
-            "no_verify": 0.67,
-            "team_uplift": 0.33,
             "tni": null,
             "classification": "TEAM-HELPS"
           },
@@ -5132,66 +1702,6 @@
             "team_uplift": 0.08,
             "tni": null,
             "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.75,
-            "restricted": 0.58,
-            "team": 0.83,
-            "no_plan": 0.67,
-            "no_verify": 0.5,
-            "team_uplift": 0.08,
-            "tni": 1.4706,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.75,
-            "restricted": 0.58,
-            "team": 0.83,
-            "no_plan": 0.75,
-            "no_verify": 0.83,
-            "team_uplift": 0.08,
-            "tni": 1.4706,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.67,
-            "restricted": 0.42,
-            "team": 0.83,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.16,
-            "tni": 1.64,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.42,
-            "team": 0.5,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.5,
-            "tni": 1.6,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.67,
-            "restricted": 0.42,
-            "team": 0.5,
-            "no_plan": 0.5,
-            "no_verify": 0.83,
-            "team_uplift": -0.17,
-            "tni": 0.32,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.42,
-            "team": 0.0,
-            "no_plan": 0.42,
-            "no_verify": 0.5,
-            "team_uplift": 0.0,
-            "tni": -8.4,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.75,
@@ -5209,36 +1719,6 @@
         "task_id": "SEC3_crypto_upgrade",
         "category": "Security",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.0,
-            "no_plan": 0.54,
-            "no_verify": 0.0,
-            "team_uplift": -0.54,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.77,
             "restricted": 0.77,
@@ -5258,36 +1738,6 @@
             "team_uplift": 0.0,
             "tni": 1.0,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.54,
-            "team": 0.0,
-            "no_plan": 0.54,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -10.8,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.85,
-            "no_plan": 0.54,
-            "no_verify": 0.77,
-            "team_uplift": 0.31,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.77,
-            "restricted": 0.92,
-            "team": 0.92,
-            "no_plan": 0.85,
-            "no_verify": 0.85,
-            "team_uplift": 0.15,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 0.54,
@@ -5309,16 +1759,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.85,
-            "restricted": 0.54,
-            "team": 0.85,
-            "no_plan": 0.0,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.54,
             "restricted": 0.85,
@@ -5329,46 +1769,6 @@
             "tni": 0.0,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.54,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.54,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.85,
             "restricted": 0.92,
@@ -5377,66 +1777,6 @@
             "no_verify": 0.54,
             "team_uplift": -0.31,
             "tni": -7.6,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.85,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.85,
-            "no_verify": 0.54,
-            "team_uplift": -0.31,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.77,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.23,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.54,
-            "restricted": 0.54,
-            "team": 0.54,
-            "no_plan": 0.54,
-            "no_verify": 0.54,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.77,
-            "restricted": 0.85,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.77,
-            "tni": -17.0,
             "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
@@ -5455,36 +1795,6 @@
         "task_id": "SPEC1_feature_impl",
         "category": "Specification",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.64,
             "restricted": 0.64,
@@ -5502,36 +1812,6 @@
             "no_plan": 0.64,
             "no_verify": 0.73,
             "team_uplift": 0.09,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.09,
-            "no_plan": 0.09,
-            "no_verify": 0.09,
-            "team_uplift": 0.09,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.73,
-            "no_plan": 0.64,
-            "no_verify": 0.73,
-            "team_uplift": 0.18,
             "tni": null,
             "classification": "TEAM-HELPS"
           },
@@ -5555,16 +1835,6 @@
             "tni": 0.0,
             "classification": "TEAM-HURTS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.64,
             "restricted": 0.64,
@@ -5575,46 +1845,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.09,
-            "restricted": 0.09,
-            "team": 0.0,
-            "no_plan": 0.09,
-            "no_verify": 0.18,
-            "team_uplift": -0.09,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.64,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.45,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": -0.45,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.0,
             "restricted": 0.64,
@@ -5624,66 +1854,6 @@
             "team_uplift": 0.0,
             "tni": -12.8,
             "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.0,
-            "restricted": 0.64,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": -12.8,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.64,
-            "restricted": 0.0,
-            "team": 0.73,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.09,
-            "tni": 1.1406,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.73,
-            "no_plan": 0.0,
-            "no_verify": 0.09,
-            "team_uplift": 0.73,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.64,
-            "restricted": 0.64,
-            "team": 0.0,
-            "no_plan": 0.64,
-            "no_verify": 0.0,
-            "team_uplift": -0.64,
-            "tni": null,
-            "classification": "TEAM-HURTS"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.64,
@@ -5701,36 +1871,6 @@
         "task_id": "SPEC3_data_model",
         "category": "Specification",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": -0.071,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.786,
             "restricted": 0.786,
@@ -5747,36 +1887,6 @@
             "team": 0.857,
             "no_plan": 0.857,
             "no_verify": 0.071,
-            "team_uplift": 0.071,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.071,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -1.42,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.929,
-            "restricted": 0.929,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
             "team_uplift": 0.071,
             "tni": null,
             "classification": "TEAM-HELPS"
@@ -5801,16 +1911,6 @@
             "tni": 1.0,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.0,
-            "no_verify": 0.071,
-            "team_uplift": 0.071,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.857,
             "restricted": 0.857,
@@ -5821,46 +1921,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.071,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.071,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": -0.071,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 1.0,
             "restricted": 0.857,
@@ -5870,66 +1930,6 @@
             "team_uplift": -0.929,
             "tni": -5.4965,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.714,
-            "restricted": 0.857,
-            "team": 0.786,
-            "no_plan": 0.786,
-            "no_verify": 0.929,
-            "team_uplift": 0.072,
-            "tni": -1.42,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": -0.071,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": -0.071,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.071,
-            "restricted": 0.071,
-            "team": 0.071,
-            "no_plan": 0.071,
-            "no_verify": 0.071,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.071,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 1.0,
@@ -5947,36 +1947,6 @@
         "task_id": "TEST1_spec_to_tests",
         "category": "Testing",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.6,
-            "restricted": 0.6,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.0,
-            "team_uplift": -0.6,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.6,
             "restricted": 0.3,
@@ -5995,36 +1965,6 @@
             "no_verify": 0.9,
             "team_uplift": 0.6,
             "tni": 6.0,
-            "classification": "HIGH-TNI"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.6,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -12.0,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.6,
-            "restricted": 0.6,
-            "team": 0.8,
-            "no_plan": 0.5,
-            "no_verify": 0.8,
-            "team_uplift": 0.2,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.7,
-            "restricted": 0.6,
-            "team": 0.9,
-            "no_plan": 0.6,
-            "no_verify": 0.7,
-            "team_uplift": 0.2,
-            "tni": 3.0,
             "classification": "HIGH-TNI"
           },
           "GPT-5 Mini": {
@@ -6047,16 +1987,6 @@
             "tni": 2.5,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.9,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.8,
             "restricted": 0.8,
@@ -6067,46 +1997,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.6,
-            "restricted": 0.6,
-            "team": 0.6,
-            "no_plan": 0.6,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.5,
-            "restricted": 0.1,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.2,
-            "team_uplift": -0.5,
-            "tni": -0.25,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.6,
-            "restricted": 0.5,
-            "team": 0.0,
-            "no_plan": 0.1,
-            "no_verify": 0.2,
-            "team_uplift": -0.6,
-            "tni": -5.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.7,
             "restricted": 0.6,
@@ -6116,66 +2006,6 @@
             "team_uplift": -0.4,
             "tni": -3.0,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.6,
-            "restricted": 0.3,
-            "team": 0.3,
-            "no_plan": 0.7,
-            "no_verify": 0.7,
-            "team_uplift": -0.3,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.4,
-            "restricted": 0.1,
-            "team": 0.1,
-            "no_plan": 0.1,
-            "no_verify": 0.0,
-            "team_uplift": -0.3,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.6,
-            "team": 0.6,
-            "no_plan": 0.6,
-            "no_verify": 0.0,
-            "team_uplift": 0.6,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.1,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -2.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.6,
-            "team": 0.0,
-            "no_plan": 0.7,
-            "no_verify": 0.8,
-            "team_uplift": 0.0,
-            "tni": -12.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.9,
@@ -6193,36 +2023,6 @@
         "task_id": "TEST2_regression",
         "category": "Testing",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.0,
-            "no_plan": 0.55,
-            "no_verify": 0.64,
-            "team_uplift": -0.55,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.91,
             "restricted": 0.91,
@@ -6241,36 +2041,6 @@
             "no_verify": 0.82,
             "team_uplift": 0.27,
             "tni": 1.8,
-            "classification": "HIGH-TNI"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.0,
-            "no_plan": 0.55,
-            "no_verify": 0.0,
-            "team_uplift": -0.55,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.64,
-            "no_plan": 0.64,
-            "no_verify": 0.64,
-            "team_uplift": 0.09,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.73,
-            "restricted": 0.27,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.73,
-            "team_uplift": 0.27,
-            "tni": 1.587,
             "classification": "HIGH-TNI"
           },
           "GPT-5 Mini": {
@@ -6293,16 +2063,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.91,
-            "restricted": 0.91,
-            "team": 0.91,
-            "no_plan": 0.91,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.73,
             "restricted": 0.91,
@@ -6313,46 +2073,6 @@
             "tni": 1.8,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.45,
-            "restricted": 0.18,
-            "team": 0.55,
-            "no_plan": 0.55,
-            "no_verify": 0.64,
-            "team_uplift": 0.1,
-            "tni": 1.3704,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.45,
-            "restricted": 0.09,
-            "team": 0.09,
-            "no_plan": 0.27,
-            "no_verify": 0.18,
-            "team_uplift": -0.36,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.82,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.36,
-            "restricted": 0.09,
-            "team": 0.09,
-            "no_plan": 0.09,
-            "no_verify": 0.18,
-            "team_uplift": -0.27,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.91,
             "restricted": 0.91,
@@ -6360,66 +2080,6 @@
             "no_plan": 0.55,
             "no_verify": 0.64,
             "team_uplift": -0.36,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.55,
-            "restricted": 0.91,
-            "team": 0.55,
-            "no_plan": 0.91,
-            "no_verify": 0.55,
-            "team_uplift": 0.0,
-            "tni": -7.2,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.27,
-            "restricted": 0.09,
-            "team": 0.36,
-            "no_plan": 0.45,
-            "no_verify": 0.18,
-            "team_uplift": 0.09,
-            "tni": 1.5,
-            "classification": "HIGH-TNI"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 1.0,
-            "no_plan": 0.55,
-            "no_verify": 0.64,
-            "team_uplift": 0.45,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.55,
-            "no_plan": 0.55,
-            "no_verify": 0.64,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.55,
-            "restricted": 0.55,
-            "team": 0.64,
-            "no_plan": 0.55,
-            "no_verify": 0.64,
-            "team_uplift": 0.09,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.91,
-            "restricted": 0.91,
-            "team": 0.0,
-            "no_plan": 1.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.91,
             "tni": null,
             "classification": "TEAM-HURTS"
           },
@@ -6439,36 +2099,6 @@
         "task_id": "TEST5_mutation_resistant",
         "category": "Testing",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.67,
-            "restricted": 0.67,
-            "team": 0.67,
-            "no_plan": 0.67,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.83,
             "restricted": 0.83,
@@ -6488,36 +2118,6 @@
             "team_uplift": 0.0,
             "tni": 1.0,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.67,
-            "restricted": 0.67,
-            "team": 0.0,
-            "no_plan": 0.67,
-            "no_verify": 0.0,
-            "team_uplift": -0.67,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.75,
-            "restricted": 0.83,
-            "team": 0.83,
-            "no_plan": 0.75,
-            "no_verify": 0.92,
-            "team_uplift": 0.08,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.83,
-            "restricted": 0.67,
-            "team": 0.58,
-            "no_plan": 0.92,
-            "no_verify": 0.92,
-            "team_uplift": -0.25,
-            "tni": -0.5625,
-            "classification": "TEAM-HURTS"
           },
           "GPT-5 Mini": {
             "oracle": 0.75,
@@ -6539,16 +2139,6 @@
             "tni": 1.8,
             "classification": "HIGH-TNI"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.67,
             "restricted": 0.67,
@@ -6559,46 +2149,6 @@
             "tni": null,
             "classification": "TEAM-HELPS"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.67,
-            "restricted": 0.67,
-            "team": 0.67,
-            "no_plan": 0.67,
-            "no_verify": 0.75,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.67,
-            "restricted": 0.42,
-            "team": 0.67,
-            "no_plan": 0.58,
-            "no_verify": 0.67,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.67,
-            "restricted": 0.75,
-            "team": 0.0,
-            "no_plan": 0.42,
-            "no_verify": 0.67,
-            "team_uplift": -0.67,
-            "tni": -15.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.83,
             "restricted": 0.83,
@@ -6608,66 +2158,6 @@
             "team_uplift": -0.83,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.67,
-            "restricted": 0.67,
-            "team": 0.0,
-            "no_plan": 0.67,
-            "no_verify": 0.0,
-            "team_uplift": -0.67,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.67,
-            "restricted": 0.58,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.67,
-            "tni": -6.4444,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.67,
-            "restricted": 0.67,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": -0.67,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.58,
-            "no_verify": 0.75,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.83,
-            "restricted": 0.58,
-            "team": 0.83,
-            "no_plan": 0.67,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.83,
@@ -6685,36 +2175,6 @@
         "task_id": "TRAP1_spec_conflict",
         "category": "Adversarial",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -6734,36 +2194,6 @@
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 1.0,
-            "restricted": 0.4,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.9,
-            "restricted": 0.9,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.9,
-            "team_uplift": 0.1,
-            "tni": null,
-            "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
             "oracle": 1.0,
@@ -6785,16 +2215,6 @@
             "tni": 1.0,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 1.0,
             "restricted": 1.0,
@@ -6805,112 +2225,12 @@
             "tni": null,
             "classification": "NEUTRAL"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.4,
-            "team_uplift": -0.4,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 1.0,
             "restricted": 1.0,
             "team": 1.0,
             "no_plan": 0.4,
             "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.4,
-            "restricted": 1.0,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.4,
-            "team_uplift": 0.6,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 1.0,
-            "restricted": 0.4,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 1.0,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
             "team_uplift": 0.0,
             "tni": null,
             "classification": "NEUTRAL"
@@ -6931,36 +2251,6 @@
         "task_id": "TRAP3_metric_mirage",
         "category": "Adversarial",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": -0.4,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.4,
             "restricted": 0.4,
@@ -6979,36 +2269,6 @@
             "no_verify": 0.6,
             "team_uplift": 0.4,
             "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -8.0,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.4": {
-            "oracle": 0.8,
-            "restricted": 0.8,
-            "team": 1.0,
-            "no_plan": 1.0,
-            "no_verify": 0.8,
-            "team_uplift": 0.2,
-            "tni": null,
             "classification": "TEAM-HELPS"
           },
           "GPT-5 Mini": {
@@ -7031,16 +2291,6 @@
             "tni": null,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.0,
-            "restricted": 0.6,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": -12.0,
-            "classification": "NEUTRAL"
-          },
           "Claude Haiku 4.5": {
             "oracle": 1.0,
             "restricted": 0.4,
@@ -7049,46 +2299,6 @@
             "no_verify": 1.0,
             "team_uplift": 0.0,
             "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
             "classification": "NEUTRAL"
           },
           "Qwen3.5-35B-A3B": {
@@ -7100,66 +2310,6 @@
             "team_uplift": 0.4,
             "tni": null,
             "classification": "TEAM-HELPS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 1.0,
-            "restricted": 0.6,
-            "team": 1.0,
-            "no_plan": 0.4,
-            "no_verify": 0.6,
-            "team_uplift": 0.0,
-            "tni": 1.0,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.6,
-            "no_verify": 0.6,
-            "team_uplift": -0.4,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.4,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.0,
-            "team_uplift": -0.4,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.4,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.4,
-            "no_verify": 0.4,
-            "team_uplift": -0.4,
-            "tni": null,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.4,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": -8.0,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 1.0,
@@ -7177,36 +2327,6 @@
         "task_id": "TRAP5_security_theater",
         "category": "Adversarial",
         "models": {
-          "CodeGemma 7B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "DeepSeek-R1-Distill-32B": {
-            "oracle": 0.57,
-            "restricted": 0.57,
-            "team": 0.57,
-            "no_plan": 0.57,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Devstral-24B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
           "Gemini 3.1 Lite": {
             "oracle": 0.71,
             "restricted": 0.71,
@@ -7226,36 +2346,6 @@
             "team_uplift": -0.07,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Gemma 3 27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.57,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "GPT-5.3 Chat": {
-            "oracle": 0.71,
-            "restricted": 0.86,
-            "team": 0.86,
-            "no_plan": 0.71,
-            "no_verify": 0.71,
-            "team_uplift": 0.15,
-            "tni": 0.0,
-            "classification": "TEAM-HELPS"
-          },
-          "GPT-5.4": {
-            "oracle": 0.57,
-            "restricted": 0.64,
-            "team": 0.79,
-            "no_plan": 0.86,
-            "no_verify": 0.64,
-            "team_uplift": 0.22,
-            "tni": 3.0,
-            "classification": "HIGH-TNI"
           },
           "GPT-5 Mini": {
             "oracle": 0.86,
@@ -7277,16 +2367,6 @@
             "tni": 1.0,
             "classification": "NEUTRAL"
           },
-          "GPT-OSS-20B": {
-            "oracle": 0.57,
-            "restricted": 0.71,
-            "team": 0.0,
-            "no_plan": 0.71,
-            "no_verify": 0.57,
-            "team_uplift": -0.57,
-            "tni": -14.2,
-            "classification": "TEAM-HURTS"
-          },
           "Claude Haiku 4.5": {
             "oracle": 0.79,
             "restricted": 0.71,
@@ -7297,46 +2377,6 @@
             "tni": 1.875,
             "classification": "HIGH-TNI"
           },
-          "Qwen2.5-Coder-32B": {
-            "oracle": 0.57,
-            "restricted": 0.57,
-            "team": 0.57,
-            "no_plan": 0.57,
-            "no_verify": 0.57,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-0.8B": {
-            "oracle": 0.64,
-            "restricted": 0.57,
-            "team": 0.57,
-            "no_plan": 0.57,
-            "no_verify": 0.57,
-            "team_uplift": -0.07,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-27B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.0,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3.5-2B": {
-            "oracle": 0.71,
-            "restricted": 0.57,
-            "team": 0.57,
-            "no_plan": 0.57,
-            "no_verify": 0.57,
-            "team_uplift": -0.14,
-            "tni": 0.0,
-            "classification": "TEAM-HURTS"
-          },
           "Qwen3.5-35B-A3B": {
             "oracle": 0.86,
             "restricted": 0.86,
@@ -7346,66 +2386,6 @@
             "team_uplift": -0.86,
             "tni": null,
             "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-4B": {
-            "oracle": 0.71,
-            "restricted": 0.57,
-            "team": 0.0,
-            "no_plan": 0.71,
-            "no_verify": 0.57,
-            "team_uplift": -0.71,
-            "tni": -4.0714,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3.5-9B": {
-            "oracle": 0.79,
-            "restricted": 0.57,
-            "team": 0.71,
-            "no_plan": 0.0,
-            "no_verify": 0.57,
-            "team_uplift": -0.08,
-            "tni": 0.6364,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-14B": {
-            "oracle": 0.0,
-            "restricted": 0.57,
-            "team": 0.0,
-            "no_plan": 0.57,
-            "no_verify": 0.57,
-            "team_uplift": 0.0,
-            "tni": -11.4,
-            "classification": "NEUTRAL"
-          },
-          "Qwen3-4B": {
-            "oracle": 0.36,
-            "restricted": 0.43,
-            "team": 0.0,
-            "no_plan": 0.57,
-            "no_verify": 0.0,
-            "team_uplift": -0.36,
-            "tni": -8.6,
-            "classification": "TEAM-HURTS"
-          },
-          "Qwen3-8B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.57,
-            "no_plan": 0.57,
-            "no_verify": 0.29,
-            "team_uplift": 0.57,
-            "tni": null,
-            "classification": "TEAM-HELPS"
-          },
-          "Qwen3-Coder-30B-A3B": {
-            "oracle": 0.0,
-            "restricted": 0.0,
-            "team": 0.0,
-            "no_plan": 0.0,
-            "no_verify": 0.57,
-            "team_uplift": 0.0,
-            "tni": null,
-            "classification": "NEUTRAL"
           },
           "Claude Sonnet 4.6": {
             "oracle": 0.86,
