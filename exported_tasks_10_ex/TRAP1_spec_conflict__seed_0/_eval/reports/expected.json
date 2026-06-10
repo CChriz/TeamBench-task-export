@@ -1,0 +1,27 @@
+{
+  "strict_endpoints": [
+    "users",
+    "items",
+    "orders",
+    "reports"
+  ],
+  "relaxed_endpoints": [
+    "batch-import",
+    "search",
+    "webhooks"
+  ],
+  "report_types": [
+    "summary",
+    "detailed",
+    "audit",
+    "export"
+  ],
+  "user_name_field": "name",
+  "user_email_field": "email",
+  "item_name_field": "name",
+  "item_price_field": "price",
+  "order_user_id_field": "user_id",
+  "order_item_id_field": "item_id",
+  "order_quantity_field": "quantity",
+  "seed": 0
+}

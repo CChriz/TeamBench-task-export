@@ -1,0 +1,12 @@
+task_id: D6_data_reconcile
+domain: data
+network: false
+time_limit_sec: 1200
+seeds: [0, 1, 2]
+difficulty: expert
+languages: [python]
+tags: [data-reconciliation, source-of-truth, conflict-resolution, field-ownership, manual-override, json]
+workspace_file_count: 3
+lines_changed_expected: 40
+parameterized: true
+tni_patterns: [D]

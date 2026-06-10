@@ -1,0 +1,8 @@
+task_id: TRAP1_spec_conflict
+category: Adversarial
+difficulty: hard
+languages: [python]
+description: "4/7 spec endpoints need input validation; 3 are intentionally relaxed per CHANGELOG"
+tni_pattern: B
+parameterized: true
+seeds: [0, 1, 2]

@@ -1,0 +1,33 @@
+{
+  "resolved_config": {
+    "backup_interval_hours": 445,
+    "metrics_window_sec": 980,
+    "compression_enabled": false,
+    "compression": "none",
+    "backup_enabled": true,
+    "cache_ttl": 755,
+    "max_payload_mb": 660,
+    "log_retention_days": 615
+  },
+  "key_count": 8,
+  "conflict_resolutions": {
+    "backup_interval_hours": {
+      "winner": "spec-A",
+      "reason": "security > performance"
+    },
+    "metrics_window_sec": {
+      "winner": "spec-A",
+      "reason": "security > performance"
+    },
+    "compression_enabled": {
+      "winner": "spec-B",
+      "reason": "performance > convenience"
+    },
+    "compression": {
+      "winner": "spec-C",
+      "reason": "footnote exception overrides standard priority"
+    }
+  },
+  "exception_key": "compression",
+  "exception_value": "none"
+}

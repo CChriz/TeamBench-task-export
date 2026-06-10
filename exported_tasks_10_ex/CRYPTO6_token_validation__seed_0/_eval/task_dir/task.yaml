@@ -1,0 +1,8 @@
+task_id: CRYPTO6_token_validation
+category: Security
+difficulty: hard
+languages: [python]
+description: "JWT validation with 4 bugs (none alg, exp off-by-one, grace window, missing iss check) + 2 refresh race conditions"
+tni_pattern: A
+parameterized: true
+seeds: [0, 1, 2]

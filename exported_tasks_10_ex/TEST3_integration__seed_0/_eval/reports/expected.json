@@ -1,0 +1,15 @@
+{
+  "service_name": "search_service",
+  "port": 5003,
+  "auth_header": "X-API-Key",
+  "valid_api_key": "search-api-key-def456",
+  "endpoint_count": 5,
+  "endpoint_ids": [
+    "search",
+    "get_document",
+    "delete_document",
+    "index_document",
+    "health_check"
+  ],
+  "min_tests": 9
+}

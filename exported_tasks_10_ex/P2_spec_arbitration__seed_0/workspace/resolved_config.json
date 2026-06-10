@@ -1,0 +1,10 @@
+{
+  "backup_interval_hours": 462,
+  "metrics_window_sec": 984,
+  "compression_enabled": 36,
+  "compression": "wrong_value",
+  "backup_enabled": 2,
+  "cache_ttl": 761,
+  "max_payload_mb": 707,
+  "log_retention_days": 641
+}

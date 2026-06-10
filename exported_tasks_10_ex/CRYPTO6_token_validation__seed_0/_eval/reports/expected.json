@@ -1,0 +1,20 @@
+{
+  "validation_bugs": [
+    "alg_none_accepted",
+    "exp_off_by_one",
+    "grace_window_nonzero",
+    "missing_iss_check"
+  ],
+  "race_conditions": [
+    "no_token_blacklist",
+    "concurrent_refresh_duplicate"
+  ],
+  "secret_key": "super-secret-key-2024-prod",
+  "issuers": [
+    "auth.myapp.com",
+    "sso.myapp.com"
+  ],
+  "lifetime": 300,
+  "grace_window": 60,
+  "seed": 0
+}
