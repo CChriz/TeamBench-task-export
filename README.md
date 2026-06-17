@@ -9,6 +9,7 @@ This repository restructures TeamBench tasks into portable bundles that support 
 
 ## Repository Structure
 
+```text
 .
 ├── task_team/          # Original TeamBench task exports
 ├── agent_modified/     # Example agent-modified workspaces
@@ -17,11 +18,13 @@ This repository restructures TeamBench tasks into portable bundles that support 
 │   ├── evaluate_one.py
 │   └── evaluate_all.py
 └── README.md
+```
 
 ### Evaluation Bundle Format
 
 Each task under evals/ follows the same structure:
 
+```text
 evals/<task_id>/
 ├── task.yaml
 ├── brief.md
@@ -40,6 +43,7 @@ evals/<task_id>/
     ├── expected.json
     ├── score.json
     └── standalone_eval_record.json
+```
 
 ### Reports
 
