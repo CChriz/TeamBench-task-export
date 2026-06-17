@@ -1,0 +1,19 @@
+{
+  "task_id": "P2_spec_arbitration",
+  "seed": 0,
+  "generated": true,
+  "exported_at": "2026-06-10T06:50:29.294050+00:00",
+  "agent_prompt": "TASK.md",
+  "agent_workspace": "workspace",
+  "hidden_eval_dir": "_eval",
+  "agent_visible_files": [
+    "TASK.md",
+    "workspace/"
+  ],
+  "agent_hidden_files": [
+    "_eval/",
+    "_eval/reports/expected.json",
+    "_eval/grade.sh",
+    "_eval/task_dir/"
+  ]
+}

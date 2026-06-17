@@ -1,0 +1,88 @@
+{
+  "task_id": "CROSS1_api_contract_seed_0",
+  "command": [
+    "bash",
+    "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/grade.sh",
+    "/home/cz776/TeamBench/agent_modified/CROSS1_api_contract_seed_0/workspace",
+    "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/reports",
+    "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/submission",
+    "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/task_dir",
+    "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/reports/expected.json"
+  ],
+  "returncode": 0,
+  "score": {
+    "pass": false,
+    "secondary": {
+      "partial_score": 0.6,
+      "checks_passed": 6,
+      "total_checks": 10,
+      "pytest_passed": 1,
+      "pytest_failed": 0
+    },
+    "failure_modes": [],
+    "checklist": [
+      {
+        "id": "C1",
+        "ok": false,
+        "note": "Go server failed to compile"
+      },
+      {
+        "id": "C2",
+        "ok": true,
+        "note": "Python client imports without error"
+      },
+      {
+        "id": "C3",
+        "ok": false,
+        "note": "Integration tests failed (test_integration.py)"
+      },
+      {
+        "id": "C4",
+        "ok": false,
+        "note": "Pagination tests failed (test_pagination.py)"
+      },
+      {
+        "id": "C5",
+        "ok": false,
+        "note": "Error handling tests failed (test_errors.py)"
+      },
+      {
+        "id": "C6",
+        "ok": true,
+        "note": "client/models.py from_dict maps camelCase 'userId' key"
+      },
+      {
+        "id": "C7",
+        "ok": true,
+        "note": "client/api.py parses 'data' key for pagination results"
+      },
+      {
+        "id": "C8",
+        "ok": true,
+        "note": "client/exceptions.py handles HTTP 422 with 'errors' array"
+      },
+      {
+        "id": "C9",
+        "ok": true,
+        "note": "api_spec.yaml updated with correct contract (userId/productId/orderId, data, next, 422, errors)"
+      },
+      {
+        "id": "C10",
+        "ok": true,
+        "note": "All Python client files have valid syntax"
+      }
+    ]
+  },
+  "stdout": "Collecting pytest\n  Using cached pytest-9.1.0-py3-none-any.whl.metadata (7.6 kB)\nRequirement already satisfied: requests in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (2.34.2)\nCollecting iniconfig>=1.0.1 (from pytest)\n  Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)\nRequirement already satisfied: packaging>=22 in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (from pytest) (26.0)\nCollecting pluggy<2,>=1.5 (from pytest)\n  Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)\nCollecting pygments>=2.7.2 (from pytest)\n  Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)\nRequirement already satisfied: charset_normalizer<4,>=2 in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (from requests) (3.4.7)\nRequirement already satisfied: idna<4,>=2.5 in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (from requests) (3.18)\nRequirement already satisfied: urllib3<3,>=1.26 in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (from requests) (2.7.0)\nRequirement already satisfied: certifi>=2023.5.7 in /home/cz776/miniconda3/envs/teambench/lib/python3.11/site-packages (from requests) (2026.5.20)\nUsing cached pytest-9.1.0-py3-none-any.whl (386 kB)\nUsing cached pluggy-1.6.0-py3-none-any.whl (20 kB)\nUsing cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)\nUsing cached pygments-2.20.0-py3-none-any.whl (1.2 MB)\nInstalling collected packages: pygments, pluggy, iniconfig, pytest\n\nSuccessfully installed iniconfig-2.3.0 pluggy-1.6.0 pygments-2.20.0 pytest-9.1.0\n",
+  "stderr": "",
+  "paths": {
+    "task_input": "/home/cz776/TeamBench/task_team/CROSS1_api_contract_seed_0",
+    "modified_workspace": "/home/cz776/TeamBench/agent_modified/CROSS1_api_contract_seed_0/workspace",
+    "eval_dir": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0",
+    "reports": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/reports",
+    "submission": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/submission",
+    "task_dir": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/task_dir",
+    "grade_sh": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/grade.sh",
+    "expected": "/home/cz776/TeamBench/evals/CROSS1_api_contract_seed_0/reports/expected.json"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "pass": true,
+  "primary": {"success": 1},
+  "secondary": {
+    "checks_passed": 18,
+    "checks_total": 18,
+    "partial_score": 1.0
+  },
+  "failure_modes": []
+}

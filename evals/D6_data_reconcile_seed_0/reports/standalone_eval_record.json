@@ -1,0 +1,37 @@
+{
+  "task_id": "D6_data_reconcile_seed_0",
+  "command": [
+    "bash",
+    "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/grade.sh",
+    "/home/cz776/TeamBench/agent_modified/D6_data_reconcile_seed_0/workspace",
+    "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/reports",
+    "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/submission",
+    "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/task_dir",
+    "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/reports/expected.json"
+  ],
+  "returncode": 0,
+  "score": {
+    "pass": true,
+    "primary": {
+      "success": 1
+    },
+    "secondary": {
+      "checks_passed": 18,
+      "checks_total": 18,
+      "partial_score": 1.0
+    },
+    "failure_modes": []
+  },
+  "stdout": "Reconciled 32 records -> reconciled.json\nVALID_JSON_ARRAY_OK\nRECORD_COUNT_OK\nNO_DATA_LOSS_OK\nSORT_ORDER_OK\nALL_FIELDS_PRESENT_OK\nRECONCILE_SOURCE_VALID_OK\nMANUAL_OVERRIDE_OK\nFIELD_OWNERSHIP_OK\nTIMESTAMP_CONFLICT_OK\nONLY_A_RECORDS_OK\nONLY_B_RECORDS_OK\nAGREE_RECORDS_OK\nNO_EXTRA_FIELDS_OK\nNULL_TYPE_OK\nALL_RECORDS_CORRECT_OK\n",
+  "stderr": "",
+  "paths": {
+    "task_input": "/home/cz776/TeamBench/task_team/D6_data_reconcile_seed_0",
+    "modified_workspace": "/home/cz776/TeamBench/agent_modified/D6_data_reconcile_seed_0/workspace",
+    "eval_dir": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0",
+    "reports": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/reports",
+    "submission": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/submission",
+    "task_dir": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/task_dir",
+    "grade_sh": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/grade.sh",
+    "expected": "/home/cz776/TeamBench/evals/D6_data_reconcile_seed_0/reports/expected.json"
+  }
+}

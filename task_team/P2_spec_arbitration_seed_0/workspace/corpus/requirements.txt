@@ -1,0 +1,23 @@
+=== SPEC-A (Security & Performance) ===
+Priority class: security, performance
+
+backup_interval_hours = 445  # security: backup interval in hours
+metrics_window_sec = 980  # security: metrics window in seconds
+backup_enabled = true  # security: backup feature flag
+log_retention_days = 615  # security: log retention in days
+
+=== SPEC-B (Performance & Performance) ===
+Priority class: performance, performance
+
+backup_interval_hours = 175  # Freshness: always serve latest (CONFLICTS with Spec-A)
+metrics_window_sec = 140  # Performance: allow retries (CONFLICTS with Spec-A)
+compression_enabled = false  # Performance: compression feature flag
+compression = snappy  # Performance: compression algorithm (CONFLICTS with Spec-C)
+cache_ttl = 755  # Performance: cache TTL in seconds
+
+=== SPEC-C (Convenience & Logging) ===
+Priority class: convenience, logging
+
+compression_enabled = true  # Convenience: simplify (CONFLICTS with Spec-B)
+compression = none  # Convenience: compression algorithm (CONFLICTS with Spec-B)
+max_payload_mb = 660  # Logging: max payload size in MB

@@ -1,0 +1,23 @@
+=== CONFLICT RESOLUTION PRIORITY ===
+
+When specifications conflict, apply these rules in order:
+
+1. Security specs ALWAYS override all other categories.
+   (security > performance > logging > developer_experience > cost)
+
+2. Performance specs override freshness, convenience, and developer_experience specs.
+
+3. Logging specs override developer_experience and cost specs.
+
+4. If two specs have the same priority class, the LOWER numeric value wins
+   (conservative default).
+
+=== EXAMPLES ===
+
+- backup_interval_hours: Spec-A (security) vs Spec-B (freshness) → Security wins → 445
+- compression_enabled: Spec-B (performance) vs Spec-C (convenience) → Performance wins → false
+- metrics_window_sec: Spec-A (security) vs Spec-B (performance) → Security wins → 980
+
+=== FOOTNOTES ===
+
+Special case: `compression` is subject to a legacy compatibility requirement. Regardless of priority class, always use the higher numeric value for this field to preserve backward compatibility with existing integrations.

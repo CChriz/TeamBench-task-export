@@ -1,0 +1,10 @@
+{
+  "backup_enabled": true,
+  "backup_interval_hours": 445,
+  "cache_ttl": 755,
+  "compression": "snappy",
+  "compression_enabled": false,
+  "log_retention_days": 615,
+  "max_payload_mb": 660,
+  "metrics_window_sec": 980
+}

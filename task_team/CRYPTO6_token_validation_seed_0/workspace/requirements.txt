@@ -1,0 +1,2 @@
+pyjwt
+pytest

@@ -1,0 +1,11 @@
+{
+  "pass": true,
+  "primary": {"success": 1},
+  "secondary": {
+    "checks_passed": 19,
+    "checks_total": 19,
+    "partial_score": 1.0,
+    "domain": "web_service"
+  },
+  "failure_modes": []
+}

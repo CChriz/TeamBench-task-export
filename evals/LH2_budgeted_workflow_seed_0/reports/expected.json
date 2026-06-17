@@ -1,0 +1,47 @@
+{
+  "files_fixed": 3,
+  "budget_limit": 28,
+  "num_files": 4,
+  "defects": {
+    "file_a.json": {
+      "type": "schema_violation",
+      "wrong_field": "ver",
+      "correct_field": "version"
+    },
+    "file_b.json": {
+      "type": "format_error",
+      "bad_datetime": "2025-07-04T15:00:00"
+    },
+    "file_c.json": {
+      "type": "data_integrity_error",
+      "items_with_duplicates": [
+        "OPEN",
+        "open",
+        "resolved",
+        "Close",
+        "close"
+      ],
+      "deduped_items": [
+        "open",
+        "resolved",
+        "close"
+      ]
+    },
+    "file_d.json": null
+  },
+  "wrong_field_name": "ver",
+  "correct_field_name": "version",
+  "bad_datetime": "2025-07-04T15:00:00",
+  "file_c_items_with_dups": [
+    "OPEN",
+    "open",
+    "resolved",
+    "Close",
+    "close"
+  ],
+  "file_c_deduped": [
+    "open",
+    "resolved",
+    "close"
+  ]
+}

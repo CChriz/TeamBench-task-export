@@ -1,0 +1,12 @@
+{
+  "pass": false,
+  "secondary": {
+    "partial_score": 0.9,
+    "checks_passed": 9,
+    "checks_total": 10,
+    "validation_bugs": ["alg_none","exp_off_by_one","grace_window","missing_iss"],
+    "race_conditions": ["no_blacklist","concurrent_refresh"]
+  },
+  "failure_modes": [],
+  "checklist": [{"id":"C1","ok":true,"note":"pytest tests/ passes"},{"id":"C2","ok":true,"note":"Algorithm none rejected"},{"id":"C3","ok":true,"note":"Token at exact expiration rejected"},{"id":"C4","ok":true,"note":"Grace window is zero (expired token rejected)"},{"id":"C5","ok":true,"note":"Invalid issuer rejected"},{"id":"C6","ok":true,"note":"Valid token with correct issuer accepted"},{"id":"C7","ok":false,"note":"Old token blacklisted after refresh"},{"id":"C8","ok":true,"note":"Refreshed token is valid"},{"id":"C9","ok":true,"note":"Blacklist mechanism exists in refresh"},{"id":"C10","ok":true,"note":"Concurrent refresh protection (lock/atomic)"}]
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "IR2_misinformation_trap_seed_0",
+  "command": [
+    "bash",
+    "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/grade.sh",
+    "/home/cz776/TeamBench/agent_modified/IR2_misinformation_trap_seed_0/workspace",
+    "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/reports",
+    "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/submission",
+    "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/task_dir",
+    "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/reports/expected.json"
+  ],
+  "returncode": 0,
+  "score": {
+    "pass": true,
+    "primary": {
+      "success": 1
+    },
+    "secondary": {
+      "checks_passed": 7,
+      "checks_total": 7,
+      "partial_score": 1.0
+    },
+    "failure_modes": []
+  },
+  "stdout": "STRUCTURE_OK\nEVIDENCE_FORMAT_OK\nTRAP_AVOIDED\nANSWER_CORRECT\nEVIDENCE_CONTENT_OK\n",
+  "stderr": "",
+  "paths": {
+    "task_input": "/home/cz776/TeamBench/task_team/IR2_misinformation_trap_seed_0",
+    "modified_workspace": "/home/cz776/TeamBench/agent_modified/IR2_misinformation_trap_seed_0/workspace",
+    "eval_dir": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0",
+    "reports": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/reports",
+    "submission": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/submission",
+    "task_dir": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/task_dir",
+    "grade_sh": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/grade.sh",
+    "expected": "/home/cz776/TeamBench/evals/IR2_misinformation_trap_seed_0/reports/expected.json"
+  }
+}

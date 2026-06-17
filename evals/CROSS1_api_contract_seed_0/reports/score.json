@@ -1,0 +1,12 @@
+{
+  "pass": false,
+  "secondary": {
+    "partial_score": 0.6000,
+    "checks_passed": 6,
+    "total_checks": 10,
+    "pytest_passed": 1,
+    "pytest_failed": 0
+  },
+  "failure_modes": [],
+  "checklist": [{"id":"C1","ok":false,"note":"Go server failed to compile"},{"id":"C2","ok":true,"note":"Python client imports without error"},{"id":"C3","ok":false,"note":"Integration tests failed (test_integration.py)"},{"id":"C4","ok":false,"note":"Pagination tests failed (test_pagination.py)"},{"id":"C5","ok":false,"note":"Error handling tests failed (test_errors.py)"},{"id":"C6","ok":true,"note":"client/models.py from_dict maps camelCase 'userId' key"},{"id":"C7","ok":true,"note":"client/api.py parses 'data' key for pagination results"},{"id":"C8","ok":true,"note":"client/exceptions.py handles HTTP 422 with 'errors' array"},{"id":"C9","ok":true,"note":"api_spec.yaml updated with correct contract (userId/productId/orderId, data, next, 422, errors)"},{"id":"C10","ok":true,"note":"All Python client files have valid syntax"}]
+}

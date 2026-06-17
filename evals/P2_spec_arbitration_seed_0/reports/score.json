@@ -1,0 +1,10 @@
+{
+  "pass": false,
+  "primary": {"success": 0},
+  "secondary": {
+    "checks_passed": 2,
+    "checks_total": 4,
+    "partial_score": 0.5
+  },
+  "failure_modes": ["resolved_config_wrong", "exception_key_wrong"]
+}

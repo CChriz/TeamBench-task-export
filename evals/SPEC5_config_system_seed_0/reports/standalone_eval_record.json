@@ -1,0 +1,38 @@
+{
+  "task_id": "SPEC5_config_system_seed_0",
+  "command": [
+    "bash",
+    "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/grade.sh",
+    "/home/cz776/TeamBench/agent_modified/SPEC5_config_system_seed_0/workspace",
+    "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/reports",
+    "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/submission",
+    "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/task_dir",
+    "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/reports/expected.json"
+  ],
+  "returncode": 0,
+  "score": {
+    "pass": true,
+    "primary": {
+      "success": 1
+    },
+    "secondary": {
+      "checks_passed": 19,
+      "checks_total": 19,
+      "partial_score": 1.0,
+      "domain": "web_service"
+    },
+    "failure_modes": []
+  },
+  "stdout": "",
+  "stderr": "",
+  "paths": {
+    "task_input": "/home/cz776/TeamBench/task_team/SPEC5_config_system_seed_0",
+    "modified_workspace": "/home/cz776/TeamBench/agent_modified/SPEC5_config_system_seed_0/workspace",
+    "eval_dir": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0",
+    "reports": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/reports",
+    "submission": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/submission",
+    "task_dir": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/task_dir",
+    "grade_sh": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/grade.sh",
+    "expected": "/home/cz776/TeamBench/evals/SPEC5_config_system_seed_0/reports/expected.json"
+  }
+}
